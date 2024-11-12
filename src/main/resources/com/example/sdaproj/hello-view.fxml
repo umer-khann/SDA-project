@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaproj.HelloController">
+    <left>
+        <AnchorPane prefHeight="407.0" prefWidth="228.0" style="-fx-background-color: #263F73;" BorderPane.alignment="CENTER">
+            <children>
+                <Label layoutX="56.0" layoutY="48.0" text="ADMIN LOGIN" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="17.0" />
+                    </font>
+                </Label>
+                <Line endX="100.0" layoutX="114.0" layoutY="81.0" startX="-100.0" stroke="WHITE" />
+            </children>
+        </AnchorPane>
+    </left>
+    <right>
+        <AnchorPane prefHeight="400.0" prefWidth="332.0" BorderPane.alignment="CENTER">
+            <children>
+                <!-- Add the welcomeText Label here -->
+                <Label fx:id="welcomeText" layoutX="50.0" layoutY="100.0" text="Hello World!" textFill="BLACK" />
+                <Button layoutX="88.0" layoutY="194.0" mnemonicParsing="false" onMouseClicked="#onHelloButtonClick" text="Button" />
+            </children>
+        </AnchorPane>
+    </right>
+</BorderPane>
+
