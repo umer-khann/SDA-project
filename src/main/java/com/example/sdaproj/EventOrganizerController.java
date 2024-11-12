@@ -1,0 +1,67 @@
+package com.example.sdaproj;
+
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
+import javafx.scene.layout.BorderPane;
+
+import javafx.scene.layout.AnchorPane;
+
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+
+public class EventOrganizerController {
+    @FXML
+    private Label welcomeText;
+    @FXML
+    private Label loginmessagelabel;
+
+
+    @FXML
+    private Button loginbutton;
+
+    @FXML
+    private TextField uname;
+
+    @FXML
+    private PasswordField upass;
+
+
+
+    @FXML
+    protected void onHelloButtonClick() {
+        welcomeText.setText("Welcome to JavaFX Application!");
+    }
+
+    @FXML
+    public void loginbuttonOnAction(javafx.event.ActionEvent e) throws IOException {
+        // Load the new FXML file
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+
+        // Since the root of hello-view.fxml is a BorderPane, cast to BorderPane
+        BorderPane root = fxmlLoader.load();
+
+        // Create a new scene with the loaded FXML
+        Scene scene = new Scene(root);
+
+        // Get the current stage (window) using the button that triggered the action
+        javafx.stage.Stage stage = (javafx.stage.Stage) loginbutton.getScene().getWindow();
+
+        // Set the scene to the stage
+        stage.setScene(scene);
+
+        // Optionally, you can give the new window a title
+        stage.setTitle("Welcome Screen");
+
+        // Show the new scene and close the old one
+        stage.show();
+    }
+
+
+}

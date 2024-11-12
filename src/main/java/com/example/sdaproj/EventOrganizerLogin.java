@@ -7,13 +7,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class EventOrganizerLogin extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("event-organizer-login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
 
-        stage.setTitle("Admin login");
+        stage.setTitle("Event Organizer login");
         stage.setScene(scene);
         stage.show();
     }
