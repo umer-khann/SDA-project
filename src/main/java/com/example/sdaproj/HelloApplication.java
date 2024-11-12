@@ -24,3 +24,4 @@ public class HelloApplication extends Application {
 }
 
 //Helllo I am
+//hamza is gay
