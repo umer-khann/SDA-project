@@ -12,7 +12,7 @@ public class EventOrganizerLogin extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("event-organizer-login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        // swsw
+        // swsw inam is gay
         stage.setTitle("Event Organizer login");
         stage.setScene(scene);
         stage.show();
