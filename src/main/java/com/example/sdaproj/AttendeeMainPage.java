@@ -21,6 +21,7 @@ public class AttendeeMainPage extends Application {
             y = event.getSceneY();
         });
 
+
         root.setOnMouseDragged(event -> {
             primaryStage.setX(event.getScreenX() - x);
             primaryStage.setY(event.getScreenY() - y);

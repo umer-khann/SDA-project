@@ -32,6 +32,7 @@ public class AttendeeMainPageController implements Initializable {
         Exit.setOnMouseClicked(event -> {
             System.exit(0);
         });
+
         slider.setTranslateX(-176);
         Menu.setOnMouseClicked(event -> {
             TranslateTransition slide = new TranslateTransition();
