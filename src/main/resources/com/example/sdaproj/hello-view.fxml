@@ -37,13 +37,14 @@
          <Button fx:id="loginbutton" layoutX="40.0" layoutY="284.0" mnemonicParsing="false" onAction="#loginbuttonOnAction" prefHeight="31.0" prefWidth="275.0" style="-fx-background-color: #263F73;" text="Login" textFill="WHITE" />
          <PasswordField fx:id="upass" layoutX="109.0" layoutY="202.0" />
          <Label fx:id="loginmessagelabel" layoutX="95.0" layoutY="76.0" prefHeight="21.0" prefWidth="183.0" />
-         <Button layoutX="20.0" layoutY="38.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" style="-fx-background-color: trans;" />
-         <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="20.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" />
-         <ImageView layoutX="20.0" layoutY="39.0">
-            <image>
-               <Image url="@images/undo-2.png" />
-            </image>
-         </ImageView>
+         <Button layoutX="20.0" layoutY="38.0" mnemonicParsing="false" onAction="#backButtonOnAction" prefHeight="25.0" prefWidth="26.0" style="-fx-background-color: trans;">
+            <graphic>
+               <ImageView>
+                  <image>
+                     <Image url="@images/undo-2.png" />
+                  </image>
+               </ImageView>
+            </graphic></Button>
         </AnchorPane>
    </center>
 </BorderPane>
