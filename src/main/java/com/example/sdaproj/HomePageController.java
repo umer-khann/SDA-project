@@ -18,7 +18,7 @@ public class HomePageController {
         loadPage("event-organizer-login.fxml", e);
     }
 
-    public void adminbutton(ActionEvent e) throws IOException {
+    public void loginButtonOnAction(ActionEvent e) throws IOException {
         loadPage("hello-view.fxml", e);
     }
 
