@@ -32,9 +32,10 @@
             <Label layoutX="14.0" layoutY="129.0" text="User Name" />
             <Label layoutX="20.0" layoutY="207.0" text="Password" />
             <TextField fx:id="uname" layoutX="109.0" layoutY="124.0" />
-            <Button fx:id="loginbutton" layoutX="40.0" layoutY="284.0" mnemonicParsing="false" onAction="#loginbuttonOnAction" prefHeight="31.0" prefWidth="275.0" style="-fx-background-color: #263F73;" text="Login" textFill="WHITE" />
+            <Button fx:id="loginbutton" layoutX="36.0" layoutY="261.0" mnemonicParsing="false" onAction="#loginbuttonOnAction" prefHeight="31.0" prefWidth="275.0" style="-fx-background-color: #263F73;" text="Login" textFill="WHITE" />
             <PasswordField fx:id="upass" layoutX="109.0" layoutY="202.0" />
             <Label fx:id="loginmessagelabel" layoutX="111.0" layoutY="79.0" prefHeight="21.0" prefWidth="183.0" />
+         <Button fx:id="loginbutton1" layoutX="36.0" layoutY="306.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="275.0" style="-fx-background-color: #263F73;" text="Don't have an account? Sign Up!" textFill="WHITE" />
         </AnchorPane>
     </center>
 </BorderPane>

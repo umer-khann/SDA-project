@@ -33,7 +33,17 @@ public class HelloController {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
 
+    @FXML
+    public void loginbuttonOnAction(javafx.event.ActionEvent e) {
+        loginmessagelabel.setText("You tried to login");
 
+        if(!uname.getText().isBlank() && !upass.getText().isBlank()){
+            loginmessagelabel.setText("You tried to login");
+        }
+        else {
+            loginmessagelabel.setText("Please input full details");
+        }
+    }
 
 
 }
