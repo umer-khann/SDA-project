@@ -24,6 +24,7 @@ public class HomePageController {
 
     private void loadPage(String fxmlFile, ActionEvent event) throws IOException {
         // Load the FXML file
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
         BorderPane root = fxmlLoader.load(); // Assuming the root node is a BorderPane
 
