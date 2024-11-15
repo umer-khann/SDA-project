@@ -23,7 +23,8 @@ public class AttendeeMainPage extends Application {
             primaryStage.setY(event.getScreenY() - y);
         });
 
-        primaryStage.setScene(new Scene(root, 700, 400));
+        primaryStage.setScene(new Scene(root, 700
+                , 400));
         primaryStage.show();
     }
 
