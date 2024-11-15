@@ -17,12 +17,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AttendeeMainPageController implements Initializable {
+public class AdminMainPageController implements Initializable {
 
+    public JFXButton button3;
     public JFXButton button2;
     public JFXButton button1;
-    public String a;
-    public String b;
+    public String a, b, c;
 
     @FXML
     private ImageView Exit;
@@ -43,6 +43,8 @@ public class AttendeeMainPageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         a = button1.getText();
         b = button2.getText();
+        c = button3.getText();
+
         Exit.setOnMouseClicked(event -> {
             System.exit(0);
         });
@@ -65,6 +67,7 @@ public class AttendeeMainPageController implements Initializable {
                 contentArea.setPrefWidth(400);
                 button1.setText(a);
                 button2.setText(b);
+                button3.setText(c);
             });
         });
 
@@ -85,6 +88,8 @@ public class AttendeeMainPageController implements Initializable {
                 contentArea.setPrefWidth(730);
                 button1.setText("");
                 button2.setText("");
+                button3.setText("");
+
             });
         });
     }
@@ -101,6 +106,7 @@ public class AttendeeMainPageController implements Initializable {
         slider.setTranslateX(0);
         button1.setText("");
         button2.setText("");
+        button3.setText("");
         slide.setOnFinished((ActionEvent e)-> {
             Menu.setVisible(true);
             MenuClose.setVisible(false);
