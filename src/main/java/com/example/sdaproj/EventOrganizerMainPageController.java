@@ -17,12 +17,28 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AttendeeMainPageController implements Initializable {
+public class EventOrganizerMainPageController implements Initializable {
 
-    public JFXButton button2;
     public JFXButton button1;
+    public JFXButton button2;
+    public JFXButton button3;
+    public JFXButton button4;
+    public JFXButton button5;
+    public JFXButton button6;
+    public JFXButton button7;
+    public JFXButton button8;
+    public JFXButton button9;
+    public JFXButton button10;
     public String a;
     public String b;
+    public String c;
+    public String d;
+    public String e1;
+    public String f;
+    public String g;
+    public String h;
+    public String i;
+    public String j;
 
     @FXML
     private ImageView Exit;
@@ -43,6 +59,14 @@ public class AttendeeMainPageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         a = button1.getText();
         b = button2.getText();
+        c = button3.getText();
+        d = button4.getText();
+        e1 = button5.getText();
+        f = button6.getText();
+        g = button7.getText();
+        h = button8.getText();
+        i = button9.getText();
+        j = button10.getText();
         Exit.setOnMouseClicked(event -> {
             System.exit(0);
         });
@@ -65,6 +89,14 @@ public class AttendeeMainPageController implements Initializable {
                 contentArea.setPrefWidth(400);
                 button1.setText(a);
                 button2.setText(b);
+                button3.setText(c);
+                button4.setText(d);
+                button5.setText(e1);
+                button6.setText(f);
+                button7.setText(g);
+                button8.setText(h);
+                button9.setText(i);
+                button10.setText(j);
             });
         });
 
@@ -85,6 +117,14 @@ public class AttendeeMainPageController implements Initializable {
                 contentArea.setPrefWidth(730);
                 button1.setText("");
                 button2.setText("");
+                button3.setText("");
+                button4.setText("");
+                button5.setText("");
+                button6.setText("");
+                button7.setText("");
+                button8.setText("");
+                button9.setText("");
+                button10.setText("");
             });
         });
     }
@@ -101,6 +141,14 @@ public class AttendeeMainPageController implements Initializable {
         slider.setTranslateX(0);
         button1.setText("");
         button2.setText("");
+        button3.setText("");
+        button4.setText("");
+        button5.setText("");
+        button6.setText("");
+        button7.setText("");
+        button8.setText("");
+        button9.setText("");
+        button10.setText("");
         slide.setOnFinished((ActionEvent e)-> {
             Menu.setVisible(true);
             MenuClose.setVisible(false);
@@ -129,3 +177,4 @@ public class AttendeeMainPageController implements Initializable {
         loadPage("attendee-reg.fxml"); // Load Add page
     }
 }
+

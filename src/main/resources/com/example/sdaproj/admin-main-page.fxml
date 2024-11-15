@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaproj.AttendeeMainPageController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaproj.AdminMainPageController">
     <children>
         <BorderPane layoutX="114.0" layoutY="54.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
@@ -54,11 +54,11 @@
                 </AnchorPane>
             </top>
             <left>
-                <AnchorPane fx:id="slider" prefHeight="362.0" prefWidth="176.0" style="-fx-background-color: #0A4969;" BorderPane.alignment="CENTER">
+                <AnchorPane fx:id="slider" prefHeight="362.0" prefWidth="186.0" style="-fx-background-color: #0A4969;" BorderPane.alignment="CENTER">
                     <children>
                         <VBox layoutX="14.0" layoutY="35.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
                             <children>
-                                <JFXButton fx:id="button1" alignment="BASELINE_LEFT" onAction="#handleDashboardClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Event Registration" textFill="WHITE">
+                                <JFXButton fx:id="button1" alignment="BASELINE_LEFT" onAction="#handleDashboardClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Event Analysis" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="15.0" />
                                     </font>
@@ -70,7 +70,7 @@
                                         </ImageView>
                                     </graphic>
                                 </JFXButton>
-                                <JFXButton fx:id="button2" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Feedback" textFill="WHITE">
+                                <JFXButton fx:id="button2" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Add Event Org" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="15.0" />
                                     </font>
@@ -82,6 +82,18 @@
                                         </ImageView>
                                     </graphic>
                                 </JFXButton>
+                                <JFXButton fx:id="button3" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Remove Event Org" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="15.0" />
+                                </font>
+                                <graphic>
+                                    <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@images/dash1.png" />
+                                        </image>
+                                    </ImageView>
+                                </graphic>
+                            </JFXButton>
                             </children>
                         </VBox>
                     </children>
@@ -92,4 +104,5 @@
             </center>
         </BorderPane>
     </children>
+
 </AnchorPane>

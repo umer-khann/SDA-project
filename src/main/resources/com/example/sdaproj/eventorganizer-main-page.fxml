@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaproj.EventOrganizerMainPageController">
+    <children>
+        <BorderPane layoutX="114.0" layoutY="54.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+
+                <AnchorPane prefHeight="65.0" prefWidth="200.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
+                    <children>
+                        <Pane layoutX="102.0" layoutY="20.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #032d4d;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <ImageView fx:id="Exit" fitHeight="22.0" fitWidth="22.0" layoutX="678.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/exit.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </Pane>
+                        <HBox layoutX="239.0" layoutY="1.0" prefHeight="43.0" prefWidth="525.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+                            <children>
+                            </children>
+                        </HBox>
+                        <Label fx:id="Menu" layoutX="14.0" layoutY="36.0" prefHeight="22.0" prefWidth="92.0" text="MENU" textFill="#b7b7b7" AnchorPane.bottomAnchor="7.007998687500045" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="618.063980710938" AnchorPane.topAnchor="36.0">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/menu1.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="MenuClose" layoutX="14.0" layoutY="36.0" prefHeight="22.0" prefWidth="92.0" text="MENU" textFill="#b7b7b7" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="594.0" AnchorPane.topAnchor="36.0">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/menu1.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </top>
+            <left>
+                <AnchorPane fx:id="slider" prefHeight="362.0" prefWidth="176.0" style="-fx-background-color: #0A4969;" BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox layoutX="14.0" layoutY="-1.0" prefHeight="360.0" prefWidth="176.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
+                            <children>
+                                <JFXButton fx:id="button1" alignment="BASELINE_LEFT" onAction="#handleDashboardClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Create Event" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                    <graphic>
+                                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/dash1.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </JFXButton>
+                                <JFXButton fx:id="button2" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Manage Event" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                    <graphic>
+                                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/dash1.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </JFXButton>
+                                <JFXButton fx:id="button3" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Event Resources" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="15.0" />
+                                </font>
+                                <graphic>
+                                    <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@images/dash1.png" />
+                                        </image>
+                                    </ImageView>
+                                </graphic>
+                            </JFXButton><JFXButton fx:id="button4" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Budgeting" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="15.0" />
+                                </font>
+                                <graphic>
+                                    <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@images/dash1.png" />
+                                        </image>
+                                    </ImageView>
+                                </graphic>
+                            </JFXButton><JFXButton fx:id="button5" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Add Venue" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="15.0" />
+                                </font>
+                                <graphic>
+                                    <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@images/dash1.png" />
+                                        </image>
+                                    </ImageView>
+                                </graphic>
+                            </JFXButton><JFXButton fx:id="button6" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Remove Venue" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="15.0" />
+                                </font>
+                                <graphic>
+                                    <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@images/dash1.png" />
+                                        </image>
+                                    </ImageView>
+                                </graphic>
+                            </JFXButton><JFXButton fx:id="button7" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Manage Attendee" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="15.0" />
+                                </font>
+                                <graphic>
+                                    <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@images/dash1.png" />
+                                        </image>
+                                    </ImageView>
+                                </graphic>
+                            </JFXButton><JFXButton fx:id="button8" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Add Sponser" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="15.0" />
+                                </font>
+                                <graphic>
+                                    <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@images/dash1.png" />
+                                        </image>
+                                    </ImageView>
+                                </graphic>
+                            </JFXButton><JFXButton fx:id="button9" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Remove Sponser" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="15.0" />
+                                </font>
+                                <graphic>
+                                    <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@images/dash1.png" />
+                                        </image>
+                                    </ImageView>
+                                </graphic>
+                            </JFXButton><JFXButton fx:id="button10" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Ticketing" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="15.0" />
+                                </font>
+                                <graphic>
+                                    <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@images/dash1.png" />
+                                        </image>
+                                    </ImageView>
+                                </graphic>
+                            </JFXButton>
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </left>
+            <center>
+                <ScrollPane fx:id="contentArea" layoutX="200.0" layoutY="65.0" prefHeight="335.0" prefWidth="400.0" visible="false" />
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>
