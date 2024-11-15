@@ -1,5 +1,6 @@
 package com.example.sdaproj;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -9,7 +10,6 @@ import javafx.scene.control.PasswordField;
 
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 
 public class HelloController {
     @FXML
@@ -33,15 +33,7 @@ public class HelloController {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
 
-    @FXML
-    public void loginbuttonOnAction(javafx.event.ActionEvent e) {
-        loginmessagelabel.setText("You tried to login");
 
-        if(!uname.getText().isBlank() && !upass.getText().isBlank()){
-            loginmessagelabel.setText("You tried to login");
-        }
-        else {
-            loginmessagelabel.setText("Please input full details");
-        }
-    }
+
+
 }
