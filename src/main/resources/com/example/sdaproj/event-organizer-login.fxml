@@ -26,16 +26,16 @@
     </left>
     <center>
         <AnchorPane prefHeight="400.0" prefWidth="370.0" style="-fx-background-color: 3d5994;" BorderPane.alignment="CENTER">
-            <Label layoutX="127.0" layoutY="38.0" text="SECURE LOGIN">
+            <Label layoutX="176.0" layoutY="38.0" text="SECURE LOGIN">
                 <font>
                     <Font name="System Bold" size="17.0" />
                 </font>
             </Label>
-            <Label layoutX="14.0" layoutY="129.0" text="User Name" />
-            <Label layoutX="20.0" layoutY="207.0" text="Password" />
-            <TextField fx:id="uname" layoutX="109.0" layoutY="124.0" />
-            <Button fx:id="loginbutton" layoutX="40.0" layoutY="284.0" mnemonicParsing="false" onAction="#loginbuttonOnAction" prefHeight="31.0" prefWidth="275.0" style="-fx-background-color: #263F73;" text="Login" textFill="WHITE" />
-            <PasswordField fx:id="upass" layoutX="109.0" layoutY="202.0" />
+            <Label layoutX="101.0" layoutY="127.0" text="User Name" />
+            <Label layoutX="101.0" layoutY="205.0" text="Password" />
+            <TextField fx:id="uname" layoutX="196.0" layoutY="122.0" />
+            <Button fx:id="loginbutton" layoutX="98.0" layoutY="264.0" mnemonicParsing="false" onAction="#loginbuttonOnAction" prefHeight="31.0" prefWidth="275.0" style="-fx-background-color: #263F73;" text="Login" textFill="WHITE" />
+            <PasswordField fx:id="upass" layoutX="190.0" layoutY="200.0" />
             <Label fx:id="loginmessagelabel" layoutX="111.0" layoutY="79.0" prefHeight="21.0" prefWidth="183.0" />
             <Button layoutX="20.0" layoutY="38.0" mnemonicParsing="false" onAction="#backButtonOnAction" prefHeight="25.0" prefWidth="26.0" style="-fx-background-color: trans;">
             <graphic>
@@ -45,6 +45,7 @@
                       </image>
                   </ImageView>
             </graphic></Button>
+         <Button fx:id="loginbutton2" layoutX="98.0" layoutY="322.0" mnemonicParsing="false" onAction="#signUpButtonOnAction" prefHeight="31.0" prefWidth="275.0" style="-fx-background-color: #263F73;" text="Don't have an account? Sign Up!" textFill="WHITE" />
         </AnchorPane>
     </center>
 </BorderPane>

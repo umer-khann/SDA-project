@@ -51,6 +51,9 @@ public class AttendeeLoginController {
     public void backButtonOnAction(javafx.event.ActionEvent e) throws IOException {
         loadPage("home-page.fxml", e);
     }
+    public void signUpButtonOnAction(javafx.event.ActionEvent e) throws IOException {
+        loadPage("attendee-reg.fxml", e);
+    }
     private void loadPage(String fxmlFile, ActionEvent event) throws IOException {
         // Load the FXML file
 
