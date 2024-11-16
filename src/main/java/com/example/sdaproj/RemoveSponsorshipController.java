@@ -59,7 +59,7 @@ public class RemoveSponsorshipController {
         stage.setScene(scene);
 
         // Optionally, you can give the new window a title
-        stage.setTitle("Welcome Screen");
+        stage.setTitle("");
 
         // Show the new scene and close the old one
         stage.show();
@@ -78,6 +78,7 @@ public class RemoveSponsorshipController {
 
         // Set the new scene
         stage.setScene(new Scene(root));
+        stage.setTitle("");
 
         // Show the stage
         stage.show();

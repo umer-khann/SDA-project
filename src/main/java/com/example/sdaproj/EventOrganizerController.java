@@ -44,25 +44,7 @@ public class EventOrganizerController {
     @FXML
     public void loginbuttonOnAction(javafx.event.ActionEvent e) throws IOException {
         // Load the new FXML file
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
-
-        // Since the root of hello-view.fxml is a BorderPane, cast to BorderPane
-        BorderPane root = fxmlLoader.load();
-
-        // Create a new scene with the loaded FXML
-        Scene scene = new Scene(root);
-
-        // Get the current stage (window) using the button that triggered the action
-        javafx.stage.Stage stage = (javafx.stage.Stage) loginbutton.getScene().getWindow();
-
-        // Set the scene to the stage
-        stage.setScene(scene);
-
-        // Optionally, you can give the new window a title
-        stage.setTitle("Welcome Screen");
-
-        // Show the new scene and close the old one
-        stage.show();
+        loadPage2("eventorganizer-main-page.fxml",e);
     }
     public void backButtonOnAction(javafx.event.ActionEvent e) throws IOException {
         loadPage("home-page.fxml", e);
@@ -78,10 +60,26 @@ public class EventOrganizerController {
 
         // Set the new scene
         stage.setScene(new Scene(root));
+        stage.setTitle("");
+        // Show the stage
+        stage.show();
+    }
+    private void loadPage2(String fxmlFile, ActionEvent event) throws IOException {
+        // Load the FXML file
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
+        AnchorPane root = fxmlLoader.load(); // Assuming the root node is a BorderPane
+
+        // Get the stage from the event source
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle("");
+        // Set the new scene
+        stage.setScene(new Scene(root));
 
         // Show the stage
         stage.show();
     }
+
 
 
     public void signUpButtonOnAction(javafx.event.ActionEvent e) throws IOException {

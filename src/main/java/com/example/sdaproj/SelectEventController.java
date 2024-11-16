@@ -78,7 +78,7 @@ public class SelectEventController {
 
         // Set the new scene
         stage.setScene(new Scene(root));
-
+        stage.setTitle("");
         // Show the stage
         stage.show();
     }

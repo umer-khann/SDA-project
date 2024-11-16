@@ -12,7 +12,7 @@ public class EventOrganizerReg extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("event-org-reg.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 700, 400);
-        stage.setTitle("Attendee Registration");
+        stage.setTitle("Event Organizer Registration");
         stage.setScene(scene);
         stage.show();
     }
