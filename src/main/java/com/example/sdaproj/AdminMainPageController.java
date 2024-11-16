@@ -139,4 +139,8 @@ public class AdminMainPageController implements Initializable {
 
     public void button3Click(ActionEvent actionEvent) {
     }
+
+    public void HandleEvA(ActionEvent actionEvent) {
+        loadPage("generate-event-analysis.fxml");
+    }
 }

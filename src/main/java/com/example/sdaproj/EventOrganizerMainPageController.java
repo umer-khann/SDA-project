@@ -168,8 +168,8 @@ public class EventOrganizerMainPageController implements Initializable {
 
     // Example event handlers for the buttons in the sidebar
     @FXML
-    private void handleDashboardClick(ActionEvent event) {
-        loadPage("attendee-reg.fxml"); // Load Dashboard page
+    private void HandleCrEv(ActionEvent event) {
+        loadPage("Create-event.fxml"); // Load Dashboard page
     }
 
     @FXML
@@ -197,5 +197,10 @@ public class EventOrganizerMainPageController implements Initializable {
         loadPage("add-new-venue.fxml");
     }
 
+    public void HandleRemVen(ActionEvent actionEvent) { loadPage("remove-venue.fxml");}
+
+    public void HandleAddSp(ActionEvent actionEvent) {
+        loadPage("add-sponsership.fxml");
+    }
 }
 

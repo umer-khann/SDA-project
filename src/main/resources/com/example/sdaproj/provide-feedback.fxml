@@ -98,5 +98,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
+      <Button layoutX="110.0" layoutY="279.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="161.0" text="Provide Feedback">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
     </children>
 </AnchorPane>
