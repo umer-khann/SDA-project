@@ -70,7 +70,7 @@
                                         </ImageView>
                                     </graphic>
                                 </JFXButton>
-                                <JFXButton fx:id="button2" alignment="BASELINE_LEFT" onAction="#button2Click" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Add Event Org" textFill="WHITE">
+                                <JFXButton fx:id="button2" alignment="BASELINE_LEFT" onAction="#addEventOrgClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Add Event Org" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="15.0" />
                                     </font>
@@ -83,17 +83,17 @@
                                     </graphic>
                                 </JFXButton>
                                 <JFXButton fx:id="button3" alignment="BASELINE_LEFT" onAction="#button3Click" prefHeight="38.0" prefWidth="185.0" styleClass="sidebarItem" text="Remove Event Org" textFill="WHITE">
-                                <font>
-                                    <Font name="System Bold" size="15.0" />
-                                </font>
-                                <graphic>
-                                    <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                                        <image>
-                                            <Image url="@images/dash1.png" />
-                                        </image>
-                                    </ImageView>
-                                </graphic>
-                            </JFXButton>
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                    <graphic>
+                                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/dash1.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </JFXButton>
                             </children>
                         </VBox>
                     </children>

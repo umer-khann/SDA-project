@@ -59,17 +59,12 @@
                     </font>
                 </Label>
                 <TextField fx:id="nameField" layoutX="148.0" layoutY="84.0" />
-                <Button fx:id="AddVenue" layoutX="48.0" layoutY="342.0" mnemonicParsing="false" onAction="#AddVenueOnAction" prefHeight="33.0" prefWidth="111.0" style="-fx-background-color: #263F73;" text="Add Venue" textFill="WHITE">
+                <Button fx:id="AddVenue" layoutX="146.0" layoutY="341.0" mnemonicParsing="false" onAction="#AddVenueOnAction" prefHeight="33.0" prefWidth="111.0" style="-fx-background-color: #263F73;" text="Add Venue" textFill="WHITE">
                     <font>
                         <Font name="Verdana Bold" size="15.0" />
                     </font>
                 </Button>
                 <ChoiceBox fx:id="myChoiceBox" layoutX="148.0" layoutY="203.0" prefWidth="150.0" />
-                <Button fx:id="cancelButton" layoutX="215.0" layoutY="341.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="107.0" style="-fx-background-color: #3a3a3a;" text="Cancel" textFill="WHITE">
-                    <font>
-                        <Font name="Verdana Bold" size="15.0" />
-                    </font>
-                </Button>
                 <TextField fx:id="capacityfield" layoutX="148.0" layoutY="162.0" />
                 <TextField fx:id="locationField" layoutX="148.0" layoutY="122.0" />
 

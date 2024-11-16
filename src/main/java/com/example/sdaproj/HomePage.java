@@ -12,7 +12,7 @@ public class HomePage extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home-page.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 700, 400);
-        stage.setTitle("Home page");
+        stage.setTitle("Home Page");
         stage.setScene(scene);
         stage.show();
     }

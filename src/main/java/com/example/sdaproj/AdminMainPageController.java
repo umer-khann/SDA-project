@@ -130,8 +130,8 @@ public class AdminMainPageController implements Initializable {
         loadPage("attendee-reg.fxml"); // Load Add page
     }
 
-    public void button2Click(ActionEvent actionEvent) {
-        
+    public void addEventOrgClick(ActionEvent actionEvent) {
+        loadPage("event-org-reg.fxml");
     }
 
     public void button1Click(ActionEvent actionEvent) {

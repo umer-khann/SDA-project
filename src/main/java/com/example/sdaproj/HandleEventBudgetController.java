@@ -59,7 +59,7 @@ public class HandleEventBudgetController {
         stage.setScene(scene);
 
         // Optionally, you can give the new window a title
-        stage.setTitle("Welcome Screen");
+        stage.setTitle("");
 
         // Show the new scene and close the old one
         stage.show();

@@ -121,7 +121,7 @@ public class AttendeeMainPageController implements Initializable {
     // Example event handlers for the buttons in the sidebar
     @FXML
     private void handleDashboardClick(ActionEvent event) {
-        loadPage("attendee-reg.fxml"); // Load Dashboard page
+        loadPage("attendee-event-registeration.fxml"); // Load Dashboard page
     }
 
     @FXML

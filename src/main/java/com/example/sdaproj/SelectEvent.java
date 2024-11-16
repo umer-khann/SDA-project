@@ -12,7 +12,7 @@ public class SelectEvent extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("select-event.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 700, 400);
-        stage.setTitle("Attendee Registration");
+        stage.setTitle("");
         stage.setScene(scene);
         stage.show();
     }

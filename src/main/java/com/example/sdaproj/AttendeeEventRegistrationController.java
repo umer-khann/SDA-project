@@ -1,62 +1,42 @@
 package com.example.sdaproj;
 
 import javafx.animation.TranslateTransition;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
-import javafx.scene.layout.BorderPane;
-
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-
-import javax.swing.*;
 import java.io.IOException;
 
-public class SelectEventController {
-    @FXML
-    private Label welcomeText;
-    @FXML
-    private Label loginmessagelabel;
-
-
-    @FXML
-    private Button loginbutton;
-
-    @FXML
-    private TextField uname;
-
-    @FXML
-    private PasswordField upass;
+public class AttendeeEventRegistrationController extends Application {
 
     @FXML
     private Button applychanges;
 
-    private Label eventLabel;
-
-
-
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    //check
+    @Override
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("attendee-event-registeration.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        stage.setScene(scene);
+        stage.show();
     }
 
-
-
+    public static void main(String[] args) {
+        launch();
+    }
 
     public void buttonpress(ActionEvent e) throws IOException {
         AnchorPane parentPane = (AnchorPane) applychanges.getParent();
         Stage stage = (Stage) applychanges.getScene().getWindow();
-        loadPage("manage-attendee.fxml", e, parentPane);
+        loadPage("Handle-ticket-and-payment.fxml", e, parentPane);
     }
 
     // Method to load a new FXML into the content area
@@ -77,6 +57,6 @@ public class SelectEventController {
         } catch (IOException e1) {
             e1.printStackTrace(); // Log the error if loading fails
         }
-
     }
 }
+

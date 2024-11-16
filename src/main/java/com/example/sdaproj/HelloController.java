@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -39,11 +40,10 @@ public class HelloController {
     }
 
     @FXML
-    public void loginbuttonOnAction(javafx.event.ActionEvent e) {
-        loginmessagelabel.setText("You tried to login");
+    public void loginbuttonOnAction(javafx.event.ActionEvent e) throws IOException {
 
         if(!uname.getText().isBlank() && !upass.getText().isBlank()){
-            loginmessagelabel.setText("You tried to login");
+            loadPage2("admin-main-page.fxml",e);
         }
         else {
             loginmessagelabel.setText("Please input full details");
@@ -64,6 +64,23 @@ public class HelloController {
 
         // Set the new scene
         stage.setScene(new Scene(root));
+        stage.setTitle("");
+
+        // Show the stage
+        stage.show();
+    }
+    private void loadPage2(String fxmlFile, ActionEvent event) throws IOException {
+        // Load the FXML file
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
+        AnchorPane root = fxmlLoader.load(); // Assuming the root node is a BorderPane
+
+        // Get the stage from the event source
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Set the new scene
+        stage.setScene(new Scene(root));
+        stage.setTitle("");
 
         // Show the stage
         stage.show();

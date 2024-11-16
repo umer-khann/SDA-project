@@ -30,7 +30,7 @@ public class HomePageController {
 
         // Get the stage from the event source
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
+        stage.setTitle("");
         // Set the new scene
         stage.setScene(new Scene(root));
 
