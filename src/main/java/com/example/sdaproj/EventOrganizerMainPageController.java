@@ -176,5 +176,9 @@ public class EventOrganizerMainPageController implements Initializable {
     private void handleAddClick(ActionEvent event) {
         loadPage("attendee-reg.fxml"); // Load Add page
     }
+
+    public void ManageEventClick(ActionEvent actionEvent) {
+        loadPage("manage-event.fxml");
+    }
 }
 
