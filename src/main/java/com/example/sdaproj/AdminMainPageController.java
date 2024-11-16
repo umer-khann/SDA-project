@@ -126,12 +126,17 @@ public class AdminMainPageController implements Initializable {
 
     // Example event handlers for the buttons in the sidebar
     @FXML
-    private void handleDashboardClick(ActionEvent event) {
-        loadPage("attendee-reg.fxml"); // Load Dashboard page
-    }
-
-    @FXML
     private void handleAddClick(ActionEvent event) {
         loadPage("attendee-reg.fxml"); // Load Add page
+    }
+
+    public void button2Click(ActionEvent actionEvent) {
+        
+    }
+
+    public void button1Click(ActionEvent actionEvent) {
+    }
+
+    public void button3Click(ActionEvent actionEvent) {
     }
 }
