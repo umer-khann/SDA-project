@@ -44,7 +44,12 @@ public class EventOrganizerController {
     @FXML
     public void loginbuttonOnAction(javafx.event.ActionEvent e) throws IOException {
         // Load the new FXML file
-        loadPage2("eventorganizer-main-page.fxml",e);
+        if(!uname.getText().isBlank() && !upass.getText().isBlank()){
+            loadPage2("eventorganizer-main-page.fxml",e);
+        }
+        else {
+            loginmessagelabel.setText("Please input full details");
+        }
     }
     public void backButtonOnAction(javafx.event.ActionEvent e) throws IOException {
         loadPage("home-page.fxml", e);
