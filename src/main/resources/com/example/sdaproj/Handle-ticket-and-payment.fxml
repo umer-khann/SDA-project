@@ -35,11 +35,6 @@
             <Font size="18.0" />
         </font>
     </Label>
-    <Label layoutX="117.0" layoutY="316.0" text="CVV" textFill="WHITE">
-        <font>
-            <Font size="18.0" />
-        </font>
-    </Label>
     <TextField fx:id="txtCreditCardNumber" layoutX="291.0" layoutY="117.0" onKeyReleased="#setCreditCardType">
         <font>
             <Font size="18.0" />
@@ -51,11 +46,6 @@
         </font>
     </TextField>
     <TextField fx:id="txtMonth" layoutX="291.0" layoutY="264.0" prefHeight="39.0" prefWidth="87.0" promptText="MM">
-        <font>
-            <Font size="18.0" />
-        </font>
-    </TextField>
-    <TextField fx:id="txtAlias" layoutX="291.0" layoutY="310.0">
         <font>
             <Font size="18.0" />
         </font>
@@ -80,7 +70,7 @@
             <Font size="18.0" />
         </font>
     </TextField>
-    <Button fx:id="btnLink" layoutX="572.0" layoutY="359.0" mnemonicParsing="false" onAction="#saveData" prefHeight="39.0" prefWidth="87.0" text="PAY">
+    <Button fx:id="btnLink" layoutX="335.0" layoutY="331.0" mnemonicParsing="false" onAction="#saveData" prefHeight="39.0" prefWidth="87.0" text="PAY">
         <font>
             <Font size="18.0" />
         </font>
