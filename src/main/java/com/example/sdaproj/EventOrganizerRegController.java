@@ -52,8 +52,7 @@ public class EventOrganizerRegController implements Initializable {
 
         if(!usernameField.getText().isBlank() && !passwordField.getText().isBlank() && !contactField.getText().isBlank()
                 && !emailField.getText().isBlank()){
-            signUpmessagelabel.setText("Page Created Successfully!");
-            loadPage("admin-main-page.fxml",e);
+            signUpmessagelabel.setText("Account Created Successfully!");
         }
         else {
             signUpmessagelabel.setText("Please input full details!");

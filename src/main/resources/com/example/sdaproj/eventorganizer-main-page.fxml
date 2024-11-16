@@ -93,7 +93,7 @@
                                         </image>
                                     </ImageView>
                                 </graphic>
-                            </JFXButton><JFXButton fx:id="button4" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Budgeting" textFill="WHITE">
+                            </JFXButton><JFXButton fx:id="button4" alignment="BASELINE_LEFT" onAction="#budgetClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Budgeting" textFill="WHITE">
                                 <font>
                                     <Font name="System Bold" size="15.0" />
                                 </font>
@@ -104,7 +104,7 @@
                                         </image>
                                     </ImageView>
                                 </graphic>
-                            </JFXButton><JFXButton fx:id="button5" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Add Venue" textFill="WHITE">
+                            </JFXButton><JFXButton fx:id="button5" alignment="BASELINE_LEFT" onAction="#AddVenueClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Add Venue" textFill="WHITE">
                                 <font>
                                     <Font name="System Bold" size="15.0" />
                                 </font>
@@ -126,7 +126,7 @@
                                         </image>
                                     </ImageView>
                                 </graphic>
-                            </JFXButton><JFXButton fx:id="button7" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Manage Attendee" textFill="WHITE">
+                            </JFXButton><JFXButton fx:id="button7" alignment="BASELINE_LEFT" onAction="#ManageAttendeeClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Manage Attendee" textFill="WHITE">
                                 <font>
                                     <Font name="System Bold" size="15.0" />
                                 </font>
@@ -137,7 +137,7 @@
                                         </image>
                                     </ImageView>
                                 </graphic>
-                            </JFXButton><JFXButton fx:id="button8" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Add Sponser" textFill="WHITE">
+                            </JFXButton><JFXButton fx:id="button8" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Add Sponsor" textFill="WHITE">
                                 <font>
                                     <Font name="System Bold" size="15.0" />
                                 </font>
@@ -148,7 +148,7 @@
                                         </image>
                                     </ImageView>
                                 </graphic>
-                            </JFXButton><JFXButton fx:id="button9" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Remove Sponser" textFill="WHITE">
+                            </JFXButton><JFXButton fx:id="button9" alignment="BASELINE_LEFT" onAction="#RemoveSponsorshipClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Remove Sponsor" textFill="WHITE">
                                 <font>
                                     <Font name="System Bold" size="15.0" />
                                 </font>

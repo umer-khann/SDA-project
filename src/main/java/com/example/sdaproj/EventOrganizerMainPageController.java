@@ -180,5 +180,22 @@ public class EventOrganizerMainPageController implements Initializable {
     public void ManageEventClick(ActionEvent actionEvent) {
         loadPage("manage-event.fxml");
     }
+
+    public void ManageAttendeeClick(ActionEvent actionEvent) {
+        loadPage("manage-attendee.fxml");
+    }
+
+    public void RemoveSponsorshipClick(ActionEvent actionEvent) {
+        loadPage("manage-attendee.fxml");
+    }
+
+    public void budgetClick(ActionEvent actionEvent) {
+        loadPage("handle-event-budget.fxml");
+    }
+
+    public void AddVenueClick(ActionEvent actionEvent) {
+        loadPage("add-new-venue.fxml");
+    }
+
 }
 

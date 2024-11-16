@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -62,8 +64,11 @@ public class AddNewVenueController implements Initializable {
         // Show fields for outdoor venue
         weatherLabel.setVisible(true);
         weatherField.setVisible(true);
+        weatherLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
         additionalCapacityLabel.setVisible(true);
         additionalCapacityField.setVisible(true);
+        additionalCapacityLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+
 
         // Hide indoor venue fields
         roomLabel.setVisible(false);
@@ -78,6 +83,10 @@ public class AddNewVenueController implements Initializable {
         roomField.setVisible(true);
         floorLabel.setVisible(true);
         floorField.setVisible(true);
+        roomLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+        floorLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+
+
 
         // Hide outdoor venue fields
         weatherLabel.setVisible(false);
