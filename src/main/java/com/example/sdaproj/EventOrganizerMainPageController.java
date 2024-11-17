@@ -202,5 +202,9 @@ public class EventOrganizerMainPageController implements Initializable {
     public void HandleAddSp(ActionEvent actionEvent) {
         loadPage("add-sponsership.fxml");
     }
+
+    public void eventresources(ActionEvent actionEvent) {
+        loadPage("Allocate-And-Track-Event-Resources.fxml");
+    }
 }
 

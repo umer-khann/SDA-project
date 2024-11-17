@@ -134,13 +134,13 @@ public class AdminMainPageController implements Initializable {
         loadPage("event-org-reg.fxml");
     }
 
-    public void button1Click(ActionEvent actionEvent) {
-    }
 
-    public void button3Click(ActionEvent actionEvent) {
-    }
 
     public void HandleEvA(ActionEvent actionEvent) {
         loadPage("generate-event-analysis.fxml");
+    }
+
+    public void removeeventorg(ActionEvent actionEvent) {
+        loadPage("Remove-Event-Organizer.fxml");
     }
 }
