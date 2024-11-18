@@ -26,7 +26,7 @@ public class EventOrganizerMainPage extends Application {
         primaryStage.setScene(new Scene(root, 700, 400));
         primaryStage.show();
     }
-
+//km
 
     public static void main(String[] args) {
         launch(args);
