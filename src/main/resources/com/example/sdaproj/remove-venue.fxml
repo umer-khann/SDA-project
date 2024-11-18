@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaproj.RemoveVenueController">
+    <children>
+        <ImageView fx:id="Exit" fitHeight="22.0" fitWidth="22.0" layoutX="577.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/exit.png" />
+            </image>
+        </ImageView>
+        <TableView layoutX="2.0" layoutY="53.0" prefHeight="200.0" prefWidth="600.0">
+            <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+        <Label layoutX="246.0" layoutY="25.0" text="MANAGE EVENT" textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+        </Label>
+        <Label layoutX="49.0" layoutY="271.0" text="SELECT VENUE ID" textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+        </Label>
+        <TextField fx:id="eventid" layoutX="188.0" layoutY="261.0" prefHeight="31.0" prefWidth="117.0" />
+        <Button fx:id="applychanges" layoutX="36.0" layoutY="309.0" mnemonicParsing="false" onAction="#buttonpress" prefHeight="31.0" prefWidth="422.0" style="-fx-background-color: &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;?import javafx.scene.control.TextField?&gt;&lt;TextField layoutX=&quot;438.0&quot; layoutY=&quot;276.0&quot; prefHeight=&quot;31.0&quot; pre;" text="DELETE">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+        </Button>
+        <Label layoutX="537.0" layoutY="332.0" text="EventaX " textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+        <Label layoutX="554.0" layoutY="350.0" text="By" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+        <Label layoutX="534.0" layoutY="368.0" text="Aetherion" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

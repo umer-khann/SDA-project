@@ -128,4 +128,8 @@ public class AttendeeMainPageController implements Initializable {
     private void handleAddClick(ActionEvent event) {
         loadPage("attendee-reg.fxml"); // Load Add page
     }
+
+    public void HandleProvFeed(ActionEvent actionEvent) {
+        loadPage("provide-feedback.fxml");
+    }
 }
