@@ -82,7 +82,7 @@
                                         </ImageView>
                                     </graphic>
                                 </JFXButton>
-                                <JFXButton fx:id="button3" alignment="BASELINE_LEFT" onAction="#button3Click" prefHeight="38.0" prefWidth="185.0" styleClass="sidebarItem" text="Remove Event Org" textFill="WHITE">
+                                <JFXButton fx:id="button3" alignment="BASELINE_LEFT" onAction="#removeeventorg" prefHeight="38.0" prefWidth="185.0" styleClass="sidebarItem" text="Remove Event Org" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="15.0" />
                                     </font>

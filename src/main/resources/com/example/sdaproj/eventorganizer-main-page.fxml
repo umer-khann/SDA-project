@@ -81,7 +81,7 @@
                                         </ImageView>
                                     </graphic>
                                 </JFXButton>
-                                <JFXButton fx:id="button3" alignment="BASELINE_LEFT" onAction="#handleAddClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Event Resources" textFill="WHITE">
+                                <JFXButton fx:id="button3" alignment="BASELINE_LEFT" onAction="#eventresources" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Event Resources" textFill="WHITE">
                                 <font>
                                     <Font name="System Bold" size="15.0" />
                                 </font>
