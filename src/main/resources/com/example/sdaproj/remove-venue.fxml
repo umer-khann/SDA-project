@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sdaproj.RemoveVenueController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.RemoveVenueController">
     <children>
         <ImageView fx:id="Exit" fitHeight="22.0" fitWidth="22.0" layoutX="577.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
             <image>
