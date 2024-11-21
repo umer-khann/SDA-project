@@ -1,6 +1,8 @@
 package com.example.controllers;
 
 import com.example.oopfiles.Attendee;
+import com.example.oopfiles.GeneralAttendee;
+import com.example.oopfiles.VipAttendee;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,7 @@ import java.io.IOException;
 
 public class AttendeeLoginController {
 
+    private Attendee attendee;
     @FXML
     private Label welcomeText;
     @FXML
@@ -43,13 +46,21 @@ public class AttendeeLoginController {
         String password = upass.getText();
 
         if (!username.isBlank() && !password.isBlank()) {
-            Attendee attendee = new Attendee(username, password);
-
-            // Validate login
-            if (attendee.validateLogin()) {
-                // If login is successful, load the main attendee page
+            Attendee temp = new VipAttendee();
+            Attendee temp1 = new GeneralAttendee();
+            if(temp.login(username,password)){
+                attendee = new VipAttendee();
+                attendee.Create(username, password);
                 loadPage2("Attendee-main-page.fxml", e);
-            } else {
+
+            }
+            else if(temp1.login(username, password)){
+                attendee = new GeneralAttendee();
+                attendee.Create(username, password);
+                loadPage2("Attendee-main-page.fxml", e);
+
+            }
+            else{
                 // Display an error message
                 loginmessagelabel.setText("Invalid username or password. Please try again.");
             }
