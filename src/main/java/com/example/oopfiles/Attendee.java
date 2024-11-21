@@ -1,54 +1,39 @@
 package com.example.oopfiles;
 
-import com.example.JDBC.MyJDBC;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import com.example.JDBC.AttendeeDBController;
 
 public class Attendee {
     private String username;
     private String password;
+    private AttendeeDBController dbController;
 
     // Constructor
     public Attendee(String username, String password) {
         this.username = username;
         this.password = password;
+        dbController = new AttendeeDBController();
     }
 
-    /**
-     * Validate the attendee's login credentials.
-     *
-     * @return true if the login is successful, false otherwise
-     */
+    // Method to validate login
     public boolean validateLogin() {
-        String query = "SELECT * FROM Attendees WHERE username = ? AND password = ?";
-        try (Connection connection = MyJDBC.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-            // Set parameters
-            preparedStatement.setString(1, this.username);
-            preparedStatement.setString(2, this.password);
-
-            // Execute query
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                return resultSet.next(); // Returns true if a matching record is found
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false; // Return false in case of exceptions
-        }
+        // Call the AttendeeDBController to validate login credentials
+        return dbController.validateLogin(this.username, this.password);
     }
 
-    // Main method for testing
-    public static void main(String[] args) {
-        // Example usage
-        Attendee attendee = new Attendee("testUser", "testPassword");
+    // Getters and setters
+    public String getUsername() {
+        return username;
+    }
 
-        if (attendee.validateLogin()) {
-            System.out.println("Login successful!");
-        } else {
-            System.out.println("Invalid username or password.");
-        }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
