@@ -9,8 +9,9 @@ import java.io.IOException;
 
 public class HomePage extends Application {
     @Override
+
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home-page.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HomePage.class.getResource("home-page.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 700, 400);
         stage.setTitle("Home Page");
         stage.setScene(scene);
