@@ -1,90 +1,59 @@
 package com.example.controllers;
 
+import com.example.oopfiles.Admin;
+import com.example.oopfiles.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-
-import javax.swing.*;
 import java.io.IOException;
 
 public class HelloController {
-    @FXML
-    private Label welcomeText;
+
     @FXML
     private Label loginmessagelabel;
-
-
-    @FXML
-    private Button loginbutton;
-
     @FXML
     private TextField uname;
-
     @FXML
     private PasswordField upass;
 
+    private final User admin = Admin.getInstance(); // Singleton instance of Admin
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    public void loginbuttonOnAction(ActionEvent e) throws IOException {
+        String username = uname.getText();
+        String password = upass.getText();
+
+        if (!username.isBlank() && !password.isBlank()) {
+            if (admin.login(username, password)) {
+                // Navigate to the Admin main page
+                navigateTo("admin-main-page.fxml", e);
+            } else {
+                loginmessagelabel.setText("Invalid credentials! Try again.");
+            }
+        } else {
+            loginmessagelabel.setText("Please input full details.");
+        }
     }
 
     @FXML
-    public void loginbuttonOnAction(javafx.event.ActionEvent e) throws IOException {
-
-        if(!uname.getText().isBlank() && !upass.getText().isBlank()){
-            loadPage2("admin-main-page.fxml",e);
-        }
-        else {
-            loginmessagelabel.setText("Please input full details");
-        }
+    public void backButtonOnAction(ActionEvent e) throws IOException {
+        // Navigate to the Home page
+        navigateTo("home-page.fxml", e);
     }
 
-    public void backButtonOnAction(javafx.event.ActionEvent e) throws IOException {
-        loadPage("home-page.fxml", e);
-    }
-    private void loadPage(String fxmlFile, ActionEvent event) throws IOException {
-        // Load the FXML file
-
+    private void navigateTo(String fxmlFile, ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/sdaproj/" + fxmlFile));
-        BorderPane root = fxmlLoader.load(); // Assuming the root node is a BorderPane
+        AnchorPane root = fxmlLoader.load();
 
-        // Get the stage from the event source
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        // Set the new scene
         stage.setScene(new Scene(root));
-        stage.setTitle("");
-
-        // Show the stage
         stage.show();
     }
-    private void loadPage2(String fxmlFile, ActionEvent event) throws IOException {
-        // Load the FXML file
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/sdaproj/" + fxmlFile));
-        AnchorPane root = fxmlLoader.load(); // Assuming the root node is a BorderPane
-
-        // Get the stage from the event source
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        // Set the new scene
-        stage.setScene(new Scene(root));
-        stage.setTitle("");
-
-        // Show the stage
-        stage.show();
-    }
-
-
 }

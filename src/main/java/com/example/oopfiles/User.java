@@ -7,14 +7,25 @@ public abstract class User {
     protected boolean loggedIn;
     private String userName;
     private String password;
+
     // Constructor
     public User() {
+        this.userID = 0; // Default ID
+        this.name = "Default User"; // Default name
+        this.email = "default@example.com"; // Default email
+        this.contactDetails = "000-000-0000"; // Default contact details
+        this.loggedIn = false; // Default login state
+    }
+
+    //parameterized constructor
+    public User(int userID, String name, String email, String contactDetails) {
         this.userID = userID;
         this.name = name;
         this.email = email;
         this.contactDetails = contactDetails;
         this.loggedIn = false;
     }
+
 
     // Common Getter and Setter Methods
     public int getUserID() { return userID; }

@@ -1,35 +1,33 @@
 package com.example.oopfiles;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Admin extends User {
-    private List<String> assignedEvents;
-    private String role;
+    private static final User INSTANCE = new Admin();
 
-    // Constructor
-    public Admin() {
-        super();
+    private static final String HARD_CODED_USERNAME = "umer";
+    private static final String HARD_CODED_PASSWORD = "umer";
+
+    private Admin() {
+        super(1,"Umer Khan","umer.2003@gmail.com","03005560602");
+        this.setUserName(HARD_CODED_USERNAME);
+        this.setPassword(HARD_CODED_PASSWORD);
     }
+
+    public static User getInstance() {
+        return INSTANCE;
+    }
+
     @Override
     public boolean login(String uname, String pass) {
-        // Implementation for Event Organizer login
-        this.loggedIn = true;
-        System.out.println("Admin " + name + " has logged in.");
-        return loggedIn;
+        if (HARD_CODED_USERNAME.equals(uname) && HARD_CODED_PASSWORD.equals(pass)) {
+            this.loggedIn = true;
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean logout() {
-        // Implementation for Event Organizer logout
         this.loggedIn = false;
-        System.out.println("Admin " + name + " has logged out.");
-        return !loggedIn;
+        return true;
     }
-
-    // Specific Methods for Admin
-    public boolean addEventOrganizer() { /* Implementation here */ return true; }
-    public String generateEventReport() { /* Implementation here */ return "Report"; }
-
-    // Other methods...
 }
