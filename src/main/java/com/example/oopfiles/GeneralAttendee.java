@@ -26,6 +26,8 @@ public class GeneralAttendee extends Attendee {
         return true;
     }
 
+    public void addNotification(int ID, int userType, String message, String notifType){};
+
     // Specific Method for General Attendee
     public boolean redeemPoints() {
         // Implementation to redeem points

@@ -85,9 +85,4 @@ public class EventOrganizerController {
         stage.show();
     }
 
-
-
-    public void signUpButtonOnAction(javafx.event.ActionEvent e) throws IOException {
-        loadPage("event-org-reg.fxml", e);
-    }
 }

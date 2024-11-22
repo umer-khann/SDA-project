@@ -30,4 +30,17 @@ public class Admin extends User {
         this.loggedIn = false;
         return true;
     }
+
+    @Override
+    public boolean isValidUserName() {
+        return false;
+    }
+
+    @Override
+    public boolean isValidEmail() {
+        return false;
+    }
+    @Override
+    public void addNotification(int ID, int userType, String message, String notifType){};
+
 }
