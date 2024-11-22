@@ -1,26 +1,26 @@
 package com.example.oopfiles;
 
 // Abstract Class Venue
-abstract class Venue {
-    private String venueId;
+public abstract class Venue {
+    private int venueId;
     private String venueName;
     private String location;
     private int capacity;
 
     // Constructor
-    public Venue(String venueId, String venueName, String location, int capacity) {
-        this.venueId = venueId;
+    public Venue(String venueName, String location, int capacity) {
+        this.venueId = 0;
         this.venueName = venueName;
         this.location = location;
         this.capacity = capacity;
     }
 
     // Getters and Setters for common attributes
-    public String getVenueId() {
+    public int getVenueId() {
         return venueId;
     }
 
-    public void setVenueId(String venueId) {
+    public void setVenueId(int venueId) {
         this.venueId = venueId;
     }
 
@@ -49,13 +49,9 @@ abstract class Venue {
     }
 
     // Common methods
-    public void addVenue() {
-        System.out.println("Adding Venue: " + venueName);
-    }
+    public abstract void addVenue(int ID) ;
 
-    public void removeVenue() {
-        System.out.println("Removing Venue: " + venueName);
-    }
+    public abstract void removeVenue();
 
     // Abstract method to be implemented by subclasses
     public abstract void displayVenueDetails();

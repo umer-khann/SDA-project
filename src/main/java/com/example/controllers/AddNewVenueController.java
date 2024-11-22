@@ -1,5 +1,8 @@
 package com.example.controllers;
 
+import com.example.oopfiles.IndoorVenue;
+import com.example.oopfiles.OutdoorVenue;
+import com.example.oopfiles.Venue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,7 +20,7 @@ public class AddNewVenueController implements Initializable {
     @FXML
     private TextField locationField;
     @FXML
-    private TextField capacityField;
+    private TextField capacityfield;
     @FXML
     private ChoiceBox<String> myChoiceBox;
 
@@ -31,6 +34,8 @@ public class AddNewVenueController implements Initializable {
     @FXML
     private TextField floorField;
 
+    Venue venue;
+
     @FXML
     private Label weatherLabel;
     @FXML
@@ -43,6 +48,7 @@ public class AddNewVenueController implements Initializable {
     private String[] choices = {"Indoor", "Outdoor"};
     private String choice;
     private int evOrgID;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         myChoiceBox.getItems().addAll(choices);
@@ -96,10 +102,149 @@ public class AddNewVenueController implements Initializable {
     }
 
     public void AddVenueOnAction(ActionEvent actionEvent) {
-        // Handle adding venue logic here
+        // Step 1: Retrieve input values
+        String name = nameField.getText();
+        String location = locationField.getText();
+        String capacityStr = capacityfield.getText();
+        Venue venue;
+
+        // Validate the string fields: Ensure they are not numbers
+        if (isNumeric(name) || isNumeric(location)) {
+            showAlert("Error", "Name and Location must be valid strings, not numbers!");
+            return;
+        }
+
+        // Validate inputs for capacity
+        if (name.isBlank() || location.isBlank() || capacityStr.isBlank()) {
+            showAlert("Error", "Please fill in all required fields!");
+            return;
+        }
+
+        int capacity;
+        try {
+            capacity = Integer.parseInt(capacityStr); // Parse capacity to integer
+        } catch (NumberFormatException e) {
+            showAlert("Error", "Capacity must be a valid number!");
+            return;
+        }
+
+        // Step 2: Check the venue type and handle accordingly
+        if ("Outdoor".equals(choice)) {
+            // Get additional fields for outdoor venue
+            String weather = weatherField.getText();
+            String additionalCapacityStr = additionalCapacityField.getText();
+
+            // Validate the weather field: Ensure it's a string
+            if (weather.isBlank() || isNumeric(weather)) {
+                showAlert("Error", "Weather description must be a valid string, not a number!");
+                return;
+            }
+
+            // Validate additional capacity: Ensure it's numeric
+            if (additionalCapacityStr.isBlank()) {
+                showAlert("Error", "Additional Capacity is required for Outdoor Venue!");
+                return;
+            }
+
+            int additionalCapacity;
+            try {
+                additionalCapacity = Integer.parseInt(additionalCapacityStr);
+            } catch (NumberFormatException e) {
+                showAlert("Error", "Additional Capacity must be a valid number!");
+                return;
+            }
+
+            // Step 3: Create Outdoor Venue
+            venue = new OutdoorVenue(name, location, capacity, weather, additionalCapacity);
+            // Call addVenue function to save the venue
+            venue.addVenue(evOrgID); // Calls the addVenue method in OutdoorVenue
+
+        } else if ("Indoor".equals(choice)) {
+            // Get indoor venue-specific fields
+            String room = roomField.getText();
+            String floorStr = floorField.getText();
+
+            // Validate room field: Ensure it's a string
+            if (room.isBlank() || isNumeric(room)) {
+                showAlert("Error", "Room description must be a valid string, not a number!");
+                return;
+            }
+
+            // Validate floor: Ensure it's numeric
+            if (floorStr.isBlank()) {
+                showAlert("Error", "Floor is required for Indoor Venue!");
+                return;
+            }
+
+            int floor;
+            try {
+                floor = Integer.parseInt(floorStr);
+            } catch (NumberFormatException e) {
+                showAlert("Error", "Floor must be a valid number!");
+                return;
+            }
+
+            // Step 4: Create Indoor Venue
+            venue = new IndoorVenue(name, location, capacity, room, floor);
+            // Call addVenue function to save the venue
+            venue.addVenue(evOrgID); // Calls the addVenue method in IndoorVenue
+
+        } else {
+            showAlert("Error", "Please select a valid venue type!");
+            return;
+        }
+
+        // Step 5: Show success message and clear fields
+        showAlert("Success", "Venue added successfully!");
+        clearFields();
     }
 
+    // Method to clear all input fields
+    private void clearFields() {
+        nameField.clear();
+        locationField.clear();
+        capacityfield.clear();
+        if (weatherField != null) weatherField.clear();
+        if (additionalCapacityField != null) additionalCapacityField.clear();
+        if (roomField != null) roomField.clear();
+        if (floorField != null) floorField.clear();
+    }
+
+
+
+    public void showAlert(String title, String message) {
+        // Create an alert with AlertType.NONE to avoid the default error icon
+        Alert alert = new Alert(Alert.AlertType.NONE, message, ButtonType.OK);
+
+        // Set the title of the alert
+        alert.setTitle(title);
+
+        // Optionally set a custom icon or no icon at all
+        // alert.setGraphic(null);  // Uncomment if you don't want any icon
+
+        // Show the alert and wait for the user to close it
+        alert.showAndWait();
+    }
+
+
+
+
+    // Helper method to check if a string is numeric (to validate if it's a valid string)
+    private boolean isNumeric(String str) {
+        try {
+            // Attempt to parse the string as a number
+            Double.parseDouble(str);
+            return true; // It's a number
+        } catch (NumberFormatException e) {
+            return false; // It's not a number
+        }
+    }
     public void setEventOrgID(int eventOrgID) {
         this.evOrgID = eventOrgID;
     }
+
 }
+
+
+
+
