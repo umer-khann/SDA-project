@@ -11,8 +11,8 @@ public class MyJDBC {
             // Establish connection
             Connection connection = DriverManager.getConnection(
                     "jdbc:mysql://127.0.0.1:3306/sdaproj", // Database URL
-                    "INAM", // Username
-                    "bababoi8N"  // Password
+                    "root", // Username
+                    "1234"  // Password
             );
 
             // Create a statement object
