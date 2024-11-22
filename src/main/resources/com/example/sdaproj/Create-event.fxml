@@ -9,7 +9,7 @@
    <children>
        <AnchorPane prefHeight="65.0" prefWidth="573.0" style="-fx-background-color: trans;" BorderPane.alignment="CENTER">
            <children>
-               <Pane layoutX="102.0" layoutY="20.0" prefHeight="25.0" prefWidth="700.0" style="-fx-background-color: #032d4d;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-500.0" AnchorPane.topAnchor="0.0">
+               <Pane layoutX="102.0" layoutY="20.0" prefHeight="25.0" prefWidth="700.0" style="-fx-background-color: #032d4d;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-127.0" AnchorPane.topAnchor="0.0">
                    <children>
                        <ImageView fx:id="Exit" fitHeight="22.0" fitWidth="22.0" layoutX="678.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -30,14 +30,14 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="143.0" layoutY="37.0" />
-      <DatePicker layoutX="143.0" layoutY="74.0" />
+      <TextField fx:id="EvName" layoutX="143.0" layoutY="37.0" />
+      <DatePicker fx:id="EvDate" layoutX="143.0" layoutY="74.0" />
       <Label layoutX="50.0" layoutY="111.0" text="Budget">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="143.0" layoutY="108.0" />
+      <TextField fx:id="EVBudget" layoutX="143.0" layoutY="108.0" />
       <Label layoutX="50.0" layoutY="152.0" text="Type">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -60,9 +60,9 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="86.0" layoutY="11.0" />
-            <TextField layoutX="86.0" layoutY="41.0" />
-            <TextField layoutX="86.0" layoutY="70.0" />
+            <TextField fx:id="EvTopic" layoutX="86.0" layoutY="11.0" />
+            <TextField fx:id="EvDuration" layoutX="86.0" layoutY="41.0" />
+            <TextField fx:id="EvInstructor" layoutX="86.0" layoutY="70.0" />
          </children>
       </AnchorPane>
       <ChoiceBox fx:id="Type" layoutX="144.0" layoutY="148.0" prefWidth="150.0" />
@@ -78,8 +78,8 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="133.0" layoutY="12.0" />
-            <TextField layoutX="134.0" layoutY="43.0" />
+            <TextField fx:id="EvPerformer" layoutX="133.0" layoutY="12.0" />
+            <TextField fx:id="EvGenre" layoutX="134.0" layoutY="43.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="Confrence" layoutX="379.0" layoutY="371.0" prefHeight="129.0" prefWidth="330.0" visible="false" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="175.0">
@@ -94,8 +94,8 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="133.0" layoutY="12.0" />
-            <TextField layoutX="134.0" layoutY="43.0" />
+            <TextField fx:id="EvSpeaker" layoutX="133.0" layoutY="12.0" />
+            <TextField fx:id="EvAgenda" layoutX="134.0" layoutY="43.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutY="316.0" prefHeight="83.0" prefWidth="700.0" style="-fx-background-color: #2A3663;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="316.0">
@@ -117,7 +117,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <Button layoutX="471.0" layoutY="278.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="141.0" text="Create">
+      <Button fx:id="create" layoutX="471.0" layoutY="278.0" onAction="#handleCreateEvent" mnemonicParsing="false" prefHeight="29.0" prefWidth="141.0" text="Create">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

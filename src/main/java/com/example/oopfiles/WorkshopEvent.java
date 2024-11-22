@@ -7,13 +7,14 @@ public class WorkshopEvent extends Event {
     private double duration; // In hours
     private String instructor;
 
-    public WorkshopEvent(int eventID, String eventName, Date eventDate, double budget, String topic, double duration, String instructor) {
-        super(eventID, eventName, eventDate, budget);
-        this.topic = topic;
-        this.duration = duration;
-        this.instructor = instructor;
+    public WorkshopEvent() {
+        super();
     }
-
+    @Override
+    public boolean createEvent() {
+        return db.saveWorkshopEvent(this, 1 ,1);
+        // Event creation logic specific to ConcertEvent can go here
+    }
     // Getters and setters
     public String getTopic() {
         return topic;
@@ -25,5 +26,17 @@ public class WorkshopEvent extends Event {
 
     public String getInstructor() {
         return instructor;
+    }
+
+    public void setDuration(double duration) {
+        this.duration = duration;
+    }
+
+    public void setInstructor(String instructor) {
+        this.instructor = instructor;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 }
