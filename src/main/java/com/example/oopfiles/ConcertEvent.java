@@ -1,24 +1,39 @@
 package com.example.oopfiles;
 
+import com.example.JDBC.EventDBController;
+
 import java.util.Date;
 import java.util.List;
 
 public class ConcertEvent extends Event {
-    private List<String> performerNames;
+    private String performer;
     private String genre;
 
-    public ConcertEvent(int eventID, String eventName, Date eventDate, double budget, List<String> performerNames, String genre) {
-        super(eventID, eventName, eventDate, budget);
-        this.performerNames = performerNames;
+    public ConcertEvent() {
+        super();
+    }
+
+    // Getter and Setter for performerNames
+    public String getPerformer() {
+        return performer;
+    }
+
+    public void setPerformer(String performer) {
+        this.performer = performer;
+    }
+
+    // Getter and Setter for genre
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 
-    // Getters and setters
-    public List<String> getPerformerNames() {
-        return performerNames;
-    }
-
-    public String getGenre() {
-        return genre;
+    @Override
+    public boolean createEvent() {
+        return db.saveConcertEvent(this,1,1);
+        // Event creation logic specific to ConcertEvent can go here
     }
 }

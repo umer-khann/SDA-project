@@ -45,7 +45,7 @@ public class HelloController {
     @FXML
     public void backButtonOnAction(ActionEvent e) throws IOException {
         // Navigate to the Home page
-        navigateTo("home-page.fxml", e);
+        navigateTo1("home-page.fxml", e);
     }
 
     private void navigateTo(String fxmlFile, ActionEvent event) throws IOException {
@@ -56,4 +56,13 @@ public class HelloController {
         stage.setScene(new Scene(root));
         stage.show();
     }
+    private void navigateTo1(String fxmlFile, ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/sdaproj/" + fxmlFile));
+        BorderPane root = fxmlLoader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
 }
