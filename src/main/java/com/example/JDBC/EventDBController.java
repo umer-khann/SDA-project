@@ -4,6 +4,8 @@ import com.example.oopfiles.ConcertEvent;
 import com.example.oopfiles.ConferenceEvent;
 import com.example.oopfiles.Event;
 import com.example.oopfiles.WorkshopEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.util.Date;
@@ -17,7 +19,7 @@ public class EventDBController {
      * @return true if the event is saved successfully, false otherwise.
      */
     public boolean saveEvent(Event event) {
-        String query = "INSERT INTO Events (eventName, eventDate, budget, status) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO Event (eventName, eventDate, budget, status) VALUES (?, ?, ?, ?)";
 
         try (Connection connection = MyJDBC.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -46,7 +48,7 @@ public class EventDBController {
      * @return true if the update is successful, false otherwise.
      */
     public boolean updateEventDetails(int eventID, String newName, Date newDate) {
-        String query = "UPDATE Events SET eventName = ?, eventDate = ? WHERE eventID = ?";
+        String query = "UPDATE Event SET eventName = ?, eventDate = ? WHERE eventID = ?";
 
         try (Connection connection = MyJDBC.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -65,6 +67,48 @@ public class EventDBController {
         }
     }
 
+    public void showEvents(ObservableList<Event> eventList) {
+        String query = "SELECT eventID, eventName, budget, eventType FROM Event";
+
+        try (Connection connection = MyJDBC.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
+            while (resultSet.next()) {
+                int eventID = resultSet.getInt("eventID");
+                String eventName = resultSet.getString("eventName");
+                float budget = resultSet.getFloat("budget");
+                String eventType = resultSet.getString("eventType");
+                System.out.println(eventType);
+                Event event;
+                // Instantiate the appropriate subclass based on eventType
+                switch (eventType.toLowerCase()) {
+                    case "conference":
+                        event = new ConferenceEvent();
+                        event.assignValues(eventID,eventName,budget,eventType);
+                        break;
+                    case "concert":
+                        event = new ConcertEvent();
+                        event.assignValues(eventID,eventName,budget,eventType);
+                        break;
+                    case "workshop":
+                        event = new WorkshopEvent(); // example default values
+                        event.assignValues(eventID,eventName,budget,eventType);
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Unknown event type: " + eventType);
+                }
+
+                // Add the event to the list
+                eventList.add(event);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     /**
      * Delete an event from the database by its ID.
      *
@@ -72,7 +116,7 @@ public class EventDBController {
      * @return true if the deletion is successful, false otherwise.
      */
     public boolean deleteEvent(int eventID) {
-        String query = "DELETE FROM Events WHERE eventID = ?";
+        String query = "DELETE FROM Event WHERE eventID = ?";
 
         try (Connection connection = MyJDBC.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -96,7 +140,7 @@ public class EventDBController {
      * @return An Event object if found, null otherwise.
      */
     public Event getEventByID(int eventID) {
-        String query = "SELECT * FROM Events WHERE eventID = ?";
+        String query = "SELECT * FROM Event WHERE eventID = ?";
 
         try (Connection connection = MyJDBC.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -249,6 +293,56 @@ public class EventDBController {
         }
         return false;
     }
+
+    public boolean verifyEvent(int eventID) {
+        // SQL query to check if the event exists in the database
+        String query = "SELECT 1 FROM Event WHERE eventID = ? LIMIT 1";
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Set the eventID parameter in the query
+            preparedStatement.setInt(1, eventID);
+
+            // Execute the query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                // If a result is returned, the event exists
+                return resultSet.next();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // Return false in case of an exception
+        }
+    }
+
+    public void updateEventBudget(int ID, double newBudget) {
+        String query = "UPDATE Event SET budget = ? WHERE eventID = ?";
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Set the parameters for the query
+            preparedStatement.setDouble(1, newBudget);
+            preparedStatement.setInt(2, ID);
+
+            // Execute the update query
+            int rowsUpdated = preparedStatement.executeUpdate();
+
+            // Check if the update was successful
+            if (rowsUpdated > 0) {
+                System.out.println("Event budget updated successfully for Event ID: " + ID);
+            } else {
+                System.out.println("Event ID not found. No update performed.");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error updating event budget for Event ID: " + ID);
+        }
+    }
+
+
 
     // Additional methods for handling event-related database operations can be added here
 }

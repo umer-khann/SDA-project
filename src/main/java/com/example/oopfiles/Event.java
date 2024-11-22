@@ -1,8 +1,7 @@
 package com.example.oopfiles;
 
 import com.example.JDBC.EventDBController;
-
-import java.util.Date;
+import javafx.collections.ObservableList;
 
 public abstract class Event {
     private int eventID;
@@ -10,7 +9,8 @@ public abstract class Event {
     private String eventDate;
     private boolean status;
     private double budget;
-    protected EventDBController db;
+    protected static EventDBController db;
+    private String eventType;
     public Event() {
         db = new EventDBController();
     }
@@ -18,7 +18,24 @@ public abstract class Event {
     public boolean updateDetails(String newName, String newDate) {
         this.eventName = newName;
         this.eventDate = newDate;
+        this.eventType="";
         return true;
+    }
+
+    public static boolean checkEvent(int ID){
+        db=new EventDBController();
+        boolean result = db.verifyEvent(ID);
+        return result;
+    }
+    public static void updateBudget(int ID,float newBudget){
+        db=new EventDBController();
+        db.updateEventBudget(ID,newBudget);
+    }
+
+    public static ObservableList<Event> intializeTable(ObservableList<Event> eventList){
+        db=new EventDBController();
+        db.showEvents(eventList);
+        return eventList;
     }
 
     public boolean allocateBudget(double newBudget) {
@@ -32,6 +49,13 @@ public abstract class Event {
     // Getters and setters
     public int getEventID() {
         return eventID;
+    }
+
+    public void assignValues(int eventID,String eventName,float budget,String eventType){
+        this.eventID=eventID;
+        this.eventName=eventName;
+        this.budget=budget;
+        this.eventType=eventType;
     }
 
     public void setEventID(int eventID) {
@@ -76,6 +100,14 @@ public abstract class Event {
 
     public void deactivate() {
         this.status = false;
+    }
+
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
     }
 
     // Placeholder method for saving event to database

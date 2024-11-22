@@ -36,4 +36,5 @@ public class ConcertEvent extends Event {
         return db.saveConcertEvent(this,1,1);
         // Event creation logic specific to ConcertEvent can go here
     }
+
 }
