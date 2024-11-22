@@ -1,5 +1,6 @@
 package com.example.controllers;
 
+import com.example.oopfiles.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,9 +22,6 @@ public class EventOrganizerRegController implements Initializable {
     private Label signUpmessagelabel;
 
     @FXML
-    private Button cancelButton;
-
-    @FXML
     private Button signUpButton;
 
     @FXML
@@ -34,6 +32,9 @@ public class EventOrganizerRegController implements Initializable {
 
     @FXML
     private TextField contactField;
+
+    @FXML
+    private TextField experienceField;
 
     @FXML
     private TextField usernameField;
@@ -48,17 +49,111 @@ public class EventOrganizerRegController implements Initializable {
 
     }
 
+//    @FXML
+//    public void signUpButtonOnAction(javafx.event.ActionEvent e) throws IOException {
+//
+//        if(!usernameField.getText().isBlank() && !passwordField.getText().isBlank() && !contactField.getText().isBlank()
+//                && !emailField.getText().isBlank()){
+//            signUpmessagelabel.setText("Account Created Successfully!");
+//        }
+//        else {
+//            signUpmessagelabel.setText("Please input full details!");
+//        }
+//    }
+
     @FXML
     public void signUpButtonOnAction(javafx.event.ActionEvent e) throws IOException {
+        // Retrieve input values from form fields
 
-        if(!usernameField.getText().isBlank() && !passwordField.getText().isBlank() && !contactField.getText().isBlank()
-                && !emailField.getText().isBlank()){
-            signUpmessagelabel.setText("Account Created Successfully!");
-        }
-        else {
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        String contact = contactField.getText();
+        String email = emailField.getText();
+        String experience = experienceField.getText();  // Experience field
+
+        // Check for empty fields
+        if (username.isBlank() || password.isBlank() || contact.isBlank() || email.isBlank() || experience.isBlank()) {
             signUpmessagelabel.setText("Please input full details!");
+            return;
         }
+
+        // Validate email format using a regex pattern
+        if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+            signUpmessagelabel.setText("Invalid email format!");
+            return;
+        }
+
+        // Validate contact details (e.g., should be a valid phone number format)
+        if (!contact.matches("\\d{10}")) {  // Assuming phone number should be 10 digits long
+            signUpmessagelabel.setText("Invalid contact number! Must be 10 digits.");
+            return;
+        }
+
+        // Validate experience input as a numeric value
+        if (!experience.matches("\\d+")) {  // Check if experience is a valid integer
+            signUpmessagelabel.setText("Invalid experience! Must be a numeric value.");
+            return;
+        }
+
+        // Create a new EventOrganizer object
+        User eventOrganizer = new EventOrganizer();
+
+
+        // Set the event organizer's details
+        eventOrganizer.setName(nameField.getText());
+        eventOrganizer.setEmail(emailField.getText());
+        eventOrganizer.setContactDetails(contactField.getText());
+        eventOrganizer.setUserName(username);
+        eventOrganizer.setPassword(password);
+        eventOrganizer.setExperienceLevel(Integer.parseInt(experience));  // Parse experience to integer
+
+        // Validate registration (check uniqueness of username/email)
+        if (!eventOrganizer.isValidUserName()) {
+            signUpmessagelabel.setText("Username already exists!");
+            return;  // Don't proceed if validation fails
+        }
+        if (!eventOrganizer.isValidEmail()) {
+            signUpmessagelabel.setText("Email already exists!");
+            return;  // Don't proceed if validation fails
+        }
+
+        // Register the event organizer
+        eventOrganizer.registerEventOrganizer();
+
+        // Show success dialog
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Registration Successful");
+        alert.setHeaderText(null);
+        alert.setContentText("Your account has been created successfully!");
+        alert.showAndWait();
+        // Assuming 'eventOrganizer' is an instance of a class handling database interactions
+        int eventOrganizerID = eventOrganizer.getID(username); // Fetch the Event Organizer's ID using the username
+
+        // Construct the message with the username and password
+        String message = "Account created successfully. Username: " + username + ", Password: " + password;
+
+        // Add the notification
+        eventOrganizer.addNotification(eventOrganizerID, 2,message, "Account Registration");
+
+
+
+        // Optionally, clear fields or redirect the user to another page
+        clearFields();  // Clear form fields (implement this if needed)
+        // loadPage2("EventOrganizer-main-page.fxml", e);  // Navigate to the next page
     }
+
+    // Optional: A helper method to clear input fields
+    private void clearFields() {
+        nameField.clear();
+        usernameField.clear();
+        passwordField.clear();
+        contactField.clear();
+        emailField.clear();
+        experienceField.clear();
+        signUpmessagelabel.setText("");
+    }
+
+
 
 
     private void loadPage(String fxmlFile, ActionEvent event) throws IOException {

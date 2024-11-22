@@ -1,15 +1,27 @@
 package com.example.oopfiles;
+import com.example.JDBC.AttendeeDBController;
+import com.example.JDBC.EventOrganizerDBHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventOrganizer extends User {
     private List<String> eventsOrganized;
-    private String experienceLevel;
+    private int experienceLevel;
+    EventOrganizerDBHandler dbHandler;
 
     // Constructor
     public EventOrganizer() {
         super();
+        dbHandler=new EventOrganizerDBHandler();
     }
+
+
+    public void addNotification(int ID, int userType, String message, String notifType){
+        dbHandler.addNotification(ID,userType,message,notifType);
+    };
+
+//    public String getExperienceLevel(){ return experienceLevel;}
 
     @Override
     public boolean login(String uname, String pass) {
@@ -104,10 +116,42 @@ public class EventOrganizer extends User {
         }
     }
 
+    public int getID(String username) {
+        int OrganizerID = dbHandler.getEventOrganizerID(username);
+        return OrganizerID;
+    }
+
+    public boolean isValidUserName() {
+
+        // Check if the username already exists
+        if (dbHandler.usernameExists(this.getUserName())) {
+            System.out.println("Username already exists!");
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public boolean isValidEmail() {
+
+        // Check if the email already exists
+        if (dbHandler.emailExists(this.email)) {
+            System.out.println("Email already exists!");
+            return false;
+        }
+
+        return true;
+    }
+
+    public void registerEventOrganizer() {
+        dbHandler.signUpEventOrganizer(this);
+    }
+
     // Getters and Setters for EventOrganizer-specific fields
     public List<String> getEventsOrganized() { return eventsOrganized; }
     public void setEventsOrganized(List<String> eventsOrganized) { this.eventsOrganized = eventsOrganized; }
 
-    public String getExperienceLevel() { return experienceLevel; }
-    public void setExperienceLevel(String experienceLevel) { this.experienceLevel = experienceLevel; }
+    public int getExperienceLevel() { return experienceLevel; }
+    public void setExperienceLevel(int experienceLevel) { this.experienceLevel = experienceLevel; }
 }

@@ -45,7 +45,6 @@
                       </image>
                   </ImageView>
             </graphic></Button>
-         <Button fx:id="loginbutton2" layoutX="98.0" layoutY="322.0" mnemonicParsing="false" onAction="#signUpButtonOnAction" prefHeight="31.0" prefWidth="275.0" style="-fx-background-color: #263F73;" text="Don't have an account? Sign Up!" textFill="WHITE" />
         </AnchorPane>
     </center>
 </BorderPane>

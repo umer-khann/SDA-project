@@ -28,6 +28,8 @@ public class VipAttendee extends Attendee {
         db.signUpAttendee(this);
         return true;
     }
+    public void addNotification(int ID, int userType, String message, String notifType){};
+
 
     // Specific Getter and Setter Methods
     public String getVIPLevel() { return VIPLevel; }
