@@ -15,7 +15,7 @@ public class Admin extends User {
     public boolean login(String uname, String pass) {
         // Implementation for Event Organizer login
         this.loggedIn = true;
-        System.out.println("Event Organizer " + name + " has logged in.");
+        System.out.println("Admin " + name + " has logged in.");
         return loggedIn;
     }
 
@@ -23,7 +23,7 @@ public class Admin extends User {
     public boolean logout() {
         // Implementation for Event Organizer logout
         this.loggedIn = false;
-        System.out.println("Event Organizer " + name + " has logged out.");
+        System.out.println("Admin " + name + " has logged out.");
         return !loggedIn;
     }
 
