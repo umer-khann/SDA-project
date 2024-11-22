@@ -27,4 +27,7 @@ public class RemoveSponsershipController implements Initializable {
             System.exit(0);
         });
     }
+
+    public void setEventOrgID(int eventOrgID) {
+    }
 }

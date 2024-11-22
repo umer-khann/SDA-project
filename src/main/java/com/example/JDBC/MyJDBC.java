@@ -5,9 +5,8 @@ import java.sql.DriverManager;
 
 public class MyJDBC {
     private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/sdaproj";
-    private static final String DB_USERNAME = "root";
-    private static final String DB_PASSWORD = "1234";
-
+    private static final String DB_USERNAME = "INAM";
+    private static final String DB_PASSWORD = "bababoi8N";
     // Singleton connection (optional for efficiency)
     private static Connection connection;
 

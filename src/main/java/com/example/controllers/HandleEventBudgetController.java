@@ -87,4 +87,7 @@ public class HandleEventBudgetController {
     public void signUpButtonOnAction(ActionEvent actionEvent)
     {
     }
+
+    public void setEventOrgID(int eventOrgID) {
+    }
 }

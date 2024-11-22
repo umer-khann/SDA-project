@@ -18,7 +18,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EventOrganizerMainPageController implements Initializable {
-
+    private int EventorgID;
     public JFXButton button1;
     public JFXButton button2;
     public JFXButton button3;
@@ -52,7 +52,9 @@ public class EventOrganizerMainPageController implements Initializable {
 
     @FXML
     private ScrollPane contentArea;
-
+    public void setEventorgID(int a){
+        EventorgID = a;
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         a = button1.getText();
@@ -73,7 +75,7 @@ public class EventOrganizerMainPageController implements Initializable {
             TranslateTransition slide = new TranslateTransition();
             slide.setDuration(Duration.seconds(0.4));
             slide.setNode(slider);
-
+            System.out.println(EventorgID);
             slide.setToX(0);
             slide.play();
 
@@ -125,7 +127,7 @@ public class EventOrganizerMainPageController implements Initializable {
     }
 
     // Method to load a new FXML into the content area
-    private void loadPage(String fxml) {
+    private void loadPage(String fxml, int eventOrgID) {
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.4));
         slide.setNode(slider);
@@ -143,17 +145,39 @@ public class EventOrganizerMainPageController implements Initializable {
         button7.setText("");
         button8.setText("");
         button9.setText("");
-        slide.setOnFinished((ActionEvent e)-> {
+        slide.setOnFinished((ActionEvent e) -> {
             Menu.setVisible(true);
             MenuClose.setVisible(false);
             slider.setPrefWidth(10);
         });
         contentArea.setVisible(true);
         contentArea.setPrefWidth(730);
+
         try {
-            // Load the FXML file
-            Parent pane = FXMLLoader.load(getClass().getResource("/com/example/sdaproj/" + fxml));
-            // Clear the current content and set the new content
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/sdaproj/" + fxml));
+            Parent pane = loader.load();
+
+            // Access the controller and set the EventorgID
+            Object controller = loader.getController();
+
+            if (controller instanceof CreateEventController) {
+                ((CreateEventController) controller).setEventOrgID(eventOrgID);
+            } else if (controller instanceof ManageEventController) {
+                ((ManageEventController) controller).setEventOrgID(eventOrgID);
+            } else if (controller instanceof HandleEventBudgetController) {
+                ((HandleEventBudgetController) controller).setEventOrgID(eventOrgID);
+            } else if (controller instanceof AddNewVenueController) {
+                ((AddNewVenueController) controller).setEventOrgID(eventOrgID);
+            } else if (controller instanceof RemoveVenueController) {
+                ((RemoveVenueController) controller).setEventOrgID(eventOrgID);
+            } else if (controller instanceof ManageAttendeeController) {
+                ((ManageAttendeeController) controller).setEventOrgID(eventOrgID);
+            } else if (controller instanceof AddSponsershipController) {
+                ((AddSponsershipController) controller).setEventOrgID(eventOrgID);
+            } else if (controller instanceof RemoveSponsershipController) {
+                ((RemoveSponsershipController) controller).setEventOrgID(eventOrgID);
+            }
+
             contentArea.setContent(pane);
         } catch (IOException e) {
             e.printStackTrace(); // Log the error if loading fails
@@ -163,42 +187,42 @@ public class EventOrganizerMainPageController implements Initializable {
     // Example event handlers for the buttons in the sidebar
     @FXML
     private void HandleCrEv(ActionEvent event) {
-        loadPage("Create-event.fxml"); // Load Dashboard page
+        loadPage("Create-event.fxml",EventorgID); // Load Dashboard page
     }
 
     @FXML
     private void handleAddClick(ActionEvent event) {
-        loadPage("attendee-reg.fxml"); // Load Add page
+        loadPage("attendee-reg.fxml",EventorgID); // Load Add page
     }
 
     public void ManageEventClick(ActionEvent actionEvent) {
-        loadPage("manage-event.fxml");
+        loadPage("manage-event.fxml",EventorgID);
     }
 
     public void ManageAttendeeClick(ActionEvent actionEvent) {
-        loadPage("select-event.fxml");
+        loadPage("select-event.fxml",EventorgID);
     }
 
     public void RemoveSponsorshipClick(ActionEvent actionEvent) {
-        loadPage("remove-sponsorship.fxml");
+        loadPage("remove-sponsorship.fxml",EventorgID);
     }
 
     public void budgetClick(ActionEvent actionEvent) {
-        loadPage("handle-event-budget.fxml");
+        loadPage("handle-event-budget.fxml",EventorgID);
     }
 
     public void AddVenueClick(ActionEvent actionEvent) {
-        loadPage("add-new-venue.fxml");
+        loadPage("add-new-venue.fxml",EventorgID);
     }
 
-    public void HandleRemVen(ActionEvent actionEvent) { loadPage("remove-venue.fxml");}
+    public void HandleRemVen(ActionEvent actionEvent) { loadPage("remove-venue.fxml",EventorgID);}
 
     public void HandleAddSp(ActionEvent actionEvent) {
-        loadPage("add-sponsership.fxml");
+        loadPage("add-sponsership.fxml",EventorgID);
     }
 
     public void eventresources(ActionEvent actionEvent) {
-        loadPage("Allocate-And-Track-Event-Resources.fxml");
+        loadPage("Allocate-And-Track-Event-Resources.fxml",EventorgID);
     }
 }
 

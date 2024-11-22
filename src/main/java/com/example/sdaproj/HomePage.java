@@ -1,5 +1,6 @@
 package com.example.sdaproj;
 
+import com.example.oopfiles.Tracker;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,6 +14,7 @@ public class HomePage extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HomePage.class.getResource("home-page.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 700, 400);
+        Tracker t = new Tracker();
         stage.setTitle("Home Page");
         stage.setScene(scene);
         stage.show();

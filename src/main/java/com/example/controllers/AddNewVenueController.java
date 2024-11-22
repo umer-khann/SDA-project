@@ -42,7 +42,7 @@ public class AddNewVenueController implements Initializable {
 
     private String[] choices = {"Indoor", "Outdoor"};
     private String choice;
-
+    private int evOrgID;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         myChoiceBox.getItems().addAll(choices);
@@ -97,5 +97,9 @@ public class AddNewVenueController implements Initializable {
 
     public void AddVenueOnAction(ActionEvent actionEvent) {
         // Handle adding venue logic here
+    }
+
+    public void setEventOrgID(int eventOrgID) {
+        this.evOrgID = eventOrgID;
     }
 }
