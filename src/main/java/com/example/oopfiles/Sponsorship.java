@@ -1,25 +1,33 @@
 package com.example.oopfiles;
 
+import com.example.JDBC.SponsorshipDBHandler;
+import javafx.collections.ObservableList;
+
 public class Sponsorship {
 
-    private String sponsorId;
+    private int sponsorID;
+    private int eventID;
     private String sponsorName;
     private double contributionAmount;
+    SponsorshipDBHandler db;
 
     // Constructor
-    public Sponsorship(String sponsorId, String sponsorName, double contributionAmount) {
-        this.sponsorId = sponsorId;
-        this.sponsorName = sponsorName;
-        this.contributionAmount = contributionAmount;
+    public Sponsorship() {
+        db=new SponsorshipDBHandler();
+    }
+
+    public ObservableList<Sponsorship> intializeTable(ObservableList<Sponsorship> sponsorshipList, int eventOrgID) {
+        db.showEvents(sponsorshipList,eventOrgID);
+        return sponsorshipList;
     }
 
     // Getters and setters
-    public String getSponsorId() {
-        return sponsorId;
+    public int getSponsorID() {
+        return sponsorID;
     }
 
-    public void setSponsorId(String sponsorId) {
-        this.sponsorId = sponsorId;
+    public void setSponsorID(int sponsorId) {
+        this.sponsorID = sponsorId;
     }
 
     public String getSponsorName() {
@@ -46,9 +54,16 @@ public class Sponsorship {
     }
 
     // Remove sponsorship
-    public boolean removeSponsorship() {
-        //SponsorshipDAO dao = new SponsorshipDAO();
-        //return dao.deleteSponsorship(this.sponsorId);
+    public boolean removeSponsorship(int eventID,int sponsorshipID) {
+
         return false;
+    }
+
+
+    public int getEventID() {
+        return eventID;
+    }
+    public void setEventID(int eventID) {
+        this.eventID=eventID;
     }
 }

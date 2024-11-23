@@ -174,8 +174,8 @@ public class EventOrganizerMainPageController implements Initializable {
                 ((ManageAttendeeController) controller).setEventOrgID(eventOrgID);
             } else if (controller instanceof AddSponsershipController) {
                 ((AddSponsershipController) controller).setEventOrgID(eventOrgID);
-            } else if (controller instanceof RemoveSponsershipController) {
-                ((RemoveSponsershipController) controller).setEventOrgID(eventOrgID);
+            } else if (controller instanceof RemoveSponsorshipController) {
+                ((RemoveSponsorshipController) controller).setEventOrgID(eventOrgID);
             }
 
             contentArea.setContent(pane);
