@@ -76,4 +76,6 @@ public abstract class User {
     public String getUsername() {
         return this.userName;
     }
+
+    public void setLoyaltyPoints(int loyaltyPoints) {}
 }

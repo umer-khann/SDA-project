@@ -1,6 +1,7 @@
 package com.example.oopfiles;
 
 import com.example.JDBC.EventDBController;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.Date;
@@ -14,9 +15,11 @@ public abstract class Event {
     protected static EventDBController db;
     private String eventType;
     private EventOrganizer organizer;  // Aggregation: Event has an organizer
+    private static ObservableList<Attendee> attendeeList;
 
     public Event() {
         db = new EventDBController();
+        attendeeList = FXCollections.observableArrayList();
     }
 
 
@@ -55,6 +58,11 @@ public abstract class Event {
         db=new EventDBController();
         boolean result = db.verifyEvent(ID);
         return result;
+    }
+    public static ObservableList<Attendee> displayAttendees(int eventID){
+        db=new EventDBController();
+        db.retrieveAttendees(attendeeList,eventID);
+        return attendeeList;
     }
 
     public static void updateBudget(int ID,float newBudget){
@@ -163,6 +171,14 @@ public abstract class Event {
 
     public int getOrganizerID() {
         return organizer.getID(organizer.getUsername());
+    }
+
+    public ObservableList<Attendee> getAttendeeList() {
+        return attendeeList;
+    }
+
+    public void setAttendeeList(ObservableList<Attendee> attendeeList) {
+        this.attendeeList = attendeeList;
     }
 
 

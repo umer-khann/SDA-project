@@ -14,6 +14,8 @@ public class GeneralAttendee extends Attendee {
         return true;
     }
 
+    public String getAttendeeType() { return "General"; }
+
     @Override
     public boolean provideFeedback() {
         // Implementation for providing feedback

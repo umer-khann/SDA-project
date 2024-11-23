@@ -71,6 +71,10 @@ public abstract class Attendee extends User {
     public abstract boolean registerAttendee();
 
     // Common Getter and Setter Methods
-    public int getLoyaltyPoints() { return loyaltyPoints; }
     public void setLoyaltyPoints(int loyaltyPoints) { this.loyaltyPoints = loyaltyPoints; }
+    public int getAttendeeID() { return userID; }
+    public String getAttendeeName() { return name; }
+    public String getAttendeeEmail() { return email; }
+    public String getAttendeeContact() { return contactDetails; }
+    public int getLoyaltyPoints() { return loyaltyPoints; }
 }

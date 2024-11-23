@@ -30,7 +30,10 @@ public class VipAttendee extends Attendee {
     }
     public void addNotification(int ID, int userType, String message, String notifType){};
 
-
+    public void setLoyaltyPoints(int loyaltyPoints) {
+        this.loyaltyPoints=loyaltyPoints;
+    }
+    public String getAttendeeType() { return "VIP"; }
     // Specific Getter and Setter Methods
     public String getVIPLevel() { return VIPLevel; }
     public void setVIPLevel(String VIPLevel) { this.VIPLevel = VIPLevel; }
