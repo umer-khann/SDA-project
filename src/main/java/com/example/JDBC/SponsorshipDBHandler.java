@@ -80,4 +80,25 @@ public class SponsorshipDBHandler {
         return false; // Return false if the IDs don't exist or an error occurs
     }
 
+    public String getName(String sponsorID) {
+        String sponsorName = null;
+        String query = "SELECT sponsorName FROM Sponsorship WHERE sponsorshipID = ?";
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, sponsorID);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    sponsorName = resultSet.getString("sponsorName");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return sponsorName; // Returns the name if found, or null if not
+    }
+
 }

@@ -75,4 +75,9 @@ public class Sponsorship {
     public void setEventName(String eventName) {
         this.eventName = eventName;
     }
+
+    public String retrieveName(String sponsorID) {
+        String name = db.getName(sponsorID);
+        return name;
+    }
 }
