@@ -2,6 +2,7 @@ package com.example.JDBC;
 
 import com.example.oopfiles.*;
 import javafx.collections.FXCollections;
+import com.example.oopfiles.*;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
@@ -582,6 +583,68 @@ public class EventDBController {
             throw new RuntimeException(e);
         }
     }
+
+    public void retrieveAttendees(ObservableList<Attendee> attendeeList, int eventID) {
+        // Updated query to join Ticket and Attendees tables based on eventID
+        String query = "SELECT a.attendeeID, a.name, a.email, a.contactDetails, a.loyaltyPoints, a.type " +
+                "FROM Attendees a " +
+                "INNER JOIN Ticket t ON a.attendeeID = t.attendeeID " +
+                "WHERE t.eventID = ?"; // Matching the eventID from the Ticket table
+
+        System.out.println(eventID + " in retrieveAttendees.");
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Set the eventID parameter to filter by the event
+            preparedStatement.setInt(1, eventID);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                // Clear the list before populating it to avoid duplicates if the method is called multiple times
+                attendeeList.clear();
+
+                while (resultSet.next()) {
+                    int attendeeID = resultSet.getInt("attendeeID");
+                    String attendeeName = resultSet.getString("name");
+                    String attendeeEmail = resultSet.getString("email");
+                    String attendeeContact = resultSet.getString("contactDetails");
+                    int loyaltyPoints = resultSet.getInt("loyaltyPoints");
+                    String attendeeType = resultSet.getString("type");  // Column 'type' in the database
+
+                    User attendee;
+
+                    // Instantiate the appropriate subclass based on the type
+                    if ("VIP".equalsIgnoreCase(attendeeType)) {
+                        attendee = new VipAttendee();  // Instantiate the concrete class for VIP
+                        attendee.setUserID(attendeeID);
+                        attendee.setName(attendeeName);
+                        attendee.setEmail(attendeeEmail);
+                        attendee.setContactDetails(attendeeContact);
+                        attendee.setLoyaltyPoints(loyaltyPoints);
+                    } else {
+                        // Default to RegularAttendee or another subclass for General
+                        attendee = new GeneralAttendee();  // Instantiate the concrete class for General
+                        attendee.setUserID(attendeeID);
+                        attendee.setName(attendeeName);
+                        attendee.setEmail(attendeeEmail);  // Corrected to set the email
+                        attendee.setContactDetails(attendeeContact);
+                        attendee.setLoyaltyPoints(loyaltyPoints);
+                    }
+
+                    // Add the attendee to the list, cast to Attendee if needed
+                    attendeeList.add((Attendee) attendee);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
 
 
     // Additional methods for handling event-related database operations can be added here

@@ -28,8 +28,8 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <TextField fx:id="nameField" layoutX="351.0" layoutY="261.0" />
-                <Button fx:id="applychanges" layoutX="255.0" layoutY="328.0" mnemonicParsing="false" onAction="#buttonpress" prefHeight="33.0" prefWidth="191.0" style="-fx-background-color: #263F73;" text="Retrieve Attendees" textFill="WHITE">
+                <TextField fx:id="eventIDField" layoutX="351.0" layoutY="261.0" />
+                <Button fx:id="applychanges" layoutX="255.0" layoutY="312.0" mnemonicParsing="false" onAction="#buttonpress" prefHeight="33.0" prefWidth="191.0" style="-fx-background-color: #263F73;" text="Retrieve Attendees" textFill="WHITE">
                     <font>
                         <Font name="Verdana Bold" size="15.0" />
                     </font>
@@ -44,13 +44,19 @@
                         <Font name="Verdana Bold" size="14.0" />
                     </font>
                 </Label>
-                <TableView layoutX="1.0" layoutY="63.0" prefHeight="165.0" prefWidth="700.0">
+                <TableView fx:id="eventTable" layoutX="11.0" layoutY="52.0" prefHeight="165.0" prefWidth="670.0">
                     <columns>
-                        <TableColumn prefWidth="145.33330297470093" text="C1" />
-                        <TableColumn minWidth="0.0" prefWidth="160.00001525878906" text="C2" />
-                        <TableColumn minWidth="0.0" prefWidth="160.00001525878906" text="C3" />
+                        <TableColumn fx:id="colEventID" prefWidth="106.6666533946991" text="Event ID" />
+                        <TableColumn fx:id="colEventName" prefWidth="132.66669464111328" text="Event Name" />
+                        <TableColumn fx:id="colBudget" minWidth="0.0" prefWidth="111.99995422363281" text="Budget" />
+                        <TableColumn fx:id="colEventType" prefWidth="180.00003051757812" text="Event Type" />
                     </columns>
                 </TableView>
+            <Button fx:id="updateTable" layoutX="25.0" layoutY="226.0" mnemonicParsing="false" onAction="#updateTableButtonOnAction" prefHeight="18.0" prefWidth="130.0" style="-fx-background-color: #263F73;" text="DISPLAY TABLE" textFill="WHITE">
+               <font>
+                  <Font name="Verdana Bold" size="9.0" />
+               </font>
+            </Button>
             </children>
         </AnchorPane>
     </center>

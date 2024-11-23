@@ -1,14 +1,16 @@
 package com.example.controllers;
 
+import com.example.oopfiles.Event;
+import com.example.oopfiles.Sponsorship;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 
 import javafx.scene.layout.AnchorPane;
@@ -24,15 +26,35 @@ public class RemoveSponsorshipController {
     @FXML
     private Label loginmessagelabel;
 
-
+    private Sponsorship sponsorship;
     @FXML
     private Button loginbutton;
 
     @FXML
-    private TextField uname;
+    private TextField eventIDField;
 
     @FXML
-    private PasswordField upass;
+    private TextField sponsorIDField;
+
+    @FXML
+    private TableView<Sponsorship> sponsorshipTable;
+
+    @FXML
+    private TableColumn<Sponsorship, Integer> colEventID;
+
+    @FXML
+    private TableColumn<Sponsorship, String> colEventName;
+
+    @FXML
+    private TableColumn<Sponsorship, Integer> colSponsorID;
+
+    @FXML
+    private TableColumn<Sponsorship, String> colSponsorName;
+
+    @FXML
+    private TableColumn<Sponsorship, Double> colContributionAmount;
+
+    private int EventOrgID;
 
 
 
@@ -85,7 +107,68 @@ public class RemoveSponsorshipController {
     }
 
 
-    public void signUpButtonOnAction(ActionEvent actionEvent)
-    {
+
+
+    public void removeSponsorButtonOnAction(ActionEvent actionEvent) {
+        String eventID = eventIDField.getText().trim();
+        String sponsorID = sponsorIDField.getText().trim();
+
+        // Check if fields are empty
+        if (eventID.isEmpty() || sponsorID.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Both Event ID and Sponsor ID are required.");
+            return;
+        }
+
+        // Validate Event ID format (numeric)
+        if (!eventID.matches("\\d+")) { // Checks if eventID is numeric
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Event ID must be a numeric value.");
+            return;
+        }
+
+        // Validate Sponsor ID format (numeric)
+        if (!sponsorID.matches("\\d+")) { // Checks if sponsorID is numeric
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Sponsor ID must be a numeric value.");
+            return;
+        }
+
+        // If all validations pass
+        sponsorship=new Sponsorship();
+        if (sponsorship.removeSponsorship(Integer.parseInt(eventID), Integer.parseInt(sponsorID))) {
+            // If removal was successful
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Sponsor removed successfully!");
+            ActionEvent ev=new ActionEvent();
+            displayTableButtonOnAction(ev);
+        } else {
+            // If removal failed
+            showAlert(Alert.AlertType.ERROR, "Failure", "Sponsor could not be removed as it does not exist.");
+        }
+
+
+
+    }
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null); // Optional: Set to null to remove the header
+        alert.setContentText(message);
+        alert.showAndWait(); // Waits for the user to close the alert before continuing
+    }
+
+
+    public void displayTableButtonOnAction(ActionEvent actionEvent) {
+        colEventID.setCellValueFactory(new PropertyValueFactory<>("eventID"));
+        colEventName.setCellValueFactory(new PropertyValueFactory<>("eventName"));
+        colSponsorID.setCellValueFactory(new PropertyValueFactory<>("sponsorID"));
+        colSponsorName.setCellValueFactory(new PropertyValueFactory<>("sponsorName"));
+        colContributionAmount.setCellValueFactory(new PropertyValueFactory<>("contributionAmount"));
+
+        // Load data from the database
+        sponsorship=new Sponsorship();
+        ObservableList<Sponsorship> sponsorshipList = FXCollections.observableArrayList();
+        sponsorshipTable.setItems(sponsorship.intializeTable(sponsorshipList,EventOrgID));
+    }
+
+    public void setEventOrgID(int eventOrgID) {
+        EventOrgID=eventOrgID;
     }
 }

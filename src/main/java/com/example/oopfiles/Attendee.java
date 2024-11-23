@@ -4,13 +4,26 @@ import com.example.JDBC.AttendeeDBController;
 import com.example.JDBC.AttendeeDBController;
 public abstract class Attendee extends User {
     protected int loyaltyPoints;
-    protected final AttendeeDBController db;
+    protected static AttendeeDBController db;
 
     // Constructor
     Attendee() {
         super();
         db = new AttendeeDBController();
     }
+
+    public static boolean removeAttendee(int ID) {
+        db=new AttendeeDBController();
+        boolean check=db.removeAttendee(ID);
+        return check;
+    }
+
+    public static boolean updateAttendee(int attendeeID, String name, String email, String contact, Integer loyaltyPoints) {
+        db=new AttendeeDBController();
+        boolean result = db.updateAttendee(attendeeID,name,email,contact,loyaltyPoints);
+        return result;
+    }
+
     public String toString() {
         return "Attendee {" +
                 "attendeeID=" + getUserID() +
@@ -71,10 +84,10 @@ public abstract class Attendee extends User {
     public abstract boolean registerAttendee();
 
     // Common Getter and Setter Methods
-    public int getLoyaltyPoints() { return loyaltyPoints; }
     public void setLoyaltyPoints(int loyaltyPoints) { this.loyaltyPoints = loyaltyPoints; }
-
-    public int getId() {
-        return this.userID;
-    }
+    public int getAttendeeID() { return userID; }
+    public String getAttendeeName() { return name; }
+    public String getAttendeeEmail() { return email; }
+    public String getAttendeeContact() { return contactDetails; }
+    public int getLoyaltyPoints() { return loyaltyPoints; }
 }

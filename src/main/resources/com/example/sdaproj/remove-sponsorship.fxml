@@ -23,13 +23,13 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <TextField fx:id="nameField" layoutX="362.0" layoutY="211.0" />
-                <Button fx:id="signUpButton" layoutX="278.0" layoutY="295.0" mnemonicParsing="false" onAction="#signUpButtonOnAction" prefHeight="33.0" prefWidth="167.0" style="-fx-background-color: #263F73;" text="Remove Sponsor" textFill="WHITE">
+                <TextField fx:id="eventIDField" layoutX="362.0" layoutY="211.0" />
+                <Button fx:id="removeSponsorButton" layoutX="278.0" layoutY="295.0" mnemonicParsing="false" onAction="#removeSponsorButtonOnAction" prefHeight="33.0" prefWidth="167.0" style="-fx-background-color: #263F73;" text="Remove Sponsor" textFill="WHITE">
                     <font>
                         <Font name="Verdana Bold" size="15.0" />
                     </font>
                 </Button>
-                <TextField fx:id="emailField" layoutX="362.0" layoutY="249.0" />
+                <TextField fx:id="sponsorIDField" layoutX="362.0" layoutY="249.0" />
                 <Label fx:id="signUpmessagelabel" alignment="CENTER" layoutX="69.0" layoutY="50.0" prefHeight="23.0" prefWidth="232.0">
                     <font>
                         <Font name="Verdana" size="12.0" />
@@ -45,14 +45,20 @@
                         <Font name="Verdana Bold" size="14.0" />
                     </font>
                 </Label>
-                <TableView layoutY="32.0" prefHeight="165.0" prefWidth="700.0">
+                <TableView fx:id="sponsorshipTable" layoutY="32.0" prefHeight="165.0" prefWidth="700.0">
                     <columns>
-                        <TableColumn prefWidth="145.33330297470093" text="C1" />
-                        <TableColumn minWidth="0.0" prefWidth="160.00001525878906" text="C2" />
-                        <TableColumn minWidth="0.0" prefWidth="169.99993896484375" text="C3" />
-                  <TableColumn minWidth="0.0" prefWidth="169.99993896484375" text="C4" />
+                        <TableColumn fx:id="colEventID" prefWidth="106.6666533946991" text="Event ID" />
+                  <TableColumn fx:id="colEventName" prefWidth="106.6666533946991" text="Event Name" />
+                        <TableColumn fx:id="colSponsorID" prefWidth="132.66669464111328" text="Sponsor ID" />
+                        <TableColumn fx:id="colSponsorName" minWidth="0.0" prefWidth="111.99995422363281" text="Sponsor Name" />
+                        <TableColumn fx:id="colContributionAmount" prefWidth="180.00003051757812" text="Contribution Amount" />
                     </columns>
                 </TableView>
+            <Button fx:id="displayTableButton" layoutX="12.0" layoutY="202.0" mnemonicParsing="false" onAction="#displayTableButtonOnAction" prefHeight="17.0" prefWidth="114.0" style="-fx-background-color: #263F73;" text="DISPLAY TABLE" textFill="WHITE">
+               <font>
+                  <Font name="Verdana Bold" size="9.0" />
+               </font>
+            </Button>
             </children>
         </AnchorPane>
     </center>
