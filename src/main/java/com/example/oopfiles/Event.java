@@ -1,8 +1,9 @@
 package com.example.oopfiles;
 
 import com.example.JDBC.EventDBController;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.Date;
 
 public abstract class Event {
     private int eventID;
@@ -31,7 +32,15 @@ public abstract class Event {
         return eventList;
     }
 
-    public static void updateEvent(Event updatedEvent) {
+    public static boolean updateEvent(int eventID, String newName, Date newDate)
+    {
+        db=new EventDBController();
+        return db.updateEvent(eventID,newName,newDate);
+    }
+
+    public static void insertEventUpdateNotification(int eventID, int organizerUserID, String message) {
+        db=new EventDBController();
+        db.insertEventUpdateNotification(eventID,organizerUserID,message);
     }
 
 

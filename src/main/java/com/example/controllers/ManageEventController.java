@@ -19,12 +19,6 @@ import java.util.Date;
 
 public class ManageEventController {
 
-    private EventDBController dbController;
-
-    public ManageEventController()
-    {
-        dbController= new EventDBController();
-    }
 
     @FXML
     private Label welcomeText;
@@ -167,7 +161,7 @@ public class ManageEventController {
             }
 
             // Call the update function in the DB controller (handles updating name, date, or both)
-            boolean updateSuccessful = dbController.updateEvent(eventID, newName.isEmpty() ? null : newName, newDate);
+            boolean updateSuccessful = Event.updateEvent(eventID, newName.isEmpty() ? null : newName, newDate);
 
             // Insert notification into EventUpdateNotification table if update is successful
             if (updateSuccessful) {
@@ -184,7 +178,7 @@ public class ManageEventController {
                 int organizerUserID = currentOrganizerid;
 
                 // Insert notification for the Event Organizer
-                dbController.insertEventUpdateNotification(eventID, organizerUserID, message);
+                Event.insertEventUpdateNotification(eventID, organizerUserID, message);
 
                 showAlert("Success", "Event details updated and notification sent to the Attendee successfully!");
             } else {
