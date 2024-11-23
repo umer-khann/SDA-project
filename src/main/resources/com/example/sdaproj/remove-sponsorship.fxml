@@ -48,6 +48,7 @@
                 <TableView fx:id="sponsorshipTable" layoutY="32.0" prefHeight="165.0" prefWidth="700.0">
                     <columns>
                         <TableColumn fx:id="colEventID" prefWidth="106.6666533946991" text="Event ID" />
+                  <TableColumn fx:id="colEventName" prefWidth="106.6666533946991" text="Event Name" />
                         <TableColumn fx:id="colSponsorID" prefWidth="132.66669464111328" text="Sponsor ID" />
                         <TableColumn fx:id="colSponsorName" minWidth="0.0" prefWidth="111.99995422363281" text="Sponsor Name" />
                         <TableColumn fx:id="colContributionAmount" prefWidth="180.00003051757812" text="Contribution Amount" />

@@ -43,6 +43,9 @@ public class RemoveSponsorshipController {
     private TableColumn<Sponsorship, Integer> colEventID;
 
     @FXML
+    private TableColumn<Sponsorship, String> colEventName;
+
+    @FXML
     private TableColumn<Sponsorship, Integer> colSponsorID;
 
     @FXML
@@ -130,8 +133,16 @@ public class RemoveSponsorshipController {
 
         // If all validations pass
         sponsorship=new Sponsorship();
-        sponsorship.removeSponsorship(Integer.parseInt(eventID),Integer.parseInt(sponsorID));
-        showAlert(Alert.AlertType.INFORMATION, "Success", "Sponsor removed successfully!");
+        if (sponsorship.removeSponsorship(Integer.parseInt(eventID), Integer.parseInt(sponsorID))) {
+            // If removal was successful
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Sponsor removed successfully!");
+            ActionEvent ev=new ActionEvent();
+            displayTableButtonOnAction(ev);
+        } else {
+            // If removal failed
+            showAlert(Alert.AlertType.ERROR, "Failure", "Sponsor could not be removed as it does not exist.");
+        }
+
 
 
     }
@@ -146,6 +157,7 @@ public class RemoveSponsorshipController {
 
     public void displayTableButtonOnAction(ActionEvent actionEvent) {
         colEventID.setCellValueFactory(new PropertyValueFactory<>("eventID"));
+        colEventName.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         colSponsorID.setCellValueFactory(new PropertyValueFactory<>("sponsorID"));
         colSponsorName.setCellValueFactory(new PropertyValueFactory<>("sponsorName"));
         colContributionAmount.setCellValueFactory(new PropertyValueFactory<>("contributionAmount"));

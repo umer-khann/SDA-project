@@ -7,6 +7,7 @@ public class Sponsorship {
 
     private int sponsorID;
     private int eventID;
+    private String eventName;
     private String sponsorName;
     private double contributionAmount;
     SponsorshipDBHandler db;
@@ -55,8 +56,8 @@ public class Sponsorship {
 
     // Remove sponsorship
     public boolean removeSponsorship(int eventID,int sponsorshipID) {
-
-        return false;
+        boolean result=db.removeSponsor(eventID,sponsorshipID);
+        return result;
     }
 
 
@@ -65,5 +66,13 @@ public class Sponsorship {
     }
     public void setEventID(int eventID) {
         this.eventID=eventID;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 }
