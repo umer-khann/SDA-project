@@ -32,9 +32,9 @@ public abstract class Event {
         db.updateEventBudget(ID,newBudget);
     }
 
-    public static ObservableList<Event> intializeTable(ObservableList<Event> eventList){
+    public static ObservableList<Event> intializeTable(ObservableList<Event> eventList,int EventOrgID){
         db=new EventDBController();
-        db.showEvents(eventList);
+        db.showEvents(eventList,EventOrgID);
         return eventList;
     }
 
