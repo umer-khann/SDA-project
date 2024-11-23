@@ -160,4 +160,7 @@ public class AttendeeRegController implements Initializable {
     public void backButtonOnAction(javafx.event.ActionEvent e) throws IOException {
         loadPage("home-page.fxml", e);
     }
+
+    public void setAttendeeID(int attendeeID) {
+    }
 }

@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #03101b;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.HandleTicketAndPaymentController">
@@ -15,62 +16,62 @@
         </font>
     </Label>
     <Separator layoutY="61.0" prefWidth="700.0" />
-    <Label layoutX="53.0" layoutY="123.0" text="Credit Card Number" textFill="WHITE">
+    <Label layoutX="25.0" layoutY="123.0" text="Credit Card Number" textFill="WHITE">
         <font>
             <Font size="18.0" />
         </font>
     </Label>
-    <Label layoutX="82.0" layoutY="170.0" text="CVV Number" textFill="WHITE">
+    <Label layoutX="31.0" layoutY="170.0" text="CVV Number" textFill="WHITE">
         <font>
             <Font size="18.0" />
         </font>
     </Label>
-    <Label layoutX="75.0" layoutY="220.0" text="Name On Card" textFill="WHITE">
+    <Label layoutX="31.0" layoutY="219.0" text="Name On Card" textFill="WHITE">
         <font>
             <Font size="18.0" />
         </font>
     </Label>
-    <Label layoutX="110.0" layoutY="270.0" text="Expiry" textFill="WHITE">
+    <Label layoutX="35.0" layoutY="270.0" text="Expiry" textFill="WHITE">
         <font>
             <Font size="18.0" />
         </font>
     </Label>
-    <TextField fx:id="txtCreditCardNumber" layoutX="291.0" layoutY="117.0" onKeyReleased="#setCreditCardType">
+    <TextField fx:id="txtCreditCardNumber" layoutX="204.0" layoutY="117.0" onKeyReleased="#setCreditCardType">
         <font>
             <Font size="18.0" />
         </font>
     </TextField>
-    <TextField fx:id="txtNameOnCard" layoutX="291.0" layoutY="214.0">
+    <TextField fx:id="txtNameOnCard" layoutX="204.0" layoutY="213.0">
         <font>
             <Font size="18.0" />
         </font>
     </TextField>
-    <TextField fx:id="txtMonth" layoutX="291.0" layoutY="264.0" prefHeight="39.0" prefWidth="87.0" promptText="MM">
+    <TextField fx:id="txtMonth" layoutX="204.0" layoutY="270.0" prefHeight="39.0" prefWidth="87.0" promptText="MM">
         <font>
             <Font size="18.0" />
         </font>
     </TextField>
-    <Label fx:id="labelWelcomeMessage1" alignment="CENTER" layoutX="250.0" layoutY="64.0" prefHeight="31.0" prefWidth="201.0" text="Link Credit/Debit Card" textAlignment="RIGHT" textFill="WHITE" wrapText="true">
+    <Label fx:id="labelWelcomeMessage1" alignment="CENTER" layoutX="158.0" layoutY="64.0" prefHeight="31.0" prefWidth="201.0" text="Link Credit/Debit Card" textAlignment="RIGHT" textFill="WHITE" wrapText="true">
         <font>
             <Font size="18.0" />
         </font>
     </Label>
-    <PasswordField fx:id="txtCVVNumber" layoutX="291.0" layoutY="164.0">
+    <PasswordField fx:id="txtCVVNumber" layoutX="204.0" layoutY="164.0">
         <font>
             <Font size="18.0" />
         </font>
     </PasswordField>
-    <Label layoutX="399.0" layoutY="270.0" text="/">
+    <Label layoutX="312.0" layoutY="276.0" text="/">
         <font>
             <Font size="18.0" />
         </font>
     </Label>
-    <TextField fx:id="txtYear" layoutX="428.0" layoutY="264.0" prefHeight="39.0" prefWidth="87.0" promptText="YYYY">
+    <TextField fx:id="txtYear" layoutX="335.0" layoutY="270.0" prefHeight="39.0" prefWidth="87.0" promptText="YYYY">
         <font>
             <Font size="18.0" />
         </font>
     </TextField>
-    <Button fx:id="btnLink" layoutX="335.0" layoutY="331.0" mnemonicParsing="false" onAction="#saveData" prefHeight="39.0" prefWidth="87.0" text="PAY">
+    <Button fx:id="btnLink" layoutX="259.0" layoutY="331.0" mnemonicParsing="false" onAction="#saveData" prefHeight="39.0" prefWidth="87.0" text="PAY">
         <font>
             <Font size="18.0" />
         </font>
@@ -79,4 +80,10 @@
       <font>
          <Font name="System Bold" size="15.0" />
       </font></Label>
+   <Line endX="-103.0" endY="339.29290771484375" layoutX="540.0" layoutY="63.0" startX="-103.0" startY="1.0" stroke="WHITE" />
+   <Label fx:id="eventNameLabel" layoutX="514.0" layoutY="85.0" prefHeight="21.0" prefWidth="95.0" textFill="WHITE" />
+   <Label fx:id="eventVenueLabel" layoutX="514.0" layoutY="137.0" prefHeight="21.0" prefWidth="110.0" textFill="WHITE" />
+   <Label fx:id="eventDateLabel" layoutX="514.0" layoutY="193.0" prefHeight="21.0" prefWidth="135.0" textFill="WHITE" />
+   <Label layoutX="462.0" layoutY="236.0" prefHeight="21.0" prefWidth="48.0" text="PRICE:" textFill="WHITE" />
+   <Label fx:id="eventDetailsLabel" layoutX="513.0" layoutY="236.0" prefHeight="21.0" prefWidth="154.0" textFill="WHITE" />
 </AnchorPane>

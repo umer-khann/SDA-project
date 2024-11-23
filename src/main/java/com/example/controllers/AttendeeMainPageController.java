@@ -21,6 +21,7 @@ public class AttendeeMainPageController implements Initializable {
 
     public JFXButton button2;
     public JFXButton button1;
+    private int attendeeID; // New field for AttendeeID
     public String a;
     public String b;
 
@@ -89,8 +90,8 @@ public class AttendeeMainPageController implements Initializable {
         });
     }
 
-    // Method to load a new FXML into the content area
-    private void loadPage(String fxml) {
+    // Modified method to accept both EventorgID and AttendeeID
+    private void loadPage(String fxml, int attendeeID) {
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.4));
         slide.setNode(slider);
@@ -109,12 +110,17 @@ public class AttendeeMainPageController implements Initializable {
         contentArea.setVisible(true);
         contentArea.setPrefWidth(730);
         try {
-            // Load the FXML file
-            Parent pane = FXMLLoader.load(getClass().getResource("/com/example/sdaproj/" + fxml));
-
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/sdaproj/" + fxml));
+            Parent pane = fxmlLoader.load();
 
-            // Clear the current content and set the new content
+            // Access the controller of the loaded FXML and set the AttendeeID
+            Object controller = fxmlLoader.getController();
+            if (controller instanceof AttendeeRegController) {
+                ((AttendeeRegController) controller).setAttendeeID(attendeeID);
+            } else if (controller instanceof AttendeeEventRegistrationController) {
+                ((AttendeeEventRegistrationController) controller).setAttendeeID(attendeeID);
+            }
+
             contentArea.setContent(pane);
         } catch (IOException e) {
             e.printStackTrace(); // Log the error if loading fails
@@ -124,15 +130,22 @@ public class AttendeeMainPageController implements Initializable {
     // Example event handlers for the buttons in the sidebar
     @FXML
     private void handleDashboardClick(ActionEvent event) {
-        loadPage("attendee-event-registeration.fxml"); // Load Dashboard page
+        System.out.println("AttendeeID set to: " + attendeeID);  // Debug line
+        loadPage("attendee-event-registeration.fxml", attendeeID); // Pass AttendeeID
     }
 
     @FXML
     private void handleAddClick(ActionEvent event) {
-        loadPage("attendee-reg.fxml"); // Load Add page
+        loadPage("attendee-reg.fxml", attendeeID); // Pass AttendeeID
     }
 
-    public void HandleProvFeed(ActionEvent actionEvent) {
-        loadPage("provide-feedback.fxml");
+    @FXML
+    private void HandleProvFeed(ActionEvent actionEvent) {
+        loadPage("provide-feedback.fxml", attendeeID); // Pass AttendeeID
+    }
+
+
+    public void setAttendeeID(int attendeeID) {
+        this.attendeeID=attendeeID;
     }
 }

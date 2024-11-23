@@ -1,6 +1,8 @@
 package com.example.JDBC;
 
 import com.example.oopfiles.*;
+import javafx.collections.FXCollections;
+import com.example.oopfiles.*;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
@@ -167,6 +169,121 @@ public class EventDBController {
             e.printStackTrace();
         }
     }
+
+    public void showEventsForAttendee(ObservableList<Event> eventList) {
+        // Modify the query to include venue location
+        String query = "SELECT \n" +
+                "    E.eventID,\n" +
+                "    E.eventName,\n" +
+                "    E.eventDate,\n" +
+                "    E.status,\n" +
+                "    E.budget,\n" +
+                "    E.eventType,\n" +
+                "    VE.venueName,\n" +  // Add venueName column
+                "    VE.venueType,\n" +  // Add venueType column
+                "    VE.location,\n" +   // Add location column
+                "    VE.capacity,\n" +   // Explicitly select the capacity column
+                "    WE.topic AS workshopTopic,\n" +
+                "    WE.duration AS workshopDuration,\n" +
+                "    WE.instructor AS workshopInstructor,\n" +
+                "    CE.genre AS concertGenre,\n" +
+                "    FE.performerName AS performerName,\n" +
+                "    CFE.agenda AS conferenceAgenda,\n" +
+                "    SE.speakerName AS speakerName,\n" +
+                "    IV.roomNumber AS indoorRoomNumber,\n" +  // Indoor specific column
+                "    IV.floor AS indoorFloor,\n" +  // Indoor specific column
+                "    OV.weatherPreparedness AS outdoorWeather,\n" +  // Outdoor specific column
+                "    OV.additionalCapacity AS outdoorCapacity\n" +  // Outdoor specific column
+                "FROM \n" +
+                "    Event E\n" +
+                "LEFT JOIN \n" +
+                "    Venue VE ON E.venueID = VE.venueID\n" +  // Join with Venue
+                "LEFT JOIN \n" +
+                "    WorkshopEvent WE ON E.eventID = WE.eventID\n" +
+                "LEFT JOIN \n" +
+                "    ConcertEvent CE ON E.eventID = CE.eventID\n" +
+                "LEFT JOIN \n" +
+                "    Performer FE ON CE.eventID = FE.eventID\n" +
+                "LEFT JOIN \n" +
+                "    ConferenceEvent CFE ON E.eventID = CFE.eventID\n" +
+                "LEFT JOIN \n" +
+                "    Speaker SE ON CFE.eventID = SE.eventID\n" +
+                "LEFT JOIN \n" +
+                "    IndoorVenue IV ON VE.venueID = IV.indoorVenueID\n" +  // Indoor venue join
+                "LEFT JOIN \n" +
+                "    OutdoorVenue OV ON VE.venueID = OV.outdoorVenueID";  // Outdoor venue join
+
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int eventID = resultSet.getInt("eventID");
+                    String eventName = resultSet.getString("eventName");
+                    String eventDate = resultSet.getString("eventDate");
+                    boolean status = resultSet.getBoolean("status");
+                    float budget = resultSet.getFloat("budget");
+                    String eventType = resultSet.getString("eventType");
+                    String venueName = resultSet.getString("venueName");
+                    String venueType = resultSet.getString("venueType");
+                    String location = resultSet.getString("location");  // Fetch the location
+
+                    // Instantiate the appropriate event based on eventType
+                    Event event;
+                    switch (eventType.toLowerCase()) {
+                        case "conference":
+                            event = new ConferenceEvent();
+                            event.assignAllValues(eventID, eventName, budget, eventType, eventDate, status);
+                            ((ConferenceEvent) event).setAgenda(resultSet.getString("conferenceAgenda"));
+                            ((ConferenceEvent) event).setSpeakerName(resultSet.getString("speakerName"));
+                            break;
+
+                        case "concert":
+                            event = new ConcertEvent();
+                            event.assignAllValues(eventID, eventName, budget, eventType, eventDate, status);
+                            ((ConcertEvent) event).setGenre(resultSet.getString("concertGenre"));
+                            ((ConcertEvent) event).setPerformerName(resultSet.getString("performerName"));
+                            break;
+
+                        case "workshop":
+                            event = new WorkshopEvent();
+                            event.assignAllValues(eventID, eventName, budget, eventType, eventDate, status);
+                            ((WorkshopEvent) event).setTopic(resultSet.getString("workshopTopic"));
+                            ((WorkshopEvent) event).setDuration(resultSet.getFloat("workshopDuration"));
+                            ((WorkshopEvent) event).setInstructor(resultSet.getString("workshopInstructor"));
+                            break;
+
+                        default:
+                            throw new IllegalArgumentException("Unknown event type: " + eventType);
+                    }
+
+                    // Create the appropriate venue based on venueType
+                    Venue venue;
+                    if ("Indoor".equalsIgnoreCase(venueType)) {
+                        venue = new IndoorVenue(venueName, location, resultSet.getInt("capacity"),
+                                resultSet.getString("indoorRoomNumber"), resultSet.getInt("indoorFloor"));
+                    } else if ("Outdoor".equalsIgnoreCase(venueType)) {
+                        venue = new OutdoorVenue(venueName, location, resultSet.getInt("capacity"),
+                                resultSet.getString("outdoorWeather"), resultSet.getInt("outdoorCapacity"));
+                    } else {
+                        throw new IllegalArgumentException("Unknown venue type: " + venueType);
+                    }
+
+                    // Set the venue to the event
+                    event.setVenue(venue);
+
+                    // Add the event to the list
+                    eventList.add(event);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
 
@@ -523,6 +640,7 @@ public class EventDBController {
             e.printStackTrace();
         }
     }
+
 
 
 

@@ -36,4 +36,8 @@ public class ConferenceEvent extends Event {
     public void setSpeakerName(String speakerName) {
         this.speaker=speakerName;
     }
+
+    public String getEventAgenda() {
+        return agenda;
+    }
 }

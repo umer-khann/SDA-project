@@ -79,4 +79,9 @@ public abstract class User {
     }
 
     public void setLoyaltyPoints(int loyaltyPoints) {}
+
+
+    public int getId() {
+        return this.userID;
+    }
 }

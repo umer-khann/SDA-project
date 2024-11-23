@@ -40,4 +40,8 @@ public class ConcertEvent extends Event {
     public void setPerformerName(String performerName) {
         this.performer=performerName;
     }
+
+    public String getPerformerName() {
+        return performer;
+    }
 }
