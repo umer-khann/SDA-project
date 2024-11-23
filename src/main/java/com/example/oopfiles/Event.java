@@ -26,27 +26,13 @@ public abstract class Event {
     }
 
     public static ObservableList<Event> initializeTableForOrganizer(ObservableList<Event> eventList, int currentOrganizerid) {
-        // Initialize the EventDBController to get events from the database
-        EventDBController db = new EventDBController();
-
-        // Create a new list to hold events filtered by the organizer
-        ObservableList<Event> filteredEvents = FXCollections.observableArrayList();
-
-        // Fetch all complete events (from different event types)
-        db.showCompleteEvents(eventList);  // This will fill eventList with all events from the DB
-
-        // Now filter the events based on the currentOrganizerid
-        for (Event event : eventList) {
-            // Check if the event belongs to the current organizer by comparing the organizerID
-            if (event.getOrganizerID() == currentOrganizerid) {
-                filteredEvents.add(event);  // Add the event to the filtered list
-            }
-        }
-
-        // Return the filtered list of events for the current organizer
-        return filteredEvents;
+        db=new EventDBController();
+        db.showCompleteEvents(eventList,currentOrganizerid);
+        return eventList;
     }
 
+    public static void updateEvent(Event updatedEvent) {
+    }
 
 
     public boolean updateDetails(String newName, String newDate) {
@@ -72,9 +58,6 @@ public abstract class Event {
         db.showEvents(eventList,EventOrgID);
         return eventList;
     }
-
-
-
 
 
 
