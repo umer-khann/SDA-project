@@ -1,5 +1,6 @@
 package com.example.controllers;
 
+import com.example.oopfiles.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-import javax.swing.*;
 import java.io.IOException;
 
 public class EventOrganizerController {
@@ -33,22 +33,38 @@ public class EventOrganizerController {
 
     @FXML
     private PasswordField upass;
-
-
-
+    Tracker t;
     @FXML
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
+    public EventOrganizerController(){
+        t = new Tracker();
 
+    }
     @FXML
     public void loginbuttonOnAction(javafx.event.ActionEvent e) throws IOException {
         // Load the new FXML file
-        if(!uname.getText().isBlank() && !upass.getText().isBlank()){
-            loadPage2("eventorganizer-main-page.fxml",e);
-        }
-        else {
-            loginmessagelabel.setText("Please input full details");
+        User evOrg = null;
+        String username = uname.getText(), password = upass.getText();
+        if (!username.isBlank() && !password.isBlank()) {
+            User temp = new EventOrganizer();
+            if(temp.login(username,password)){
+                evOrg = new EventOrganizer();
+                evOrg.Create(username,password);
+                Tracker t = new Tracker();
+                System.out.println(evOrg);
+                System.out.println(t.eventOrganizerID);
+                loadPage2("eventorganizer-main-page.fxml", e,evOrg.getUserID()
+                );
+
+            }
+            else{
+                // Display an error message
+                loginmessagelabel.setText("Invalid username or password. Please try again.");
+            }
+        } else {
+            loginmessagelabel.setText("Please input full details.");
         }
     }
     public void backButtonOnAction(javafx.event.ActionEvent e) throws IOException {
@@ -69,15 +85,20 @@ public class EventOrganizerController {
         // Show the stage
         stage.show();
     }
-    private void loadPage2(String fxmlFile, ActionEvent event) throws IOException {
+    private void loadPage2(String fxmlFile, ActionEvent event, int ID) throws IOException {
         // Load the FXML file
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/sdaproj/" + fxmlFile));
-        AnchorPane root = fxmlLoader.load(); // Assuming the root node is a BorderPane
+        AnchorPane root = fxmlLoader.load();
+
+        // Get the controller of the new FXML
+        EventOrganizerMainPageController controller = fxmlLoader.getController();
+        // Pass the event organizer ID to the new controller
+        controller.setEventorgID(ID);
 
         // Get the stage from the event source
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle("");
+
         // Set the new scene
         stage.setScene(new Scene(root));
 

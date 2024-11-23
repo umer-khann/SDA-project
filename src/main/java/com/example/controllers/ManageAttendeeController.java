@@ -65,4 +65,6 @@ public class ManageAttendeeController implements Initializable {
         System.out.println(choice);
     }
 
+    public void setEventOrgID(int eventOrgID) {
+    }
 }

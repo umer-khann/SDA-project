@@ -41,6 +41,13 @@ public class Admin extends User {
         return false;
     }
     @Override
-    public void addNotification(int ID, int userType, String message, String notifType){};
+    public void addNotification(int ID, int userType, String message, String notifType){}
+
+    @Override
+    public void Create(String username, String password) {
+
+    }
+
+    ;
 
 }

@@ -27,4 +27,7 @@ public class AddSponsershipController implements Initializable {
             System.exit(0);
         });
     }
+
+    public void setEventOrgID(int eventOrgID) {
+    }
 }

@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.EventOrganizerController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.HandleEventBudgetController">
     <left>
         <AnchorPane prefHeight="400.0" prefWidth="159.0" style="-fx-background-color: #263F73;" BorderPane.alignment="CENTER">
             <children>
@@ -65,13 +65,13 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <TextField fx:id="nameField" layoutX="235.0" layoutY="240.0" />
-                <Button fx:id="signUpButton" layoutX="151.0" layoutY="332.0" mnemonicParsing="false" onAction="#signUpButtonOnAction" prefHeight="33.0" prefWidth="167.0" style="-fx-background-color: #263F73;" text="Allocate Budget" textFill="WHITE">
+                <TextField fx:id="eventIDField" layoutX="235.0" layoutY="240.0" />
+                <Button fx:id="allocateBudgetButton" layoutX="151.0" layoutY="332.0" mnemonicParsing="false" onAction="#allocateBudgetButtonOnAction" prefHeight="33.0" prefWidth="167.0" style="-fx-background-color: #263F73;" text="Allocate Budget" textFill="WHITE">
                     <font>
                         <Font name="Verdana Bold" size="15.0" />
                     </font>
                 </Button>
-                <TextField fx:id="emailField" layoutX="235.0" layoutY="278.0" />
+                <TextField fx:id="eventBudgetField" layoutX="235.0" layoutY="278.0" />
                 <Label fx:id="signUpmessagelabel" alignment="CENTER" layoutX="69.0" layoutY="50.0" prefHeight="23.0" prefWidth="232.0">
                     <font>
                         <Font name="Verdana" size="12.0" />
@@ -87,12 +87,13 @@
                   <Font name="Verdana Bold" size="14.0" />
                </font>
             </Label>
-            <TableView layoutX="1.0" layoutY="52.0" prefHeight="165.0" prefWidth="470.0">
-              <columns>
-                <TableColumn prefWidth="145.33330297470093" text="C1" />
-                <TableColumn minWidth="0.0" prefWidth="160.00001525878906" text="C2" />
-                  <TableColumn minWidth="0.0" prefWidth="160.00001525878906" text="C3" />
-              </columns>
+            <TableView fx:id="eventTable" layoutX="1.0" layoutY="52.0" prefHeight="165.0" prefWidth="470.0">
+                <columns>
+                    <TableColumn fx:id="colEventID" prefWidth="70.00007367134094" text="Event ID" />
+                    <TableColumn fx:id="colEventName" prefWidth="144.00000762939453" text="Event Name" />
+                    <TableColumn fx:id="colBudget" minWidth="0.0" prefWidth="101.99995422363281" text="Budget" />
+                    <TableColumn fx:id="colEventType" prefWidth="151.33331298828125" text="Event Type" />
+                </columns>
             </TableView>
             </children>
         </AnchorPane>

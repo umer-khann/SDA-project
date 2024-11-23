@@ -25,4 +25,7 @@ public class RemoveVenueController implements Initializable {
     public void buttonpress(ActionEvent actionEvent) {
 
     }
+
+    public void setEventOrgID(int eventOrgID) {
+    }
 }

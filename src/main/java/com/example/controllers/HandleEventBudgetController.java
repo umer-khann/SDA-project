@@ -1,14 +1,15 @@
 package com.example.controllers;
 
+import com.example.oopfiles.Event;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 
 import javafx.scene.layout.AnchorPane;
@@ -24,49 +25,49 @@ public class HandleEventBudgetController {
     @FXML
     private Label loginmessagelabel;
 
+    private int EventOrgID;
+    @FXML
+    private Button allocateBudgetButton;
 
     @FXML
-    private Button loginbutton;
+    private TextField eventIDField;
 
     @FXML
-    private TextField uname;
+    private TextField eventBudgetField;
 
     @FXML
-    private PasswordField upass;
-
-
+    private TableView<Event> eventTable;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    private TableColumn<Event, Integer> colEventID;
+
+    @FXML
+    private TableColumn<Event, String> colEventName;
+
+    @FXML
+    private TableColumn<Event, Float> colBudget;
+
+    @FXML
+    private TableColumn<Event, String> colEventType;
+
+
+    public void initialize() {
+        // Link columns to Event model properties
+        colEventID.setCellValueFactory(new PropertyValueFactory<>("eventID"));
+        colEventName.setCellValueFactory(new PropertyValueFactory<>("eventName"));
+        colBudget.setCellValueFactory(new PropertyValueFactory<>("budget"));
+        colEventType.setCellValueFactory(new PropertyValueFactory<>("eventType"));
+
+        // Load data from the database
+        ObservableList<Event> eventList = FXCollections.observableArrayList();
+        eventTable.setItems(Event.intializeTable(eventList));
     }
 
-    @FXML
-    public void loginbuttonOnAction(javafx.event.ActionEvent e) throws IOException {
-        // Load the new FXML file
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/sdaproj/hello-view.fxml"));
-
-        // Since the root of hello-view.fxml is a BorderPane, cast to BorderPane
-        BorderPane root = fxmlLoader.load();
-
-        // Create a new scene with the loaded FXML
-        Scene scene = new Scene(root);
-
-        // Get the current stage (window) using the button that triggered the action
-        javafx.stage.Stage stage = (javafx.stage.Stage) loginbutton.getScene().getWindow();
-
-        // Set the scene to the stage
-        stage.setScene(scene);
-
-        // Optionally, you can give the new window a title
-        stage.setTitle("");
-
-        // Show the new scene and close the old one
-        stage.show();
+    public void resetTable(){
+        initialize();
     }
-    public void backButtonOnAction(javafx.event.ActionEvent e) throws IOException {
-        loadPage("home-page.fxml", e);
-    }
+
+
     private void loadPage(String fxmlFile, ActionEvent event) throws IOException {
         // Load the FXML file
 
@@ -84,7 +85,66 @@ public class HandleEventBudgetController {
     }
 
 
-    public void signUpButtonOnAction(ActionEvent actionEvent)
-    {
+    public void allocateBudgetButtonOnAction(ActionEvent actionEvent) {
+        // Retrieve input values from the fields
+        String eventIDStr = eventIDField.getText();
+        String eventBudgetStr = eventBudgetField.getText();
+
+        // Validate event ID: Ensure it's numeric and not blank
+        if (eventIDStr.isBlank() || !isNumeric(eventIDStr)) {
+            showAlert("Error", "Event ID must be a valid number!");
+            return;
+        }
+
+        // Validate event budget: Ensure it's numeric and not blank
+        if (eventBudgetStr.isBlank() || !isNumeric(eventBudgetStr)) {
+            showAlert("Error", "Event Budget must be a valid number!");
+            return;
+        }
+
+        // Convert validated input to appropriate types
+        int eventID = Integer.parseInt(eventIDStr);
+        float eventBudget = Float.parseFloat(eventBudgetStr);
+
+        // Use the static method from Event to check the event existence
+        boolean exists = Event.checkEvent(eventID); // Static method call
+
+        // Show success or error based on the allocation result
+        if (exists) {
+            Event.updateBudget(eventID,eventBudget);
+            showAlert("Success", "Budget successfully allocated to Event ID " + eventID + "!");
+            resetTable();
+            clearFields(); // Clear the input fields after success
+        } else {
+            showAlert("Error", "Failed to allocate budget. Please check the Event ID.");
+        }
+    }
+
+
+    // Utility method to check if a string is numeric
+    private boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str); // Can parse integers and decimals
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+
+    // Utility method to clear input fields
+    private void clearFields() {
+        eventIDField.clear();
+        eventBudgetField.clear();
+    }
+
+    // Utility method to show alerts
+    private void showAlert(String title, String message) {
+        JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
+    }
+
+
+    public void setEventOrgID(int eventOrgID) {
+        EventOrgID=eventOrgID;
     }
 }

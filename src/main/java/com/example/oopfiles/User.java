@@ -70,4 +70,6 @@ public abstract class User {
     public void setExperienceLevel(int experienceLevel) {}
 
     public void registerEventOrganizer() {}
+
+    public abstract void Create(String username, String password);
 }

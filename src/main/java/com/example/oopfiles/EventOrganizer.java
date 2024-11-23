@@ -15,6 +15,16 @@ public class EventOrganizer extends User {
         super();
         dbHandler=new EventOrganizerDBHandler();
     }
+    public String toString() {
+        return "EventOrganizer {" +
+                "User ID: " + this.getUserID() + ", " +
+                "Username: " + this.getUserName() + ", " +
+                "Email: " + this.getEmail() + ", " +
+                "Events Organized: " + (eventsOrganized != null ? eventsOrganized.toString() : "None") + ", " +
+                "Experience Level: " + experienceLevel + ", " +
+                "Logged In: " + loggedIn +
+                " }";
+    }
 
 
     public void addNotification(int ID, int userType, String message, String notifType){
@@ -22,13 +32,18 @@ public class EventOrganizer extends User {
     };
 
 //    public String getExperienceLevel(){ return experienceLevel;}
-
     @Override
-    public boolean login(String uname, String pass) {
-        // Implementation for Event Organizer login
-        this.loggedIn = true;
-        System.out.println("Event Organizer " + name + " has logged in.");
-        return loggedIn;
+    public void Create(String uname, String pass){
+        dbHandler.assignEventOrganizer(this, uname, pass);
+    }
+    public boolean login(String u, String p) {
+
+        boolean f = dbHandler.validateLogin(u, p);
+        if(f == true){
+            this.Create(u, p);
+        }
+        System.out.println(this);
+        return f;
     }
 
     @Override
@@ -147,6 +162,7 @@ public class EventOrganizer extends User {
     public void registerEventOrganizer() {
         dbHandler.signUpEventOrganizer(this);
     }
+
 
     // Getters and Setters for EventOrganizer-specific fields
     public List<String> getEventsOrganized() { return eventsOrganized; }

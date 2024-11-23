@@ -6,4 +6,7 @@ public class ManageEventController {
 
     public void buttonpress(ActionEvent actionEvent) {
     }
+
+    public void setEventOrgID(int eventOrgID) {
+    }
 }
