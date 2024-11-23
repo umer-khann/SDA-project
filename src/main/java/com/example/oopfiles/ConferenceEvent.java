@@ -32,4 +32,8 @@ public class ConferenceEvent extends Event {
         return db.saveConferenceEvent(this,1,1);
         // Event creation logic specific to ConcertEvent can go here
     }
+
+    public void setSpeakerName(String speakerName) {
+        this.speaker=speakerName;
+    }
 }

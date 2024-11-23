@@ -108,6 +108,85 @@ public class EventDBController {
         }
     }
 
+    public void showCompleteEvents(ObservableList<Event> eventList) {
+        String query = "SELECT \n" +
+                "    E.eventID,\n" +
+                "    E.eventName,\n" +
+                "    E.eventDate,\n" +
+                "    E.status,\n" +
+                "    E.budget,\n" +
+                "    E.eventType,\n" +
+                "    WE.topic AS workshopTopic,\n" +
+                "    WE.duration AS workshopDuration,\n" +
+                "    WE.instructor AS workshopInstructor,\n" +
+                "    CE.genre AS concertGenre,\n" +
+                "    FE.performerName AS performerName,\n" +
+                "    CFE.agenda AS conferenceAgenda,\n" +
+                "    SE.speakerName AS speakerName\n" +
+                "FROM \n" +
+                "    Event E\n" +
+                "LEFT JOIN \n" +
+                "    WorkshopEvent WE ON E.eventID = WE.eventID\n" +
+                "LEFT JOIN \n" +
+                "    ConcertEvent CE ON E.eventID = CE.eventID\n" +
+                "LEFT JOIN \n" +
+                "    Performer FE ON CE.eventID = FE.eventID\n" +
+                "LEFT JOIN \n" +
+                "    ConferenceEvent CFE ON E.eventID = CFE.eventID\n" +
+                "LEFT JOIN \n" +
+                "    Speaker SE ON CFE.eventID = SE.eventID;\n";
+
+        try (Connection connection = MyJDBC.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
+            while (resultSet.next()) {
+                int eventID = resultSet.getInt("eventID");
+                String eventName = resultSet.getString("eventName");
+                String eventDate = resultSet.getString("eventDate");
+                boolean status = resultSet.getBoolean("status");
+                float budget = resultSet.getFloat("budget");
+                String eventType = resultSet.getString("eventType");
+
+                // Instantiate the appropriate subclass based on eventType
+                Event event;
+                switch (eventType.toLowerCase()) {
+                    case "conference":
+                        event = new ConferenceEvent();
+                        event.assignAllValues(eventID, eventName, budget, eventType, eventDate, status);
+                        ((ConferenceEvent) event).setAgenda(resultSet.getString("conferenceAgenda"));
+                        ((ConferenceEvent) event).setSpeakerName(resultSet.getString("speakerName"));
+                        break;
+
+                    case "concert":
+                        event = new ConcertEvent();
+                        event.assignAllValues(eventID, eventName, budget, eventType, eventDate, status);
+                        ((ConcertEvent) event).setGenre(resultSet.getString("concertGenre"));
+                        ((ConcertEvent) event).setPerformerName(resultSet.getString("performerName"));
+                        break;
+
+                    case "workshop":
+                        event = new WorkshopEvent();
+                        event.assignAllValues(eventID, eventName, budget, eventType, eventDate, status);
+                        ((WorkshopEvent) event).setTopic(resultSet.getString("workshopTopic"));
+                        ((WorkshopEvent) event).setDuration(resultSet.getFloat("workshopDuration"));
+                        ((WorkshopEvent) event).setInstructor(resultSet.getString("workshopInstructor"));
+                        break;
+
+                    default:
+                        throw new IllegalArgumentException("Unknown event type: " + eventType);
+                }
+
+                // Add the event to the list
+                eventList.add(event);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     /**
      * Delete an event from the database by its ID.
@@ -168,6 +247,8 @@ public class EventDBController {
 
         return null; // Return null if no event is found
     }
+
+
     public boolean saveConcertEvent(ConcertEvent event, int eventOrganizerID, int venueID) {
         String query = "INSERT INTO Event (eventName, eventDate, budget, status, eventType, eventOrganizerID, venueID) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
