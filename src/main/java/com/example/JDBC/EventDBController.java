@@ -67,40 +67,44 @@ public class EventDBController {
         }
     }
 
-    public void showEvents(ObservableList<Event> eventList) {
-        String query = "SELECT eventID, eventName, budget, eventType FROM Event";
-
+    public void showEvents(ObservableList<Event> eventList, int EventOrgID) {
+        String query = "SELECT eventID, eventName, budget, eventType FROM Event WHERE eventOrganizerID = ?";
+        System.out.println(EventOrgID+" in too.");
         try (Connection connection = MyJDBC.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(query)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            while (resultSet.next()) {
-                int eventID = resultSet.getInt("eventID");
-                String eventName = resultSet.getString("eventName");
-                float budget = resultSet.getFloat("budget");
-                String eventType = resultSet.getString("eventType");
-                System.out.println(eventType);
-                Event event;
-                // Instantiate the appropriate subclass based on eventType
-                switch (eventType.toLowerCase()) {
-                    case "conference":
-                        event = new ConferenceEvent();
-                        event.assignValues(eventID,eventName,budget,eventType);
-                        break;
-                    case "concert":
-                        event = new ConcertEvent();
-                        event.assignValues(eventID,eventName,budget,eventType);
-                        break;
-                    case "workshop":
-                        event = new WorkshopEvent(); // example default values
-                        event.assignValues(eventID,eventName,budget,eventType);
-                        break;
-                    default:
-                        throw new IllegalArgumentException("Unknown event type: " + eventType);
+            // Set the EventOrgID parameter
+            preparedStatement.setInt(1, EventOrgID);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int eventID = resultSet.getInt("eventID");
+                    String eventName = resultSet.getString("eventName");
+                    float budget = resultSet.getFloat("budget");
+                    String eventType = resultSet.getString("eventType");
+
+                    Event event;
+                    // Instantiate the appropriate subclass based on eventType
+                    switch (eventType.toLowerCase()) {
+                        case "conference":
+                            event = new ConferenceEvent();
+                            event.assignValues(eventID, eventName, budget, eventType);
+                            break;
+                        case "concert":
+                            event = new ConcertEvent();
+                            event.assignValues(eventID, eventName, budget, eventType);
+                            break;
+                        case "workshop":
+                            event = new WorkshopEvent();
+                            event.assignValues(eventID, eventName, budget, eventType);
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Unknown event type: " + eventType);
+                    }
+
+                    // Add the event to the list
+                    eventList.add(event);
                 }
-
-                // Add the event to the list
-                eventList.add(event);
             }
 
         } catch (Exception e) {
@@ -188,6 +192,7 @@ public class EventDBController {
 
 
 
+
     /**
      * Delete an event from the database by its ID.
      *
@@ -251,7 +256,7 @@ public class EventDBController {
 
     public boolean saveConcertEvent(ConcertEvent event, int eventOrganizerID, int venueID) {
         String query = "INSERT INTO Event (eventName, eventDate, budget, status, eventType, eventOrganizerID, venueID) VALUES (?, ?, ?, ?, ?, ?, ?)";
-
+        System.out.println(eventOrganizerID+" done.");
         try (Connection connection = MyJDBC.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 

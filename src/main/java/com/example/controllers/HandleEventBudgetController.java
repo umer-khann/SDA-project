@@ -51,8 +51,9 @@ public class HandleEventBudgetController {
     private TableColumn<Event, String> colEventType;
 
 
-    public void initialize() {
+    public void updateTableButtonOnAction(ActionEvent event){
         // Link columns to Event model properties
+
         colEventID.setCellValueFactory(new PropertyValueFactory<>("eventID"));
         colEventName.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         colBudget.setCellValueFactory(new PropertyValueFactory<>("budget"));
@@ -60,11 +61,15 @@ public class HandleEventBudgetController {
 
         // Load data from the database
         ObservableList<Event> eventList = FXCollections.observableArrayList();
-        eventTable.setItems(Event.intializeTable(eventList));
+        System.out.println(EventOrgID+" in.");
+        eventTable.setItems(Event.intializeTable(eventList,EventOrgID));
+    }
+    public void initialize() {
     }
 
     public void resetTable(){
-        initialize();
+        ActionEvent ev=new ActionEvent();
+        updateTableButtonOnAction(ev);
     }
 
 
@@ -146,5 +151,6 @@ public class HandleEventBudgetController {
 
     public void setEventOrgID(int eventOrgID) {
         EventOrgID=eventOrgID;
+        System.out.println(EventOrgID+" here.");
     }
 }
