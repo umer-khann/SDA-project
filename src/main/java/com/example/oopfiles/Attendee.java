@@ -12,6 +12,11 @@ public abstract class Attendee extends User {
         db = new AttendeeDBController();
     }
 
+    public static void addNotif(int ID, int userType, String message, String notifType) {
+        db=new AttendeeDBController();
+        db.addNotification(ID,userType,message,notifType);
+    }
+
     public static boolean removeAttendee(int ID) {
         db=new AttendeeDBController();
         boolean check=db.removeAttendee(ID);
