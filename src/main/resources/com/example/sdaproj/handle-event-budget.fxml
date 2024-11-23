@@ -5,52 +5,15 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.HandleEventBudgetController">
-    <left>
-        <AnchorPane prefHeight="400.0" prefWidth="159.0" style="-fx-background-color: #263F73;" BorderPane.alignment="CENTER">
-            <children>
-                <Label alignment="CENTER" layoutY="107.0" prefHeight="22.0" prefWidth="230.0" text="EVENTA X" textFill="#fffbfb">
-                    <font>
-                        <Font name="Verdana Bold" size="24.0" />
-                    </font>
-                    <effect>
-                        <DropShadow />
-                    </effect>
-                </Label>
-                <Label alignment="CENTER" layoutY="156.0" prefHeight="22.0" prefWidth="230.0" text="By Aetherion" textFill="#fffbfb">
-                    <font>
-                        <Font name="Verdana Bold" size="15.0" />
-                    </font>
-                    <effect>
-                        <DropShadow />
-                    </effect>
-                </Label>
-                <Line endX="59.0" endY="-1.52587890625E-5" layoutX="128.0" layoutY="146.0" startX="-84.66665649414062" startY="-1.52587890625E-5" stroke="WHITE" strokeWidth="2.0">
-                    <effect>
-                        <DropShadow />
-                    </effect>
-                </Line>
-                <Circle fill="#fff7f73f" layoutX="114.0" layoutY="145.0" radius="86.0" stroke="#a69c9c13" strokeType="INSIDE">
-                    <effect>
-                        <InnerShadow />
-                    </effect>
-                </Circle>
-                <Label layoutX="86.0" layoutY="304.0" />
-            </children>
-        </AnchorPane>
-    </left>
     <center>
         <AnchorPane prefHeight="400.0" prefWidth="372.0" BorderPane.alignment="CENTER">
             <children>
-                <Label alignment="CENTER" layoutX="51.0" layoutY="8.0" prefHeight="30.0" prefWidth="370.0" text="Allocate Event Budget" textAlignment="CENTER">
+                <Label alignment="CENTER" layoutX="-20.0" prefHeight="37.0" prefWidth="721.0" style="-fx-background-color: #263F73;" text="Allocate Event Budget" textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font name="Verdana Bold" size="19.0" />
                     </font>
@@ -65,39 +28,39 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <TextField fx:id="eventIDField" layoutX="233.0" layoutY="260.0" />
-                <Button fx:id="allocateBudgetButton" layoutX="168.0" layoutY="352.0" mnemonicParsing="false" onAction="#allocateBudgetButtonOnAction" prefHeight="33.0" prefWidth="167.0" style="-fx-background-color: #263F73;" text="Allocate Budget" textFill="WHITE">
+                <TextField fx:id="eventIDField" layoutX="331.0" layoutY="264.0" />
+                <Button fx:id="allocateBudgetButton" layoutX="267.0" layoutY="352.0" mnemonicParsing="false" onAction="#allocateBudgetButtonOnAction" prefHeight="33.0" prefWidth="167.0" style="-fx-background-color: #263F73;" text="Update Budget" textFill="WHITE">
                     <font>
                         <Font name="Verdana Bold" size="15.0" />
                     </font>
                 </Button>
-                <TextField fx:id="eventBudgetField" layoutX="233.0" layoutY="298.0" />
+                <TextField fx:id="eventBudgetField" layoutX="331.0" layoutY="302.0" />
                 <Label fx:id="signUpmessagelabel" alignment="CENTER" layoutX="69.0" layoutY="50.0" prefHeight="23.0" prefWidth="232.0">
                     <font>
                         <Font name="Verdana" size="12.0" />
                     </font>
                 </Label>
-                <Label layoutX="59.0" layoutY="299.0" prefHeight="23.0" prefWidth="181.0" text="Enter Event Budget">
+                <Label layoutX="157.0" layoutY="303.0" prefHeight="23.0" prefWidth="181.0" text="Enter Event Budget">
                     <font>
                         <Font name="Verdana Bold" size="14.0" />
                     </font>
                 </Label>
-            <Label layoutX="59.0" layoutY="261.0" prefHeight="23.0" prefWidth="181.0" text="Enter Event ID">
+            <Label layoutX="157.0" layoutY="265.0" prefHeight="23.0" prefWidth="181.0" text="Enter Event ID">
                <font>
                   <Font name="Verdana Bold" size="14.0" />
                </font>
             </Label>
-            <TableView fx:id="eventTable" layoutX="1.0" layoutY="52.0" prefHeight="165.0" prefWidth="470.0">
+            <TableView fx:id="eventTable" layoutX="11.0" layoutY="52.0" prefHeight="165.0" prefWidth="670.0">
                 <columns>
-                    <TableColumn fx:id="colEventID" prefWidth="70.00007367134094" text="Event ID" />
-                    <TableColumn fx:id="colEventName" prefWidth="144.00000762939453" text="Event Name" />
-                    <TableColumn fx:id="colBudget" minWidth="0.0" prefWidth="101.99995422363281" text="Budget" />
-                    <TableColumn fx:id="colEventType" prefWidth="151.33331298828125" text="Event Type" />
+                    <TableColumn fx:id="colEventID" prefWidth="106.6666533946991" text="Event ID" />
+                    <TableColumn fx:id="colEventName" prefWidth="132.66669464111328" text="Event Name" />
+                    <TableColumn fx:id="colBudget" minWidth="0.0" prefWidth="111.99995422363281" text="Budget" />
+                    <TableColumn fx:id="colEventType" prefWidth="180.00003051757812" text="Event Type" />
                 </columns>
             </TableView>
-            <Button fx:id="updateTableButton" layoutX="176.0" layoutY="226.0" mnemonicParsing="false" onAction="#updateTableButtonOnAction" prefHeight="10.0" prefWidth="151.0" style="-fx-background-color: #263F73;" text="DISPLAY EVENTS IN TABLE" textFill="WHITE">
+            <Button fx:id="updateTableButton" layoutX="22.0" layoutY="225.0" mnemonicParsing="false" onAction="#updateTableButtonOnAction" prefHeight="10.0" prefWidth="151.0" style="-fx-background-color: #263F73;" text="DISPLAY EVENTS IN TABLE" textFill="WHITE">
                <font>
-                  <Font name="Verdana Bold" size="8.0" />
+                  <Font name="Verdana Bold" size="9.0" />
                </font>
             </Button>
             </children>
