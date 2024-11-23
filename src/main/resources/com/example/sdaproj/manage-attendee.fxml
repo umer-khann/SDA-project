@@ -19,11 +19,6 @@
                         <Font name="Verdana Bold" size="19.0" />
                     </font>
                 </Label>
-                <Button fx:id="displayButton" layoutX="578.0" layoutY="28.0" mnemonicParsing="false" onAction="#displayButtonOnAction" prefHeight="9.0" prefWidth="107.0" style="-fx-background-color: #ffffff;" text="Display Table">
-                    <font>
-                        <Font name="Verdana Bold" size="8.0" />
-                    </font>
-                </Button>
             </children>
         </AnchorPane>
     </top>
@@ -39,9 +34,9 @@
                     <font>
                         <Font size="11.0" />
                     </font></TextField>
-                <Button fx:id="signUpButton" layoutX="72.0" layoutY="295.0" mnemonicParsing="false" onAction="#signUpButtonOnAction" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: #263F73;" text="Update Attendee" textFill="WHITE">
+                <Button fx:id="updateButton" layoutX="21.0" layoutY="295.0" mnemonicParsing="false" onAction="#updateButtonOnAction" prefHeight="22.0" prefWidth="127.0" style="-fx-background-color: #263F73;" text="Update Attendee" textFill="WHITE">
                     <font>
-                        <Font name="Verdana Bold" size="13.0" />
+                        <Font name="Verdana Bold" size="11.0" />
                     </font>
                 </Button>
                 <TextField fx:id="contactField" layoutX="123.0" layoutY="107.0" prefHeight="24.0" prefWidth="121.0">
@@ -83,19 +78,19 @@
                 <TableView fx:id="attendeeTable" layoutX="300.0" layoutY="1.0" prefHeight="350.0" prefWidth="399.0">
                         <columns>
                             <TableColumn fx:id="colAttendeeID" prefWidth="35.33331298828125" text="ID" />
-                            <TableColumn fx:id="colAttendeeName" prefWidth="82.66668701171875" text="Name" />
-                            <TableColumn fx:id="colAttendeeEmail" minWidth="0.0" prefWidth="107.33334350585938" text="Email" />
-                            <TableColumn fx:id="colAttendeeContact" prefWidth="99.33331298828125" text="Contact" />
-                            <TableColumn fx:id="colLoyaltyPoints" prefWidth="77.3333740234375" text="Points" />
-                            <TableColumn fx:id="colAttendeeType" prefWidth="77.3333740234375" text="Type" />
+                            <TableColumn fx:id="colAttendeeName" prefWidth="66.66668701171875" text="Name" />
+                            <TableColumn fx:id="colAttendeeEmail" minWidth="0.0" prefWidth="76.66668701171875" text="Email" />
+                            <TableColumn fx:id="colAttendeeContact" prefWidth="94.00006103515625" text="Contact" />
+                            <TableColumn fx:id="colLoyaltyPoints" prefWidth="54.66668701171875" text="Points" />
+                            <TableColumn fx:id="colAttendeeType" prefWidth="68.6666259765625" text="Type" />
                         </columns>
                 </TableView>
-                <Label layoutX="46.0" layoutY="30.0" prefHeight="23.0" prefWidth="76.0" text="ID">
+                <Label layoutX="37.0" layoutY="38.0" prefHeight="23.0" prefWidth="76.0" text="ID">
                     <font>
                         <Font name="Verdana Bold" size="13.0" />
                     </font>
                 </Label>
-                <TextField fx:id="IDField" layoutX="123.0" layoutY="30.0" prefHeight="24.0" prefWidth="121.0">
+                <TextField fx:id="IDField" layoutX="123.0" layoutY="38.0" prefHeight="24.0" prefWidth="121.0">
                     <font>
                         <Font size="11.0" />
                     </font></TextField>
@@ -109,6 +104,16 @@
                   <Font name="Verdana Bold" size="11.0" />
                </font>
             </Label>
+            <Button fx:id="removeButton" layoutX="162.0" layoutY="295.0" mnemonicParsing="false" onAction="#removeButtonOnAction" prefHeight="15.0" prefWidth="130.0" style="-fx-background-color: #263F73;" text="Remove Attendee" textFill="WHITE">
+               <font>
+                  <Font name="Verdana Bold" size="11.0" />
+               </font>
+            </Button>
+                <Button fx:id="displayButton" layoutX="108.0" layoutY="10.0" mnemonicParsing="false" onAction="#displayButtonOnAction" prefHeight="9.0" prefWidth="107.0" style="-fx-background-color: #263F73;" text="Display Table" textFill="WHITE">
+                    <font>
+                        <Font name="Verdana Bold" size="8.0" />
+                    </font>
+                </Button>
             </children>
         </AnchorPane>
     </center>

@@ -182,4 +182,83 @@ public class ManageAttendeeController implements Initializable {
         // Set the list of attendees in the TableView
         attendeeTable.setItems(attendeeList);
     }
+
+    public void updateButtonOnAction(ActionEvent actionEvent) {
+        try {
+            // Retrieve input values from the fields
+            String idText = IDField.getText().trim();
+            String name = nameField.getText().trim();
+            String email = emailField.getText().trim();
+            String contact = contactField.getText().trim();
+            String loyaltyPointsText = loyaltyPointsField.getText().trim();
+
+            // Validate ID
+            if (idText.isEmpty() || !idText.matches("\\d+")) {
+                showAlert(Alert.AlertType.ERROR, "Validation Error", "ID must be a valid number.");
+                return;
+            }
+            int attendeeID = Integer.parseInt(idText);
+
+            // Validate contact (if provided)
+            if (!contact.isEmpty() && !contact.matches("^\\d{10}$")) {
+                showAlert(Alert.AlertType.ERROR, "Validation Error", "Contact number must be 10 digits.");
+                return;
+            }
+
+            // Validate email (if provided)
+            if (!email.isEmpty() && !email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
+                showAlert(Alert.AlertType.ERROR, "Validation Error", "Email must be a valid email address.");
+                return;
+            }
+
+            // Validate loyalty points (if provided)
+            Integer loyaltyPoints = null; // Null means no update to this field
+            if (!loyaltyPointsText.isEmpty()) {
+                if (!loyaltyPointsText.matches("\\d+")) {
+                    showAlert(Alert.AlertType.ERROR, "Validation Error", "Loyalty Points must be a valid number.");
+                    return;
+                }
+                loyaltyPoints = Integer.parseInt(loyaltyPointsText);
+            }
+
+            // Call the DB function to update the attendee details
+            boolean success = Attendee.updateAttendee(
+                    attendeeID,
+                    name.isEmpty() ? null : name, // Null for unchanged fields
+                    email.isEmpty() ? null : email,
+                    contact.isEmpty() ? null : contact,
+                    loyaltyPoints
+            );
+
+            // Show appropriate alert based on success
+            if (success) {
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Attendee updated successfully.");
+                displayButtonOnAction(null); // Refresh the table
+            } else {
+                showAlert(Alert.AlertType.WARNING, "Update Failed", "No attendee found with the given ID.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "An error occurred while updating the attendee.");
+        }
+    }
+
+
+    public void removeButtonOnAction(ActionEvent actionEvent) {
+        String id = IDField.getText().trim();
+
+        // Validate that ID is numeric
+        if (id.isEmpty() || !id.matches("\\d+")) {
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Please enter a valid numeric ID.");
+            return;
+        }
+
+        if (Attendee.removeAttendee(Integer.parseInt(id))){
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Attendee successfully removed.");
+            displayButtonOnAction(null);
+        }
+        else{
+            showAlert(Alert.AlertType.WARNING, "Not Found", "No attendee found with the given ID.");
+        }
+    }
 }

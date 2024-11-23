@@ -132,5 +132,73 @@ public class AttendeeDBController {
         }
     }
 
+    public static boolean removeAttendee(int attendeeID) {
+        String query = "DELETE FROM Attendees WHERE attendeeID = ?";
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, attendeeID);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0; // Return true if at least one row was affected
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception for debugging
+            return false; // Return false in case of an error
+        }
+    }
+
+    public boolean updateAttendee(int attendeeID, String name, String email, String contact, Integer loyaltyPoints) {
+        StringBuilder query = new StringBuilder("UPDATE Attendees SET ");
+        boolean hasFieldsToUpdate = false;
+
+        // Dynamically build the query based on non-null parameters
+        if (name != null) {
+            query.append("name = ?, ");
+            hasFieldsToUpdate = true;
+        }
+        if (email != null) {
+            query.append("email = ?, ");
+            hasFieldsToUpdate = true;
+        }
+        if (contact != null) {
+            query.append("contactDetails = ?, ");
+            hasFieldsToUpdate = true;
+        }
+        if (loyaltyPoints != null) {
+            query.append("loyaltyPoints = ?, ");
+            hasFieldsToUpdate = true;
+        }
+
+        if (!hasFieldsToUpdate) {
+            // No fields to update
+            return false;
+        }
+
+        // Remove trailing comma and space, add WHERE clause
+        query.setLength(query.length() - 2);
+        query.append(" WHERE attendeeID = ?");
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query.toString())) {
+
+            // Set parameters dynamically
+            int index = 1;
+            if (name != null) preparedStatement.setString(index++, name);
+            if (email != null) preparedStatement.setString(index++, email);
+            if (contact != null) preparedStatement.setString(index++, contact);
+            if (loyaltyPoints != null) preparedStatement.setInt(index++, loyaltyPoints);
+
+            // Set the attendee ID
+            preparedStatement.setInt(index, attendeeID);
+
+            // Execute the update
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
     // Additional methods for Attendee-related queries can go here, e.g., registration, fetching attendee data, etc.
 }
