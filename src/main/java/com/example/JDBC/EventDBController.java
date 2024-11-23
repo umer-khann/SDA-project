@@ -39,33 +39,7 @@ public class EventDBController {
         }
     }
 
-    /**
-     * Update the details of an existing event in the database.
-     *
-     * @param eventID The ID of the event to be updated.
-     * @param newName The new name of the event.
-     * @param newDate The new date of the event.
-     * @return true if the update is successful, false otherwise.
-     */
-    public boolean updateEventDetails(int eventID, String newName, Date newDate) {
-        String query = "UPDATE Event SET eventName = ?, eventDate = ? WHERE eventID = ?";
 
-        try (Connection connection = MyJDBC.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-            preparedStatement.setString(1, newName);
-            preparedStatement.setDate(2, new java.sql.Date(newDate.getTime()));
-            preparedStatement.setInt(3, eventID);
-
-            int result = preparedStatement.executeUpdate();
-            return result > 0; // Return true if at least one row is affected
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public void showEvents(ObservableList<Event> eventList, int EventOrgID) {
         String query = "SELECT eventID, eventName, budget, eventType FROM Event WHERE eventOrganizerID = ?";
@@ -111,6 +85,93 @@ public class EventDBController {
             e.printStackTrace();
         }
     }
+
+    public void showCompleteEvents(ObservableList<Event> eventList, int EventOrgID) {
+        // Modify the query to filter by EventOrgID
+        String query = "SELECT \n" +
+                "    E.eventID,\n" +
+                "    E.eventName,\n" +
+                "    E.eventDate,\n" +
+                "    E.status,\n" +
+                "    E.budget,\n" +
+                "    E.eventType,\n" +
+                "    WE.topic AS workshopTopic,\n" +
+                "    WE.duration AS workshopDuration,\n" +
+                "    WE.instructor AS workshopInstructor,\n" +
+                "    CE.genre AS concertGenre,\n" +
+                "    FE.performerName AS performerName,\n" +
+                "    CFE.agenda AS conferenceAgenda,\n" +
+                "    SE.speakerName AS speakerName\n" +
+                "FROM \n" +
+                "    Event E\n" +
+                "LEFT JOIN \n" +
+                "    WorkshopEvent WE ON E.eventID = WE.eventID\n" +
+                "LEFT JOIN \n" +
+                "    ConcertEvent CE ON E.eventID = CE.eventID\n" +
+                "LEFT JOIN \n" +
+                "    Performer FE ON CE.eventID = FE.eventID\n" +
+                "LEFT JOIN \n" +
+                "    ConferenceEvent CFE ON E.eventID = CFE.eventID\n" +
+                "LEFT JOIN \n" +
+                "    Speaker SE ON CFE.eventID = SE.eventID\n" +
+                "WHERE E.eventOrganizerID = ?";  // Add filter for the event organizer ID
+
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Set the event organizer ID in the query
+            preparedStatement.setInt(1, EventOrgID);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int eventID = resultSet.getInt("eventID");
+                    String eventName = resultSet.getString("eventName");
+                    String eventDate = resultSet.getString("eventDate");
+                    boolean status = resultSet.getBoolean("status");
+                    float budget = resultSet.getFloat("budget");
+                    String eventType = resultSet.getString("eventType");
+
+                    // Instantiate the appropriate subclass based on eventType
+                    Event event;
+                    switch (eventType.toLowerCase()) {
+                        case "conference":
+                            event = new ConferenceEvent();
+                            event.assignAllValues(eventID, eventName, budget, eventType, eventDate, status);
+                            ((ConferenceEvent) event).setAgenda(resultSet.getString("conferenceAgenda"));
+                            ((ConferenceEvent) event).setSpeakerName(resultSet.getString("speakerName"));
+                            break;
+
+                        case "concert":
+                            event = new ConcertEvent();
+                            event.assignAllValues(eventID, eventName, budget, eventType, eventDate, status);
+                            ((ConcertEvent) event).setGenre(resultSet.getString("concertGenre"));
+                            ((ConcertEvent) event).setPerformerName(resultSet.getString("performerName"));
+                            break;
+
+                        case "workshop":
+                            event = new WorkshopEvent();
+                            event.assignAllValues(eventID, eventName, budget, eventType, eventDate, status);
+                            ((WorkshopEvent) event).setTopic(resultSet.getString("workshopTopic"));
+                            ((WorkshopEvent) event).setDuration(resultSet.getFloat("workshopDuration"));
+                            ((WorkshopEvent) event).setInstructor(resultSet.getString("workshopInstructor"));
+                            break;
+
+                        default:
+                            throw new IllegalArgumentException("Unknown event type: " + eventType);
+                    }
+
+                    // Add the event to the list
+                    eventList.add(event);
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 
@@ -173,6 +234,8 @@ public class EventDBController {
 
         return null; // Return null if no event is found
     }
+
+
     public boolean saveConcertEvent(ConcertEvent event, int eventOrganizerID, int venueID) {
         String query = "INSERT INTO Event (eventName, eventDate, budget, status, eventType, eventOrganizerID, venueID) VALUES (?, ?, ?, ?, ?, ?, ?)";
         System.out.println(eventOrganizerID+" done.");
@@ -347,6 +410,66 @@ public class EventDBController {
         }
     }
 
+    public boolean updateEvent(int eventID, String newName, Date newDate) {
+        // Construct the SQL query dynamically based on which fields are provided
+        StringBuilder query = new StringBuilder("UPDATE Event SET ");
+        boolean hasName = newName != null && !newName.isEmpty();
+        boolean hasDate = newDate != null;
+
+        if (hasName) {
+            query.append("eventName = ?");
+        }
+
+        if (hasDate) {
+            if (hasName) {
+                query.append(", ");
+            }
+            query.append("eventDate = ?");
+        }
+
+        query.append(" WHERE eventID = ?");
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query.toString())) {
+
+            int index = 1;
+
+            if (hasName) {
+                preparedStatement.setString(index++, newName);
+            }
+
+            if (hasDate) {
+                preparedStatement.setDate(index++, new java.sql.Date(newDate.getTime()));
+            }
+
+            preparedStatement.setInt(index, eventID);
+
+            int result = preparedStatement.executeUpdate();
+            return result > 0; // Return true if at least one row is affected
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public void insertEventUpdateNotification(int eventID, int userID, String message) {
+        String sql = "INSERT INTO EventUpdateNotification (EventID, UserID, Message) VALUES (?, ?, ?)";
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setInt(1, eventID);
+            pstmt.setInt(2, userID);
+            pstmt.setString(3, message);
+
+            pstmt.executeUpdate();  // Execute the insert
+
+        } catch (SQLException e) {
+            System.out.println("Error inserting notification: " + e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     // Additional methods for handling event-related database operations can be added here

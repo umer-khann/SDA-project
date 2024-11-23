@@ -72,4 +72,8 @@ public abstract class User {
     public void registerEventOrganizer() {}
 
     public abstract void Create(String username, String password);
+
+    public String getUsername() {
+        return this.userName;
+    }
 }

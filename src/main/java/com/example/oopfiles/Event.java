@@ -3,6 +3,8 @@ package com.example.oopfiles;
 import com.example.JDBC.EventDBController;
 import javafx.collections.ObservableList;
 
+import java.util.Date;
+
 public abstract class Event {
     private int eventID;
     private String eventName;
@@ -11,9 +13,36 @@ public abstract class Event {
     private double budget;
     protected static EventDBController db;
     private String eventType;
+    private EventOrganizer organizer;  // Aggregation: Event has an organizer
+
     public Event() {
         db = new EventDBController();
     }
+
+
+    public static void deleteEvent(int eventID) {
+    }
+
+    public static void updateEventDetails(Event selectedEvent) {
+    }
+
+    public static ObservableList<Event> initializeTableForOrganizer(ObservableList<Event> eventList, int currentOrganizerid) {
+        db=new EventDBController();
+        db.showCompleteEvents(eventList,currentOrganizerid);
+        return eventList;
+    }
+
+    public static boolean updateEvent(int eventID, String newName, Date newDate)
+    {
+        db=new EventDBController();
+        return db.updateEvent(eventID,newName,newDate);
+    }
+
+    public static void insertEventUpdateNotification(int eventID, int organizerUserID, String message) {
+        db=new EventDBController();
+        db.insertEventUpdateNotification(eventID,organizerUserID,message);
+    }
+
 
     public boolean updateDetails(String newName, String newDate) {
         this.eventName = newName;
@@ -27,6 +56,7 @@ public abstract class Event {
         boolean result = db.verifyEvent(ID);
         return result;
     }
+
     public static void updateBudget(int ID,float newBudget){
         db=new EventDBController();
         db.updateEventBudget(ID,newBudget);
@@ -38,6 +68,8 @@ public abstract class Event {
         return eventList;
     }
 
+
+
     public boolean allocateBudget(double newBudget) {
         if (newBudget >= 0) {
             this.budget = newBudget;
@@ -45,6 +77,7 @@ public abstract class Event {
         }
         return false;
     }
+
     public abstract boolean createEvent();
     // Getters and setters
     public int getEventID() {
@@ -57,6 +90,7 @@ public abstract class Event {
         this.budget=budget;
         this.eventType=eventType;
     }
+
 
     public void setEventID(int eventID) {
         this.eventID = eventID;
@@ -109,6 +143,28 @@ public abstract class Event {
     public void setEventType(String eventType) {
         this.eventType = eventType;
     }
+
+    public EventOrganizer getOrganizer() {
+        return organizer;
+    }
+
+    public void setOrganizer(EventOrganizer organizer) {
+        this.organizer = organizer;
+    }
+
+    public void assignAllValues(int eventID, String eventName, float budget, String eventType, String eventDate, boolean status) {
+        this.eventID=eventID;
+        this.eventName=eventName;
+        this.budget=budget;
+        this.eventType=eventType;
+        this.eventDate=eventDate;
+        this.status=status;
+    }
+
+    public int getOrganizerID() {
+        return organizer.getID(organizer.getUsername());
+    }
+
 
     // Placeholder method for saving event to database
 }

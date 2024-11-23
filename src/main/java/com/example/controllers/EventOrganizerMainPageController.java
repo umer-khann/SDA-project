@@ -52,9 +52,7 @@ public class EventOrganizerMainPageController implements Initializable {
 
     @FXML
     private ScrollPane contentArea;
-    public void setEventorgID(int a){
-        EventorgID = a;
-    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         a = button1.getText();
@@ -223,6 +221,10 @@ public class EventOrganizerMainPageController implements Initializable {
 
     public void eventresources(ActionEvent actionEvent) {
         loadPage("Allocate-And-Track-Event-Resources.fxml",EventorgID);
+    }
+
+    public void setEventorgID(int id) {
+        this.EventorgID=id;
     }
 }
 

@@ -170,4 +170,5 @@ public class EventOrganizer extends User {
 
     public int getExperienceLevel() { return experienceLevel; }
     public void setExperienceLevel(int experienceLevel) { this.experienceLevel = experienceLevel; }
+
 }

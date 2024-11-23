@@ -37,4 +37,7 @@ public class ConcertEvent extends Event {
         // Event creation logic specific to ConcertEvent can go here
     }
 
+    public void setPerformerName(String performerName) {
+        this.performer=performerName;
+    }
 }
