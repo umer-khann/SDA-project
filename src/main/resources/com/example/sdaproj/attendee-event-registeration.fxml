@@ -10,15 +10,26 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AttendeeEventRegistrationController">
     <children>
-        <TableView layoutX="2.0" layoutY="53.0" prefHeight="200.0" prefWidth="600.0">
+        <TableView fx:id="eventTable" layoutX="2.0" layoutY="53.0" prefHeight="200.0" prefWidth="600.0">
             <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="colEventID" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="colEventName" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="colEventType" prefWidth="75.0" text="TYPE" />
+                <TableColumn fx:id="colEventDate" prefWidth="75.0" text="Date" />
+                <TableColumn fx:id="colVenueName" prefWidth="75.0" text="Venue" />
+                <TableColumn fx:id="colPerformerName" prefWidth="75.0" text="performer" />
+                <TableColumn fx:id="colConferenceAgenda" prefWidth="75.0" text="Agenda" />
+                <TableColumn fx:id="colWorkshopTopic" prefWidth="75.0" text="Workshop topic" />
+
+
+
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
+
+
         <Label layoutX="184.0" layoutY="14.0" text="SELECT EVENT TO REGISTER FOR " textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="15.0" />
@@ -35,5 +46,6 @@
                 <Font name="System Bold" size="15.0" />
             </font>
         </Button>
+      <Button layoutX="14.0" layoutY="291.0" mnemonicParsing="false" onAction="#showEvents" text="RELOAD" />
     </children>
 </AnchorPane>

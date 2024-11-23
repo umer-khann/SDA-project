@@ -48,19 +48,20 @@ public class AttendeeLoginController {
         if (!username.isBlank() && !password.isBlank()) {
             Attendee temp = new VipAttendee();
             Attendee temp1 = new GeneralAttendee();
-            if(temp.login(username,password)){
+            if (temp.login(username, password)) {
                 attendee = new VipAttendee();
                 attendee.Create(username, password);
-                loadPage2("Attendee-main-page.fxml", e);
+                // Assuming attendee has an ID that you want to pass
+                int attendeeID = attendee.getId();
+                loadPage2("Attendee-main-page.fxml", e, attendeeID);
 
-            }
-            else if(temp1.login(username, password)){
+            } else if (temp1.login(username, password)) {
                 attendee = new GeneralAttendee();
                 attendee.Create(username, password);
-                loadPage2("Attendee-main-page.fxml", e);
+                int attendeeID = attendee.getId();
+                loadPage2("Attendee-main-page.fxml", e, attendeeID);
 
-            }
-            else{
+            } else {
                 // Display an error message
                 loginmessagelabel.setText("Invalid username or password. Please try again.");
             }
@@ -87,9 +88,13 @@ public class AttendeeLoginController {
         stage.show();
     }
 
-    private void loadPage2(String fxmlFile, ActionEvent event) throws IOException {
+    private void loadPage2(String fxmlFile, ActionEvent event, int attendeeID) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/sdaproj/" + fxmlFile));
         AnchorPane root = fxmlLoader.load(); // Assuming the root node is an AnchorPane
+
+        // Get the next controller and pass the attendeeID
+        AttendeeMainPageController nextController = fxmlLoader.getController();
+        nextController.setAttendeeID(attendeeID); // Set attendeeID in the next controller
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));

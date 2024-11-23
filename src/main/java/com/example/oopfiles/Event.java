@@ -14,6 +14,7 @@ public abstract class Event {
     protected static EventDBController db;
     private String eventType;
     private EventOrganizer organizer;  // Aggregation: Event has an organizer
+    private Venue v;
 
     public Event() {
         db = new EventDBController();
@@ -29,6 +30,12 @@ public abstract class Event {
     public static ObservableList<Event> initializeTableForOrganizer(ObservableList<Event> eventList, int currentOrganizerid) {
         db=new EventDBController();
         db.showCompleteEvents(eventList,currentOrganizerid);
+        return eventList;
+    }
+
+    public static ObservableList<Event> initializeTableForAttendee(ObservableList<Event> eventList) {
+        db=new EventDBController();
+        db.showEventsForAttendee(eventList);
         return eventList;
     }
 
@@ -163,6 +170,18 @@ public abstract class Event {
 
     public int getOrganizerID() {
         return organizer.getID(organizer.getUsername());
+    }
+
+    public void setVenue(Venue venue) {
+        this.v = venue;
+    }
+
+    public String getVenueName() {
+        return v != null ? v.getVenueName() : "No Venue Assigned";
+    }
+
+    public String getVenueLocation() {
+        return v != null ? v.getLocation() : "No Location Assigned";
     }
 
 
