@@ -70,6 +70,12 @@ public abstract class Venue {
         }
         return db.getAllVenues(evOrgID);
     }
+    public List<Venue> getAllVenues() {
+        if (db == null) {
+            throw new IllegalStateException("VenueDBHandler is not initialized!");
+        }
+        return db.getAllVenues();
+    }
     public boolean venueExists(int venueId) {
         if (db == null) {
             throw new IllegalStateException("VenueDBHandler is not initialized!");

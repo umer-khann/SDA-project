@@ -92,7 +92,7 @@ public class CreateEventController implements Initializable {
     // Load venue data into the table
     private void loadVenueData() {
         ObservableList<Venue> venueList = FXCollections.observableArrayList();
-        venueList.addAll(ven.getAllVenues(EvOrgID)); // Replace with your DB fetching method
+        venueList.addAll(ven.getAllVenues()); // Replace with your DB fetching method
         VenueTable.setItems(venueList);
     }
 
