@@ -820,8 +820,6 @@ public class EventDBController {
     }
 
     public boolean EventExistsByOrganizer(int attendeeID, int EVID) {
-    }
-    public boolean EventExistsByOrganizer(int attendeeID, int EVID) {
         String Q = "SELECT e.eventID FROM Event e WHERE e.eventOrganizerID = ?";
         try (Connection conn = MyJDBC.getConnection();
              PreparedStatement stmt = conn.prepareStatement(Q)) {
