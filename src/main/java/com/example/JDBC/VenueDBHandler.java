@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VenueDBHandler {
     public boolean addVenue(String type, Venue venue,int ID) {
@@ -95,4 +97,84 @@ public class VenueDBHandler {
             return false;
         }
     }
+    public static List<Venue> getAllVenues(int EVID) {
+        List<Venue> venues = new ArrayList<>();
+        String query = "SELECT * FROM Venue WHERE eventOrganizerID = ?";
+
+        try (Connection conn = MyJDBC.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, EVID); // Set the eventOrganizerID parameter
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Venue venue;
+                    if (rs.getString("venueType").equals("Indoor")) {
+                        venue = new IndoorVenue();
+                    } else {
+                        venue = new OutdoorVenue();
+                    }
+
+                    venue.setVenueId(rs.getInt("venueID"));
+                    venue.setVenueName(rs.getString("venueName"));
+                    venue.setLocation(rs.getString("location"));
+                    venue.setCapacity(rs.getInt("capacity"));
+                    venues.add(venue);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return venues;
+    }
+    public boolean deleteVenue(int venueID, int EVID) {
+        // SQL query for deleting the venue from the Venue table
+        String deleteVenueQuery = "DELETE FROM Venue WHERE venueID = ? AND eventOrganizerID = ?";
+
+        try (Connection connection = MyJDBC.getConnection()) {
+            connection.setAutoCommit(false);
+
+            // Step 1: Delete from the Venue table
+            try (PreparedStatement venueStatement = connection.prepareStatement(deleteVenueQuery)) {
+                venueStatement.setInt(1, venueID);
+                venueStatement.setInt(2, EVID); // Ensure you set both parameters here
+                int rowsAffected = venueStatement.executeUpdate();
+                if (rowsAffected == 0) {
+                    connection.rollback();
+                    return false; // No rows deleted in the Venue table
+                }
+            }
+
+            // Step 2: Commit transaction if deletion is successful
+            connection.commit();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public boolean doesVenueExist(int venueID) {
+        String query = "SELECT COUNT(*) FROM Venue WHERE venueID = ?";
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, venueID);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    return count > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return false;
+    }
+
 }

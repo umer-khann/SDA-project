@@ -15,6 +15,9 @@ public class OutdoorVenue extends Venue {
         this.additionalCapacity = additionalCapacity;
         db=new VenueDBHandler();
     }
+    public OutdoorVenue() {
+        super();
+    }
 
     @Override
     public void addVenue(int ID) {
@@ -36,6 +39,11 @@ public class OutdoorVenue extends Venue {
         System.out.println("Capacity: " + getCapacity());
         System.out.println("Weather Preparedness: " + weatherPreparedness);
         System.out.println("Additional Capacity: " + additionalCapacity);
+    }
+
+    @Override
+    public void setDb(VenueDBHandler venueDBHandler) {
+        this.db = venueDBHandler;
     }
 
     public String getWeatherPreparedness() {

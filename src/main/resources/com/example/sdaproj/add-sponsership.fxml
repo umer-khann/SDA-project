@@ -1,25 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AddSponsershipController">
+<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AddSponsershipController">
     <children>
-        <AnchorPane prefHeight="65.0" prefWidth="573.0" style="-fx-background-color: trans;" BorderPane.alignment="CENTER">
-            <children>
-                <Pane layoutX="102.0" layoutY="20.0" prefHeight="25.0" prefWidth="700.0" style="-fx-background-color: #032d4d;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-127.0" AnchorPane.topAnchor="0.0">
-                    <children>
-                        <ImageView fx:id="Exit" fitHeight="22.0" fitWidth="22.0" layoutX="678.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@images/exit.png" />
-                            </image>
-                        </ImageView>
-                    </children>
-                </Pane>
-            </children>
-        </AnchorPane>
         <AnchorPane layoutY="316.0" prefHeight="83.0" prefWidth="700.0" style="-fx-background-color: #2A3663;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="316.0">
             <children>
                 <Label layoutX="636.0" layoutY="5.0" text="EventaX " textFill="WHITE">
@@ -39,21 +29,40 @@
                 </Label>
             </children>
         </AnchorPane>
-      <Label layoutX="71.0" layoutY="75.0" text="Name">
+      <Label layoutX="383.0" layoutY="117.0" text="Sponsership Name">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField layoutX="123.0" layoutY="113.0" />
-      <TextField layoutX="123.0" layoutY="71.0" />
-      <Label layoutX="71.0" layoutY="117.0" text="Amount">
+      <TextField fx:id="SpAmount" layoutX="514.0" layoutY="157.0" />
+      <TextField fx:id="SpName" layoutX="514.0" layoutY="113.0" />
+      <Label layoutX="383.0" layoutY="161.0" text="Amount Contributing">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Button layoutX="117.0" layoutY="270.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="157.0" text="Add Sponsership">
+      <Button fx:id="Add" layoutX="435.0" layoutY="270.0" mnemonicParsing="false" onAction="#AddPushed" prefHeight="25.0" prefWidth="157.0" text="Add Sponsership">
          <font>
             <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="383.0" layoutY="72.0" text="EVENT ID">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="EventID" layoutX="514.0" layoutY="68.0" />
+      <TableView fx:id="Table" layoutX="8.0" layoutY="14.0" prefHeight="270.0" prefWidth="362.0">
+        <columns>
+            <TableColumn fx:id="EVID" prefWidth="80.0" text="Event ID" />
+            <TableColumn fx:id="EVNAME" prefWidth="120.0" text="Event Name" />
+            <TableColumn fx:id="EVDATE" prefWidth="80.0" text="Event Date" />
+            <TableColumn fx:id="EVTYPE" prefWidth="80.0" text="Event Type" />
+        </columns>
+      </TableView>
+      <Button layoutX="29.0" layoutY="287.0" mnemonicParsing="false" onAction="#DisplayPushed" text="Display">
+         <font>
+            <Font name="System Bold" size="12.0" />
          </font>
       </Button>
     </children>

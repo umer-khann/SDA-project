@@ -1,18 +1,24 @@
 package com.example.oopfiles;
 
+import com.example.JDBC.VenueDBHandler;
+
+import java.util.List;
+
 // Abstract Class Venue
 public abstract class Venue {
     private int venueId;
     private String venueName;
     private String location;
     private int capacity;
-
-    // Constructor
+    private VenueDBHandler db;
     public Venue(String venueName, String location, int capacity) {
         this.venueId = 0;
         this.venueName = venueName;
         this.location = location;
         this.capacity = capacity;
+    }
+    public Venue() {
+        db = new VenueDBHandler();
     }
 
     // Getters and Setters for common attributes
@@ -55,4 +61,22 @@ public abstract class Venue {
 
     // Abstract method to be implemented by subclasses
     public abstract void displayVenueDetails();
+
+    public abstract void setDb(VenueDBHandler venueDBHandler);
+
+    public List<Venue> getAllVenues(int evOrgID) {
+        if (db == null) {
+            throw new IllegalStateException("VenueDBHandler is not initialized!");
+        }
+        return db.getAllVenues(evOrgID);
+    }
+    public boolean venueExists(int venueId) {
+        if (db == null) {
+            throw new IllegalStateException("VenueDBHandler is not initialized!");
+        }
+        return db.doesVenueExist(venueId);
+    }
+    public boolean deleteVenue(int VenID,int evID){
+        return db.deleteVenue(VenID,evID);
+    }
 }

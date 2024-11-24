@@ -15,6 +15,9 @@ public class IndoorVenue extends Venue {
         this.floor = floor;
         db=new VenueDBHandler();
     }
+    public IndoorVenue() {
+       super();
+    }
 
     @Override
     public void addVenue(int ID) {
@@ -36,6 +39,11 @@ public class IndoorVenue extends Venue {
         System.out.println("Capacity: " + getCapacity());
         System.out.println("Room Number: " + roomNumber);
         System.out.println("Floor: " + floor);
+    }
+
+    @Override
+    public void setDb(VenueDBHandler venueDBHandler) {
+        this.db = venueDBHandler;
     }
 
     public String getRoomNumber() {

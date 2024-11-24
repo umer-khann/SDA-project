@@ -100,5 +100,56 @@ public class SponsorshipDBHandler {
 
         return sponsorName; // Returns the name if found, or null if not
     }
+    public boolean addSponsorship(Sponsorship s, int eventID) {
+        // Query to insert into the Sponsorship table
+        String insertSponsorshipQuery = "INSERT INTO Sponsorship (sponsorName, contributionAmount, eventID, eventOrganizerID) " +
+                "VALUES (?, ?, ?, ?)";
+        // Query to insert into the SponsorshipEvent table
+        String insertSponsorshipEventQuery = "INSERT INTO SponsorshipEvent (sponsorshipID, eventID) " +
+                "VALUES (?, ?)";
+
+        try (Connection connection = MyJDBC.getConnection()) {
+            // Use transaction to ensure both inserts are successful
+            connection.setAutoCommit(false);
+
+            // Insert into the Sponsorship table
+            try (PreparedStatement sponsorshipStmt = connection.prepareStatement(insertSponsorshipQuery, PreparedStatement.RETURN_GENERATED_KEYS)) {
+                sponsorshipStmt.setString(1, s.getSponsorName());
+                sponsorshipStmt.setDouble(2, s.getContributionAmount());
+                sponsorshipStmt.setInt(3, eventID);
+                sponsorshipStmt.setInt(4, s.getEvorgid());
+
+                int rowsInserted = sponsorshipStmt.executeUpdate();
+                if (rowsInserted > 0) {
+                    // Retrieve the generated sponsorshipID
+                    try (ResultSet generatedKeys = sponsorshipStmt.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            int sponsorshipID = generatedKeys.getInt(1);
+
+                            // Insert into the SponsorshipEvent table
+                            try (PreparedStatement sponsorshipEventStmt = connection.prepareStatement(insertSponsorshipEventQuery)) {
+                                sponsorshipEventStmt.setInt(1, sponsorshipID);
+                                sponsorshipEventStmt.setInt(2, eventID);
+
+                                int sponsorshipEventInserted = sponsorshipEventStmt.executeUpdate();
+                                if (sponsorshipEventInserted > 0) {
+                                    connection.commit(); // Commit transaction if both inserts are successful
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                connection.rollback(); // Rollback if an error occurs
+                e.printStackTrace();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false; // Return false if insertion failed
+    }
 
 }

@@ -36,6 +36,10 @@ public class ConcertEvent extends Event {
         return db.saveConcertEvent(this,1,1);
         // Event creation logic specific to ConcertEvent can go here
     }
+    public boolean createEvent(int ID, int I) {
+        return db.saveConcertEvent(this,ID,I);
+        // Event creation logic specific to ConcertEvent can go here
+    }
 
     public void setPerformerName(String performerName) {
         this.performer=performerName;

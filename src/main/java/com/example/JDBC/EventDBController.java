@@ -6,7 +6,9 @@ import com.example.oopfiles.*;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class EventDBController {
 
@@ -641,12 +643,71 @@ public class EventDBController {
         }
     }
 
+    public List<Event> DisplayEventsByAttendee(int attendeeID) {
+        List<Event> eventList = new ArrayList<>();
+        String Q = "SELECT e.eventID, e.eventName, e.eventDate, e.budget, e.eventType FROM Event e JOIN EventAttendee ea ON e.eventID = ea.eventID JOIN Attendees a ON ea.attendeeID = a.attendeeID WHERE a.attendeeID = ?";
+        try (Connection conn = MyJDBC.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(Q)) {
+            stmt.setInt(1, attendeeID); // Set the eventOrganizerID parameter
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Event ev = null;
+                    if (rs.getString("eventType").equals("Concert")) {
+                        ev = new ConcertEvent();
+                    }
+                    else if (rs.getString("eventType").equals("Conference")) {
+                        ev = new ConferenceEvent();
+                    }
+                    else if (rs.getString("eventType").equals("Workshop")) {
+                        ev = new WorkshopEvent();
+                    }
 
+                    ev.setEventID(rs.getInt("eventID"));
+                    ev.setEventName(rs.getString("eventName"));
+                    ev.setEventDate(rs.getString("eventDate"));
+                    ev.setEventType(rs.getString("eventType"));
+                    eventList.add(ev);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return eventList;
+    }
 
-
-
-
-
-
+    public boolean EventExistsByAttendee(int attendeeID, int EVID) {
+        List<Event> eventList = new ArrayList<>();
+        String Q = "SELECT e.eventID FROM Event e JOIN EventAttendee ea ON e.eventID = ea.eventID JOIN Attendees a ON ea.attendeeID = a.attendeeID WHERE a.attendeeID = ?";
+        try (Connection conn = MyJDBC.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(Q)) {
+            stmt.setInt(1, attendeeID); // Set the eventOrganizerID parameter
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    int id = (rs.getInt("eventID"));
+                    if(id == EVID)
+                        return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }public boolean EventExistsByOrganizer(int attendeeID, int EVID) {
+        String Q = "SELECT e.eventID FROM Event e WHERE e.eventOrganizerID = ?";
+        try (Connection conn = MyJDBC.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(Q)) {
+            stmt.setInt(1, attendeeID); // Set the eventOrganizerID parameter
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    int id = (rs.getInt("eventID"));
+                    if(id == EVID)
+                        return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
     // Additional methods for handling event-related database operations can be added here
 }

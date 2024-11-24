@@ -35,7 +35,10 @@ public class WorkshopEvent extends Event {
     public void setInstructor(String instructor) {
         this.instructor = instructor;
     }
-
+    public boolean createEvent(int a, int b) {
+        return db.saveWorkshopEvent(this, a,b);
+        // Event creation logic specific to ConcertEvent can go here
+    }
     public void setTopic(String topic) {
         this.topic = topic;
     }
