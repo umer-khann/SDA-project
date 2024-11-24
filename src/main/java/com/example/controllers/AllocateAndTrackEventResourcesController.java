@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -45,7 +46,7 @@ public class AllocateAndTrackEventResourcesController {
     private TableColumn<Event, Integer> colEventType;
 
     @FXML
-    public void buttonpress(ActionEvent actionEvent) {
+    public void buttonpress(ActionEvent actionEvent) throws Exception {
         // Get the eventID from the TextField
         String eventIDText = eventid.getText();
 
@@ -59,10 +60,18 @@ public class AllocateAndTrackEventResourcesController {
             return;  // Exit if the eventID is invalid
         }
 
+        // Check if the eventID exists in the TableView
+        boolean eventExists = eventTable.getItems().stream()
+                .anyMatch(event -> event.getEventID() == eventID);
+        if (!eventExists) {
+            System.out.println("The event ID does not exist in the table view.");
+            return;  // Exit if the eventID is not found
+        }
+
         // Initialize variables for staff, seats, and equipment with null or 0
         Integer staff1 = null;
         Integer seats1 = null;
-        Integer equipment1= null;
+        Integer equipment1 = null;
 
         // Retrieve the values from the text fields (staff, seats, and equipment)
         String staffText = staff.getText();
@@ -95,25 +104,15 @@ public class AllocateAndTrackEventResourcesController {
             }
         }
 
-        // Update the event resources in the database
+        // Update the event details
+        Event.updateEventDetails(eventID, staff1, seats1, equipment1);
 
-        // Optionally, find the event in the table and update its values
-       // Event event = findEventById(eventID);
-       // if (event != null) {
-      //      if (staff != null) event.setStaff(staff);
-       //     if (seats != null) event.setSeats(seats);
-      //      if (equipment != null) event.setEquipment(equipment);
-        //updateEventResources(eventID, staff, seats, equipment);
+        RFA(null);
 
-            // Refresh the TableView to reflect the changes
-      //      eventTable.refresh();
-
-            // Optionally, show a success message
-     //       System.out.println("Event resources updated successfully.");
-    //    } else {
-    //        System.out.println("Event not found with eventID: " + eventID);
-  //      }
+        // Show success message
+        showAlert(Alert.AlertType.CONFIRMATION, "Success", "EVENT RESOURCES HAVE BEEN UPDATED.");
     }
+
 
 
     public void RFA(ActionEvent actionEvent) {
@@ -132,5 +131,13 @@ public class AllocateAndTrackEventResourcesController {
 
     public void setEventOrgID(int eventOrgID) {
         this.EventOrgID=eventOrgID;
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

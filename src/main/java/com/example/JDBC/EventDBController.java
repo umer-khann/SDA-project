@@ -108,23 +108,27 @@ public class EventDBController {
 
                     Event event = new Event() {
                         @Override
+                        public boolean createEvent(int a, int b) {
+                            return false;
+                        }
+
+                        @Override
                         public boolean createEvent() {
                             return false;
                         }
                     };
 
                     // Find the Event object associated with the eventID
-                    // Event event = findEventById(eventList, eventID);
-                    // if (event != null) {
-                    // Set values for eventName, staff, seats, and equipment
+                     if (event != null) {
+                     //Set values for eventName, staff, seats, and equipment
                     event.setEventID(eventID);
                     event.setEventName(eventName);
                     event.setStaff(staff);
                     event.setSeats(seats);
                     event.setNoOfTechnicalEquipment(equipment);
-                    //  } else {
-                    //      System.out.println("Event not found for eventID: " + eventID);
-                    //   }
+                      } else {
+                         System.out.println("Event not found for eventID: " + eventID);
+                      }
 
 
                     eventList.add(event);
@@ -704,8 +708,8 @@ public class EventDBController {
         }
     }
 
-    public void updateEventResources(int eventID, Integer staff, Integer seats, Integer equipment) {
-        StringBuilder queryBuilder = new StringBuilder("UPDATE EventResources SET ");
+    public void updateEventResources(int eventID, Integer staff, Integer seats, Integer equipment) throws Exception {
+        StringBuilder queryBuilder = new StringBuilder("UPDATE Event SET ");
         boolean hasUpdates = false;
 
         // Append columns that need to be updated
@@ -718,7 +722,7 @@ public class EventDBController {
             hasUpdates = true;
         }
         if (equipment != null) {
-            queryBuilder.append("equipment = ?, ");
+            queryBuilder.append("technicalEquipmentQuantity = ?, ");
             hasUpdates = true;
         }
 
@@ -756,6 +760,14 @@ public class EventDBController {
             } else {
                 System.out.println("No event found with eventID: " + eventID);
             }
+        }
+     catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    }
+
+
     public List<Event> DisplayEventsByAttendee(int attendeeID) {
         List<Event> eventList = new ArrayList<>();
         String Q = "SELECT e.eventID, e.eventName, e.eventDate, e.budget, e.eventType FROM Event e JOIN EventAttendee ea ON e.eventID = ea.eventID JOIN Attendees a ON ea.attendeeID = a.attendeeID WHERE a.attendeeID = ?";
@@ -805,7 +817,9 @@ public class EventDBController {
             e.printStackTrace();
         }
         return false;
-    }public boolean EventExistsByOrganizer(int attendeeID, int EVID) {
+    }
+
+    public boolean EventExistsByOrganizer(int attendeeID, int EVID) {
         String Q = "SELECT e.eventID FROM Event e WHERE e.eventOrganizerID = ?";
         try (Connection conn = MyJDBC.getConnection();
              PreparedStatement stmt = conn.prepareStatement(Q)) {
@@ -822,12 +836,7 @@ public class EventDBController {
         }
         return false;
     }
-    // Additional methods for handling event-related database operations can be added here
-}
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 
 }

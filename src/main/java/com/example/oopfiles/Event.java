@@ -31,8 +31,7 @@ public abstract class Event {
     public static void deleteEvent(int eventID) {
     }
 
-    public static void updateEventDetails(Event selectedEvent) {
-    }
+
 
     public static ObservableList<Event> initializeTableForOrganizer(ObservableList<Event> eventList, int currentOrganizerid) {
         db=new EventDBController();
@@ -55,6 +54,11 @@ public abstract class Event {
     public static void insertEventUpdateNotification(int eventID, int organizerUserID, String message) {
         db=new EventDBController();
         db.insertEventUpdateNotification(eventID,organizerUserID,message);
+    }
+
+    public static void updateEventDetails(int eventid, Integer staff1, Integer seats1, Integer equipment1) throws Exception {
+        db= new EventDBController();
+        db.updateEventResources(eventid,staff1,seats1,equipment1);
     }
 
 
@@ -93,8 +97,7 @@ public abstract class Event {
         return eventList;
     }
 
-    public void updateEventResources(int eventID,Integer staff,Integer  seats, Integer equipment)
-    {
+    public void updateEventResources(int eventID,Integer staff,Integer  seats, Integer equipment) throws Exception {
         db=new EventDBController();
         db.updateEventResources(eventID,staff,seats,equipment);
     }
