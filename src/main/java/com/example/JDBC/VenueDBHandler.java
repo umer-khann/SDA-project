@@ -122,6 +122,33 @@ public class VenueDBHandler {
         }
         return venues;
     }
+    public static List<Venue> getAllVenues() {
+        List<Venue> venues = new ArrayList<>();
+        String query = "SELECT * FROM Venue";
+
+        try (Connection conn = MyJDBC.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Venue venue;
+                    if (rs.getString("venueType").equals("Indoor")) {
+                        venue = new IndoorVenue();
+                    } else {
+                        venue = new OutdoorVenue();
+                    }
+
+                    venue.setVenueId(rs.getInt("venueID"));
+                    venue.setVenueName(rs.getString("venueName"));
+                    venue.setLocation(rs.getString("location"));
+                    venue.setCapacity(rs.getInt("capacity"));
+                    venues.add(venue);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return venues;
+    }
     public boolean deleteVenue(int venueID, int EVID) {
         // SQL query for deleting the venue from the Venue table
         String deleteVenueQuery = "DELETE FROM Venue WHERE venueID = ? AND eventOrganizerID = ?";

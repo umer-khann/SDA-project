@@ -55,6 +55,8 @@ public class EventOrganizerMainPageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        MenuClose.setVisible(false);
+        Menu.setVisible(true);
         a = button1.getText();
         b = button2.getText();
         c = button3.getText();
@@ -104,12 +106,12 @@ public class EventOrganizerMainPageController implements Initializable {
             slide.setToX(0);
             slide.play();
 
-            slider.setTranslateX(0);
+            slider.setTranslateX(176);
 
             slide.setOnFinished((ActionEvent e)-> {
                 Menu.setVisible(true);
                 MenuClose.setVisible(false);
-                slider.setPrefWidth(10);
+                slider.setPrefWidth(0);
                 contentArea.setPrefWidth(730);
                 button1.setText("");
                 button2.setText("");
@@ -129,24 +131,26 @@ public class EventOrganizerMainPageController implements Initializable {
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.4));
         slide.setNode(slider);
-
+        System.out.println(EventorgID);
         slide.setToX(0);
         slide.play();
 
-        slider.setTranslateX(0);
-        button1.setText("");
-        button2.setText("");
-        button3.setText("");
-        button4.setText("");
-        button5.setText("");
-        button6.setText("");
-        button7.setText("");
-        button8.setText("");
-        button9.setText("");
-        slide.setOnFinished((ActionEvent e) -> {
-            Menu.setVisible(true);
-            MenuClose.setVisible(false);
-            slider.setPrefWidth(10);
+        slider.setTranslateX(-176);
+
+        slide.setOnFinished((ActionEvent e)-> {
+            Menu.setVisible(false);
+            MenuClose.setVisible(true);
+            slider.setPrefWidth(176);
+            contentArea.setPrefWidth(400);
+            button1.setText(a);
+            button2.setText(b);
+            button3.setText(c);
+            button4.setText(d);
+            button5.setText(e1);
+            button6.setText(f);
+            button7.setText(g);
+            button8.setText(h);
+            button9.setText(i);
         });
         contentArea.setVisible(true);
         contentArea.setPrefWidth(730);

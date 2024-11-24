@@ -69,7 +69,11 @@ public abstract class Event {
         return true;
     }
 
-    public static boolean checkEvent(int ID){
+    public static boolean checkEvent(int ID, int OrgID){
+        db=new EventDBController();
+        boolean result = db.verifyEvent(ID, OrgID);
+        return result;
+    } public static boolean checkEvent(int ID){
         db=new EventDBController();
         boolean result = db.verifyEvent(ID);
         return result;
