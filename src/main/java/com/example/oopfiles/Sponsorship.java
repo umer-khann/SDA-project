@@ -1,5 +1,6 @@
 package com.example.oopfiles;
 
+import com.example.JDBC.EventDBController;
 import com.example.JDBC.SponsorshipDBHandler;
 import javafx.collections.ObservableList;
 
@@ -10,8 +11,8 @@ public class Sponsorship {
     private String eventName;
     private String sponsorName;
     private double contributionAmount;
+    private int evorgid;
     SponsorshipDBHandler db;
-
     // Constructor
     public Sponsorship() {
         db=new SponsorshipDBHandler();
@@ -49,9 +50,7 @@ public class Sponsorship {
 
     // Add sponsorship
     public boolean addSponsorship() {
-        //SponsorshipDAO dao = new SponsorshipDAO();
-        //return dao.saveSponsorship(this);
-        return false;
+        return db.addSponsorship(this,this.eventID);
     }
 
     // Remove sponsorship
@@ -74,5 +73,18 @@ public class Sponsorship {
 
     public void setEventName(String eventName) {
         this.eventName = eventName;
+    }
+
+    public String retrieveName(String sponsorID) {
+        String name = db.getName(sponsorID);
+        return name;
+    }
+
+    public int getEvorgid() {
+        return evorgid;
+    }
+
+    public void setEvorgid(int evorgid) {
+        this.evorgid = evorgid;
     }
 }

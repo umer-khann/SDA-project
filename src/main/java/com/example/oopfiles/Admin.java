@@ -1,15 +1,19 @@
 package com.example.oopfiles;
 
+import com.example.JDBC.AdminDBHandler;
+
 public class Admin extends User {
     private static final User INSTANCE = new Admin();
 
     private static final String HARD_CODED_USERNAME = "umer";
     private static final String HARD_CODED_PASSWORD = "umer";
+    private AdminDBHandler db;
 
-    private Admin() {
+    public Admin() {
         super(1,"Umer Khan","umer.2003@gmail.com","03005560602");
         this.setUserName(HARD_CODED_USERNAME);
         this.setPassword(HARD_CODED_PASSWORD);
+        db=new AdminDBHandler();
     }
 
     public static User getInstance() {
@@ -41,7 +45,9 @@ public class Admin extends User {
         return false;
     }
     @Override
-    public void addNotification(int ID, int userType, String message, String notifType){}
+    public void addNotification(int ID, int userType, String message, String notifType){
+        db.addNotification(ID,userType,message,notifType);
+    }
 
     @Override
     public void Create(String username, String password) {

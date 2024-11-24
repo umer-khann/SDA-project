@@ -41,7 +41,8 @@ public abstract class User {
     public abstract boolean isValidEmail();
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
-    public abstract void addNotification(int ID, int userType, String message, String notifType);
+
+    public void addNotification(int ID, int userType, String message, String notifType) {}
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }

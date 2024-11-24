@@ -91,7 +91,7 @@ public class AttendeeMainPageController implements Initializable {
     }
 
     // Modified method to accept both EventorgID and AttendeeID
-    private void loadPage(String fxml, int attendeeID) {
+    private void loadPage(String fxml) {
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.4));
         slide.setNode(slider);
@@ -115,10 +115,10 @@ public class AttendeeMainPageController implements Initializable {
 
             // Access the controller of the loaded FXML and set the AttendeeID
             Object controller = fxmlLoader.getController();
-            if (controller instanceof AttendeeRegController) {
-                ((AttendeeRegController) controller).setAttendeeID(attendeeID);
-            } else if (controller instanceof AttendeeEventRegistrationController) {
+            if (controller instanceof AttendeeEventRegistrationController) {
                 ((AttendeeEventRegistrationController) controller).setAttendeeID(attendeeID);
+            } else if (controller instanceof ProvideFeedBackController) {
+                ((ProvideFeedBackController) controller).setAttendeeID(attendeeID);
             }
 
             contentArea.setContent(pane);
@@ -131,17 +131,17 @@ public class AttendeeMainPageController implements Initializable {
     @FXML
     private void handleDashboardClick(ActionEvent event) {
         System.out.println("AttendeeID set to: " + attendeeID);  // Debug line
-        loadPage("attendee-event-registeration.fxml", attendeeID); // Pass AttendeeID
+        loadPage("attendee-event-registeration.fxml"); // Pass AttendeeID
     }
 
     @FXML
     private void handleAddClick(ActionEvent event) {
-        loadPage("attendee-reg.fxml", attendeeID); // Pass AttendeeID
+        loadPage("attendee-reg.fxml"); // Pass AttendeeID
     }
 
     @FXML
     private void HandleProvFeed(ActionEvent actionEvent) {
-        loadPage("provide-feedback.fxml", attendeeID); // Pass AttendeeID
+        loadPage("provide-feedback.fxml"); // Pass AttendeeID
     }
 
 

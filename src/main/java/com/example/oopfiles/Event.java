@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.Date;
+import java.util.List;
 
 public abstract class Event {
     private int eventID;
@@ -107,6 +108,7 @@ public abstract class Event {
         }
         return false;
     }
+    public abstract boolean createEvent(int a, int b);
 
     public abstract boolean createEvent();
     // Getters and setters
@@ -120,8 +122,9 @@ public abstract class Event {
         this.budget=budget;
         this.eventType=eventType;
     }
-
-
+    public static boolean EventExistsByOrganizer(int EVID, int OrgID){
+        return db.EventExistsByAttendee(OrgID,EVID);
+    }
     public void setEventID(int eventID) {
         this.eventID = eventID;
     }
@@ -240,6 +243,12 @@ public abstract class Event {
     }
 
 
+    public List<Event> ListOfEvents(int attendeeID) {
+        return db.DisplayEventsByAttendee(attendeeID);
+    }
+    public static boolean EventExistsByAttendee(int attendeeID, int EVID){
+        return db.EventExistsByAttendee(attendeeID,EVID);
+    }
 
     // Placeholder method for saving event to database
 }

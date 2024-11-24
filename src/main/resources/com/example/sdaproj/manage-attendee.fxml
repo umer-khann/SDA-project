@@ -94,11 +94,6 @@
                     <font>
                         <Font size="11.0" />
                     </font></TextField>
-            <PasswordField fx:id="loyaltyPointsField" layoutX="122.0" layoutY="182.0" prefHeight="12.0" prefWidth="121.0">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </PasswordField>
             <Label layoutX="20.0" layoutY="182.0" prefHeight="23.0" prefWidth="103.0" text="Loyalty Points">
                <font>
                   <Font name="Verdana Bold" size="11.0" />
@@ -114,6 +109,11 @@
                         <Font name="Verdana Bold" size="8.0" />
                     </font>
                 </Button>
+            <TextField fx:id="loyaltyPointsField" layoutX="122.0" layoutY="182.0" prefHeight="24.0" prefWidth="121.0">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </TextField>
             </children>
         </AnchorPane>
     </center>

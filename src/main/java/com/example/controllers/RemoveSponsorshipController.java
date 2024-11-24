@@ -1,7 +1,6 @@
 package com.example.controllers;
 
-import com.example.oopfiles.Event;
-import com.example.oopfiles.Sponsorship;
+import com.example.oopfiles.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -55,6 +54,8 @@ public class RemoveSponsorshipController {
     private TableColumn<Sponsorship, Double> colContributionAmount;
 
     private int EventOrgID;
+    Admin admin;
+    EventOrganizer eventOrganizer;
 
 
 
@@ -133,8 +134,14 @@ public class RemoveSponsorshipController {
 
         // If all validations pass
         sponsorship=new Sponsorship();
+        String name = sponsorship.retrieveName(sponsorID);
         if (sponsorship.removeSponsorship(Integer.parseInt(eventID), Integer.parseInt(sponsorID))) {
             // If removal was successful
+            String message = "Sponsor Details:\nSponsor ID: "+sponsorID+". Sponsor Name: "+name+".\n";
+            admin=new Admin();
+            eventOrganizer=new EventOrganizer();
+            admin.addNotification(1, 1, message, "Sponsor has been removed!");
+            eventOrganizer.addNotification(EventOrgID,2,message,"Sponsor has been removed!");
             showAlert(Alert.AlertType.INFORMATION, "Success", "Sponsor removed successfully!");
             ActionEvent ev=new ActionEvent();
             displayTableButtonOnAction(ev);

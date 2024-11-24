@@ -1,20 +1,28 @@
 package com.example.oopfiles;
 
+import com.example.JDBC.FeedbackDBHandler;
+
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Feedback {
     // Attributes
     private int feedbackID;
     private int rating; // Rating should be between 1 and 5
     private String comments;
-    private LocalDate date;
-
+    private Date date;
+    private int eventID;
+    private FeedbackDBHandler db;
     // Constructor
-    public Feedback(int feedbackID, int rating, String comments, LocalDate date) {
+    public Feedback(int feedbackID, int rating, String comments, Date date) {
         this.feedbackID = feedbackID;
         setRating(rating); // Use the setter to validate the rating
         this.comments = comments;
         this.date = date;
+        this.db = new FeedbackDBHandler();
+    }
+    public Feedback() {
+        this.db = new FeedbackDBHandler();
     }
 
     // Getters and Setters
@@ -46,11 +54,11 @@ public class Feedback {
         this.comments = comments;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -72,5 +80,17 @@ public class Feedback {
         System.out.println("Rating: " + rating);
         System.out.println("Comments: " + comments);
         System.out.println("Date: " + date);
+    }
+
+    public int getEventID() {
+        return eventID;
+    }
+
+    public void setEventID(int eventID) {
+        this.eventID = eventID;
+    }
+
+    public boolean insertFeedback() {
+        return db.insertFeedback(this);
     }
 }

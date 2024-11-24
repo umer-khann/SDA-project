@@ -220,6 +220,20 @@ public class ManageAttendeeController implements Initializable {
                 }
                 loyaltyPoints = Integer.parseInt(loyaltyPointsText);
             }
+            // Track updated fields for the notification message
+            StringBuilder updatedFields = new StringBuilder();
+            if (!name.isEmpty()) {
+                updatedFields.append("Name: ").append(name).append("\n");
+            }
+            if (!email.isEmpty()) {
+                updatedFields.append("Email: ").append(email).append("\n");
+            }
+            if (!contact.isEmpty()) {
+                updatedFields.append("Contact: ").append(contact).append("\n");
+            }
+            if (loyaltyPoints != null) {
+                updatedFields.append("Loyalty Points: ").append(loyaltyPoints).append("\n");
+            }
 
             // Call the DB function to update the attendee details
             boolean success = Attendee.updateAttendee(
@@ -233,6 +247,10 @@ public class ManageAttendeeController implements Initializable {
             // Show appropriate alert based on success
             if (success) {
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Attendee updated successfully.");
+                String message = "Your account details have been updated successfully:\n" + updatedFields.toString();
+                Attendee.addNotif(attendeeID, 3, message, "Account Details Updated Successfully.");
+                // Optionally, clear fields or redirect the user to another page
+                clearFields();  // Clear form fields (implement this if needed)
                 displayButtonOnAction(null); // Refresh the table
             } else {
                 showAlert(Alert.AlertType.WARNING, "Update Failed", "No attendee found with the given ID.");
@@ -242,6 +260,20 @@ public class ManageAttendeeController implements Initializable {
             showAlert(Alert.AlertType.ERROR, "Error", "An error occurred while updating the attendee.");
         }
     }
+    private void clearFields() {
+        // Clear all the input fields
+        IDField.clear();
+        nameField.clear();
+        emailField.clear();
+        contactField.clear();
+        loyaltyPointsField.clear();
+        usernameField.clear();
+        passwordField.clear();
+
+        // Optionally reset any dropdowns or other UI elements if applicable
+        // Example: attendeeTypeDropdown.setValue(null);  // Uncomment if you have a dropdown for attendee type
+    }
+
 
 
     public void removeButtonOnAction(ActionEvent actionEvent) {
@@ -255,6 +287,8 @@ public class ManageAttendeeController implements Initializable {
 
         if (Attendee.removeAttendee(Integer.parseInt(id))){
             showAlert(Alert.AlertType.INFORMATION, "Success", "Attendee successfully removed.");
+            String message = "Your account has been removed.\n";
+            Attendee.addNotif(Integer.parseInt(id), 3, message, "Your Account ID : "+id);
             displayButtonOnAction(null);
         }
         else{
