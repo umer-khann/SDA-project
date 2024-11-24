@@ -2,6 +2,7 @@ package com.example.controllers;
 
 import com.example.oopfiles.Admin;
 import com.example.oopfiles.User;
+import com.example.oopfiles.UserFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +24,7 @@ public class HelloController {
     @FXML
     private PasswordField upass;
 
-    private final User admin = Admin.getInstance(); // Singleton instance of Admin
+    User admin = UserFactory.createUser("ADMIN");// Singleton instance of Admin
 
     @FXML
     public void loginbuttonOnAction(ActionEvent e) throws IOException {
