@@ -36,6 +36,7 @@ public class AttendeeDBController {
             throw new RuntimeException(e);
         }
     }
+
     public void signUpAttendee(Attendee attendee) {
         String query = "INSERT INTO Attendees (name, email, contactDetails, username, password, loyaltyPoints) " +
                 "VALUES (?, ?, ?, ?, ?, ?)";
@@ -62,6 +63,7 @@ public class AttendeeDBController {
             throw new RuntimeException(e);
         }
     }
+
     public void AssignAttendee(Attendee attendee, String uname, String pass) {
         String query = "SELECT * FROM Attendees WHERE username = ? AND password = ?";
 
@@ -224,6 +226,4 @@ public class AttendeeDBController {
         }
     }
 
-
-    // Additional methods for Attendee-related queries can go here, e.g., registration, fetching attendee data, etc.
 }

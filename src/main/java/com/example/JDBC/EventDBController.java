@@ -40,10 +40,9 @@ public class EventDBController {
     }
 
 
-
     public void showEvents(ObservableList<Event> eventList, int EventOrgID) {
         String query = "SELECT eventID, eventName, budget, eventType FROM Event WHERE eventOrganizerID = ?";
-        System.out.println(EventOrgID+" in too.");
+        System.out.println(EventOrgID + " in too.");
         try (Connection connection = MyJDBC.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
@@ -85,6 +84,74 @@ public class EventDBController {
             e.printStackTrace();
         }
     }
+
+    public void showEventResources(ObservableList<Event> eventList, int EventOrgID) {
+        // Modify the query to also select eventName along with staff, seats, and equipment
+        String query = "SELECT e.eventID, e.eventName, e.staff, e.seats, e.technicalEquipmentQuantity " +
+                "FROM Event e " +
+                "WHERE e.eventOrganizerID = ?";
+        System.out.println(EventOrgID + " in too.");
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Set the EventOrgID parameter
+            preparedStatement.setInt(1, EventOrgID);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int eventID = resultSet.getInt("eventID");
+                    String eventName = resultSet.getString("eventName");
+                    int staff = resultSet.getInt("staff");
+                    int seats = resultSet.getInt("seats");
+                    int equipment = resultSet.getInt("technicalEquipmentQuantity");
+
+                    Event event = new Event() {
+                        @Override
+                        public boolean createEvent(int a, int b) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean createEvent() {
+                            return false;
+                        }
+                    };
+
+                    // Find the Event object associated with the eventID
+                     if (event != null) {
+                     //Set values for eventName, staff, seats, and equipment
+                    event.setEventID(eventID);
+                    event.setEventName(eventName);
+                    event.setStaff(staff);
+                    event.setSeats(seats);
+                    event.setNoOfTechnicalEquipment(equipment);
+                      } else {
+                         System.out.println("Event not found for eventID: " + eventID);
+                      }
+
+
+                    eventList.add(event);
+
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    // Helper method to find an Event by eventID from the eventList
+    private Event findEventById(ObservableList<Event> eventList, int eventID) {
+        for (Event event : eventList) {
+            if (event.getEventID() == eventID) {
+                return event;
+            }
+        }
+        return null;
+    }
+
 
     public void showCompleteEvents(ObservableList<Event> eventList, int EventOrgID) {
         // Modify the query to filter by EventOrgID
@@ -286,10 +353,6 @@ public class EventDBController {
     }
 
 
-
-
-
-
     /**
      * Delete an event from the database by its ID.
      *
@@ -353,7 +416,7 @@ public class EventDBController {
 
     public boolean saveConcertEvent(ConcertEvent event, int eventOrganizerID, int venueID) {
         String query = "INSERT INTO Event (eventName, eventDate, budget, status, eventType, eventOrganizerID, venueID) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        System.out.println(eventOrganizerID+" done.");
+        System.out.println(eventOrganizerID + " done.");
         try (Connection connection = MyJDBC.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -393,6 +456,7 @@ public class EventDBController {
         }
         return false;
     }
+
     public boolean saveWorkshopEvent(WorkshopEvent event, int eventOrganizerID, int venueID) {
         String query = "INSERT INTO Event (eventName, eventDate, budget, status, eventType, eventOrganizerID, venueID) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
@@ -436,6 +500,7 @@ public class EventDBController {
         }
         return false;
     }
+
     public boolean saveConferenceEvent(ConferenceEvent event, int eventOrganizerID, int venueID) {
         String query = "INSERT INTO Event (eventName, eventDate, budget, status, eventType, eventOrganizerID, venueID) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
@@ -643,6 +708,66 @@ public class EventDBController {
         }
     }
 
+    public void updateEventResources(int eventID, Integer staff, Integer seats, Integer equipment) throws Exception {
+        StringBuilder queryBuilder = new StringBuilder("UPDATE Event SET ");
+        boolean hasUpdates = false;
+
+        // Append columns that need to be updated
+        if (staff != null) {
+            queryBuilder.append("staff = ?, ");
+            hasUpdates = true;
+        }
+        if (seats != null) {
+            queryBuilder.append("seats = ?, ");
+            hasUpdates = true;
+        }
+        if (equipment != null) {
+            queryBuilder.append("technicalEquipmentQuantity = ?, ");
+            hasUpdates = true;
+        }
+
+        // Remove the trailing comma and space if there are updates
+        if (hasUpdates) {
+            queryBuilder.setLength(queryBuilder.length() - 2);
+            queryBuilder.append(" WHERE eventID = ?");
+        } else {
+            System.out.println("No changes to update.");
+            return;
+        }
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(queryBuilder.toString())) {
+
+            int parameterIndex = 1;
+
+            // Set the values for the prepared statement dynamically
+            if (staff != null) {
+                preparedStatement.setInt(parameterIndex++, staff);
+            }
+            if (seats != null) {
+                preparedStatement.setInt(parameterIndex++, seats);
+            }
+            if (equipment != null) {
+                preparedStatement.setInt(parameterIndex++, equipment);
+            }
+            preparedStatement.setInt(parameterIndex, eventID);
+
+            // Execute the update query
+            int rowsUpdated = preparedStatement.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Event resources updated in the database.");
+            } else {
+                System.out.println("No event found with eventID: " + eventID);
+            }
+        }
+     catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    }
+
+
     public List<Event> DisplayEventsByAttendee(int attendeeID) {
         List<Event> eventList = new ArrayList<>();
         String Q = "SELECT e.eventID, e.eventName, e.eventDate, e.budget, e.eventType FROM Event e JOIN EventAttendee ea ON e.eventID = ea.eventID JOIN Attendees a ON ea.attendeeID = a.attendeeID WHERE a.attendeeID = ?";
@@ -693,6 +818,9 @@ public class EventDBController {
         }
         return false;
     }
+
+    public boolean EventExistsByOrganizer(int attendeeID, int EVID) {
+    }
     public boolean EventExistsByOrganizer(int attendeeID, int EVID) {
         String Q = "SELECT e.eventID FROM Event e WHERE e.eventOrganizerID = ?";
         try (Connection conn = MyJDBC.getConnection();
@@ -710,5 +838,7 @@ public class EventDBController {
         }
         return false;
     }
-    // Additional methods for handling event-related database operations can be added here
+
+
+
 }
