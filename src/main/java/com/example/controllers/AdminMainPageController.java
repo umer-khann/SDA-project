@@ -44,7 +44,8 @@ public class AdminMainPageController implements Initializable {
         a = button1.getText();
         b = button2.getText();
         c = button3.getText();
-
+        MenuClose.setVisible(false);
+        Menu.setVisible(true);
         Exit.setOnMouseClicked(event -> {
             System.exit(0);
         });
