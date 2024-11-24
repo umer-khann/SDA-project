@@ -178,6 +178,9 @@ public class EventOrganizerMainPageController implements Initializable {
             else if (controller instanceof SelectEventController){
                 ((SelectEventController) controller).setEventOrgID(eventOrgID);
             }
+            else if (controller instanceof AllocateAndTrackEventResourcesController){
+                ((AllocateAndTrackEventResourcesController) controller).setEventOrgID(eventOrgID);
+            }
 
             contentArea.setContent(pane);
         } catch (IOException e) {

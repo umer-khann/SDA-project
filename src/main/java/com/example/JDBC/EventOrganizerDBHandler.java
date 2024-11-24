@@ -2,6 +2,9 @@ package com.example.JDBC;
 
 import com.example.JDBC.MyJDBC;
 import com.example.oopfiles.EventOrganizer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,13 +13,7 @@ import java.sql.SQLException;
 
 public class EventOrganizerDBHandler {
 
-    /**
-     * Validate the login credentials for an event organizer.
-     *
-     * @param username The username of the event organizer.
-     * @param password The password of the event organizer.
-     * @return true if the login is successful, false otherwise.
-     */
+
     public boolean validateLogin(String username, String password) {
         String query = "SELECT * FROM EventOrganizers WHERE username = ? AND password = ?";
 
@@ -37,11 +34,6 @@ public class EventOrganizerDBHandler {
         }
     }
 
-    /**
-     * Sign up a new event organizer.
-     *
-     * @param organizer The EventOrganizer object containing organizer details.
-     */
     public void signUpEventOrganizer(EventOrganizer organizer) {
         String query = "INSERT INTO EventOrganizers (name, email, contactDetails, experience, username, password) " +
                 "VALUES (?, ?, ?, ?, ?, ?)";
@@ -69,13 +61,7 @@ public class EventOrganizerDBHandler {
         }
     }
 
-    /**
-     * Assign an EventOrganizer object with details from the database based on username and password.
-     *
-     * @param organizer The EventOrganizer object to populate.
-     * @param uname The username of the event organizer.
-     * @param pass The password of the event organizer.
-     */
+
     public void assignEventOrganizer(EventOrganizer organizer, String uname, String pass) {
         String query = "SELECT * FROM EventOrganizers WHERE username = ? AND password = ?";
 
@@ -105,12 +91,7 @@ public class EventOrganizerDBHandler {
         }
     }
 
-    /**
-     * Check if a username already exists in the EventOrganizers table.
-     *
-     * @param username The username to check.
-     * @return true if the username exists, false otherwise.
-     */
+
     public boolean usernameExists(String username) {
         String query = "SELECT * FROM EventOrganizers WHERE username = ?";
 
@@ -180,12 +161,6 @@ public class EventOrganizerDBHandler {
 
 
 
-    /**
-     * Check if an email already exists in the EventOrganizers table.
-     *
-     * @param email The email to check.
-     * @return true if the email exists, false otherwise.
-     */
     public boolean emailExists(String email) {
         String query = "SELECT * FROM EventOrganizers WHERE email = ?";
 
@@ -204,4 +179,115 @@ public class EventOrganizerDBHandler {
             throw new RuntimeException(e);
         }
     }
+
+    public boolean RemoveEventOrganizer(int organizerId, Integer newOrganizerId) {
+        String checkManagedEventsQuery = "SELECT COUNT(*) FROM Event WHERE eventOrganizerID = ?";
+        String updateEventsQuery = "UPDATE Event SET eventOrganizerID = ? WHERE eventOrganizerID = ?";
+        String deleteOrganizerQuery = "DELETE FROM EventOrganizers WHERE eventOrganizerID = ?";
+
+        try (Connection connection = MyJDBC.getConnection()) {
+            connection.setAutoCommit(false); // Enable transaction management
+
+            // Check if the organizer manages any events
+            try (PreparedStatement checkEventsStmt = connection.prepareStatement(checkManagedEventsQuery)) {
+                checkEventsStmt.setInt(1, organizerId);
+                ResultSet eventCountResult = checkEventsStmt.executeQuery();
+                eventCountResult.next();
+                int eventCount = eventCountResult.getInt(1);
+
+                if (eventCount > 0) {
+                    // Organizer manages events; ensure a new organizer ID is provided
+                    if (newOrganizerId == null) {
+                        System.out.println("Organizer with ID " + organizerId + " manages events. A new organizer ID must be provided.");
+                        connection.rollback();
+                        return false;
+                    }
+
+                    // Reassign events to the new organizer
+                    try (PreparedStatement updateEventsStmt = connection.prepareStatement(updateEventsQuery)) {
+                        updateEventsStmt.setInt(1, newOrganizerId);
+                        updateEventsStmt.setInt(2, organizerId);
+                        int updatedRows = updateEventsStmt.executeUpdate();
+                        System.out.println("Reassigned " + updatedRows + " events to organizer with ID " + newOrganizerId);
+                    }
+                }
+
+                // Delete the organizer
+                try (PreparedStatement deleteOrganizerStmt = connection.prepareStatement(deleteOrganizerQuery)) {
+                    deleteOrganizerStmt.setInt(1, organizerId);
+                    int deletedRows = deleteOrganizerStmt.executeUpdate();
+                    if (deletedRows > 0) {
+                        System.out.println("Organizer with ID " + organizerId + " has been removed.");
+                        connection.commit();
+                        return true;
+                    } else {
+                        System.out.println("Failed to remove the organizer.");
+                        connection.rollback();
+                        return false;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
+
+    public void showEvents(ObservableList<EventOrganizer> eventList) {
+        String query = "SELECT eo.eventOrganizerID, eo.name AS organizerName, e.eventID, e.eventName " +
+                "FROM EventOrganizers eo " +
+                "LEFT JOIN Event e ON eo.eventOrganizerID = e.eventOrganizerID " +
+                "ORDER BY eo.eventOrganizerID, e.eventID";
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            // While iterating through the result set
+            while (resultSet.next()) {
+                int organizerID = resultSet.getInt("eventOrganizerID");
+                String organizerName = resultSet.getString("organizerName");
+                Integer eventID = resultSet.getInt("eventID");
+                if (resultSet.wasNull()) eventID = null; // Handle null values
+                String eventName = resultSet.getString("eventName");
+
+                // Debugging: Check values for each row
+                System.out.println("Processing: Organizer ID = " + organizerID + ", Event ID = " + eventID);
+
+                // Create a new EventOrganizer object for each record (new organizer + event combination)
+                EventOrganizer currentOrganizer = new EventOrganizer();
+                currentOrganizer.setid(organizerID);  // Set the organizer ID
+                currentOrganizer.setName(organizerName != null ? organizerName : "Default Name");
+                System.out.println("New Organizer Created: ID = " + organizerID + ", Name = " + organizerName);
+
+                // Add event details to the current organizer if eventID is not null
+                if (eventID != null) {
+                    currentOrganizer.addEventDetails(eventID, eventName != null ? eventName : "Default Event");
+                    // Debugging: Print added event details
+                    System.out.println("Added Event: ID = " + eventID + ", Name = " + eventName);
+                }
+
+                // Add the current organizer (with the event) to the list
+                eventList.add(currentOrganizer);
+
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 }

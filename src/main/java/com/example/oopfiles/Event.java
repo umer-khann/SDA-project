@@ -16,6 +16,9 @@ public abstract class Event {
     private String eventType;
     private EventOrganizer organizer;  // Aggregation: Event has an organizer
     private Venue v;
+    private int seats;
+    private int staff;
+    private int NoOfTechnicalEquipment;
     private static ObservableList<Attendee> attendeeList;
 
     public Event() {
@@ -81,6 +84,18 @@ public abstract class Event {
         db=new EventDBController();
         db.showEvents(eventList,EventOrgID);
         return eventList;
+    }
+
+    public static ObservableList<Event> intializeTableForResources(ObservableList<Event> eventList,int EventOrgID){
+        db=new EventDBController();
+        db.showEventResources(eventList,EventOrgID);
+        return eventList;
+    }
+
+    public void updateEventResources(int eventID,Integer staff,Integer  seats, Integer equipment)
+    {
+        db=new EventDBController();
+        db.updateEventResources(eventID,staff,seats,equipment);
     }
 
 
@@ -199,6 +214,31 @@ public abstract class Event {
     public void setAttendeeList(ObservableList<Attendee> attendeeList) {
         this.attendeeList = attendeeList;
     }
+
+    public int getSeats() {
+        return seats;
+    }
+
+    public void setSeats(int seats) {
+        this.seats = seats;
+    }
+
+    public int getStaff() {
+        return staff;
+    }
+
+    public void setStaff(int staff) {
+        this.staff = staff;
+    }
+
+    public int getNoOfTechnicalEquipment() {
+        return NoOfTechnicalEquipment;
+    }
+
+    public void setNoOfTechnicalEquipment(int noOfTechnicalEquipment) {
+        NoOfTechnicalEquipment = noOfTechnicalEquipment;
+    }
+
 
 
     // Placeholder method for saving event to database

@@ -71,7 +71,7 @@
             <Font size="18.0" />
         </font>
     </TextField>
-    <Button fx:id="btnLink" layoutX="259.0" layoutY="331.0" mnemonicParsing="false" onAction="#saveData" prefHeight="39.0" prefWidth="87.0" text="PAY">
+    <Button fx:id="btnLink" layoutX="259.0" layoutY="331.0" mnemonicParsing="false" onAction="#saveDataAndPay" prefHeight="39.0" prefWidth="87.0" text="PAY">
         <font>
             <Font size="18.0" />
         </font>

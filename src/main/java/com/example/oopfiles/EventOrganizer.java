@@ -1,20 +1,34 @@
 package com.example.oopfiles;
-import com.example.JDBC.AttendeeDBController;
 import com.example.JDBC.EventOrganizerDBHandler;
+import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EventOrganizer extends User {
     private List<String> eventsOrganized;
     private int experienceLevel;
-    EventOrganizerDBHandler dbHandler;
+    static EventOrganizerDBHandler dbHandler;
+
+
+    private int eventid;
+    private String eventname;
+    private String name;
+    int id;
+
 
     // Constructor
     public EventOrganizer() {
         super();
         dbHandler=new EventOrganizerDBHandler();
     }
+
+    public static ObservableList<EventOrganizer> showEvents(ObservableList<EventOrganizer> eventList) {
+        dbHandler = new EventOrganizerDBHandler();
+        dbHandler.showEvents(eventList);
+        return eventList;
+    }
+
+
     public String toString() {
         return "EventOrganizer {" +
                 "User ID: " + this.getUserID() + ", " +
@@ -46,6 +60,10 @@ public class EventOrganizer extends User {
         return f;
     }
 
+    public static boolean RemoveEventOrganizer(int organizerId, Integer newOrganizerId) {
+       return dbHandler.RemoveEventOrganizer(organizerId,newOrganizerId);
+    }
+
     @Override
     public boolean logout() {
         // Implementation for Event Organizer logout
@@ -60,6 +78,9 @@ public class EventOrganizer extends User {
         eventsOrganized.add(eventName);
         System.out.println("Event '" + eventName + "' has been created.");
     }
+
+
+
 
     public void manageEvent(String eventName) {
         // Implementation to manage an existing event
@@ -131,6 +152,33 @@ public class EventOrganizer extends User {
         }
     }
 
+    public Integer getEventid() {
+        return eventid;
+    }
+
+    public String getEventname() {
+        return eventname;
+    }
+
+
+    // Setter for name
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setid(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+
+
     public int getID(String username) {
         int OrganizerID = dbHandler.getEventOrganizerID(username);
         return OrganizerID;
@@ -170,5 +218,16 @@ public class EventOrganizer extends User {
 
     public int getExperienceLevel() { return experienceLevel; }
     public void setExperienceLevel(int experienceLevel) { this.experienceLevel = experienceLevel; }
+
+    public void addEventDetails(Integer eventID, String eventName) {
+        this.eventid=eventID;
+        this.eventname=eventName;
+    }
+
+    public int getOrganizerID() {
+        return this.userID;
+    }
+
+
 
 }
