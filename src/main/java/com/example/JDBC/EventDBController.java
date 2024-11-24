@@ -563,6 +563,28 @@ public class EventDBController {
             return false; // Return false in case of an exception
         }
     }
+    public boolean verifyEvent(int eventID, int orgID) {
+        // SQL query to check if the event exists in the database
+        String query = "SELECT 1 FROM Event WHERE eventID = ? and eventOrganizerID = ?";
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Set the eventID parameter in the query
+            preparedStatement.setInt(1, eventID);
+            preparedStatement.setInt(2, orgID);
+
+            // Execute the query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                // If a result is returned, the event exists
+                return resultSet.next();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // Return false in case of an exception
+        }
+    }
 
     public void updateEventBudget(int ID, double newBudget) {
         String query = "UPDATE Event SET budget = ? WHERE eventID = ?";

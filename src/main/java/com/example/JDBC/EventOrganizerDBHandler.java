@@ -183,7 +183,7 @@ public class EventOrganizerDBHandler {
     public boolean RemoveEventOrganizer(int organizerId, Integer newOrganizerId) {
         String checkManagedEventsQuery = "SELECT COUNT(*) FROM Event WHERE eventOrganizerID = ?";
         String updateEventsQuery = "UPDATE Event SET eventOrganizerID = ? WHERE eventOrganizerID = ?";
-        String deleteOrganizerQuery = "DELETE FROM EventOrganizers WHERE eventOrganizerID = ?";
+        String deleteOrganizerQuery = "DELETE FROM eventorganizers WHERE eventOrganizerID = ?";
 
         try (Connection connection = MyJDBC.getConnection()) {
             connection.setAutoCommit(false); // Enable transaction management

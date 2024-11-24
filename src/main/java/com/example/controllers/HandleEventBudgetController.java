@@ -112,7 +112,7 @@ public class HandleEventBudgetController {
         float eventBudget = Float.parseFloat(eventBudgetStr);
 
         // Use the static method from Event to check the event existence
-        boolean exists = Event.checkEvent(eventID); // Static method call
+        boolean exists = Event.checkEvent(eventID, EventOrgID); // Static method call
 
         // Show success or error based on the allocation result
         if (exists) {
