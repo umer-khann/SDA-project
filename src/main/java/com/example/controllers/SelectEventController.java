@@ -89,7 +89,7 @@ public class SelectEventController {
             return; // Stop execution if validation fails
         }
 
-        boolean exists = Event.checkEvent(Integer.parseInt(eventIDInput)); // Static method call
+        boolean exists = Event.checkEvent(Integer.parseInt(eventIDInput), EventOrgID); // Static method call
 
         // Show success or error based on the allocation result
         if (exists) {
