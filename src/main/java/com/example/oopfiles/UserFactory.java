@@ -15,6 +15,7 @@ public class UserFactory {
             default:
                 throw new IllegalArgumentException("Invalid user type: " + userType);
         }
+
     }
 }
 
