@@ -136,7 +136,6 @@ public class AddSponsershipController implements Initializable {
     }
     // Load venue data into the table
     private void loadEventData() {
-        Event ev = new WorkshopEvent();
         ObservableList<Event> eventList = FXCollections.observableArrayList();
         FXCollections.observableArrayList(Event.initializeTableForOrganizer(eventList,evOrgID));
         Table.setItems(eventList);

@@ -1,5 +1,6 @@
 package com.example.controllers;
 
+import com.example.oopfiles.EventFactory;
 import com.example.oopfiles.Feedback;
 import com.example.oopfiles.Event;
 import com.example.JDBC.FeedbackDBHandler;
@@ -36,7 +37,7 @@ public class ProvideFeedBackController implements Initializable {
     private TextArea Comments;  // Text area to enter comments
     @FXML
     private Button submitButton;        // Submit button for feedback
-    private Event ev = new WorkshopEvent();
+    private Event ev = EventFactory.createEvent("WORKSHOP");
     private Image on, off;
     private int AttendeeID;
     private int rating = 0; // Default rating

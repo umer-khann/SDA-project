@@ -60,15 +60,15 @@ public class EventDBController {
                     // Instantiate the appropriate subclass based on eventType
                     switch (eventType.toLowerCase()) {
                         case "conference":
-                            event = new ConferenceEvent();
+                            event = EventFactory.createEvent("CONFERENCE");
                             event.assignValues(eventID, eventName, budget, eventType);
                             break;
                         case "concert":
-                            event = new ConcertEvent();
+                            event = EventFactory.createEvent("CONCERT");
                             event.assignValues(eventID, eventName, budget, eventType);
                             break;
                         case "workshop":
-                            event = new WorkshopEvent();
+                            event = EventFactory.createEvent("WORKSHOP");
                             event.assignValues(eventID, eventName, budget, eventType);
                             break;
                         default:
@@ -87,7 +87,7 @@ public class EventDBController {
 
     public void showEventResources(ObservableList<Event> eventList, int EventOrgID) {
         // Modify the query to also select eventName along with staff, seats, and equipment
-        String query = "SELECT e.eventID, e.eventName, e.staff, e.seats, e.technicalEquipmentQuantity " +
+        String query = "SELECT e.eventID, e.eventName, e.staff, e.seats,e.eventType, e.technicalEquipmentQuantity " +
                 "FROM Event e " +
                 "WHERE e.eventOrganizerID = ?";
         System.out.println(EventOrgID + " in too.");
@@ -105,18 +105,14 @@ public class EventDBController {
                     int staff = resultSet.getInt("staff");
                     int seats = resultSet.getInt("seats");
                     int equipment = resultSet.getInt("technicalEquipmentQuantity");
-
-                    Event event = new Event() {
-                        @Override
-                        public boolean createEvent(int a, int b) {
-                            return false;
-                        }
-
-                        @Override
-                        public boolean createEvent() {
-                            return false;
-                        }
-                    };
+                    String type = resultSet.getString("eventType");
+                    Event event = null;
+                    if(type.equalsIgnoreCase("CONCERT"))
+                        event = EventFactory.createEvent("CONCERT");
+                    if(type.equalsIgnoreCase("CONFERENCE"))
+                        event = EventFactory.createEvent("CONFERENCE");
+                    if(type.equalsIgnoreCase("WORKSHOP"))
+                        event = EventFactory.createEvent("WORKSHOP");
 
                     // Find the Event object associated with the eventID
                      if (event != null) {
@@ -200,24 +196,28 @@ public class EventDBController {
                     String eventType = resultSet.getString("eventType");
 
                     // Instantiate the appropriate subclass based on eventType
-                    Event event;
+                    Event event = null;
+                    String type = resultSet.getString("eventType");
+                    if(type.equalsIgnoreCase("CONCERT"))
+                        event = EventFactory.createEvent("CONCERT");
+                    if(type.equalsIgnoreCase("CONFERENCE"))
+                        event = EventFactory.createEvent("CONFERENCE");
+                    if(type.equalsIgnoreCase("WORKSHOP"))
+                        event = EventFactory.createEvent("WORKSHOP");
                     switch (eventType.toLowerCase()) {
                         case "conference":
-                            event = new ConferenceEvent();
                             event.assignAllValues(eventID, eventName, budget, eventType, eventDate, status);
                             ((ConferenceEvent) event).setAgenda(resultSet.getString("conferenceAgenda"));
                             ((ConferenceEvent) event).setSpeakerName(resultSet.getString("speakerName"));
                             break;
 
                         case "concert":
-                            event = new ConcertEvent();
                             event.assignAllValues(eventID, eventName, budget, eventType, eventDate, status);
                             ((ConcertEvent) event).setGenre(resultSet.getString("concertGenre"));
                             ((ConcertEvent) event).setPerformerName(resultSet.getString("performerName"));
                             break;
 
                         case "workshop":
-                            event = new WorkshopEvent();
                             event.assignAllValues(eventID, eventName, budget, eventType, eventDate, status);
                             ((WorkshopEvent) event).setTopic(resultSet.getString("workshopTopic"));
                             ((WorkshopEvent) event).setDuration(resultSet.getFloat("workshopDuration"));
@@ -299,24 +299,28 @@ public class EventDBController {
                     String location = resultSet.getString("location");  // Fetch the location
 
                     // Instantiate the appropriate event based on eventType
-                    Event event;
+                    Event event = null;
+                    String type = resultSet.getString("eventType");
+                    if(type.equalsIgnoreCase("CONCERT"))
+                        event = EventFactory.createEvent("CONCERT");
+                    if(type.equalsIgnoreCase("CONFERENCE"))
+                        event = EventFactory.createEvent("CONFERENCE");
+                    if(type.equalsIgnoreCase("WORKSHOP"))
+                        event = EventFactory.createEvent("WORKSHOP");
                     switch (eventType.toLowerCase()) {
                         case "conference":
-                            event = new ConferenceEvent();
                             event.assignAllValues(eventID, eventName, budget, eventType, eventDate, status);
                             ((ConferenceEvent) event).setAgenda(resultSet.getString("conferenceAgenda"));
                             ((ConferenceEvent) event).setSpeakerName(resultSet.getString("speakerName"));
                             break;
 
                         case "concert":
-                            event = new ConcertEvent();
                             event.assignAllValues(eventID, eventName, budget, eventType, eventDate, status);
                             ((ConcertEvent) event).setGenre(resultSet.getString("concertGenre"));
                             ((ConcertEvent) event).setPerformerName(resultSet.getString("performerName"));
                             break;
 
                         case "workshop":
-                            event = new WorkshopEvent();
                             event.assignAllValues(eventID, eventName, budget, eventType, eventDate, status);
                             ((WorkshopEvent) event).setTopic(resultSet.getString("workshopTopic"));
                             ((WorkshopEvent) event).setDuration(resultSet.getFloat("workshopDuration"));
@@ -328,12 +332,12 @@ public class EventDBController {
                     }
 
                     // Create the appropriate venue based on venueType
-                    Venue venue;
+                    Venue venue = null;
                     if ("Indoor".equalsIgnoreCase(venueType)) {
-                        venue = new IndoorVenue(venueName, location, resultSet.getInt("capacity"),
+                        venue = VenueFactory.createVenue("INDOOR", venueName, location, resultSet.getInt("capacity"),
                                 resultSet.getString("indoorRoomNumber"), resultSet.getInt("indoorFloor"));
                     } else if ("Outdoor".equalsIgnoreCase(venueType)) {
-                        venue = new OutdoorVenue(venueName, location, resultSet.getInt("capacity"),
+                        venue = VenueFactory.createVenue("OUTDOOR", venueName, location, resultSet.getInt("capacity"),
                                 resultSet.getString("outdoorWeather"), resultSet.getInt("outdoorCapacity"));
                     } else {
                         throw new IllegalArgumentException("Unknown venue type: " + venueType);
@@ -376,43 +380,6 @@ public class EventDBController {
             throw new RuntimeException(e);
         }
     }
-
-    /**
-     * Fetch an event from the database by its ID.
-     *
-     * @param eventID The ID of the event to be fetched.
-     * @return An Event object if found, null otherwise.
-     */
-    public Event getEventByID(int eventID) {
-        String query = "SELECT * FROM Event WHERE eventID = ?";
-
-        try (Connection connection = MyJDBC.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-            preparedStatement.setInt(1, eventID);
-
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    // Create an Event object with retrieved data
-                    String eventName = resultSet.getString("eventName");
-                    Date eventDate = resultSet.getDate("eventDate");
-                    double budget = resultSet.getDouble("budget");
-                    boolean status = resultSet.getBoolean("status");
-
-                    // Return an Event object (assuming you have a concrete implementation of Event)
-                    // You might need to use a concrete subclass of Event, depending on your design
-                    return new ConcertEvent();
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        return null; // Return null if no event is found
-    }
-
 
     public boolean saveConcertEvent(ConcertEvent event, int eventOrganizerID, int venueID) {
         String query = "INSERT INTO Event (eventName, eventDate, budget, status, eventType, eventOrganizerID, venueID) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -700,11 +667,11 @@ public class EventDBController {
                     int loyaltyPoints = resultSet.getInt("loyaltyPoints");
                     String attendeeType = resultSet.getString("type");  // Column 'type' in the database
 
-                    User attendee;
+                    User attendee = null;
 
                     // Instantiate the appropriate subclass based on the type
                     if ("VIP".equalsIgnoreCase(attendeeType)) {
-                        attendee = new VipAttendee();  // Instantiate the concrete class for VIP
+                        attendee = UserFactory.createUser("VIP_ATTENDEE");  // Instantiate the concrete class for VIP
                         attendee.setUserID(attendeeID);
                         attendee.setName(attendeeName);
                         attendee.setEmail(attendeeEmail);
@@ -712,7 +679,7 @@ public class EventDBController {
                         attendee.setLoyaltyPoints(loyaltyPoints);
                     } else {
                         // Default to RegularAttendee or another subclass for General
-                        attendee = new GeneralAttendee();  // Instantiate the concrete class for General
+                        attendee = UserFactory.createUser("GENERAL_ATTENDEE");  // Instantiate the concrete class for General
                         attendee.setUserID(attendeeID);
                         attendee.setName(attendeeName);
                         attendee.setEmail(attendeeEmail);  // Corrected to set the email
@@ -799,14 +766,14 @@ public class EventDBController {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     Event ev = null;
-                    if (rs.getString("eventType").equals("Concert")) {
-                        ev = new ConcertEvent();
+                    if (rs.getString("eventType").equalsIgnoreCase("Concert")) {
+                        ev = EventFactory.createEvent("CONCERT");
                     }
-                    else if (rs.getString("eventType").equals("Conference")) {
-                        ev = new ConferenceEvent();
+                    else if (rs.getString("eventType").equalsIgnoreCase("Conference")) {
+                        ev = EventFactory.createEvent("CONFERENCE");
                     }
-                    else if (rs.getString("eventType").equals("Workshop")) {
-                        ev = new WorkshopEvent();
+                    else if (rs.getString("eventType").equalsIgnoreCase("Workshop")) {
+                        ev = EventFactory.createEvent("WORKSHOP");
                     }
 
                     ev.setEventID(rs.getInt("eventID"));

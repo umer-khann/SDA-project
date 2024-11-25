@@ -3,6 +3,7 @@ package com.example.controllers;
 import com.example.JDBC.VenueDBHandler;
 import com.example.oopfiles.IndoorVenue;
 import com.example.oopfiles.Venue;
+import com.example.oopfiles.VenueFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,7 +41,7 @@ public class RemoveVenueController implements Initializable {
         // Initialize columns before loading data
         initializeVenueTable();
 
-        ven = new IndoorVenue();
+        ven = VenueFactory.createVenue("INDOOR");
     }
     // Initialize Venue Table columns
     private void initializeVenueTable() {
@@ -69,7 +70,6 @@ public class RemoveVenueController implements Initializable {
         if (eventid.getText() != null && !eventid.getText().isEmpty()) {
             try {
                 int venueID = Integer.parseInt(eventid.getText());
-                VenueDBHandler venueDBHandler = new VenueDBHandler();
                 boolean success = ven.deleteVenue(venueID,EVORGID);
                 if (success) {
                     showAlert(Alert.AlertType.INFORMATION, "Success", "Venue deleted successfully!");

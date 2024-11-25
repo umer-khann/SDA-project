@@ -63,7 +63,7 @@ public class CreateEventController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         Type.getItems().addAll(eventTypes);
         Type.setOnAction(this::getChoice);
-        ven = new IndoorVenue();
+        ven = VenueFactory.createVenue("INDOOR");
         ven.setDb(new VenueDBHandler());
         // Initialize the Venue Table columns
         initializeVenueTable();
@@ -191,7 +191,7 @@ public class CreateEventController implements Initializable {
                 return;
             }
 
-            newEvent = new WorkshopEvent();
+            newEvent = EventFactory.createEvent("WORKSHOP");
             newEvent.setEventName(name);
             newEvent.setEventDate(eventDate);
             newEvent.setBudget(budget);
@@ -213,7 +213,7 @@ public class CreateEventController implements Initializable {
                 return;
             }
 
-            newEvent = new ConcertEvent();
+            newEvent = EventFactory.createEvent("CONCERT");
             newEvent.setEventName(name);
             newEvent.setEventDate(eventDate);
             newEvent.setBudget(budget);
@@ -234,7 +234,7 @@ public class CreateEventController implements Initializable {
                 return;
             }
 
-            newEvent = new ConferenceEvent();
+            newEvent = EventFactory.createEvent("CONFERENCE");
             newEvent.setEventName(name);
             newEvent.setEventDate(eventDate);
             newEvent.setBudget(budget);
