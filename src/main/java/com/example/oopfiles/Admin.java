@@ -4,7 +4,7 @@ package com.example.oopfiles;
 
 import com.example.JDBC.AdminDBHandler;
 
-public class Admin extends User {
+public class Admin extends User implements NotificationObserver{
     private static final User INSTANCE = new Admin();
 
     private static final String HARD_CODED_USERNAME = "umer";
@@ -59,6 +59,11 @@ public class Admin extends User {
     @Override
     public boolean registerAttendee() {
         return false;
+    }
+
+    @Override
+    public void receiveNotification(String message) {
+
     }
 
     ;

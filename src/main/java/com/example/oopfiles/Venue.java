@@ -9,7 +9,7 @@ public abstract class Venue {
     private String venueName;
     private String location;
     private int capacity;
-    private VenueDBHandler db;
+    private VenueDBHandler db = new VenueDBHandler();
     public Venue(String venueName, String location, int capacity) {
         this.venueId = 0;
         this.venueName = venueName;
@@ -17,7 +17,7 @@ public abstract class Venue {
         this.capacity = capacity;
     }
     public Venue() {
-        db = new VenueDBHandler();
+
     }
 
     // Getters and Setters for common attributes

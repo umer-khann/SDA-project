@@ -1,6 +1,6 @@
 package com.example.oopfiles;
 
-public class GeneralAttendee extends Attendee {
+public class GeneralAttendee extends Attendee implements NotificationObserver{
     private String membershipLevel;
 
     // Constructor
@@ -46,4 +46,9 @@ public class GeneralAttendee extends Attendee {
     // Specific Getter and Setter Methods
     public String getMembershipLevel() { return membershipLevel; }
     public void setMembershipLevel(String membershipLevel) { this.membershipLevel = membershipLevel; }
+
+    @Override
+    public void receiveNotification(String message) {
+
+    }
 }

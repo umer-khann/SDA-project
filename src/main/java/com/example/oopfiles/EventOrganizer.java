@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 
 import java.util.List;
 
-public class EventOrganizer extends User {
+public class EventOrganizer extends User implements NotificationObserver{
     private List<String> eventsOrganized;
     private int experienceLevel;
     static EventOrganizerDBHandler dbHandler;
@@ -233,5 +233,8 @@ public class EventOrganizer extends User {
     }
 
 
+    @Override
+    public void receiveNotification(String message) {
 
+    }
 }

@@ -154,6 +154,6 @@ public class AttendeeMainPageController implements Initializable {
     }
 
     public void Notif(ActionEvent actionEvent) {
-        loadPage("Attende-Notifications.fxml");
+        loadPage("Attendee-Notifications.fxml");
     }
 }

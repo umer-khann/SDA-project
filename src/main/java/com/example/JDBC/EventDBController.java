@@ -380,8 +380,36 @@ public class EventDBController {
             throw new RuntimeException(e);
         }
     }
+    public boolean eventexists(Event event, int venueID) {
+        String query = "SELECT * FROM event WHERE eventDate = ? AND venueID = ?";
+        try (Connection connection = MyJDBC.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            // Setting parameters for the query
+            preparedStatement.setString(1, event.getEventDate());
+            preparedStatement.setInt(2, venueID);
+
+            // Use executeQuery() for SELECT queries
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Check if the result set has any rows
+            if (resultSet.next()) {
+                return true; // Event exists
+            } else {
+                return false; // Event does not exist
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public boolean saveConcertEvent(ConcertEvent event, int eventOrganizerID, int venueID) {
+        if(eventexists(event,venueID))
+            return false;
         String query = "INSERT INTO Event (eventName, eventDate, budget, status, eventType, eventOrganizerID, venueID) VALUES (?, ?, ?, ?, ?, ?, ?)";
         System.out.println(eventOrganizerID + " done.");
         try (Connection connection = MyJDBC.getConnection();
@@ -425,6 +453,8 @@ public class EventDBController {
     }
 
     public boolean saveWorkshopEvent(WorkshopEvent event, int eventOrganizerID, int venueID) {
+        if(eventexists(event,venueID))
+            return false;
         String query = "INSERT INTO Event (eventName, eventDate, budget, status, eventType, eventOrganizerID, venueID) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = MyJDBC.getConnection();
@@ -469,6 +499,8 @@ public class EventDBController {
     }
 
     public boolean saveConferenceEvent(ConferenceEvent event, int eventOrganizerID, int venueID) {
+        if(eventexists(event,venueID))
+            return false;
         String query = "INSERT INTO Event (eventName, eventDate, budget, status, eventType, eventOrganizerID, venueID) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = MyJDBC.getConnection();

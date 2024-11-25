@@ -110,7 +110,10 @@ public class HandleEventBudgetController {
         // Convert validated input to appropriate types
         int eventID = Integer.parseInt(eventIDStr);
         float eventBudget = Float.parseFloat(eventBudgetStr);
-
+        if(eventBudget < 0) {
+            showAlert("Error", "Event Budget must be positive!");
+            return;
+        }
         // Use the static method from Event to check the event existence
         boolean exists = Event.checkEvent(eventID, EventOrgID); // Static method call
 
@@ -129,7 +132,7 @@ public class HandleEventBudgetController {
     // Utility method to check if a string is numeric
     private boolean isNumeric(String str) {
         try {
-            Double.parseDouble(str); // Can parse integers and decimals
+            Double.parseDouble(str);// Can parse integers and decimals
             return true;
         } catch (NumberFormatException e) {
             return false;

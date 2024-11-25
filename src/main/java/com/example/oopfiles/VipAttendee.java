@@ -1,6 +1,6 @@
 package com.example.oopfiles;
 
-public class VipAttendee extends Attendee {
+public class VipAttendee extends Attendee implements NotificationObserver{
     private String VIPLevel;
     private String accessToExclusiveAreas;
 
@@ -45,4 +45,9 @@ public class VipAttendee extends Attendee {
     // Specific Getter and Setter Methods
     public String getVIPLevel() { return VIPLevel; }
     public void setVIPLevel(String VIPLevel) { this.VIPLevel = VIPLevel; }
+
+    @Override
+    public void receiveNotification(String message) {
+
+    }
 }

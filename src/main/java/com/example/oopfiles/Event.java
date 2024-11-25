@@ -13,7 +13,7 @@ public abstract class Event {
     private String eventDate;
     private boolean status;
     private double budget;
-    protected static EventDBController db;
+    protected static EventDBController db = new EventDBController();;
     private String eventType;
     private EventOrganizer organizer;  // Aggregation: Event has an organizer
     private Venue v;
@@ -23,7 +23,6 @@ public abstract class Event {
     private static ObservableList<Attendee> attendeeList;
 
     public Event() {
-        db = new EventDBController();
         attendeeList = FXCollections.observableArrayList();
     }
 
@@ -34,30 +33,25 @@ public abstract class Event {
 
 
     public static ObservableList<Event> initializeTableForOrganizer(ObservableList<Event> eventList, int currentOrganizerid) {
-        db=new EventDBController();
         db.showCompleteEvents(eventList,currentOrganizerid);
         return eventList;
     }
 
     public static ObservableList<Event> initializeTableForAttendee(ObservableList<Event> eventList) {
-        db=new EventDBController();
         db.showEventsForAttendee(eventList);
         return eventList;
     }
 
     public static boolean updateEvent(int eventID, String newName, Date newDate)
     {
-        db=new EventDBController();
         return db.updateEvent(eventID,newName,newDate);
     }
 
     public static void insertEventUpdateNotification(int eventID, int organizerUserID, String message) {
-        db=new EventDBController();
         db.insertEventUpdateNotification(eventID,organizerUserID,message);
     }
 
     public static void updateEventDetails(int eventid, Integer staff1, Integer seats1, Integer equipment1) throws Exception {
-        db= new EventDBController();
         db.updateEventResources(eventid,staff1,seats1,equipment1);
     }
 
@@ -70,39 +64,32 @@ public abstract class Event {
     }
 
     public static boolean checkEvent(int ID, int OrgID){
-        db=new EventDBController();
         boolean result = db.verifyEvent(ID, OrgID);
         return result;
     } public static boolean checkEvent(int ID){
-        db=new EventDBController();
         boolean result = db.verifyEvent(ID);
         return result;
     }
     public static ObservableList<Attendee> displayAttendees(int eventID){
-        db=new EventDBController();
         db.retrieveAttendees(attendeeList,eventID);
         return attendeeList;
     }
 
     public static void updateBudget(int ID,float newBudget){
-        db=new EventDBController();
         db.updateEventBudget(ID,newBudget);
     }
 
     public static ObservableList<Event> intializeTable(ObservableList<Event> eventList,int EventOrgID){
-        db=new EventDBController();
         db.showEvents(eventList,EventOrgID);
         return eventList;
     }
 
     public static ObservableList<Event> intializeTableForResources(ObservableList<Event> eventList,int EventOrgID){
-        db=new EventDBController();
         db.showEventResources(eventList,EventOrgID);
         return eventList;
     }
 
     public void updateEventResources(int eventID,Integer staff,Integer  seats, Integer equipment) throws Exception {
-        db=new EventDBController();
         db.updateEventResources(eventID,staff,seats,equipment);
     }
 

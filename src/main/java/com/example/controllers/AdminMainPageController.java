@@ -22,7 +22,7 @@ public class AdminMainPageController implements Initializable {
     public JFXButton button3;
     public JFXButton button2;
     public JFXButton button1;
-    public String a, b, c;
+    public String a, b, c, d;
 
     @FXML
     private ImageView Exit;
