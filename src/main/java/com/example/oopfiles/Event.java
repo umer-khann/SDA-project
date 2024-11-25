@@ -102,8 +102,6 @@ public abstract class Event {
         db.updateEventResources(eventID,staff,seats,equipment);
     }
 
-
-
     public boolean allocateBudget(double newBudget) {
         if (newBudget >= 0) {
             this.budget = newBudget;
@@ -111,6 +109,7 @@ public abstract class Event {
         }
         return false;
     }
+
     public abstract boolean createEvent(int a, int b);
 
     public abstract boolean createEvent();
