@@ -121,6 +121,8 @@ public class AttendeeMainPageController implements Initializable {
                 ((AttendeeEventRegistrationController) controller).setAttendeeID(attendeeID);
             } else if (controller instanceof ProvideFeedBackController) {
                 ((ProvideFeedBackController) controller).setAttendeeID(attendeeID);
+            }else if (controller instanceof AttendeeNotifications) {
+                ((AttendeeNotifications) controller).setAttendeeID(attendeeID);
             }
 
             contentArea.setContent(pane);
@@ -149,5 +151,9 @@ public class AttendeeMainPageController implements Initializable {
 
     public void setAttendeeID(int attendeeID) {
         this.attendeeID=attendeeID;
+    }
+
+    public void Notif(ActionEvent actionEvent) {
+        loadPage("Attende-Notifications.fxml");
     }
 }

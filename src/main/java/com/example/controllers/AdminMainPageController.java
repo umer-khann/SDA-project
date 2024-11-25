@@ -144,4 +144,8 @@ public class AdminMainPageController implements Initializable {
     public void removeeventorg(ActionEvent actionEvent) {
         loadPage("Remove-Event-Organizer.fxml");
     }
+
+    public void notif(ActionEvent actionEvent) {
+        loadPage("Admin-Notifications.fxml");
+    }
 }

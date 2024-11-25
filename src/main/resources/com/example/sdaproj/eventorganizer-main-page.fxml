@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.EventOrganizerMainPageController">
     <children>
-        <BorderPane layoutX="114.0" layoutY="54.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <BorderPane fx:id="mainpane" layoutX="114.0" layoutY="54.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
                 <AnchorPane prefHeight="65.0" prefWidth="200.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
                     <children>
@@ -55,7 +55,7 @@
             <left>
                 <AnchorPane fx:id="slider" prefHeight="362.0" prefWidth="176.0" style="-fx-background-color: #0A4969;" BorderPane.alignment="CENTER">
                     <children>
-                        <VBox layoutX="14.0" layoutY="-1.0" prefHeight="360.0" prefWidth="176.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
+                        <VBox fx:id="VBOX" layoutX="14.0" layoutY="-1.0" prefHeight="360.0" prefWidth="176.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
                             <children>
                                 <JFXButton fx:id="button1" alignment="BASELINE_LEFT" onAction="#HandleCrEv" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Create Event" textFill="WHITE">
                                     <font>
@@ -158,7 +158,19 @@
                                         </image>
                                     </ImageView>
                                 </graphic>
+                            </JFXButton><JFXButton fx:id="button10" alignment="BASELINE_LEFT" onAction="#EvOrgNotClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Notifications" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="15.0" />
+                                </font>
+                                <graphic>
+                                    <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@images/dash1.png" />
+                                        </image>
+                                    </ImageView>
+                                </graphic>
                             </JFXButton>
+
                             </children>
                         </VBox>
                     </children>
