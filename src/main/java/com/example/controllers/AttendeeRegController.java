@@ -11,7 +11,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URL;
@@ -60,25 +61,19 @@ public class AttendeeRegController implements Initializable {
 
         // Check for empty fields
         if (username.isBlank() || password.isBlank() || contact.isBlank() || email.isBlank()) {
-            signUpmessagelabel.setText("Please input full details!");
+            showAlert("Input Error", "Please input full details!");
             return;
         }
 
         // Validate email format using a regex pattern
         if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-            signUpmessagelabel.setText("Invalid email format!");
+            showAlert("Invalid Email", "Invalid email format!");
             return;
         }
 
-        // Validate password strength (e.g., minimum length of 6, contains at least one number)
-//        if (!password.matches(".*\\d.*") || !password.matches(".*[A-Za-z].*")) {
-//            signUpmessagelabel.setText("Password must be at least 6 characters long and contain both letters and numbers!");
-//            return;
-//        }
-
         // Validate contact details (e.g., should be a valid phone number format)
         if (!contact.matches("\\d{10}")) {  // Assuming phone number should be 10 digits long
-            signUpmessagelabel.setText("Invalid contact number! Must be 10 digits.");
+            showAlert("Invalid Contact Number", "Invalid contact number! Must be 10 digits.");
             return;
         }
 
@@ -96,13 +91,14 @@ public class AttendeeRegController implements Initializable {
         newAttendee.setContactDetails(contactField.getText());
         newAttendee.setUserName(username);
         newAttendee.setPassword(password);
+
         // Validate registration (check uniqueness of username/email)
         if (!newAttendee.isValidUserName()) {
-            signUpmessagelabel.setText("UserName Exists");
+            showAlert("Username Error", "Username already exists!");
             return;  // Don't proceed if validation fails
         }
         if (!newAttendee.isValidEmail()) {
-            signUpmessagelabel.setText("Email exists");
+            showAlert("Email Error", "Email already exists!");
             return;  // Don't proceed if validation fails
         }
 
@@ -112,6 +108,16 @@ public class AttendeeRegController implements Initializable {
         // Load the next page
         loadPage("home-page.fxml", e);
     }
+
+    // Method to display alerts
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);  // You can set a header text if needed
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
     private void loadPage(String fxmlFile, ActionEvent event) throws IOException {
         // Load the FXML file

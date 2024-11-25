@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.GenerateEventAnalysisController">
     <children>
-        <AnchorPane prefHeight="65.0" prefWidth="573.0" style="-fx-background-color: trans;" BorderPane.alignment="CENTER">
-            <children>
-                <Pane layoutX="102.0" layoutY="20.0" prefHeight="25.0" prefWidth="700.0" style="-fx-background-color: #032d4d;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-127.0" AnchorPane.topAnchor="0.0">
-                    <children>
-                        <ImageView fx:id="Exit" fitHeight="22.0" fitWidth="22.0" layoutX="678.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@images/exit.png" />
-                            </image>
-                        </ImageView>
-                    </children>
-                </Pane>
-            </children>
-        </AnchorPane>
         <AnchorPane layoutY="316.0" prefHeight="83.0" prefWidth="700.0" style="-fx-background-color: #2A3663;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="316.0">
             <children>
                 <Label layoutX="636.0" layoutY="5.0" text="EventaX " textFill="WHITE">
@@ -37,24 +23,31 @@
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Label>
+            <Button fx:id="gen" onAction="#Generate" layoutX="14.0" layoutY="18.0" mnemonicParsing="false" text="GENERATE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
             </children>
         </AnchorPane>
-      <TableView layoutX="14.0" layoutY="100.0" prefHeight="200.0" prefWidth="312.0">
+      <TableView fx:id="Table" layoutY="82.0" prefHeight="235.0" prefWidth="700.0" AnchorPane.bottomAnchor="82.66666666666666" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="82.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+            <TableColumn fx:id="EvID" prefWidth="60" text="Event ID" />
+            <TableColumn fx:id="EvName" prefWidth="130" text="Event Name" />
+            <TableColumn fx:id="EvDate" prefWidth="130" text="Event Date" />
+            <TableColumn fx:id="EvVenue" prefWidth="130" text="Event Venue" />
+            <TableColumn fx:id="EvTickets" prefWidth="130" text="Tickets Sold" />
+            <TableColumn fx:id="EvRating" prefWidth="130" text="Avg Rating" />
         </columns>
       </TableView>
-      <Label layoutX="14.0" layoutY="65.0" text="Event ID">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField layoutX="74.0" layoutY="61.0" />
-      <Button layoutX="247.0" layoutY="61.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" text="Enter">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
+      <AnchorPane prefHeight="83.0" prefWidth="700.0" style="-fx-background-color: #2A3663;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="229.0" layoutY="15.0" text="Event Analysis" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>

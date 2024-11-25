@@ -25,10 +25,18 @@ public class VipAttendee extends Attendee {
 
     @Override
     public boolean registerAttendee() {
-        db.signUpAttendee(this);
-        return true;
+        if(db.signUpAttendee(this)) {
+            db.addNotification(this.userID, 3, "Account created for username: " + getUsername(), "Account creation");
+            return true;
+        }
+        return false;
     }
-    public void addNotification(int ID, int userType, String message, String notifType){};
+    public String gettype(){
+        return "VIP";
+    }
+    public void addNotification(int ID, int userType, String message, String notifType){
+        db.addNotification(ID,userType,message,notifType);
+    };
 
     public void setLoyaltyPoints(int loyaltyPoints) {
         this.loyaltyPoints=loyaltyPoints;

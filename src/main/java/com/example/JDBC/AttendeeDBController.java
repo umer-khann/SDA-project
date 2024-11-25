@@ -37,9 +37,9 @@ public class AttendeeDBController {
         }
     }
 
-    public void signUpAttendee(Attendee attendee) {
-        String query = "INSERT INTO Attendees (name, email, contactDetails, username, password, loyaltyPoints) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+    public boolean signUpAttendee(Attendee attendee) {
+        String query = "INSERT INTO Attendees (name, email, contactDetails, username, password, loyaltyPoints, type) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = MyJDBC.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -49,21 +49,49 @@ public class AttendeeDBController {
             preparedStatement.setString(3, attendee.getContactDetails());
             preparedStatement.setString(4, attendee.getUserName());
             preparedStatement.setString(5, attendee.getPassword());
-            preparedStatement.setInt(6, 10); // default 0 for new attendees
+            preparedStatement.setInt(6, 10);
+            System.out.println(attendee.gettype());// default 0 for new attendees
+            preparedStatement.setString(7, attendee.gettype()); // default 0 for new attendees
 
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Attendee registered successfully!");
+                int ID = getID(attendee.getUserName());
+                attendee.setUserID(ID);
+                return true;
             } else {
                 System.out.println("Failed to register the attendee.");
+                return false;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        return false;
     }
+    public int getID(String username) {
+        String query = "select attendeeID from attendees where username = ? ";
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
+            preparedStatement.setString(1, username);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                // Move the cursor to the first row
+                if (resultSet.next()) {
+                    return (resultSet.getInt("attendeeID"));
+                } else {
+                    // Handle case when no matching user is found
+                    System.out.println("No attendee found with the given credentials.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
     public void AssignAttendee(Attendee attendee, String uname, String pass) {
         String query = "SELECT * FROM Attendees WHERE username = ? AND password = ?";
 

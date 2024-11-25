@@ -114,7 +114,7 @@ public class ProvideFeedBackController implements Initializable {
             showAlert("Feedback Error", "Please provide a valid numeric Event ID.");
             return;
         }
-
+        System.out.println(AttendeeID);
         // Fetch the event using the eventID
         boolean f = ev.EventExistsByAttendee(AttendeeID, eventID);
         if (f && rating > 0) {
@@ -127,7 +127,7 @@ public class ProvideFeedBackController implements Initializable {
             }
 
             // Create the Feedback object
-            Feedback feedback = new Feedback(0, rating, comments, new java.util.Date());
+            Feedback feedback = new Feedback(0, rating, comments, new java.util.Date(),AttendeeID, eventID);
             feedback.setEventID(eventID); // Link feedback to selected event
 
             // Insert feedback into the database

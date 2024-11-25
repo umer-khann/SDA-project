@@ -37,7 +37,11 @@ public class ConcertEvent extends Event {
         // Event creation logic specific to ConcertEvent can go here
     }
     public boolean createEvent(int ID, int I) {
-        return db.saveConcertEvent(this,ID,I);
+         if(db.saveConcertEvent(this,ID,I)){
+             db.EventCreatedNoti(this,ID);
+             return true;
+        }
+         return false;
         // Event creation logic specific to ConcertEvent can go here
     }
 

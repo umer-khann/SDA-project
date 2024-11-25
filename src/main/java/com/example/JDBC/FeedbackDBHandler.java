@@ -46,7 +46,9 @@ public class FeedbackDBHandler {
                 int rating = rs.getInt("rating");
                 String comments = rs.getString("comments");
                 Date date = rs.getDate("date");
-                feedbackList.add(new Feedback(feedbackID, rating, comments, date));
+                int attendeeID = rs.getInt("attendeeID");
+                int evID = rs.getInt("eventID");
+                feedbackList.add(new Feedback(feedbackID, rating, comments, date,attendeeID,evID));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -105,11 +107,38 @@ public class FeedbackDBHandler {
                 String comments = rs.getString("comments");
                 Date date = rs.getDate("date");
                 int eventID = rs.getInt("eventID");
-                feedbackList.add(new Feedback(feedbackID, rating, comments, date));
+                int attendeeID = rs.getInt("attendeeID");
+                feedbackList.add(new Feedback(feedbackID, rating, comments, date,attendeeID,eventID));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return feedbackList;
+    }
+
+    public void addNotification(Feedback feedback) {
+        String query = "INSERT INTO GeneralNotification (UserID, UserType, Message, NotificationType, CreatedAt, eventID) " +
+                "VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP, ?)";
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Set parameters for the query
+            preparedStatement.setInt(1, feedback.getAttendeeID());
+            preparedStatement.setInt(2, 3);  // Send '2' for Event Organizer
+            preparedStatement.setString(3, "FeedBack inserted for event" + feedback.getEventID());
+            preparedStatement.setString(4, "Feedback inserted");
+            preparedStatement.setInt(5, feedback.getEventID());
+
+            // Execute the query
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Notification added successfully!");
+            } else {
+                System.out.println("Failed to add notification.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

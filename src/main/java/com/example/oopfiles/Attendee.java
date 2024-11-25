@@ -64,6 +64,7 @@ public abstract class Attendee extends User {
 
         return true;
     }
+    public abstract String gettype();
     public boolean isValidEmail() {
         AttendeeDBController dbController = new AttendeeDBController();
 

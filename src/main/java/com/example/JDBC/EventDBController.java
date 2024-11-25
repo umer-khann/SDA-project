@@ -790,11 +790,13 @@ public class EventDBController {
     }
 
     public boolean EventExistsByAttendee(int attendeeID, int EVID) {
+        System.out.println(attendeeID + " " + EVID);
         List<Event> eventList = new ArrayList<>();
-        String Q = "SELECT e.eventID FROM Event e JOIN EventAttendee ea ON e.eventID = ea.eventID JOIN Attendees a ON ea.attendeeID = a.attendeeID WHERE a.attendeeID = ?";
+        String Q = "SELECT e.eventID FROM Event e JOIN EventAttendee ea ON e.eventID = ea.eventID JOIN Attendees a ON ea.attendeeID = a.attendeeID WHERE a.attendeeID = ? and e.eventID = ?";
         try (Connection conn = MyJDBC.getConnection();
              PreparedStatement stmt = conn.prepareStatement(Q)) {
-            stmt.setInt(1, attendeeID); // Set the eventOrganizerID parameter
+            stmt.setInt(1, attendeeID);
+            stmt.setInt(2,EVID);// Set the eventOrganizerID parameter
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     int id = (rs.getInt("eventID"));
@@ -827,5 +829,28 @@ public class EventDBController {
     }
 
 
+    public void EventCreatedNoti(Event ev, int evorgID) {
+        String query = "INSERT INTO GeneralNotification (UserID, UserType, Message, NotificationType, CreatedAt) " +
+                "VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)";
 
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Set parameters for the query
+            preparedStatement.setInt(1, evorgID);
+            preparedStatement.setInt(2, 2);  // Send '2' for Event Organizer
+            preparedStatement.setString(3, "Event Created successfully: " + ev.getEventName());
+            preparedStatement.setString(4, "Event creation");
+
+            // Execute the query
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Notification added successfully!");
+            } else {
+                System.out.println("Failed to add notification.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

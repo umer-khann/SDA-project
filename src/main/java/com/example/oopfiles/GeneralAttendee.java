@@ -13,7 +13,9 @@ public class GeneralAttendee extends Attendee {
         // Implementation for General Attendee registration
         return true;
     }
-
+    public String gettype(){
+        return "GENERAL";
+    }
     public String getAttendeeType() { return "General"; }
 
     @Override
@@ -24,11 +26,16 @@ public class GeneralAttendee extends Attendee {
 
     @Override
     public boolean registerAttendee() {
-        db.signUpAttendee(this);
-        return true;
+        if(db.signUpAttendee(this)) {
+            db.addNotification(this.userID, 3, "Account created for username: " + getUsername(), "Account creation");
+            return true;
+        }
+        return false;
     }
 
-    public void addNotification(int ID, int userType, String message, String notifType){};
+    public void addNotification(int ID, int userType, String message, String notifType){
+        db.addNotification(ID,userType,message,notifType);
+    };
 
     // Specific Method for General Attendee
     public boolean redeemPoints() {

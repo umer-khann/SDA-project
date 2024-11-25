@@ -32,8 +32,12 @@ public class ConferenceEvent extends Event {
         return db.saveConferenceEvent(this,1,1);
         // Event creation logic specific to ConcertEvent can go here
     }
-    public boolean createEvent(int a, int b) {
-        return db.saveConferenceEvent(this,a,b);
+    public boolean createEvent(int ID, int I) {
+        if(db.saveConferenceEvent(this,ID,I)){
+            db.EventCreatedNoti(this,ID);
+            return true;
+        }
+        return false;
         // Event creation logic specific to ConcertEvent can go here
     }
     public void setSpeakerName(String speakerName) {

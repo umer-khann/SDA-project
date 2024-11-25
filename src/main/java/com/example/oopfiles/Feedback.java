@@ -13,12 +13,22 @@ public class Feedback {
     private Date date;
     private int eventID;
     private FeedbackDBHandler db;
+    private int attendeeID;
     // Constructor
-    public Feedback(int feedbackID, int rating, String comments, Date date) {
+    public Feedback(int feedbackID, int rating, String comments, Date date, int a) {
         this.feedbackID = feedbackID;
         setRating(rating); // Use the setter to validate the rating
         this.comments = comments;
         this.date = date;
+        this.attendeeID = a;
+        this.db = new FeedbackDBHandler();
+    }public Feedback(int feedbackID, int rating, String comments, Date date, int a, int eventID) {
+        this.feedbackID = feedbackID;
+        setRating(rating); // Use the setter to validate the rating
+        this.comments = comments;
+        this.date = date;
+        this.attendeeID = a;
+        this.eventID = eventID;
         this.db = new FeedbackDBHandler();
     }
     public Feedback() {
@@ -91,6 +101,19 @@ public class Feedback {
     }
 
     public boolean insertFeedback() {
-        return db.insertFeedback(this);
+
+        if(db.insertFeedback(this)){
+            db.addNotification(this);
+            return true;
+        }
+        return false;
+    }
+
+    public int getAttendeeID() {
+        return attendeeID;
+    }
+
+    public void setAttendeeID(int attendeeID) {
+        this.attendeeID = attendeeID;
     }
 }

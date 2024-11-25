@@ -4,7 +4,6 @@ import com.example.JDBC.VenueDBHandler;
 
 import java.util.List;
 
-// Abstract Class Venue
 public abstract class Venue {
     private int venueId;
     private String venueName;
