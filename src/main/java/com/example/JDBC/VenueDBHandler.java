@@ -132,9 +132,9 @@ public class VenueDBHandler {
                 while (rs.next()) {
                     Venue venue;
                     if (rs.getString("venueType").equals("Indoor")) {
-                        venue = new IndoorVenue();
+                        venue = VenueFactory.createVenue("INDOOR");
                     } else {
-                        venue = new OutdoorVenue();
+                        venue = VenueFactory.createVenue("OUTDOOR");
                     }
 
                     venue.setVenueId(rs.getInt("venueID"));
