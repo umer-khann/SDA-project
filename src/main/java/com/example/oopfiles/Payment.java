@@ -87,8 +87,8 @@ public class Payment {
     }
 
 
-    public void insertnotification(int eventId, int userId) {
-        PaymentDBHandler.insertEventRegistrationNotification(eventId, userId, "Registration Successful", "Unread");
+    public void insertnotification(int eventId, int userId, String eventname) {
+        PaymentDBHandler.insertEventRegistrationNotification(eventId, userId, "Registration Successful for event: "+ eventname, "Unread");
     }
 
     public int AddPaymentInformation(int attendeeID, int eventid)

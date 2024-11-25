@@ -36,12 +36,15 @@ public class HandleTicketAndPaymentController {
     @FXML
     private TextField txtYear;
 
+    private String eventname;
+
     private int attendeeID;
     private int eventid;
     private int price = 0; // Default price
 
     // Method to set event details
     public void setEventDetails(String eventName, String eventVenue, String eventDate, String eventDetails) {
+        eventname=eventName;
         eventNameLabel.setText(eventName);
         eventVenueLabel.setText(eventVenue);
         eventDateLabel.setText(eventDate);
@@ -125,10 +128,11 @@ public class HandleTicketAndPaymentController {
         if(!payment.AddEventAttendee(eventid,attendeeID))
         {
             showAlert("Error", "Already registered for this event");
+            return;
         }
 
 
-        payment.insertnotification(eventid, attendeeID);
+        payment.insertnotification(eventid, attendeeID,eventname);
 
 
 
@@ -150,13 +154,21 @@ public class HandleTicketAndPaymentController {
         }
     }
 
-    // Helper method for showing alerts
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR); // Set the alert type to ERROR
-        alert.setTitle(title); // Set the title of the alert
-        alert.setHeaderText(null); // Optional: No header text
-        alert.setContentText(message); // Set the content message
-        alert.showAndWait(); // Show the alert and wait for user interaction
+
+    public void showAlert(String type, String message) {
+        Alert alert;
+        if (type.equalsIgnoreCase("Success")) {
+            alert = new Alert(Alert.AlertType.INFORMATION); // Information type for success
+            alert.setHeaderText("Success");
+        } else if (type.equalsIgnoreCase("Error")) {
+            alert = new Alert(Alert.AlertType.ERROR); // Error type for failure
+            alert.setHeaderText("Error");
+        } else {
+            alert = new Alert(Alert.AlertType.WARNING); // Default to warning
+            alert.setHeaderText("Warning");
+        }
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 
