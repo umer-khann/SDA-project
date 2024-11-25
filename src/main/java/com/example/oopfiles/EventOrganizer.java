@@ -177,6 +177,10 @@ public class EventOrganizer extends User {
         return id;
     }
 
+    @Override
+    public boolean registerAttendee() {
+        return false;
+    }
 
 
     public int getID(String username) {

@@ -1,8 +1,6 @@
 package com.example.controllers;
 
-import com.example.oopfiles.Attendee;
-import com.example.oopfiles.GeneralAttendee;
-import com.example.oopfiles.VipAttendee;
+import com.example.oopfiles.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +16,8 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static com.example.oopfiles.UserFactory.*;
 
 public class AttendeeRegController implements Initializable {
     @FXML
@@ -83,13 +83,11 @@ public class AttendeeRegController implements Initializable {
         }
 
         // Create a new Attendee object based on choice
-        Attendee newAttendee;
-        if (myChoiceBox.getValue().toString().equals(choices[0])) {
-            newAttendee = new GeneralAttendee();
+        User newAttendee = null;
+        if (myChoiceBox.getValue().toString().equalsIgnoreCase(choices[0])) {
+            newAttendee = createUser("GENERAL_ATTENDEE");
         } else if (myChoiceBox.getValue().toString().equals(choices[1])) {
-            newAttendee = new VipAttendee();
-        } else {
-            newAttendee = null;
+            newAttendee = UserFactory.createUser("VIP_ATTENDEE");
         }
 
         // Set the attendee details
@@ -112,7 +110,7 @@ public class AttendeeRegController implements Initializable {
         newAttendee.registerAttendee();
 
         // Load the next page
-        loadPage2("Attendee-main-page.fxml", e);
+        loadPage("home-page.fxml", e);
     }
 
     private void loadPage(String fxmlFile, ActionEvent event) throws IOException {

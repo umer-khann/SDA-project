@@ -56,6 +56,11 @@ public class Admin extends User {
 
     }
 
+    @Override
+    public boolean registerAttendee() {
+        return false;
+    }
+
     ;
 
 }

@@ -84,4 +84,7 @@ public abstract class User {
     public int getId() {
         return this.userID;
     }
+
+    public abstract boolean registerAttendee();
+
 }
