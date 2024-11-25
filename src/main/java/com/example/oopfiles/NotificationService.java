@@ -3,7 +3,7 @@ package com.example.oopfiles;
 import java.util.List;
 
 public class NotificationService {
-    private Admin admin;
+    private User admin;
     private User eventOrganizer;
     private User attendee;
 
@@ -11,37 +11,16 @@ public class NotificationService {
     public void addObserver(User observer, String userType) {
         switch (userType.toLowerCase()) {
             case "admin":
-                admin = new Admin();
+                admin = UserFactory.createUser("ADMIN");
                 break;
             case "eventorganizer":
-                eventOrganizer = new EventOrganizer();
+                eventOrganizer = UserFactory.createUser("EVENT_ORGANIZER");
                 break;
-            case "attendee":
-                attendee = new Attendee() {
-                    @Override
-                    public String gettype() {
-                        return "";
-                    }
-                    @Override
-                    public boolean registerForEvent() {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean provideFeedback() {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean registerAttendee() {
-                        return false;
-                    }
-
-                    @Override
-                    public List<Notification> receiveNotification(String message) {
-                        return List.of();
-                    }
-                };
+                case "GENERAL_ATTENDEE":
+                attendee = UserFactory.createUser("GENERAL_ATTENDEE");
+                break;
+                case "VIP_ATTENDEE":
+                attendee = UserFactory.createUser("VIP_ATTENDEE");
                 break;
             default:
                 throw new IllegalArgumentException("Invalid user type: " + userType);
