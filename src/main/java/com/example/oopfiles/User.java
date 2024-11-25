@@ -1,4 +1,7 @@
 package com.example.oopfiles;
+
+import java.util.List;
+
 public abstract class User {
     protected int userID;
     protected String name;
@@ -87,4 +90,5 @@ public abstract class User {
 
     public abstract boolean registerAttendee();
 
+    public abstract List<Notification> receiveNotification(String message);
 }

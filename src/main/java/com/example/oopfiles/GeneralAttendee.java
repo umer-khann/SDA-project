@@ -1,5 +1,7 @@
 package com.example.oopfiles;
 
+import java.util.List;
+
 public class GeneralAttendee extends Attendee implements NotificationObserver{
     private String membershipLevel;
 
@@ -48,7 +50,7 @@ public class GeneralAttendee extends Attendee implements NotificationObserver{
     public void setMembershipLevel(String membershipLevel) { this.membershipLevel = membershipLevel; }
 
     @Override
-    public void receiveNotification(String message) {
-
+    public List<Notification> receiveNotification(String message) {
+        return null;
     }
 }

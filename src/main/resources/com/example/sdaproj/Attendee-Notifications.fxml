@@ -10,8 +10,6 @@
     <children>
         <TableView layoutX="2.0" layoutY="53.0" prefHeight="341.0" prefWidth="600.0">
             <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

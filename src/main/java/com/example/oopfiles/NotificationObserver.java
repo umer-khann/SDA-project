@@ -1,6 +1,8 @@
 package com.example.oopfiles;
 
+import java.util.List;
+
 // Observer interface
 public interface NotificationObserver {
-    void receiveNotification(String message);
+    List<Notification> receiveNotification(String message);
 }

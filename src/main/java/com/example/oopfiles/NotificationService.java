@@ -1,24 +1,47 @@
 package com.example.oopfiles;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NotificationService {
-    private NotificationObserver admin;
-    private List<NotificationObserver> eventOrganizers = new ArrayList<>();
-    private List<NotificationObserver> attendees = new ArrayList<>();
+    private Admin admin;
+    private User eventOrganizer;
+    private User attendee;
 
     // Add observer based on type
-    public void addObserver(NotificationObserver observer, String userType) {
+    public void addObserver(User observer, String userType) {
         switch (userType.toLowerCase()) {
             case "admin":
-                admin = (NotificationObserver) UserFactory.createUser("ADMIN");
+                admin = new Admin();
                 break;
             case "eventorganizer":
-                eventOrganizers.add(observer);
+                eventOrganizer = new EventOrganizer();
                 break;
             case "attendee":
-                attendees.add(observer);
+                attendee = new Attendee() {
+                    @Override
+                    public String gettype() {
+                        return "";
+                    }
+                    @Override
+                    public boolean registerForEvent() {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean provideFeedback() {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean registerAttendee() {
+                        return false;
+                    }
+
+                    @Override
+                    public List<Notification> receiveNotification(String message) {
+                        return List.of();
+                    }
+                };
                 break;
             default:
                 throw new IllegalArgumentException("Invalid user type: " + userType);
@@ -26,46 +49,27 @@ public class NotificationService {
     }
 
     // Remove observer based on type
-    public void removeObserver(NotificationObserver observer, String userType) {
-        switch (userType.toLowerCase()) {
-            case "admin":
-                break;
-            case "eventorganizer":
-                eventOrganizers.remove(observer);
-                break;
-            case "attendee":
-                attendees.remove(observer);
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid user type: " + userType);
-        }
-    }
 
     // Notify all admins
-    public void notifyAdmins(String message) {
-            admin.receiveNotification(message);
+    public List<Notification> notifyAdmins(String message) {
+        return admin.receiveNotification(message);
+    }
+    public List<Notification> notifyAdmins() {
+        return admin.receiveNotification("");
     }
 
     // Notify all event organizers
-    public void notifyEventOrganizers(String message) {
-        for (NotificationObserver organizer : eventOrganizers) {
-            organizer.receiveNotification(message);
-        }
+    public List<Notification> notifyEventOrganizers(String message) {
+        return eventOrganizer.receiveNotification(message);
     }
 
     // Notify all attendees
-    public void notifyAttendees(String message) {
-        for (NotificationObserver attendee : attendees) {
-            attendee.receiveNotification(message);
-        }
+    public List<Notification> notifyAttendees(String message) {
+        return attendee.receiveNotification(message);
     }
     public void notifyAl(String message){
         admin.receiveNotification(message);
-        for (NotificationObserver organizer : eventOrganizers) {
-            organizer.receiveNotification(message);
-        }
-        for (NotificationObserver attendee : attendees) {
-            attendee.receiveNotification(message);
-        }
+        eventOrganizer.receiveNotification(message);
+        attendee.receiveNotification(message);
     }
 }

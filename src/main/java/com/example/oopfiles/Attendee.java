@@ -2,9 +2,13 @@ package com.example.oopfiles;
 
 import com.example.JDBC.AttendeeDBController;
 import com.example.JDBC.AttendeeDBController;
+
+import java.util.List;
+
 public abstract class Attendee extends User implements NotificationObserver{
     protected int loyaltyPoints;
     protected static AttendeeDBController db = new AttendeeDBController();
+    public abstract List<Notification> receiveNotification(String message);
 
     // Constructor
     Attendee() {

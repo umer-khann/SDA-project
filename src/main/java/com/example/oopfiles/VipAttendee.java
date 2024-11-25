@@ -1,5 +1,7 @@
 package com.example.oopfiles;
 
+import java.util.List;
+
 public class VipAttendee extends Attendee implements NotificationObserver{
     private String VIPLevel;
     private String accessToExclusiveAreas;
@@ -47,7 +49,7 @@ public class VipAttendee extends Attendee implements NotificationObserver{
     public void setVIPLevel(String VIPLevel) { this.VIPLevel = VIPLevel; }
 
     @Override
-    public void receiveNotification(String message) {
-
+    public List<Notification> receiveNotification(String message) {
+        return null;
     }
 }

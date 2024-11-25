@@ -4,6 +4,8 @@ package com.example.oopfiles;
 
 import com.example.JDBC.AdminDBHandler;
 
+import java.util.List;
+
 public class Admin extends User implements NotificationObserver{
     private static final User INSTANCE = new Admin();
 
@@ -62,10 +64,8 @@ public class Admin extends User implements NotificationObserver{
     }
 
     @Override
-    public void receiveNotification(String message) {
-
+    public List<Notification> receiveNotification(String message) {
+        return db.retrieveNotifications();
     }
-
-    ;
 
 }
