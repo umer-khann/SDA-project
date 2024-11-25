@@ -3,6 +3,7 @@ package com.example.controllers;
 import com.example.oopfiles.IndoorVenue;
 import com.example.oopfiles.OutdoorVenue;
 import com.example.oopfiles.Venue;
+import com.example.oopfiles.VenueFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -155,7 +156,7 @@ public class AddNewVenueController implements Initializable {
             }
 
             // Step 3: Create Outdoor Venue
-            venue = new OutdoorVenue(name, location, capacity, weather, additionalCapacity);
+            venue= VenueFactory.createVenue("OUTDOOR",name, location, capacity, weather, additionalCapacity);
             // Call addVenue function to save the venue
             venue.addVenue(evOrgID); // Calls the addVenue method in OutdoorVenue
 
@@ -185,7 +186,7 @@ public class AddNewVenueController implements Initializable {
             }
 
             // Step 4: Create Indoor Venue
-            venue = new IndoorVenue(name, location, capacity, room, floor);
+            venue= VenueFactory.createVenue("INDOOR",name, location, capacity, room, floor);
             // Call addVenue function to save the venue
             venue.addVenue(evOrgID); // Calls the addVenue method in IndoorVenue
 

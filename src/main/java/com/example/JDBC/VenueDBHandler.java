@@ -1,10 +1,7 @@
 package com.example.JDBC;
 
 import com.example.JDBC.MyJDBC;
-import com.example.oopfiles.EventOrganizer;
-import com.example.oopfiles.IndoorVenue;
-import com.example.oopfiles.OutdoorVenue;
-import com.example.oopfiles.Venue;
+import com.example.oopfiles.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -108,9 +105,9 @@ public class VenueDBHandler {
                 while (rs.next()) {
                     Venue venue;
                     if (rs.getString("venueType").equals("Indoor")) {
-                        venue = new IndoorVenue();
+                        venue = VenueFactory.createVenue("INDOOR");
                     } else {
-                        venue = new OutdoorVenue();
+                        venue = VenueFactory.createVenue("OUTDOOR");
                     }
 
                     venue.setVenueId(rs.getInt("venueID"));

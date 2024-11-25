@@ -64,40 +64,38 @@ public class EventOrganizerRegController implements Initializable {
     @FXML
     public void signUpButtonOnAction(javafx.event.ActionEvent e) throws IOException {
         // Retrieve input values from form fields
-
         String username = usernameField.getText();
         String password = passwordField.getText();
         String contact = contactField.getText();
         String email = emailField.getText();
-        String experience = experienceField.getText();  // Experience field
+        String experience = experienceField.getText(); // Experience field
 
         // Check for empty fields
         if (username.isBlank() || password.isBlank() || contact.isBlank() || email.isBlank() || experience.isBlank()) {
-            signUpmessagelabel.setText("Please input full details!");
+            showAlert(Alert.AlertType.ERROR, "Input Error", "Please input full details!");
             return;
         }
 
         // Validate email format using a regex pattern
         if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-            signUpmessagelabel.setText("Invalid email format!");
+            showAlert(Alert.AlertType.ERROR, "Input Error", "Invalid email format!");
             return;
         }
 
         // Validate contact details (e.g., should be a valid phone number format)
-        if (!contact.matches("\\d{10}")) {  // Assuming phone number should be 10 digits long
-            signUpmessagelabel.setText("Invalid contact number! Must be 10 digits.");
+        if (!contact.matches("\\d{10}")) { // Assuming phone number should be 10 digits long
+            showAlert(Alert.AlertType.ERROR, "Input Error", "Invalid contact number! Must be 10 digits.");
             return;
         }
 
         // Validate experience input as a numeric value
-        if (!experience.matches("\\d+")) {  // Check if experience is a valid integer
-            signUpmessagelabel.setText("Invalid experience! Must be a numeric value.");
+        if (!experience.matches("\\d+")) { // Check if experience is a valid integer
+            showAlert(Alert.AlertType.ERROR, "Input Error", "Invalid experience! Must be a numeric value.");
             return;
         }
 
-        // Create a new EventOrganizer object
-        User eventOrganizer = new EventOrganizer();
-
+        // Create a new EventOrganizer object using factory
+        User eventOrganizer = UserFactory.createUser("EVENT_ORGANIZER");
 
         // Set the event organizer's details
         eventOrganizer.setName(nameField.getText());
@@ -105,27 +103,21 @@ public class EventOrganizerRegController implements Initializable {
         eventOrganizer.setContactDetails(contactField.getText());
         eventOrganizer.setUserName(username);
         eventOrganizer.setPassword(password);
-        eventOrganizer.setExperienceLevel(Integer.parseInt(experience));  // Parse experience to integer
+        eventOrganizer.setExperienceLevel(Integer.parseInt(experience)); // Parse experience to integer
 
         // Validate registration (check uniqueness of username/email)
         if (!eventOrganizer.isValidUserName()) {
-            signUpmessagelabel.setText("Username already exists!");
-            return;  // Don't proceed if validation fails
+            showAlert(Alert.AlertType.ERROR, "Registration Error", "Username already exists!");
+            return; // Don't proceed if validation fails
         }
         if (!eventOrganizer.isValidEmail()) {
-            signUpmessagelabel.setText("Email already exists!");
-            return;  // Don't proceed if validation fails
+            showAlert(Alert.AlertType.ERROR, "Registration Error", "Email already exists!");
+            return; // Don't proceed if validation fails
         }
 
         // Register the event organizer
         eventOrganizer.registerEventOrganizer();
 
-        // Show success dialog
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Registration Successful");
-        alert.setHeaderText(null);
-        alert.setContentText("Your account has been created successfully!");
-        alert.showAndWait();
         // Assuming 'eventOrganizer' is an instance of a class handling database interactions
         int eventOrganizerID = eventOrganizer.getID(username); // Fetch the Event Organizer's ID using the username
 
@@ -133,14 +125,25 @@ public class EventOrganizerRegController implements Initializable {
         String message = "Account created successfully. Username: " + username + ", Password: " + password;
 
         // Add the notification
-        eventOrganizer.addNotification(eventOrganizerID, 2,message, "Account Registration");
+        eventOrganizer.addNotification(eventOrganizerID, 2, message, "Account Registration");
 
-
+        // Show success dialog
+        showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "Your account has been created successfully!");
 
         // Optionally, clear fields or redirect the user to another page
-        clearFields();  // Clear form fields (implement this if needed)
-        // loadPage2("EventOrganizer-main-page.fxml", e);  // Navigate to the next page
+        clearFields(); // Clear form fields (implement this if needed)
+        // loadPage2("EventOrganizer-main-page.fxml", e); // Navigate to the next page
     }
+
+    // Utility method to display alert dialogs
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
     // Optional: A helper method to clear input fields
     private void clearFields() {

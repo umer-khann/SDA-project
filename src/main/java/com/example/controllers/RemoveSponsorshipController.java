@@ -54,8 +54,8 @@ public class RemoveSponsorshipController {
     private TableColumn<Sponsorship, Double> colContributionAmount;
 
     private int EventOrgID;
-    Admin admin;
-    EventOrganizer eventOrganizer;
+    User admin;
+    User eventOrganizer;
 
 
 
@@ -138,8 +138,8 @@ public class RemoveSponsorshipController {
         if (sponsorship.removeSponsorship(Integer.parseInt(eventID), Integer.parseInt(sponsorID))) {
             // If removal was successful
             String message = "Sponsor Details:\nSponsor ID: "+sponsorID+". Sponsor Name: "+name+".\n";
-            admin=new Admin();
-            eventOrganizer=new EventOrganizer();
+            admin=UserFactory.createUser("ADMIN");
+            eventOrganizer=UserFactory.createUser("EVENT_ORGANIZER");
             admin.addNotification(1, 1, message, "Sponsor has been removed!");
             eventOrganizer.addNotification(EventOrgID,2,message,"Sponsor has been removed!");
             showAlert(Alert.AlertType.INFORMATION, "Success", "Sponsor removed successfully!");
