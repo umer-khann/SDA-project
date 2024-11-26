@@ -49,17 +49,17 @@ public class VipAttendee extends Attendee implements NotificationObserver{
     public void setVIPLevel(String VIPLevel) { this.VIPLevel = VIPLevel; }
 
     @Override
-    public List<Notification> receiveNotification(String message) {
+    public List<Notification> receiveNotification(int message) {
         return null;
     }
 
     @Override
-    public List<EventUpdateNotification> receiveEvent(String s) {
+    public List<EventUpdateNotification> receiveEvent(int s) {
         return List.of();
     }
 
     @Override
-    public List<EventRegistrationNotification> recieveEventReg(String s) {
+    public List<EventRegistrationNotification> recieveEventReg(int s) {
         return List.of();
     }
 
@@ -69,11 +69,11 @@ public class VipAttendee extends Attendee implements NotificationObserver{
     }
 
     @Override
-    public List<PaymentNotification> receivePayment(String s) {
+    public List<PaymentNotification> receivePayment(int s) {
         return List.of();
     }
 
     public void setAccessToExclusiveAreas(String accessToExclusiveAreas) {
-        this.accessToExclusiveAreas = accessToExclusiveAreas;
+        this.accessToExclusiveAreas=accessToExclusiveAreas;
     }
 }

@@ -4,5 +4,5 @@ import java.util.List;
 
 // Observer interface
 public interface NotificationObserver {
-    List<Notification> receiveNotification(String message);
+    List<Notification> receiveNotification(int message);
 }

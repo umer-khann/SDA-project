@@ -12,7 +12,7 @@ import java.util.List;
 public abstract class Attendee extends User implements NotificationObserver{
     protected int loyaltyPoints;
     protected static AttendeeDBController db = new AttendeeDBController();
-    public abstract List<Notification> receiveNotification(String message);
+    public abstract List<Notification> receiveNotification(int message);
 
     // Constructor
     Attendee() {
@@ -22,6 +22,11 @@ public abstract class Attendee extends User implements NotificationObserver{
     public static void addNotif(int ID, int userType, String message, String notifType) {
         db.addNotification(ID,userType,message,notifType);
     }
+
+    public static User getuser(int id) {
+        return db.retrieveAttendee(id);
+    }
+
 
     public static boolean removeAttendee(int ID) {
         boolean check=db.removeAttendee(ID);
@@ -104,5 +109,22 @@ public abstract class Attendee extends User implements NotificationObserver{
     {
         return db.addEventAttendee(eventID, attendeeID);
     }
+
+    public List<EventUpdateNotification> AttendeeEvUP(int attendeeid)
+    {
+        return db.retrieveEventUp(attendeeid);
+    }
+
+    public List<EventRegistrationNotification> AttendeeEventReg(int attendeeid)
+    {
+        return db.AttendeeReg(attendeeid);
+    }
+
+    public List<TicketPurchaseNotification> TicketPurchase(int attendeeid)
+    {
+        return db.GetTicketNotif(attendeeid);
+    }
+
+
 
 }

@@ -101,9 +101,10 @@ public class AttendeeRegController implements Initializable {
             showAlert("Email Error", "Email already exists!");
             return;  // Don't proceed if validation fails
         }
-
+        RegisterAdapter userAdapter = new UserRegisterAdapter(newAttendee);
+        userAdapter.register();
         // Register the attendee
-        newAttendee.registerAttendee();
+        // newAttendee.registerAttendee();
 
         // Load the next page
         loadPage("home-page.fxml", e);

@@ -4,8 +4,11 @@ import com.example.JDBC.MyJDBC;
 import com.example.oopfiles.Attendee;
 import com.example.oopfiles.GeneralAttendee;
 import com.example.oopfiles.VipAttendee;
+import com.example.oopfiles.*;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AttendeeDBController {
 
