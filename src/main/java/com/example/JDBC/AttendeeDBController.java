@@ -2,6 +2,8 @@ package com.example.JDBC;
 
 import com.example.JDBC.MyJDBC;
 import com.example.oopfiles.Attendee;
+import com.example.oopfiles.GeneralAttendee;
+import com.example.oopfiles.VipAttendee;
 
 import java.sql.*;
 
@@ -272,6 +274,70 @@ public class AttendeeDBController {
             e.printStackTrace();
             return false;
         }
+    }
+    public Attendee retrieveAttendee(int attendeeID) {
+        Attendee attendee = null;
+
+        // SQL query to fetch the attendee details
+        String query = "SELECT a.attendeeID, a.name, a.email, a.contactDetails, a.loyaltyPoints, a.username, a.password, a.type, " +
+                "ga.membershipLevel, va.VIPLevel, va.accessToExclusiveAreas " +
+                "FROM attendees a " +
+                "LEFT JOIN generalattendees ga ON a.attendeeID = ga.attendeeID " +
+                "LEFT JOIN vipattendees va ON a.attendeeID = va.attendeeID " +
+                "WHERE a.attendeeID = ?";
+
+        try (Connection conn = MyJDBC.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, attendeeID);  // Set the attendeeID parameter
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // Fetch common attendee details
+                    String name = rs.getString("name");
+                    String email = rs.getString("email");
+                    String contactDetails = rs.getString("contactDetails");
+                    int loyaltyPoints = rs.getInt("loyaltyPoints");
+                    String username = rs.getString("username");
+                    String password = rs.getString("password");
+                    String type = rs.getString("type");
+
+                    // Instantiate the correct type of attendee based on the type field
+                    if ("VIP".equalsIgnoreCase(type)) {
+                        // VIP attendee - populate specific fields
+                        VipAttendee vipAttendee = new VipAttendee();
+                        vipAttendee.setUserID(attendeeID);
+                        vipAttendee.setName(name);
+                        vipAttendee.setEmail(email);
+                        vipAttendee.setContactDetails(contactDetails);
+                        vipAttendee.setLoyaltyPoints(loyaltyPoints);
+                        vipAttendee.setUserName(username);
+                        vipAttendee.setPassword(password);
+                        vipAttendee.setVIPLevel(rs.getString("VIPLevel"));
+                        vipAttendee.setAccessToExclusiveAreas(rs.getString("accessToExclusiveAreas"));
+                        attendee = vipAttendee;
+                    } else {
+                        // General attendee - populate specific fields
+                        GeneralAttendee generalAttendee = new GeneralAttendee();
+                        generalAttendee.setUserID(attendeeID);
+                        generalAttendee.setName(name);
+                        generalAttendee.setEmail(email);
+                        generalAttendee.setContactDetails(contactDetails);
+                        generalAttendee.setLoyaltyPoints(loyaltyPoints);
+                        generalAttendee.setUserName(username);
+                        generalAttendee.setPassword(password);
+                        generalAttendee.setMembershipLevel(rs.getString("membershipLevel"));
+                        attendee = generalAttendee;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle any SQL exceptions
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return attendee;
     }
 
 }

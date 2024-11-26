@@ -72,4 +72,8 @@ public class VipAttendee extends Attendee implements NotificationObserver{
     public List<PaymentNotification> receivePayment(String s) {
         return List.of();
     }
+
+    public void setAccessToExclusiveAreas(String accessToExclusiveAreas) {
+        this.accessToExclusiveAreas = accessToExclusiveAreas;
+    }
 }
