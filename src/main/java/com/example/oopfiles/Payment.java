@@ -78,13 +78,9 @@ public class Payment {
     public void AddNotification(int attendeeID,int paymentIdd)
     {
             this.setPaymentId(paymentIdd);
-            PaymentDBHandler.insertPaymentNotification(paymentIdd,attendeeID,"Payment Approved");
+            PaymentDBHandler.insertPaymentNotification(paymentIdd,attendeeID,"Payment Approved", amount);
     }
 
-    public boolean AddEventAttendee(int eventID, int attendeeID)
-    {
-        return PaymentDBHandler.addEventAttendee(eventID, attendeeID);
-    }
 
 
     public void insertnotification(int eventId, int userId, String eventname) {

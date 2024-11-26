@@ -79,16 +79,69 @@ public class HandleTicketAndPaymentController {
     }
 
     public void saveDataAndPay(ActionEvent actionEvent) {
-        // Get text field values
-        String creditCardNumber = txtCreditCardNumber.getText();
-        String cvv = txtCVVNumber.getText();
-        String nameOnCard = txtNameOnCard.getText();
-        String month = txtMonth.getText();
-        String year = txtYear.getText();
+        String creditCardNumber = txtCreditCardNumber.getText().trim();
+        String cvv = txtCVVNumber.getText().trim();
+        String nameOnCard = txtNameOnCard.getText().trim();
+        String month = txtMonth.getText().trim();
+        String year = txtYear.getText().trim();
 
         // Apply basic checks
         if (creditCardNumber.isEmpty() || cvv.isEmpty() || nameOnCard.isEmpty() || month.isEmpty() || year.isEmpty()) {
             showAlert("Error", "Please fill in all fields.");
+            return;
+        }
+
+        // Length validation
+        if (creditCardNumber.length() < 13 || creditCardNumber.length() > 19) {
+            showAlert("Error", "Credit card number must be between 13 and 19 digits.");
+            return;
+        }
+
+        if (cvv.length() != 3 && cvv.length() != 4) {
+            showAlert("Error", "CVV must be 3 or 4 digits.");
+            return;
+        }
+
+        // Numeric validation
+        if (!creditCardNumber.matches("\\d+")) {
+            showAlert("Error", "Credit card number must contain only digits.");
+            return;
+        }
+
+        if (!cvv.matches("\\d+")) {
+            showAlert("Error", "CVV must contain only digits.");
+            return;
+        }
+
+        if (!month.matches("\\d+") || !year.matches("\\d+")) {
+            showAlert("Error", "Month and year must contain only digits.");
+            return;
+        }
+
+        // Month validation
+        int monthInt = Integer.parseInt(month);
+        if (monthInt < 1 || monthInt > 12) {
+            showAlert("Error", "Month must be between 1 and 12.");
+            return;
+        }
+
+        // Year validation
+        int currentYear = java.time.Year.now().getValue();
+        int yearInt = Integer.parseInt(year);
+        if (yearInt < currentYear || yearInt > currentYear + 20) {
+            showAlert("Error", "Year must be valid and within a realistic range.");
+            return;
+        }
+
+        // Expiry date validation
+        if (yearInt == currentYear && monthInt < java.time.LocalDate.now().getMonthValue()) {
+            showAlert("Error", "Card expiration date must be in the future.");
+            return;
+        }
+
+        // Name validation
+        if (!nameOnCard.matches("[a-zA-Z ]+")) {
+            showAlert("Error", "Name on card must contain only alphabetic characters and spaces.");
             return;
         }
 
@@ -124,12 +177,7 @@ public class HandleTicketAndPaymentController {
         int ticket_id =ticket.AddTicketInformation(attendeeID,eventid,paymentid);
         ticket.setTicketId(ticket_id);
         System.out.println("ticket "+ ticket_id);
-        ticket.insertTicketPurchaseNotification(attendeeID,ticket_id);
-        if(!payment.AddEventAttendee(eventid,attendeeID))
-        {
-            showAlert("Error", "Already registered for this event");
-            return;
-        }
+        ticket.insertTicketPurchaseNotification(attendeeID,ticket_id, eventname);
 
 
         payment.insertnotification(eventid, attendeeID,eventname);
