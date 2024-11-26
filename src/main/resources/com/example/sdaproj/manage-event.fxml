@@ -44,12 +44,17 @@
       </Label>
       <TextField fx:id="name" layoutX="438.0" layoutY="261.0" prefHeight="31.0" prefWidth="117.0" />
       <TextField fx:id="eventid" layoutX="188.0" layoutY="261.0" prefHeight="31.0" prefWidth="117.0" />
-      <Button layoutX="109.0" layoutY="359.0" mnemonicParsing="false" onAction="#updateEventButtonOnAction" prefHeight="31.0" prefWidth="422.0" style="-fx-background-color: #4CAF50;" text="UPDATE CHANGES" textFill="WHITE">
+      <Button layoutX="328.0" layoutY="354.0" mnemonicParsing="false" onAction="#updateEventButtonOnAction" prefHeight="32.0" prefWidth="246.0" style="-fx-background-color: #4CAF50;" text="UPDATE CHANGES" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
       <DatePicker fx:id="date" layoutX="131.0" layoutY="313.0" prefHeight="31.0" prefWidth="204.0" />
       <Button layoutX="505.0" layoutY="313.0" mnemonicParsing="false" onAction="#setUpdateEventButton" text="refresh" />
+      <Button layoutX="31.0" layoutY="354.0" mnemonicParsing="false" onAction="#deleteEvent" prefHeight="32.0" prefWidth="246.0" style="-fx-background-color: red;" text="DELETE EVENT" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

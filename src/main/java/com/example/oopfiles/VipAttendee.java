@@ -64,7 +64,7 @@ public class VipAttendee extends Attendee implements NotificationObserver{
     }
 
     @Override
-    public List<TicketPurchaseNotification> receiveTicPur(String s) {
+    public List<TicketPurchaseNotification> receiveTicPur(int id) {
         return List.of();
     }
 

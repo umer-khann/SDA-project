@@ -27,7 +27,8 @@ public abstract class Event {
     }
 
 
-    public static void deleteEvent(int eventID) {
+    public static boolean deleteEvent(int eventID) throws Exception {
+            return db.deleteEvent(eventID);
     }
 
 

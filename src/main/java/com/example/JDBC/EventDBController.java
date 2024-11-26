@@ -355,31 +355,63 @@ public class EventDBController {
             e.printStackTrace();
         }
     }
-
-
-    /**
-     * Delete an event from the database by its ID.
-     *
-     * @param eventID The ID of the event to be deleted.
-     * @return true if the deletion is successful, false otherwise.
-     */
-    public boolean deleteEvent(int eventID) {
-        String query = "DELETE FROM Event WHERE eventID = ?";
+    public static String retrieveEventName(int eventID) {
+        String query = "SELECT eventName FROM event WHERE eventID = ?";
+        String eventName = null;
 
         try (Connection connection = MyJDBC.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setInt(1, eventID);
-
-            int result = preparedStatement.executeUpdate();
-            return result > 0; // Return true if at least one row is affected
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Retrieve the event name from the result set
+                    eventName = resultSet.getString("eventName");
+                }
+            }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+        }
+
+        return eventName;
+    }
+
+    public boolean deleteEvent(int eventID) throws Exception {
+        String selectQuery = "SELECT attendeeID FROM eventattendee WHERE eventID = ?";
+        String insertQuery = "INSERT INTO EventUpdateNotification (EventID, userID, Message, status, CreatedAt) " +
+                "VALUES (?, ?, 'Event Removed: " + retrieveEventName(eventID) + "', 'unread', CURRENT_TIMESTAMP)";
+        String deleteQuery = "DELETE FROM event WHERE eventID = ?";
+
+        try (Connection connection = MyJDBC.getConnection()) {
+            // Select attendees associated with the event
+            try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
+                selectStatement.setInt(1, eventID);
+                try (ResultSet resultSet = selectStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        int userID = resultSet.getInt("attendeeID");
+                        try (PreparedStatement insertStatement = connection.prepareStatement(insertQuery)) {
+                            // Set EventID and userID for the notification
+                            insertStatement.setInt(1, eventID);
+                            insertStatement.setInt(2, userID);
+                            insertStatement.executeUpdate();
+                        }
+                    }
+                }
+            }
+        }
+
+        // Delete the event
+        try (Connection connection = MyJDBC.getConnection()) {
+            try (PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery)) {
+                deleteStatement.setInt(1, eventID);
+                int result = deleteStatement.executeUpdate();
+                return result > 0; // Return true if at least  one row is affected
+            }
         }
     }
+
+
+
     public boolean eventexists(Event event, int venueID) {
         String query = "SELECT * FROM event WHERE eventDate = ? AND venueID = ?";
         try (Connection connection = MyJDBC.getConnection()) {
