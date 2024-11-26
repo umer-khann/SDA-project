@@ -116,7 +116,8 @@ public class EventOrganizerRegController implements Initializable {
         }
 
         // Register the event organizer
-        eventOrganizer.registerEventOrganizer();
+        RegisterAdapter userAdapter = new UserRegisterAdapter(eventOrganizer);
+        userAdapter.register();
 
         // Assuming 'eventOrganizer' is an instance of a class handling database interactions
         int eventOrganizerID = eventOrganizer.getID(username); // Fetch the Event Organizer's ID using the username
