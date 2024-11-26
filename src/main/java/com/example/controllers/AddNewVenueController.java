@@ -186,7 +186,7 @@ public class AddNewVenueController implements Initializable {
             }
 
             // Step 4: Create Indoor Venue
-            venue= VenueFactory.createVenue("INDOOR",name, location, capacity, room, floor);
+            venue = VenueFactory.createVenue("INDOOR",name, location, capacity, room, floor);
             // Call addVenue function to save the venue
             venue.addVenue(evOrgID); // Calls the addVenue method in IndoorVenue
 
