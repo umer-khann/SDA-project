@@ -7,7 +7,17 @@ public class PaymentNotification {
     private String message;
     private String status;
     private String createdAt;
-
+    public PaymentNotification(int paymentNotificationID, Integer paymentID, int userID,
+                               String message, String status, String createdAt) {
+        this.paymentNotificationID = paymentNotificationID;
+        this.paymentID = paymentID;
+        this.userID = userID;
+        this.message = message;
+        this.status = status;
+        this.createdAt = createdAt;
+    }
+    public PaymentNotification() {
+    }
     // Getters and Setters
     public int getPaymentNotificationID() {
         return paymentNotificationID;

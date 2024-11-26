@@ -7,6 +7,17 @@ public class EventUpdateNotification {
     private String message;
     private String status;
     private String createdAt;
+    public EventUpdateNotification(int eventUpdateNotificationID, Integer eventID, int userID,
+                                   String message, String status, String createdAt) {
+        this.eventUpdateNotificationID = eventUpdateNotificationID;
+        this.eventID = eventID;
+        this.userID = userID;
+        this.message = message;
+        this.status = status;
+        this.createdAt = createdAt;
+    }
+    public EventUpdateNotification() {
+    }
 
     // Getters and Setters
     public int getEventUpdateNotificationID() {

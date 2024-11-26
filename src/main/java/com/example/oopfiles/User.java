@@ -91,4 +91,12 @@ public abstract class User {
     public abstract boolean registerAttendee();
 
     public abstract List<Notification> receiveNotification(String message);
+
+    public abstract List<EventUpdateNotification> receiveEvent(String s);
+
+    public abstract List<EventRegistrationNotification> recieveEventReg(String s);
+
+    public abstract List<TicketPurchaseNotification> receiveTicPur(String s);
+
+    public abstract List<PaymentNotification> receivePayment(String s);
 }

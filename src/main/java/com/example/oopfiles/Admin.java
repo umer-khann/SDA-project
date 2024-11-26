@@ -68,4 +68,22 @@ public class Admin extends User implements NotificationObserver{
         return db.retrieveNotifications();
     }
 
+    @Override
+    public List<EventUpdateNotification> receiveEvent(String s) {
+        return db.retrieveEventUp();}
+
+    @Override
+    public List<EventRegistrationNotification> recieveEventReg(String s) {
+        return db.retrieveEventReg();
+    }
+
+    @Override
+    public List<TicketPurchaseNotification> receiveTicPur(String s) {
+        return db.retrieveTicketPur();    }
+
+    @Override
+    public List<PaymentNotification> receivePayment(String s) {
+        return db.retrievePaymentNo();
+    }
+
 }
