@@ -60,10 +60,10 @@ public class Ticket {
         this.payment = payment;
     }
 
-    public void insertTicketPurchaseNotification(int attendeeID, int ticketId)
+    public void insertTicketPurchaseNotification(int attendeeID, int ticketId,String eventname)
     {
         this.ticketId=ticketId;
-        TicketDBHandler.insertTicketPurchaseNotification(ticketId, attendeeID, "Ticket Purchased", "Unread");
+        TicketDBHandler.insertTicketPurchaseNotification(ticketId, attendeeID, "Ticket Purchased for: "+ eventname, "Unread");
     }
 
     public int AddTicketInformation(int attendeeID, int eventid, int paymentid) {

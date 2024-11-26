@@ -2,7 +2,11 @@ package com.example.oopfiles;
 
 import com.example.JDBC.AttendeeDBController;
 import com.example.JDBC.AttendeeDBController;
+import com.example.JDBC.MyJDBC;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 public abstract class Attendee extends User implements NotificationObserver{
@@ -94,4 +98,11 @@ public abstract class Attendee extends User implements NotificationObserver{
     public String getAttendeeEmail() { return email; }
     public String getAttendeeContact() { return contactDetails; }
     public int getLoyaltyPoints() { return loyaltyPoints; }
+
+
+    public static boolean AddEventAttendee(int eventID, int attendeeID)
+    {
+        return db.addEventAttendee(eventID, attendeeID);
+    }
+
 }

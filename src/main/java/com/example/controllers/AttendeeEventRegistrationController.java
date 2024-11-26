@@ -181,6 +181,13 @@ public class AttendeeEventRegistrationController {
 
         // Proceed to the next page with Event ID and Attendee ID
         AnchorPane parentPane = (AnchorPane) applychanges.getParent();
+
+        if(!Attendee.AddEventAttendee(enteredId,attendeeID))
+        {
+            showAlert("Error","Attendee already registered for this event");
+            return;
+        }
+
         loadPage("Handle-ticket-and-payment.fxml", e, parentPane, enteredId, attendeeID);
     }
 
