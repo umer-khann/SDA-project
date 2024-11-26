@@ -72,4 +72,7 @@ public class HelloController {
         alert.showAndWait(); // Waits for the user to close the alert before continuing
     }
 
+    public void exit(ActionEvent actionEvent) {
+        System.exit(0);
+    }
 }

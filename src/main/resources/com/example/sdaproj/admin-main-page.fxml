@@ -20,7 +20,7 @@
                                         <Image url="@images/exit.png" />
                                     </image>
                                 </ImageView>
-                                <Button layoutX="582.0" layoutY="-2.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="30.0" prefWidth="33.0" style="-fx-background-color: trans;" text="Button">
+                                <Button layoutY="-2.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="30.0" prefWidth="33.0" style="-fx-background-color: trans;" text="Button">
                            <graphic>
                                         <ImageView fitHeight="22.0" fitWidth="21.0">
                                             <image>

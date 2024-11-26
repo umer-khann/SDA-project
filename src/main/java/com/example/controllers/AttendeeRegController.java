@@ -168,4 +168,8 @@ public class AttendeeRegController implements Initializable {
 
     public void setAttendeeID(int attendeeID) {
     }
+
+    public void exit(ActionEvent actionEvent) {
+        System.exit(0);
+    }
 }

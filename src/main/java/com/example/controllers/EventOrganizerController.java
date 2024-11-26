@@ -110,4 +110,7 @@ public class EventOrganizerController {
     }
 
 
+    public void exit(ActionEvent actionEvent) {
+        System.exit(0);
+    }
 }

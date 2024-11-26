@@ -218,9 +218,7 @@ public class ManageEventController {
             if (updateSuccessful) {
                 String message = "Event deleted successfully. ";
                 int organizerUserID = currentOrganizerid;
-                Event.insertEventUpdateNotification(eventID, organizerUserID, message);
-
-                showAlert("Success", "Event details updated and notification sent to the Attendee successfully!");
+                showAlert("Success", "Event deleted and notification sent to the Attendee successfully!");
             } else {
                 showAlert("Failure", "Failed to update event details.");
             }
