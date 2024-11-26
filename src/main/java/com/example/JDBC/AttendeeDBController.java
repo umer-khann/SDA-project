@@ -343,4 +343,129 @@ public class AttendeeDBController {
         return attendee;
     }
 
+
+    public List<EventUpdateNotification> retrieveEventUp(int attendeeID) {
+        String query = "SELECT * FROM EventUpdateNotification WHERE UserID= ?";
+        List<EventUpdateNotification> notifications = new ArrayList<>();
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, attendeeID);  // Set the attendeeID parameter
+
+            // Execute the query
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Process the result set
+            while (resultSet.next()) {
+                int eventUpdateNotificationID = resultSet.getInt("eventUpdateNotificationID");
+                int eventID = resultSet.getInt("eventID");
+                int userID = resultSet.getInt("userID");
+                String message = resultSet.getString("message");
+                String status = resultSet.getString("status");
+                String createdAt = resultSet.getString("createdAt");
+                String userType;
+                notifications.add(new EventUpdateNotification(eventUpdateNotificationID, eventID, userID, message, status, createdAt));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return notifications;
+
+    }
+
+    public List<EventRegistrationNotification> AttendeeReg(int attendeeID) {
+        String query = "SELECT * FROM EventRegistrationNotification WHERE UserID = ?";
+        List<EventRegistrationNotification> notifications = new ArrayList<>();
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, attendeeID);  // Set the attendeeID parameter
+
+            // Execute the query
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+
+            // Process the result set
+            while (resultSet.next()) {
+                int notificationID = resultSet.getInt("EventRegistrationNotificationID");
+                int eventID = resultSet.getInt("EventID");
+                int userID = resultSet.getInt("UserID");
+                String message = resultSet.getString("Message");
+                String status = resultSet.getString("Status");
+                String createdAt = resultSet.getString("CreatedAt");
+
+                // Add each notification to the list
+                notifications.add(new EventRegistrationNotification(notificationID, eventID, userID, message, status, createdAt));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return notifications;
+
+    }
+
+    public List<TicketPurchaseNotification> GetTicketNotif(int attendeeID) {
+        String query = "SELECT * from TicketPurchaseNotification WHERE UserID = ?";
+        List<TicketPurchaseNotification> notifications = new ArrayList<>();
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, attendeeID);  // Set the attendeeID parameter
+            // Execute the query
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Process the result set
+            while (resultSet.next()) {
+                int notificationID = resultSet.getInt("TicketPurchaseNotificationID");
+                int userID = resultSet.getInt("UserID");
+                String message = resultSet.getString("Message");
+                String notificationType = resultSet.getString("status");
+                String createdAt = resultSet.getString("CreatedAt");
+                int ticketID = resultSet.getInt("TicketID");
+
+                // Create a TicketPurchaseNotification object using retrieved data
+                notifications.add(new TicketPurchaseNotification(notificationID, ticketID, userID, message, notificationType, createdAt));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return notifications;
+    }
+
+    public List<PaymentNotification> GetPaymentNotif(int attendeeID) {
+        String query = "SELECT * from PaymentNotification WHERE UserID = ?";
+        List<PaymentNotification> notifications = new ArrayList<>();
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, attendeeID);  // Set the attendeeID parameter
+
+            // Execute the query
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Process the result set
+            while (resultSet.next()) {
+                int notificationID = resultSet.getInt("PaymentNotificationID");
+                int userID = resultSet.getInt("UserID");
+                String message = resultSet.getString("Message");
+                String notificationType = resultSet.getString("status");
+                String createdAt = resultSet.getString("CreatedAt");
+                int paymentID = resultSet.getInt("PaymentID");
+
+                // Create a PaymentNotification object using retrieved data
+                notifications.add(new PaymentNotification(notificationID, paymentID, userID, message, notificationType, createdAt));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return notifications;
+    }
 }

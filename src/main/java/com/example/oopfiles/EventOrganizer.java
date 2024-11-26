@@ -272,4 +272,9 @@ public class EventOrganizer extends User implements NotificationObserver{
     public List<TicketPurchaseNotification> TicketPurchase(int attendeeid) {
         return List.of();
     }
+
+    @Override
+    public List<PaymentNotification> PaymentNotif(int attendeeid) {
+        return List.of();
+    }
 }

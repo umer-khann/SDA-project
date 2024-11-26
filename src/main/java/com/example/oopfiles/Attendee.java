@@ -125,6 +125,13 @@ public abstract class Attendee extends User implements NotificationObserver{
         return db.GetTicketNotif(attendeeid);
     }
 
+    public List<PaymentNotification> PaymentNotif(int attendeeid)
+    {
+        return db.GetPaymentNotif(attendeeid);
+    }
+
+
+
 
 
 }
