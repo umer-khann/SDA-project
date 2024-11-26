@@ -141,7 +141,8 @@ public class AdminNotifications implements Initializable {
         ObservableList<Notification> notificationObservableList = FXCollections.observableArrayList();
         notificationObservableList.addAll(notificationService.notifyAdmins()); // Replace with your DB fetching method
         Table.setItems(notificationObservableList);
-    }private void loadData1() {
+    }
+    private void loadData1() {
         User admin = UserFactory.createUser("ADMIN");
         NotificationService notificationService = new NotificationService();
         notificationService.addObserver(admin, "ADMIN");

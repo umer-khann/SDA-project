@@ -18,8 +18,6 @@ import java.io.IOException;
 public class HelloController {
 
     @FXML
-    private Label loginmessagelabel;
-    @FXML
     private TextField uname;
     @FXML
     private PasswordField upass;
@@ -36,10 +34,10 @@ public class HelloController {
                 // Navigate to the Admin main page
                 navigateTo("admin-main-page.fxml", e);
             } else {
-                loginmessagelabel.setText("Invalid credentials! Try again.");
+                showAlert(Alert.AlertType.ERROR, "Validation Error", "Invalid Credentials! Try again.");
             }
         } else {
-            loginmessagelabel.setText("Please input full details.");
+            showAlert(Alert.AlertType.ERROR, "Input Error", "Please input full details.");
         }
     }
 
@@ -64,6 +62,14 @@ public class HelloController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null); // Optional: Set to null to remove the header
+        alert.setContentText(message);
+        alert.showAndWait(); // Waits for the user to close the alert before continuing
     }
 
 }

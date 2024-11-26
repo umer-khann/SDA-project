@@ -8,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -63,10 +60,11 @@ public class AttendeeLoginController {
 
             } else {
                 // Display an error message
-                loginmessagelabel.setText("Invalid username or password. Please try again.");
+                showAlert(Alert.AlertType.ERROR, "Validation Error", "Invalid username or password. Please try again.");
             }
         } else {
-            loginmessagelabel.setText("Please input full details.");
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Please input full details.");
+
         }
     }
 
@@ -100,6 +98,16 @@ public class AttendeeLoginController {
         stage.setScene(new Scene(root));
         stage.setTitle("");
         stage.show();
+
     }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null); // Optional: Set to null to remove the header
+        alert.setContentText(message);
+        alert.showAndWait(); // Waits for the user to close the alert before continuing
+    }
+
 
 }

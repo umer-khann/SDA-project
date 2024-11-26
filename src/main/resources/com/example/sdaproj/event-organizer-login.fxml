@@ -36,7 +36,6 @@
             <TextField fx:id="uname" layoutX="196.0" layoutY="122.0" />
             <Button fx:id="loginbutton" layoutX="98.0" layoutY="264.0" mnemonicParsing="false" onAction="#loginbuttonOnAction" prefHeight="31.0" prefWidth="275.0" style="-fx-background-color: #263F73;" text="Login" textFill="WHITE" />
             <PasswordField fx:id="upass" layoutX="190.0" layoutY="200.0" />
-            <Label fx:id="loginmessagelabel" layoutX="111.0" layoutY="79.0" prefHeight="21.0" prefWidth="183.0" />
             <Button layoutX="20.0" layoutY="38.0" mnemonicParsing="false" onAction="#backButtonOnAction" prefHeight="25.0" prefWidth="26.0" style="-fx-background-color: trans;">
             <graphic>
                   <ImageView>
