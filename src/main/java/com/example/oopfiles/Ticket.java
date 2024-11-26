@@ -7,7 +7,7 @@ public class Ticket {
     private double price;
     private String seatNumber;
     private Payment payment;
-    private TicketDBHandler db;
+    private TicketDBHandler db = TicketDBHandler.getInstance();
 
     // Constructor
     public Ticket(int ticketId, double price, String seatNumber) {
@@ -15,7 +15,6 @@ public class Ticket {
         this.price = price;
         this.seatNumber = seatNumber;
         this.payment = new Payment();
-        db= new TicketDBHandler();
     }
 
     // Getter and Setter methods

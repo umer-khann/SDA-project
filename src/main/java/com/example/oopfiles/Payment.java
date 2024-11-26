@@ -7,7 +7,7 @@ public class Payment {
     private double amount;
     private String status;
     private int transactionId;
-    PaymentDBHandler db;
+    PaymentDBHandler db = PaymentDBHandler.getInstance();
 
     // Constructor
     public Payment(int paymentId, double amount, String status, int transactionId) {
@@ -15,7 +15,6 @@ public class Payment {
         this.amount = amount;
         this.status = status;
         this.transactionId = transactionId;
-        db= new PaymentDBHandler();
     }
 
     public Payment() {}

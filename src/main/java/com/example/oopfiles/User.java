@@ -10,7 +10,7 @@ public abstract class User {
     protected boolean loggedIn;
     private String userName;
     private String password;
-
+    private String Type;
     // Constructor
     public User() {
         this.userID = 0; // Default ID
@@ -107,4 +107,12 @@ public abstract class User {
     public abstract List<TicketPurchaseNotification> TicketPurchase(int attendeeid);
 
     public abstract List<PaymentNotification> PaymentNotif(int attendeeid);
+
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String type) {
+        Type = type;
+    }
 }

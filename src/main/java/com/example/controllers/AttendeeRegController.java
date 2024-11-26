@@ -99,17 +99,16 @@ public class AttendeeRegController implements Initializable {
         User newAttendee = null;
         if ("General".equalsIgnoreCase(choice)) {
             newAttendee = createUser("GENERAL_ATTENDEE");
+            newAttendee.setType("General");
         } else if ("VIP".equalsIgnoreCase(choice)) {
             newAttendee = createUser("VIP_ATTENDEE");
+            newAttendee.setType("VIP");
         }
-
         newAttendee.setName(nameField.getText());
         newAttendee.setEmail(emailField.getText());
         newAttendee.setContactDetails(contactField.getText());
         newAttendee.setUserName(username);
         newAttendee.setPassword(password);
-
-
         // Validate and register the attendee
         if (!newAttendee.isValidUserName() || !newAttendee.isValidEmail()) {
             showAlert("Registration Error", "Invalid details provided!");
@@ -117,10 +116,8 @@ public class AttendeeRegController implements Initializable {
         }
 
         RegisterAdapter userAdapter = new UserRegisterAdapter(newAttendee);
-        userAdapter.register();
-
-        // Load the next page
-        loadPage("home-page.fxml", e);
+        if(userAdapter.register(additionalDetail))// Load the next page
+            loadPage("home-page.fxml", e);
     }
 
 

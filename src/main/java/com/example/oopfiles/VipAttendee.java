@@ -27,7 +27,12 @@ public class VipAttendee extends Attendee implements NotificationObserver{
 
     @Override
     public boolean registerAttendee() {
-        if(db.signUpAttendee(this)) {
+        return false;
+    }
+
+    @Override
+    public boolean registerAttendee(String val) {
+        if(db.signUpAttendee(this,val)) {
             db.addNotification(this.userID, 3, "Account created for username: " + getUsername(), "Account creation");
             return true;
         }

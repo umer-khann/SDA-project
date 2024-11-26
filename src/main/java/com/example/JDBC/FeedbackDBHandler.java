@@ -6,7 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FeedbackDBHandler {
-
+    private static FeedbackDBHandler instance;
+    public static synchronized FeedbackDBHandler getInstance() {
+        if (instance == null) {
+            instance = new FeedbackDBHandler();
+        }
+        return instance;
+    }
     // Constructor
     public FeedbackDBHandler() {
         // No need to create a connection here, as we use MyJDBC for the connection

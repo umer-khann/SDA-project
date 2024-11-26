@@ -1,7 +1,6 @@
 package com.example.JDBC;
 
 import com.example.oopfiles.*;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminDBHandler {
+    private static AdminDBHandler instance;
+    public static synchronized AdminDBHandler getInstance() {
+        if (instance == null) {
+            instance = new AdminDBHandler();
+        }
+        return instance;
+    }
     public void addNotification(int userID, int userType, String message, String notificationType) {
         String query = "INSERT INTO GeneralNotification (UserID, UserType, Message, NotificationType, CreatedAt) " +
                 "VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)";

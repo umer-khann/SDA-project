@@ -12,10 +12,9 @@ public class Sponsorship {
     private String sponsorName;
     private double contributionAmount;
     private int evorgid;
-    SponsorshipDBHandler db;
+    SponsorshipDBHandler db = SponsorshipDBHandler.getInstance();
     // Constructor
     public Sponsorship() {
-        db=new SponsorshipDBHandler();
     }
 
     public ObservableList<Sponsorship> intializeTable(ObservableList<Sponsorship> sponsorshipList, int eventOrgID) {

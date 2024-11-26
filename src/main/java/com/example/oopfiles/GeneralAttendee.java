@@ -28,8 +28,8 @@ public class GeneralAttendee extends Attendee implements NotificationObserver{
     }
 
     @Override
-    public boolean registerAttendee() {
-        if(db.signUpAttendee(this)) {
+    public boolean registerAttendee(String val) {
+        if(db.signUpAttendee(this,val)) {
             db.addNotification(this.userID, 3, "Account created for username: " + getUsername(), "Account creation");
             return true;
         }
@@ -38,7 +38,12 @@ public class GeneralAttendee extends Attendee implements NotificationObserver{
 
     public void addNotification(int ID, int userType, String message, String notifType){
         db.addNotification(ID,userType,message,notifType);
-    };
+    }
+
+    @Override
+    public boolean registerAttendee() {
+        return false;
+    }
 
     // Specific Method for General Attendee
     public boolean redeemPoints() {

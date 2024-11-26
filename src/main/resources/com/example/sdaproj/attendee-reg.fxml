@@ -60,7 +60,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>            <Label alignment="CENTER" layoutX="74.0" layoutY="17.0" prefHeight="30.0" prefWidth="298.0" text="Attendee Registration" textAlignment="CENTER">
+            </Button>
+            <Label alignment="CENTER" layoutX="74.0" layoutY="17.0" prefHeight="30.0" prefWidth="298.0" text="Attendee Registration" textAlignment="CENTER">
                <font>
                   <Font name="Verdana Bold" size="19.0" />
                </font>

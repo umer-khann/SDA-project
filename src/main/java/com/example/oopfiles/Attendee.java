@@ -11,9 +11,8 @@ import java.util.List;
 
 public abstract class Attendee extends User implements NotificationObserver{
     protected int loyaltyPoints;
-    protected static AttendeeDBController db = new AttendeeDBController();
+    protected static AttendeeDBController db =AttendeeDBController.getInstance();
     public abstract List<Notification> receiveNotification(int message);
-
     // Constructor
     Attendee() {
         super();
@@ -94,7 +93,7 @@ public abstract class Attendee extends User implements NotificationObserver{
     // Abstract Methods to be implemented by subclasses
     public abstract boolean registerForEvent();
     public abstract boolean provideFeedback();
-    public abstract boolean registerAttendee();
+    public abstract boolean registerAttendee(String val);
 
     // Common Getter and Setter Methods
     public void setLoyaltyPoints(int loyaltyPoints) { this.loyaltyPoints = loyaltyPoints; }
@@ -129,9 +128,4 @@ public abstract class Attendee extends User implements NotificationObserver{
     {
         return db.GetPaymentNotif(attendeeid);
     }
-
-
-
-
-
 }

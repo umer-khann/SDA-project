@@ -12,6 +12,13 @@ import java.util.List;
 
 public class EventDBController {
 
+    private static EventDBController instance;
+    public static synchronized EventDBController getInstance() {
+        if (instance == null) {
+            instance = new EventDBController();
+        }
+        return instance;
+    }
     /**
      * Save a new event to the database.
      *

@@ -3,6 +3,13 @@ package com.example.JDBC;
 import java.sql.*;
 
 public class TicketDBHandler {
+    private static TicketDBHandler instance;
+    public static synchronized TicketDBHandler getInstance() {
+        if (instance == null) {
+            instance = new TicketDBHandler();
+        }
+        return instance;
+    }
         // Method to insert a new ticket
         public static int insertTicket(double price, int eventId, int attendeeId, int paymentId) {
             String ticketQuery = "INSERT INTO Ticket (Price, eventID, attendeeID, paymentID) VALUES (?, ?, ?, ?)";

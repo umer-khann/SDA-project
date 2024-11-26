@@ -12,7 +12,7 @@ public class Feedback {
     private String comments;
     private Date date;
     private int eventID;
-    private FeedbackDBHandler db;
+    private FeedbackDBHandler db = FeedbackDBHandler.getInstance();
     private int attendeeID;
     // Constructor
     public Feedback(int feedbackID, int rating, String comments, Date date, int a) {
@@ -21,7 +21,6 @@ public class Feedback {
         this.comments = comments;
         this.date = date;
         this.attendeeID = a;
-        this.db = new FeedbackDBHandler();
     }public Feedback(int feedbackID, int rating, String comments, Date date, int a, int eventID) {
         this.feedbackID = feedbackID;
         setRating(rating); // Use the setter to validate the rating
@@ -29,10 +28,8 @@ public class Feedback {
         this.date = date;
         this.attendeeID = a;
         this.eventID = eventID;
-        this.db = new FeedbackDBHandler();
     }
     public Feedback() {
-        this.db = new FeedbackDBHandler();
     }
 
     // Getters and Setters
