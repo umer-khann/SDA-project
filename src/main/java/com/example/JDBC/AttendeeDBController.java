@@ -1,9 +1,11 @@
 package com.example.JDBC;
 
 import com.example.JDBC.MyJDBC;
-import com.example.oopfiles.Attendee;
+import com.example.oopfiles.*;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AttendeeDBController {
 
@@ -274,4 +276,169 @@ public class AttendeeDBController {
         }
     }
 
+    public User retrieveAttendee(int attendeeID) {
+        User attendee = null;
+
+
+        // SQL query to fetch the attendee details
+        String query = "SELECT a.attendeeID, a.name, a.email, a.contactDetails, a.loyaltyPoints, a.username, a.password, a.type, " +
+                "ga.membershipLevel, va.VIPLevel, va.accessToExclusiveAreas " +
+                "FROM attendees a " +
+                "LEFT JOIN generalattendees ga ON a.attendeeID = ga.attendeeID " +
+                "LEFT JOIN vipattendees va ON a.attendeeID = va.attendeeID " +
+                "WHERE a.attendeeID = ?";
+
+
+        try (Connection conn = MyJDBC.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+
+            stmt.setInt(1, attendeeID);  // Set the attendeeID parameter
+
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // Fetch common attendee details
+                    String name = rs.getString("name");
+                    String email = rs.getString("email");
+                    String contactDetails = rs.getString("contactDetails");
+                    int loyaltyPoints = rs.getInt("loyaltyPoints");
+                    String username = rs.getString("username");
+                    String password = rs.getString("password");
+                    String type = rs.getString("type");
+
+
+                    // Instantiate the correct type of attendee based on the type field
+                    if ("VIP".equalsIgnoreCase(type)) {
+                        // VIP attendee - populate specific fields
+                        VipAttendee vipAttendee = new VipAttendee();
+                        vipAttendee.setUserID(attendeeID);
+                        vipAttendee.setName(name);
+                        vipAttendee.setEmail(email);
+                        vipAttendee.setContactDetails(contactDetails);
+                        vipAttendee.setLoyaltyPoints(loyaltyPoints);
+                        vipAttendee.setUserName(username);
+                        vipAttendee.setPassword(password);
+                        vipAttendee.setVIPLevel(rs.getString("VIPLevel"));
+                        vipAttendee.setAccessToExclusiveAreas(rs.getString("accessToExclusiveAreas"));
+                        attendee = vipAttendee;
+                    } else {
+                        // General attendee - populate specific fields
+                        GeneralAttendee generalAttendee = new GeneralAttendee();
+                        generalAttendee.setUserID(attendeeID);
+                        generalAttendee.setName(name);
+                        generalAttendee.setEmail(email);
+                        generalAttendee.setContactDetails(contactDetails);
+                        generalAttendee.setLoyaltyPoints(loyaltyPoints);
+                        generalAttendee.setUserName(username);
+                        generalAttendee.setPassword(password);
+                        generalAttendee.setMembershipLevel(rs.getString("membershipLevel"));
+                        attendee = generalAttendee;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle any SQL exceptions
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return attendee;
+    }
+
+
+    public List<EventUpdateNotification> retrieveEventUp(int attendeeID) {
+        String query = "SELECT * FROM EventUpdateNotification WHERE UserID= ?";
+        List<EventUpdateNotification> notifications = new ArrayList<>();
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, attendeeID);  // Set the attendeeID parameter
+
+            // Execute the query
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Process the result set
+            while (resultSet.next()) {
+                int eventUpdateNotificationID = resultSet.getInt("eventUpdateNotificationID");
+                int eventID = resultSet.getInt("eventID");
+                int userID = resultSet.getInt("userID");
+                String message = resultSet.getString("message");
+                String status = resultSet.getString("status");
+                String createdAt = resultSet.getString("createdAt");
+                String userType;
+                notifications.add(new EventUpdateNotification(eventUpdateNotificationID, eventID, userID, message, status, createdAt));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return notifications;
+
+    }
+
+    public List<EventRegistrationNotification> AttendeeReg(int attendeeID) {
+        String query = "SELECT * FROM EventRegistrationNotification WHERE UserID = ?";
+        List<EventRegistrationNotification> notifications = new ArrayList<>();
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, attendeeID);  // Set the attendeeID parameter
+
+            // Execute the query
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+
+            // Process the result set
+            while (resultSet.next()) {
+                int notificationID = resultSet.getInt("EventRegistrationNotificationID");
+                int eventID = resultSet.getInt("EventID");
+                int userID = resultSet.getInt("UserID");
+                String message = resultSet.getString("Message");
+                String status = resultSet.getString("Status");
+                String createdAt = resultSet.getString("CreatedAt");
+
+                // Add each notification to the list
+                notifications.add(new EventRegistrationNotification(notificationID, eventID, userID, message, status, createdAt));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return notifications;
+
+    }
+
+    public List<TicketPurchaseNotification> GetTicketNotif(int attendeeID) {
+        String query = "SELECT * from TicketPurchaseNotification WHERE UserID = ?";
+        List<TicketPurchaseNotification> notifications = new ArrayList<>();
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, attendeeID);  // Set the attendeeID parameter
+            // Execute the query
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Process the result set
+            while (resultSet.next()) {
+                int notificationID = resultSet.getInt("TicketPurchaseNotificationID");
+                int userID = resultSet.getInt("UserID");
+                String message = resultSet.getString("Message");
+                String notificationType = resultSet.getString("status");
+                String createdAt = resultSet.getString("CreatedAt");
+                int ticketID = resultSet.getInt("TicketID");
+
+                // Create a TicketPurchaseNotification object using retrieved data
+                notifications.add(new TicketPurchaseNotification(notificationID, ticketID, userID, message, notificationType, createdAt));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return notifications;
+    }
 }

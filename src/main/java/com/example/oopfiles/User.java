@@ -90,13 +90,20 @@ public abstract class User {
 
     public abstract boolean registerAttendee();
 
-    public abstract List<Notification> receiveNotification(String message);
+    public abstract List<Notification> receiveNotification(int id);
 
-    public abstract List<EventUpdateNotification> receiveEvent(String s);
+    public abstract List<EventUpdateNotification> receiveEvent(int id);
 
-    public abstract List<EventRegistrationNotification> recieveEventReg(String s);
+    public abstract List<EventRegistrationNotification> recieveEventReg(int id);
 
-    public abstract List<TicketPurchaseNotification> receiveTicPur(String s);
+    public abstract List<TicketPurchaseNotification> receiveTicPur(int id);
 
-    public abstract List<PaymentNotification> receivePayment(String s);
+    public abstract List<PaymentNotification> receivePayment(int id);
+
+    public abstract List<EventUpdateNotification> AttendeeEvUP(int attendeeid);
+
+    public abstract List<EventRegistrationNotification> AttendeeEventReg(int attendeeid);
+
+    public abstract List<TicketPurchaseNotification> TicketPurchase(int attendeeid);
+
 }

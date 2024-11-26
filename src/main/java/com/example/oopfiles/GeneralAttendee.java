@@ -5,6 +5,7 @@ import java.util.List;
 public class GeneralAttendee extends Attendee implements NotificationObserver{
     private String membershipLevel;
 
+
     // Constructor
     public GeneralAttendee() {
         super();
@@ -50,27 +51,27 @@ public class GeneralAttendee extends Attendee implements NotificationObserver{
     public void setMembershipLevel(String membershipLevel) { this.membershipLevel = membershipLevel; }
 
     @Override
-    public List<Notification> receiveNotification(String message) {
+    public List<Notification> receiveNotification(int message) {
         return null;
     }
 
     @Override
-    public List<EventUpdateNotification> receiveEvent(String s) {
+    public List<EventUpdateNotification> receiveEvent(int s) {
         return List.of();
     }
 
     @Override
-    public List<EventRegistrationNotification> recieveEventReg(String s) {
+    public List<EventRegistrationNotification> recieveEventReg(int s) {
         return List.of();
     }
 
     @Override
-    public List<TicketPurchaseNotification> receiveTicPur(String s) {
+    public List<TicketPurchaseNotification> receiveTicPur(int s) {
         return List.of();
     }
 
     @Override
-    public List<PaymentNotification> receivePayment(String s) {
+    public List<PaymentNotification> receivePayment(int s) {
         return List.of();
     }
 }
