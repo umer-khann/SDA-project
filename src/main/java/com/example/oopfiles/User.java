@@ -106,4 +106,5 @@ public abstract class User {
 
     public abstract List<TicketPurchaseNotification> TicketPurchase(int attendeeid);
 
+    public abstract List<PaymentNotification> PaymentNotif(int attendeeid);
 }

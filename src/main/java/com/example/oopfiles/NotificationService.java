@@ -83,8 +83,7 @@ public class NotificationService {
     }
 
     public List<PaymentNotification> PaymentNotif(int attendeeid) {
-       // return attendee.PaymentNotif(attendeeid);
-        return null;
+       return attendee.PaymentNotif(attendeeid);
     }
 
 

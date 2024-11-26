@@ -441,4 +441,35 @@ public class AttendeeDBController {
 
         return notifications;
     }
+
+    public List<PaymentNotification> GetPaymentNotif(int attendeeID) {
+        String query = "SELECT * from PaymentNotification WHERE UserID = ?";
+        List<PaymentNotification> notifications = new ArrayList<>();
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, attendeeID);  // Set the attendeeID parameter
+
+            // Execute the query
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Process the result set
+            while (resultSet.next()) {
+                int notificationID = resultSet.getInt("PaymentNotificationID");
+                int userID = resultSet.getInt("UserID");
+                String message = resultSet.getString("Message");
+                String notificationType = resultSet.getString("status");
+                String createdAt = resultSet.getString("CreatedAt");
+                int paymentID = resultSet.getInt("PaymentID");
+
+                // Create a PaymentNotification object using retrieved data
+                notifications.add(new PaymentNotification(notificationID, paymentID, userID, message, notificationType, createdAt));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return notifications;
+    }
 }

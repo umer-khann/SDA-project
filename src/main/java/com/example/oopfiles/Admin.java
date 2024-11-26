@@ -101,4 +101,9 @@ public class Admin extends User implements NotificationObserver{
         return List.of();
     }
 
+    @Override
+    public List<PaymentNotification> PaymentNotif(int attendeeid) {
+        return List.of();
+    }
+
 }
