@@ -6,7 +6,17 @@ public class TicketPurchaseNotification {
     private String message;
     private String status;
     private String createdAt;
-
+    public TicketPurchaseNotification(int ticketPurchaseNotificationID, Integer ticketID, int userID,
+                                      String message, String status, String createdAt) {
+        this.ticketPurchaseNotificationID = ticketPurchaseNotificationID;
+        this.ticketID = ticketID;
+        this.userID = userID;
+        this.message = message;
+        this.status = status;
+        this.createdAt = createdAt;
+    }
+    public TicketPurchaseNotification() {
+    }
     // Getters and Setters
     public int getTicketPurchaseNotificationID() {
         return ticketPurchaseNotificationID;

@@ -33,6 +33,17 @@ public class NotificationService {
     public List<Notification> notifyAdmins(String message) {
         return admin.receiveNotification(message);
     }
+    public List<EventUpdateNotification> notifyAdminsEvCr(){
+        return admin.receiveEvent("");
+    }
+    public List<EventRegistrationNotification> notifyAdminsEvUp(){
+        return admin.recieveEventReg("");
+    }public List<TicketPurchaseNotification> notifyAdminsTiPu(){
+        return admin.receiveTicPur("");
+    }public List<PaymentNotification> notifyAdminsPaN(){
+        return admin.receivePayment("");
+    }
+
     public List<Notification> notifyAdmins() {
         return admin.receiveNotification("");
     }

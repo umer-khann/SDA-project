@@ -52,4 +52,24 @@ public class VipAttendee extends Attendee implements NotificationObserver{
     public List<Notification> receiveNotification(String message) {
         return null;
     }
+
+    @Override
+    public List<EventUpdateNotification> receiveEvent(String s) {
+        return List.of();
+    }
+
+    @Override
+    public List<EventRegistrationNotification> recieveEventReg(String s) {
+        return List.of();
+    }
+
+    @Override
+    public List<TicketPurchaseNotification> receiveTicPur(String s) {
+        return List.of();
+    }
+
+    @Override
+    public List<PaymentNotification> receivePayment(String s) {
+        return List.of();
+    }
 }
