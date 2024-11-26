@@ -235,7 +235,7 @@ public class EventOrganizer extends User implements NotificationObserver{
 
     @Override
     public List<Notification> receiveNotification(int message) {
-        return null;
+        return dbHandler.recieveNotifications(message);
     }
 
     @Override

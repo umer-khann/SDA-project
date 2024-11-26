@@ -2,6 +2,7 @@ package com.example.JDBC;
 
 import com.example.JDBC.MyJDBC;
 import com.example.oopfiles.EventOrganizer;
+import com.example.oopfiles.Notification;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
@@ -10,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventOrganizerDBHandler {
 
@@ -282,12 +285,43 @@ public class EventOrganizerDBHandler {
     }
 
 
+    public List<Notification> recieveNotifications(int ID) {
+        String query = "SELECT UserID, UserType, GeneralNotificationID, Message, NotificationType, CreatedAt, EventID " +
+                "FROM generalnotification WHERE UserType = 2 and UserID = ? ";
+        List<Notification> notifications = new ArrayList<>();
 
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, ID);
+            // Execute the query
+            ResultSet resultSet = preparedStatement.executeQuery();
 
+            // Process the result set
+            while (resultSet.next()) {
+                int notificationID = resultSet.getInt("GeneralNotificationID");
+                String message = resultSet.getString("Message");
+                String notificationType = resultSet.getString("NotificationType");
+                String createdAt = resultSet.getString("CreatedAt");
+                int eventID = resultSet.getInt("EventID");
+                int userID = resultSet.getInt("UserID");
+                int ut = resultSet.getInt("UserType");
+                String userType;
+                if(ut == 1){
+                    userType = "Admin";
+                }
+                else if(ut == 2){
+                    userType = "Event Organizer";
+                }
+                else{
+                    userType = "Attendee";
+                }
+                // Add each notification to the list
+                notifications.add(new Notification(notificationID, userID, userType, message, notificationType, createdAt, eventID));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-
-
-
-
-
+        return notifications;
+    }
 }

@@ -58,8 +58,8 @@ public class NotificationService {
     }
 
     // Notify all event organizers
-    public List<Notification> notifyEventOrganizers(int message) {
-        return eventOrganizer.receiveNotification(message);
+    public List<Notification> notifyEventOrganizers(int ID) {
+        return eventOrganizer.receiveNotification(ID);
     }
 
     // Notify all attendees
