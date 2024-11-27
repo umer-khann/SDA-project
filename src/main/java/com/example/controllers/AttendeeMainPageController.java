@@ -119,7 +119,7 @@ public class AttendeeMainPageController implements Initializable {
     public void setAttendeeID(int attendeeID) {
         this.attendeeID=attendeeID;
     }
-
+//
     public void Notif(ActionEvent actionEvent) {
         loadPage("Attendee-Notifications.fxml");
     }
