@@ -23,7 +23,7 @@
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Label>
-            <Button fx:id="gen" onAction="#Generate" layoutX="14.0" layoutY="18.0" mnemonicParsing="false" text="GENERATE">
+            <Button fx:id="gen" layoutX="312.0" layoutY="18.0" mnemonicParsing="false" onAction="#Generate" style="-fx-background-color: #a2a0a0;" text="GENERATE" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

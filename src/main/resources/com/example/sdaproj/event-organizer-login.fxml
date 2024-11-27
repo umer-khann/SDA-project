@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -7,6 +8,9 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.EventOrganizerController">
+    <stylesheets>
+        <URL value="@styles2.css" />
+    </stylesheets>
     <left>
         <AnchorPane fx:id="rootPane" prefHeight="407.0" prefWidth="228.0" style="-fx-background-color: #263F73;" BorderPane.alignment="CENTER">
             <children>
@@ -16,6 +20,11 @@
                     </font>
                 </Label>
                 <Line endX="100.0" layoutX="114.0" layoutY="81.0" startX="-100.0" stroke="WHITE" />
+               <ImageView fitHeight="145.0" fitWidth="157.0" layoutX="36.0" layoutY="127.0">
+                   <image>
+                       <Image url="@images/evorg.png" />
+                   </image>
+               </ImageView>
             </children>
         </AnchorPane>
     </left>

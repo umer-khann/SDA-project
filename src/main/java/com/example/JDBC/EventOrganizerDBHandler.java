@@ -22,25 +22,44 @@ public class EventOrganizerDBHandler {
         }
         return instance;
     }
-
-    public boolean validateLogin(String username, String password) {
-        String query = "SELECT * FROM EventOrganizers WHERE username = ? AND password = ?";
+    public String retrievePassword(String username) {
+        String query = "SELECT password FROM EventOrganizers WHERE username = ?";
 
         try (Connection connection = MyJDBC.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                return resultSet.next(); // Returns true if a matching record is found
+                if (resultSet.next()) {
+                    return resultSet.getString("password"); // Return the password if found
+                } else {
+                    return "Username not found"; // Return message if username doesn't exist
+                }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false; // Return false in case of exceptions
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return "Error retrieving password"; // Handle exception case
         }
+    }
+    public boolean validateLogin(String username, String password) {
+        String query = "SELECT * FROM EventOrganizers WHERE username = ? AND password = ?";
+        if(retrievePassword(username).equals(password)){
+            try (Connection connection = MyJDBC.getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, username);
+                preparedStatement.setString(2, password);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    return resultSet.next(); // Returns true if a matching record is found
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false; // Return false in case of exceptions
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return false;
     }
 
     public void signUpEventOrganizer(EventOrganizer organizer) {

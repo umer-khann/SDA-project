@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AdminMainPageController">
+<AnchorPane prefHeight="470.0" prefWidth="890.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AdminMainPageController">
+    <stylesheets>
+        <URL value="@styles2.css" />
+    </stylesheets>
     <children>
         <BorderPane layoutX="114.0" layoutY="54.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
@@ -15,7 +19,7 @@
                     <children>
                         <Pane layoutX="102.0" layoutY="20.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #032d4d;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
-                                <Button layoutX="632.0" layoutY="-3.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="25.0" style="-fx-background-color: trans;">
+                                <Button layoutX="848.0" layoutY="-2.0" mnemonicParsing="false" onAction="#ex" prefHeight="33.0" prefWidth="25.0" style="-fx-background-color: trans;">
                                     <graphic>
                                         <ImageView fx:id="Exit" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
@@ -24,7 +28,7 @@
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Button layoutY="-2.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="30.0" prefWidth="33.0" style="-fx-background-color: trans;" text="Button">
+                                <Button layoutY="-2.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="30.0" prefWidth="33.0" style="-fx-background-color: trans;">
                            <graphic>
                                         <ImageView fitHeight="22.0" fitWidth="21.0">
                                             <image>
@@ -67,7 +71,7 @@
                 </AnchorPane>
             </top>
             <left>
-                <AnchorPane fx:id="slider" prefHeight="362.0" prefWidth="186.0" style="-fx-background-color: #032d4d;" BorderPane.alignment="CENTER">
+                <AnchorPane fx:id="slider" prefHeight="405.0" prefWidth="180.0" style="-fx-background-color: #032d4d;" BorderPane.alignment="CENTER">
                     <children>
                         <VBox layoutX="14.0" layoutY="35.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
                             <children>
@@ -78,7 +82,7 @@
                                     <graphic>
                                         <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@images/dash1.png" />
+                                                <Image url="@images/chart-line.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -90,31 +94,31 @@
                                     <graphic>
                                         <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@images/dash1.png" />
+                                                <Image url="@images/circle-user.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
                                 </JFXButton>
-                                <JFXButton fx:id="button3" alignment="BASELINE_LEFT" onAction="#removeeventorg" prefHeight="38.0" prefWidth="185.0" styleClass="sidebarItem" text="Remove Event Org" textFill="WHITE">
+                                <JFXButton fx:id="button3" alignment="BASELINE_LEFT" onAction="#removeeventorg" prefHeight="38.0" prefWidth="177.0" styleClass="sidebarItem" text="Remove Event Org" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="15.0" />
                                     </font>
                                     <graphic>
                                         <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@images/dash1.png" />
+                                                <Image url="@images/user-x.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
                                 </JFXButton>
-                                <JFXButton fx:id="button4" alignment="BASELINE_LEFT" onAction="#notif" prefHeight="38.0" prefWidth="185.0" styleClass="sidebarItem" text="Notifications" textFill="WHITE">
+                                <JFXButton fx:id="button4" alignment="BASELINE_LEFT" onAction="#notif" prefHeight="38.0" prefWidth="177.0" styleClass="sidebarItem" text="Notifications" textFill="WHITE">
                                 <font>
                                     <Font name="System Bold" size="15.0" />
                                 </font>
                                 <graphic>
                                     <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                         <image>
-                                            <Image url="@images/dash1.png" />
+                                            <Image url="@images/bell.png" />
                                         </image>
                                     </ImageView>
                                 </graphic>

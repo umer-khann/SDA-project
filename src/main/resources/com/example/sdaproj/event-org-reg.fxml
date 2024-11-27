@@ -7,8 +7,8 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.EventOrganizerRegController">
-    <center>
-        <AnchorPane prefHeight="400.0" prefWidth="372.0" BorderPane.alignment="CENTER">
+   <bottom>
+        <AnchorPane prefHeight="400.0" prefWidth="700.0" BorderPane.alignment="CENTER">
             <children>
                 <Button fx:id="backbutton" layoutX="20.0" layoutY="38.0" mnemonicParsing="false" onAction="#backButtonOnAction" prefHeight="25.0" prefWidth="26.0" style="-fx-background-color: transparent;" />
                 <Label alignment="CENTER" prefHeight="47.0" prefWidth="711.0" style="-fx-background-color: #263f73;" text="Event Organizer Registration" textAlignment="CENTER" textFill="WHITE">
@@ -92,5 +92,5 @@
             </Line>
             </children>
         </AnchorPane>
-    </center>
+   </bottom>
 </BorderPane>

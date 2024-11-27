@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.RemoveEventOrganizerController">
+<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.RemoveEventOrganizerController">
     <children>
-        <TableView fx:id="organizerTable" layoutX="-2.0" layoutY="37.0" prefHeight="213.0" prefWidth="600.0">
+        <TableView fx:id="organizerTable" layoutX="-7.0" layoutY="35.0" prefHeight="213.0" prefWidth="706.0" AnchorPane.rightAnchor="0.0">
             <columns>
                 <TableColumn fx:id="colOrganizerID" prefWidth="100" text="Organizer ID" />
                 <TableColumn fx:id="colOrganizerName" prefWidth="200" text="Organizer Name" />
@@ -19,7 +15,7 @@
             </columns>
         </TableView>
 
-        <Label layoutX="180.0" layoutY="14.0" text="SELECT EVENT ORGANIZER TO REMOVE" textAlignment="CENTER" textFill="WHITE">
+        <Label layoutX="219.0" layoutY="3.0" text="REMOVE EVENT ORGANIZER" textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>
@@ -30,7 +26,7 @@
             </font>
         </Label>
         <TextField fx:id="oldorgid" layoutX="277.0" layoutY="261.0" prefHeight="31.0" prefWidth="117.0" />
-        <Button fx:id="applychanges" layoutX="109.0" layoutY="359.0" mnemonicParsing="false" onAction="#buttonpress" prefHeight="31.0" prefWidth="422.0" style="-fx-background-color: &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;?import javafx.scene.control.TextField?&gt;&lt;TextField layoutX=&quot;438.0&quot; layoutY=&quot;276.0&quot; prefHeight=&quot;31.0&quot; pre;" text="REMOVE ORGANIZER">
+        <Button fx:id="applychanges" layoutX="217.0" layoutY="354.0" mnemonicParsing="false" onAction="#buttonpress" prefHeight="32.0" prefWidth="237.0" style="-fx-background-color: red;" text="REMOVE ORGANIZER" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>
@@ -41,6 +37,9 @@
          </font>
       </Label>
       <TextField fx:id="neworgid" layoutX="277.0" layoutY="313.0" prefHeight="31.0" prefWidth="117.0" />
-      <Button layoutX="14.0" layoutY="-1.0" mnemonicParsing="false" onAction="#Refresh" text="Button" />
+      <Button layoutX="23.0" layoutY="1.0" mnemonicParsing="false" onAction="#Refresh" style="-fx-background-color: #a2a0a0;" text="RELOAD" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
     </children>
 </AnchorPane>

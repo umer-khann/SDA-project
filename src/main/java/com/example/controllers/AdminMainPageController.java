@@ -123,4 +123,8 @@ public class AdminMainPageController implements Initializable {
         stage.setTitle("");
         stage.show();
     }
+
+    public void ex(ActionEvent actionEvent) {
+        System.exit(0);
+    }
 }

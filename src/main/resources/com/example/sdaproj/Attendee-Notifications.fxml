@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AttendeeNotifications">
+<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AttendeeNotifications">
     <children>
-        <Button layoutX="218.0" layoutY="70.0" mnemonicParsing="false" onAction="#paymentPushed" text="Payment">
+        <Button layoutX="218.0" layoutY="70.0" mnemonicParsing="false" onAction="#paymentPushed" style="-fx-background-color: #a2a0a0;" text="Payment" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </Button>
-        <Button layoutX="547.0" layoutY="70.0" mnemonicParsing="false" onAction="#EvUpPushed" text="Event Update">
+        <Button layoutX="547.0" layoutY="70.0" mnemonicParsing="false" onAction="#EvUpPushed" style="-fx-background-color: #a2a0a0;" text="Event Update" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </Button>
-        <Button layoutX="368.0" layoutY="70.0" mnemonicParsing="false" onAction="#EvRedPushed" text="Event Registration">
+        <Button layoutX="368.0" layoutY="70.0" mnemonicParsing="false" onAction="#EvRedPushed" style="-fx-background-color: #a2a0a0;" text="Event Registration" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
@@ -89,7 +86,7 @@
                 </TableView>
             </children>
         </AnchorPane>
-        <Button layoutX="14.0" layoutY="70.0" mnemonicParsing="false" onAction="#TickPushed" text="Ticket Purchase">
+        <Button layoutX="14.0" layoutY="70.0" mnemonicParsing="false" onAction="#TickPushed" style="-fx-background-color: #a2a0a0;" text="Ticket Purchase" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>

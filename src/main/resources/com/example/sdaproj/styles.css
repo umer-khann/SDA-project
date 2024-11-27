@@ -6,6 +6,9 @@ Button {
     -fx-text-fill: white;
     -fx-background-color: #03314d;
     -fx-cursor: hand;
+    -fx-background-radius: 20; /* Rounded corners */
+    -fx-border-radius: 20; /* Rounded corners for borders */
+    -fx-padding: 5 20;
 }
 
 /* Hover effect for all buttons */
@@ -13,3 +16,6 @@ Button:hover {
     -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.5), 10, 0.5, 0, 0);
     -fx-background-color: #03101b;
 }
+
+
+

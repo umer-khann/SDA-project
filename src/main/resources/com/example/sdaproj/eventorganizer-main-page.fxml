@@ -34,7 +34,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button layoutX="848.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="25.0" style="-fx-background-color: trans;">
+                        <Button layoutX="848.0" layoutY="-4.0" onAction="#ex" mnemonicParsing="false" prefHeight="33.0" prefWidth="25.0" style="-fx-background-color: trans;">
                            <graphic>
                                       <ImageView fx:id="Exit" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                           <image>
@@ -85,7 +85,7 @@
                                     <graphic>
                                         <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@images/dash1.png" />
+                                                <Image url="@images/calendar-plus.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -97,7 +97,7 @@
                                     <graphic>
                                         <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@images/dash1.png" />
+                                                <Image url="@images/calendar-arrow-up.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -109,7 +109,7 @@
                                 <graphic>
                                     <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                         <image>
-                                            <Image url="@images/dash1.png" />
+                                            <Image url="@images/landmark.png" />
                                         </image>
                                     </ImageView>
                                 </graphic>
@@ -120,7 +120,7 @@
                                 <graphic>
                                     <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                         <image>
-                                            <Image url="@images/dash1.png" />
+                                            <Image url="@images/circle-dollar-sign.png" />
                                         </image>
                                     </ImageView>
                                 </graphic>
@@ -131,7 +131,7 @@
                                 <graphic>
                                     <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                         <image>
-                                            <Image url="@images/dash1.png" />
+                                            <Image url="@images/map-pin-plus.png" />
                                         </image>
                                     </ImageView>
                                 </graphic>
@@ -142,7 +142,7 @@
                                 <graphic>
                                     <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                         <image>
-                                            <Image url="@images/dash1.png" />
+                                            <Image url="@images/map-pin-x.png" />
                                         </image>
                                     </ImageView>
                                 </graphic>
@@ -153,7 +153,7 @@
                                 <graphic>
                                     <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                         <image>
-                                            <Image url="@images/dash1.png" />
+                                            <Image url="@images/user-round-pen.png" />
                                         </image>
                                     </ImageView>
                                 </graphic>
@@ -164,7 +164,7 @@
                                 <graphic>
                                     <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                         <image>
-                                            <Image url="@images/dash1.png" />
+                                            <Image url="@images/handshake.png" />
                                         </image>
                                     </ImageView>
                                 </graphic>
@@ -175,7 +175,7 @@
                                 <graphic>
                                     <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                         <image>
-                                            <Image url="@images/dash1.png" />
+                                            <Image url="@images/circle-x.png" />
                                         </image>
                                     </ImageView>
                                 </graphic>
@@ -186,7 +186,7 @@
                                 <graphic>
                                     <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                         <image>
-                                            <Image url="@images/dash1.png" />
+                                            <Image url="@images/bell.png" />
                                         </image>
                                     </ImageView>
                                 </graphic>

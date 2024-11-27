@@ -10,6 +10,7 @@
     -fx-background-radius: 5; /* Rounded corners for smooth look */
 }
 
+
 /* Hover Effects */
 .button:hover {
     -fx-background-color: #03314d; /* Slightly brighter shade on hover */

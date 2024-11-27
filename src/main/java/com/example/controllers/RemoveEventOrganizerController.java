@@ -100,6 +100,7 @@ public class RemoveEventOrganizerController {
         } else if (!newOrgExists) {
             showAlert(Alert.AlertType.ERROR, "Error", "New Event Organizer ID does not exist in the table.");
         }
+        Refresh(null);
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
