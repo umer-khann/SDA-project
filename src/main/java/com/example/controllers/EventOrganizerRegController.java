@@ -22,6 +22,7 @@ public class EventOrganizerRegController implements Initializable {
     private Label signUpmessagelabel;
 
     @FXML
+
     private Button signUpButton;
 
     @FXML

@@ -17,6 +17,7 @@ import static java.lang.Math.random;
 public class HandleTicketAndPaymentController {
 
     @FXML
+
     private Label eventNameLabel;
     @FXML
     private Label eventVenueLabel;

@@ -18,6 +18,7 @@ public class AddNewVenueController implements Initializable {
 
     @FXML
     private TextField nameField;
+
     @FXML
     private TextField locationField;
     @FXML

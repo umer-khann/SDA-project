@@ -29,6 +29,7 @@ public class RemoveSponsorshipController {
     @FXML
     private Button loginbutton;
 
+
     @FXML
     private TextField eventIDField;
 

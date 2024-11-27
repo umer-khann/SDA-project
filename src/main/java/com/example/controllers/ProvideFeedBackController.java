@@ -26,6 +26,7 @@ public class ProvideFeedBackController implements Initializable {
     @FXML
     private TableColumn<Event, Integer> ColEvID;
     @FXML
+
     private TableColumn<Event, String> ColEvName;
     @FXML
     private TableColumn<Event, Date> ColEvDate;

@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 public class EventOrgNotifications implements Initializable {
 
 
+
     private int EvOrgID;
     @FXML
     private TableView<Notification> Table;

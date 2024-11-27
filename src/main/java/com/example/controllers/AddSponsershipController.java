@@ -28,6 +28,7 @@ public class AddSponsershipController implements Initializable {
     private TableView<Event> Table;
     @FXML
     private TableColumn<Venue, String> EVID;
+
     @FXML
     private TableColumn<Venue, String> EVNAME;
     @FXML

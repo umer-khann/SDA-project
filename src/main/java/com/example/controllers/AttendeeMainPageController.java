@@ -130,6 +130,7 @@ public class AttendeeMainPageController implements Initializable {
         stage.setScene(new Scene(root));
         stage.setTitle("");
         stage.show();
+
     }
 
     public void ex(ActionEvent actionEvent) {

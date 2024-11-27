@@ -23,6 +23,7 @@ public class AttendeeNotifications implements Initializable {
 
     User attendee= Attendee.getuser(attendeeid);
 
+
     @FXML
     private AnchorPane TicketPane;
     @FXML

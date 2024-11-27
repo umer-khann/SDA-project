@@ -34,6 +34,7 @@ public class HelloController {
                 // Navigate to the Admin main page
                 navigateTo("admin-main-page.fxml", e);
             } else {
+
                 showAlert(Alert.AlertType.ERROR, "Validation Error", "Invalid Credentials! Try again.");
             }
         } else {

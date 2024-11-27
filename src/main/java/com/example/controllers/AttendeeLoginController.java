@@ -23,6 +23,7 @@ public class AttendeeLoginController {
     @FXML
     public Label loginmessagelabel;
 
+
     @FXML
     public Button loginbutton;
 

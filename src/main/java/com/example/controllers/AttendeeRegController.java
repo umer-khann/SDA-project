@@ -28,6 +28,7 @@ public class AttendeeRegController implements Initializable {
     private Button cancelButton;
 
     @FXML
+
     private Button signUpButton;
 
     @FXML

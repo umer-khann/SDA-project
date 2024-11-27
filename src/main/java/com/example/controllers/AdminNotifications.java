@@ -22,6 +22,7 @@ public class AdminNotifications implements Initializable {
     @FXML
     private AnchorPane TicketPane;
     @FXML
+
     private TableView<TicketPurchaseNotification> Table1;
     @FXML
     private TableColumn<TicketPurchaseNotification,Integer> TicketID;

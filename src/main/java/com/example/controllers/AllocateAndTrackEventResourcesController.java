@@ -17,6 +17,7 @@ public class AllocateAndTrackEventResourcesController {
 
     @FXML
     private TextField eventid;
+
     @FXML
     private TextField equipment;
     @FXML

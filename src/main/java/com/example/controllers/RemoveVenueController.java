@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 
 public class RemoveVenueController implements Initializable {
     @FXML
+
     public TableView<Venue> VenueTable;  // Specify Venue type for better type safety
     @FXML
     public TableColumn<Venue, Integer> colVenueId;

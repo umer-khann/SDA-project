@@ -30,6 +30,7 @@ import java.util.ResourceBundle;
 public class GenerateEventAnalysisController implements Initializable {
     @FXML
     private ImageView Exit;
+
     @FXML
     private TableColumn<EventAnalysis, Integer> EvID;
     @FXML

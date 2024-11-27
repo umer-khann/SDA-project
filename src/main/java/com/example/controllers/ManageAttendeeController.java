@@ -22,6 +22,7 @@ public class ManageAttendeeController implements Initializable {
 
 
 
+
     @FXML
     private Button signUpButton;
 

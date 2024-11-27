@@ -246,6 +246,7 @@ public class CreateEventController implements Initializable {
             ((ConferenceEvent) newEvent).setSpeaker(speaker);
         }
 
+
         // Save the created event to the database
         if (newEvent != null) {
             if (newEvent.createEvent(EvOrgID,venueID)) {

@@ -23,6 +23,7 @@ public class HandleEventBudgetController {
     @FXML
     private Label welcomeText;
     @FXML
+
     private Label loginmessagelabel;
 
     private int EventOrgID;

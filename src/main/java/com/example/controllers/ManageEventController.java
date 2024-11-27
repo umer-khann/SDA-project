@@ -153,6 +153,7 @@ public class ManageEventController {
             return;
         }
 
+
         try {
             int eventID = Integer.parseInt(eventIDText); // Convert eventID to integer
 

@@ -25,6 +25,7 @@ public class AttendeeEventRegistrationController {
     @FXML
     private Button applychanges;
 
+
     private int attendeeID;
     private String eventName;
     private String eventVenue;

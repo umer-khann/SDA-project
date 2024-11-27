@@ -20,6 +20,7 @@ public class EventOrganizerController {
     private Label welcomeText;
 
 
+
     @FXML
     private Button loginbutton;
 

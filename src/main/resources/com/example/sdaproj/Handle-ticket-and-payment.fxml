@@ -46,6 +46,7 @@
             <Font size="18.0" />
         </font>
     </TextField>
+
     <TextField fx:id="txtMonth" layoutX="204.0" layoutY="270.0" prefHeight="39.0" prefWidth="87.0" promptText="MM">
         <font>
             <Font size="18.0" />

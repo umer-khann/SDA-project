@@ -160,6 +160,7 @@ public class EventOrganizerMainPageController implements Initializable {
                 ((EventOrgNotifications) controller).setEventOrgID(eventOrgID);
             }
 
+
             // Set the loaded FXML pane as the content of the content area
             contentArea.setContent(pane);
 

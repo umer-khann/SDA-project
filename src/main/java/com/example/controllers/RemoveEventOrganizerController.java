@@ -29,6 +29,7 @@ public class RemoveEventOrganizerController {
     @FXML
     private TextField neworgid;
 
+
     @FXML
     private TableColumn<EventOrganizer, Integer> colOrganizerID;
 
