@@ -14,8 +14,6 @@
 .button:hover {
     -fx-background-color: #2C4A85; /* Slightly brighter shade on hover */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.4, 2, 4); /* Enhanced shadow */
-    -fx-scale-x: 1.02; /* Slight scaling for a dynamic feel */
-    -fx-scale-y: 1.02;
 }
 
 /* Shadow on Background */
