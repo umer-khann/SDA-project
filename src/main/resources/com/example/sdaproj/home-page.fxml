@@ -14,8 +14,8 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.HomePageController">
-   <top>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.HomePageController">
+    <top>
         <AnchorPane prefHeight="388.0" prefWidth="700.0" style="-fx-background-color: #03101b;" BorderPane.alignment="CENTER">
             <children>
                 <Label layoutX="273.0" layoutY="34.0" text="EVENTA X" textFill="WHITE">
@@ -24,94 +24,94 @@
                     </font>
                 </Label>
                 <Line endX="100.0" layoutX="340.0" layoutY="73.0" startX="-100.0" stroke="WHITE" />
-            <Label layoutX="156.0" layoutY="98.0" text="Collaborative Event Management System" textFill="WHITE">
-               <font>
-                  <Font name="Verdana Bold" size="16.0" />
-               </font>
-            </Label>
-            <Line endX="197.0" layoutX="337.0" layoutY="126.0" startX="-192.0" stroke="WHITE" />
-            <ImageView fitHeight="65.0" fitWidth="90.0" layoutX="524.0" layoutY="17.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" smooth="false">
-               <image>
-                   <Image url="@images/logo.png" />
-               </image>
-               <effect>
-                  <ColorAdjust>
-                     <input>
-                        <Glow />
-                     </input>
-                  </ColorAdjust>
-               </effect>
-               <cursor>
-                  <Cursor fx:constant="W_RESIZE" />
-               </cursor>
-            </ImageView>
-            <Button defaultButton="true" layoutX="91.0" layoutY="259.0" mnemonicParsing="false" onAction="#attendeebutton" prefHeight="31.0" prefWidth="518.0" style="-fx-background-color: #03101b;" text="ATTENDEE" textFill="WHITE">
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-               <effect>
-                  <ColorAdjust brightness="0.44" />
-               </effect>
-               <font>
-                  <Font name="Verdana" size="12.0" />
-               </font>
-            </Button>
-            <Button defaultButton="true" layoutX="91.0" layoutY="310.0" mnemonicParsing="false" onAction="#eventorgbutton" prefHeight="31.0" prefWidth="518.0" style="-fx-background-color: #03101b;" text="EVENT ORGANIZER" textFill="WHITE">
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-               <effect>
-                  <ColorAdjust brightness="0.44" />
-               </effect>
-               <font>
-                  <Font name="Verdana" size="12.0" />
-               </font>
-            </Button>
-            <AnchorPane layoutX="-8.0" prefHeight="415.0" prefWidth="71.0" style="-fx-background-color: #010115;">
-               <effect>
-                  <DropShadow height="0.0" radius="4.75">
-                     <color>
-                        <Color red="0.6392157077789307" green="0.6196078658103943" blue="0.6196078658103943" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </AnchorPane>
-            <Button fx:id="adm" defaultButton="true" layoutX="91.0" layoutY="208.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="31.0" prefWidth="518.0" style="-fx-background-color: #03101b;" text="ADMIN" textFill="WHITE">
-                <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-               <effect>
-                  <ColorAdjust brightness="0.44" />
-               </effect>
-               <font>
-                  <Font name="Verdana" size="12.0" />
-               </font>
-            </Button>
-            <AnchorPane layoutX="636.0" prefHeight="415.0" prefWidth="63.0" style="-fx-background-color: #010115;">
-               <effect>
-                  <DropShadow height="0.0" radius="4.75">
-                     <color>
-                        <Color red="0.6392157077789307" green="0.6196078658103943" blue="0.6196078658103943" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </AnchorPane>
-            <ImageView fitHeight="61.0" fitWidth="60.0" layoutX="85.0" layoutY="19.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" smooth="false">
-               <image>
-                  <Image url="@images/events.png" />
-               </image>
-               <effect>
-                  <ColorAdjust>
-                     <input>
-                        <Glow />
-                     </input>
-                  </ColorAdjust>
-               </effect>
-               <cursor>
-                  <Cursor fx:constant="W_RESIZE" />
-               </cursor>
-            </ImageView>
+                <Label layoutX="156.0" layoutY="98.0" text="Collaborative Event Management System" textFill="WHITE">
+                    <font>
+                        <Font name="Verdana Bold" size="16.0" />
+                    </font>
+                </Label>
+                <Line endX="197.0" layoutX="337.0" layoutY="126.0" startX="-192.0" stroke="WHITE" />
+                <ImageView fitHeight="65.0" fitWidth="90.0" layoutX="524.0" layoutY="17.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" smooth="false">
+                    <image>
+                        <Image url="@images/logo.png" />
+                    </image>
+                    <effect>
+                        <ColorAdjust>
+                            <input>
+                                <Glow />
+                            </input>
+                        </ColorAdjust>
+                    </effect>
+                    <cursor>
+                        <Cursor fx:constant="W_RESIZE" />
+                    </cursor>
+                </ImageView>
+                <Button fx:id="attendeebutton" layoutX="183.0" layoutY="264.0" mnemonicParsing="false" onAction="#attendeebutton" prefHeight="31.0" prefWidth="332.0" styleClass="button-homepage" text="ATTENDEE" textFill="WHITE">
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                    </cursor>
+                    <effect>
+                        <ColorAdjust brightness="0.44" />
+                    </effect>
+                    <font>
+                        <Font name="Verdana" size="12.0" />
+                    </font>
+                </Button>
+                <Button fx:id="eventorgbutton" layoutX="184.0" layoutY="316.0" mnemonicParsing="false" onAction="#eventorgbutton" prefHeight="31.0" prefWidth="331.0" styleClass="button-homepage" text="EVENT ORGANIZER" textFill="WHITE">
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                    </cursor>
+                    <effect>
+                        <ColorAdjust brightness="0.44" />
+                    </effect>
+                    <font>
+                        <Font name="Verdana" size="12.0" />
+                    </font>
+                </Button>
+                <Button fx:id="adm" layoutX="183.0" layoutY="208.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="31.0" prefWidth="333.0" styleClass="button-homepage" text="ADMIN" textFill="WHITE">
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                    </cursor>
+                    <effect>
+                        <ColorAdjust brightness="0.44" />
+                    </effect>
+                    <font>
+                        <Font name="Verdana" size="12.0" />
+                    </font>
+                </Button>
+                <AnchorPane layoutX="-8.0" prefHeight="415.0" prefWidth="71.0" style="-fx-background-color: #010115;">
+                    <effect>
+                        <DropShadow height="0.0" radius="4.75">
+                            <color>
+                                <Color red="0.6392157077789307" green="0.6196078658103943" blue="0.6196078658103943" />
+                            </color>
+                        </DropShadow>
+                    </effect>
+                </AnchorPane>
+                <AnchorPane layoutX="636.0" prefHeight="415.0" prefWidth="63.0" style="-fx-background-color: #010115;">
+                    <effect>
+                        <DropShadow height="0.0" radius="4.75">
+                            <color>
+                                <Color red="0.6392157077789307" green="0.6196078658103943" blue="0.6196078658103943" />
+                            </color>
+                        </DropShadow>
+                    </effect>
+                </AnchorPane>
+                <ImageView fitHeight="61.0" fitWidth="60.0" layoutX="85.0" layoutY="19.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" smooth="false">
+                    <image>
+                        <Image url="@images/events.png" />
+                    </image>
+                    <effect>
+                        <ColorAdjust>
+                            <input>
+                                <Glow />
+                            </input>
+                        </ColorAdjust>
+                    </effect>
+                    <cursor>
+                        <Cursor fx:constant="W_RESIZE" />
+                    </cursor>
+                </ImageView>
             </children>
         </AnchorPane>
-   </top>
+    </top>
 </BorderPane>

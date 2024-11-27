@@ -1,0 +1,54 @@
+/* General button style for Homepage */
+
+/* Base button style */
+.button-homepage {
+    -fx-background-color: #03101b; /* Base dark color for the button */
+    -fx-text-fill: white; /* Text color */
+    -fx-font-family: "Verdana Bold"; /* Font style */
+    -fx-font-size: 12px; /* Font size */
+    -fx-padding: 6 12; /* Padding inside the button */
+    -fx-background-radius: 5; /* Rounded corners for the button */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.3, 2, 2); /* Subtle shadow effect */
+    -fx-cursor: hand; /* Hand cursor on hover */
+}
+
+/* Hover effect for buttons */
+.button-homepage:hover {
+    -fx-background-color: #2C4A85; /* Lighter background color on hover */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 8, 0.4, 2, 4); /* Enhanced shadow on hover */
+    -fx-scale-x: 1.05; /* Slight scaling on the x-axis */
+    -fx-scale-y: 1.05; /* Slight scaling on the y-axis */
+}
+
+/* Additional button effects (optional) */
+.button-homepage:pressed {
+    -fx-background-color: #1f3a61; /* Darker background color when pressed */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 8, 0.5, 2, 4); /* Stronger shadow when pressed */
+}
+
+/* Specific button styles based on fx:id from FXML */
+
+/* Button with fx:id="adm" */
+#adm {
+    -fx-font-size: 14px; /* Adjust font size for admin button */
+}
+
+/* Button with fx:id="attendeebutton" */
+#attendeebutton {
+    -fx-font-size: 14px; /* Adjust font size for attendee button */
+}
+
+/* Button with fx:id="eventorgbutton" */
+#eventorgbutton {
+    -fx-font-size: 14px; /* Adjust font size for event organizer button */
+}
+
+/* Apply styles to ImageView if needed */
+.image-homepage {
+    -fx-cursor: pointer; /* Change cursor to pointer for clickable images */
+}
+
+/* Add effects to images when hovered */
+.image-homepage:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.3, 2, 2); /* Subtle shadow on hover */
+}
