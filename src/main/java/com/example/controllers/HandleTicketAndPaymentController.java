@@ -163,24 +163,24 @@ public class HandleTicketAndPaymentController {
         int ticketId= 0;
         int transactionId = random.nextInt(1865) + 5; // 1991 is the range (2000 - 10 + 1)
 
-        Payment payment = new Payment(paymentId, price, "Pending", transactionId);
+        //Payment payment = new Payment(paymentId, price, "Pending", transactionId);
 
         // Create ticket object
         Ticket ticket = new Ticket(ticketId, price, "A1");
-        ticket.setPayment(payment);
+        ticket.setPayment(paymentId, price,"Pending",transactionId);
 
 
-        int paymentid= payment.AddPaymentInformation(attendeeID,eventid);
-        payment.setPaymentId(paymentId);
+        int paymentid= ticket.GetPayment().AddPaymentInformation(attendeeID,eventid);
+        ticket.GetPayment().setPaymentId(paymentId);//AddPaymentInformation(attendeeID,eventid);
         System.out.println("Payment "+ paymentid);
-        payment.AddNotification(attendeeID,paymentid);
+        ticket.GetPayment().AddNotification(attendeeID,paymentid);
         int ticket_id =ticket.AddTicketInformation(attendeeID,eventid,paymentid);
         ticket.setTicketId(ticket_id);
         System.out.println("ticket "+ ticket_id);
         ticket.insertTicketPurchaseNotification(attendeeID,ticket_id, eventname);
 
 
-        payment.insertnotification(eventid, attendeeID,eventname);
+        ticket.GetPayment().insertnotification(eventid, attendeeID,eventname);
 
 
 
@@ -195,7 +195,7 @@ public class HandleTicketAndPaymentController {
 
 
         // If everything is valid, confirm payment and show success message
-        if (payment.confirmPayment(transactionId)) {
+        if (ticket.GetPayment().confirmPayment(transactionId)) {
             showAlert("Success", "Payment successful. Ticket has been booked.");
         } else {
             showAlert("Error", "Payment confirmation failed.");
