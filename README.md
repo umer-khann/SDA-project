@@ -13,7 +13,7 @@ User Roles: Different roles such as Event Organizer, Attendee, and Event Admin w
 Technologies Used
 Java: The core language used for backend development.
 JavaFX: For building the graphical user interface (GUI).
-JDBC: For database connectivity (MySQL or any relational database).
+JDBC: For database connectivity (MySQL).
 
 Acknowledgments
 Our team: Umer Khan, Hamza Imran, Inam Ullah Shaikh.
