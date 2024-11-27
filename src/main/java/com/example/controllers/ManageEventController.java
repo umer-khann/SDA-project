@@ -108,7 +108,7 @@ public class ManageEventController {
 
     // Method to handle event deletion
     @FXML
-    public void deleteEventButtonOnAction(ActionEvent actionEvent) {
+    public void deleteEventButtonOnAction(ActionEvent actionEvent) throws Exception {
         Event selectedEvent = eventTable.getSelectionModel().getSelectedItem();
         if (selectedEvent != null) {
             // Check if the selected event belongs to the current event organizer
@@ -200,5 +200,31 @@ public class ManageEventController {
         alert.setTitle(title);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    public void deleteEvent(ActionEvent actionEvent) throws Exception {
+        // Retrieve the input values from the GUI
+        String eventIDText = eventid.getText();
+        try {
+            int eventID = Integer.parseInt(eventIDText); // Convert eventID to integer
+
+            ObservableList<Event> eventList = eventTable.getItems();
+            boolean eventExistsInTable = eventList.stream().anyMatch(event -> event.getEventID() == eventID);
+            if (!eventExistsInTable) {
+                showAlert("Error", "Event ID " + eventID + " does not exist in the current event list.");
+                return;
+            }
+            boolean updateSuccessful = Event.deleteEvent(eventID);
+            if (updateSuccessful) {
+                String message = "Event deleted successfully. ";
+                int organizerUserID = currentOrganizerid;
+                showAlert("Success", "Event deleted and notification sent to the Attendee successfully!");
+            } else {
+                showAlert("Failure", "Failed to update event details.");
+            }
+
+        } catch (NumberFormatException e) {
+            showAlert("Error", "Invalid Event ID. Please enter a valid number.");
+        }
     }
 }

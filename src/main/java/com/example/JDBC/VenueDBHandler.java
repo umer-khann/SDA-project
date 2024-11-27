@@ -11,6 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VenueDBHandler {
+    private static VenueDBHandler instance;
+    public static synchronized VenueDBHandler getInstance() {
+        if (instance == null) {
+            instance = new VenueDBHandler();
+        }
+        return instance;
+    }
     public boolean addVenue(String type, Venue venue,int ID) {
         // SQL query to insert into Venue table
         String venueQuery = "INSERT INTO Venue (venueName, location, capacity, venueType, eventOrganizerID) VALUES (?, ?, ?, ?, ?)";
@@ -149,8 +156,45 @@ public class VenueDBHandler {
         }
         return venues;
     }
+    public boolean deleteVenueNotifiction(int venueID) {
+        String selectQuery = "SELECT ea.attendeeID, e.eventName FROM event e " +
+                "JOIN eventattendee ea ON e.eventID = ea.eventID " +
+                "WHERE e.venueID = ?";
+        String insertQuery = "INSERT INTO eventupdatenotification (UserID, Message, Status) " +
+                "VALUES (?, ?, 'Unread')";
+        try (Connection conn = MyJDBC.getConnection();
+             PreparedStatement selectStmt = conn.prepareStatement(selectQuery);
+             PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
+
+            // Set the venueID for the SELECT query
+            selectStmt.setInt(1, venueID);
+
+            // Execute SELECT query to retrieve the attendee IDs and event names
+            ResultSet rs = selectStmt.executeQuery();
+
+            // Loop through the results and insert notifications for each attendee
+            while (rs.next()) {
+                int attendeeID = rs.getInt("attendeeID");
+                String eventName = rs.getString("eventName");
+
+                // Set the parameters for the INSERT query
+                insertStmt.setInt(1, attendeeID);         // Set EventID (using venueID as EventID from event)
+                insertStmt.setString(2, "Event Cancelled: " + eventName);      // Set UserID (attendeeID)
+
+                // Execute the INSERT query for each attendee
+                insertStmt.executeUpdate();
+            }
+
+            return true;  // Return true if insertions are successful
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;  // Return false if there's an error
+        }
+    }
+
     public boolean deleteVenue(int venueID, int EVID) {
         // SQL query for deleting the venue from the Venue table
+        deleteVenueNotifiction(venueID);
         String deleteVenueQuery = "DELETE FROM Venue WHERE venueID = ? AND eventOrganizerID = ?";
 
         try (Connection connection = MyJDBC.getConnection()) {

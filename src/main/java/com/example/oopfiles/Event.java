@@ -13,7 +13,7 @@ public abstract class Event {
     private String eventDate;
     private boolean status;
     private double budget;
-    protected static EventDBController db = new EventDBController();;
+    protected static EventDBController db = EventDBController.getInstance();
     private String eventType;
     private EventOrganizer organizer;  // Aggregation: Event has an organizer
     private Venue v;
@@ -27,7 +27,8 @@ public abstract class Event {
     }
 
 
-    public static void deleteEvent(int eventID) {
+    public static boolean deleteEvent(int eventID) throws Exception {
+            return db.deleteEvent(eventID);
     }
 
 

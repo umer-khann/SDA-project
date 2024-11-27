@@ -123,6 +123,9 @@
          </font>
       </Label>
       <TextField fx:id="EVVenue" layoutX="395.0" layoutY="135.0" />
-      <Button fx:id="display" layoutX="574.0" layoutY="136.0" mnemonicParsing="false" onAction="#displayPushed" text="Button" />
+      <Button fx:id="display" layoutX="574.0" layoutY="136.0" mnemonicParsing="false" onAction="#displayPushed" text="Display">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
    </children>
 </AnchorPane>

@@ -9,7 +9,7 @@ public abstract class Venue {
     private String venueName;
     private String location;
     private int capacity;
-    private VenueDBHandler db = new VenueDBHandler();
+    protected VenueDBHandler db = VenueDBHandler.getInstance();
     public Venue(String venueName, String location, int capacity) {
         this.venueId = 0;
         this.venueName = venueName;

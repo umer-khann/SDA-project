@@ -53,11 +53,26 @@ public class AttendeeRegController implements Initializable {
     private String choice;
 
     @FXML
+    private TextField vipLevelField;
+
+    @FXML
+    private Label vipLevelLabel;
+
+    @FXML
+    private TextField membershipLevelField;
+
+    @FXML
+    private Label membershipLevelLabel;
+
+
+
+    @FXML
     public void signUpButtonOnAction(javafx.event.ActionEvent e) throws IOException {
         String username = usernameField.getText();
         String password = passwordField.getText();
         String contact = contactField.getText();
         String email = emailField.getText();
+        String additionalDetail = null;
 
         // Check for empty fields
         if (username.isBlank() || password.isBlank() || contact.isBlank() || email.isBlank()) {
@@ -65,50 +80,46 @@ public class AttendeeRegController implements Initializable {
             return;
         }
 
-        // Validate email format using a regex pattern
-        if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-            showAlert("Invalid Email", "Invalid email format!");
-            return;
+        // Check for additional fields based on choice
+        if ("VIP".equalsIgnoreCase(choice)) {
+            additionalDetail = vipLevelField.getText();
+            if (additionalDetail.isBlank()) {
+                showAlert("Input Error", "Please input VIP level!");
+                return;
+            }
+        } else if ("General".equalsIgnoreCase(choice)) {
+            additionalDetail = membershipLevelField.getText();
+            if (additionalDetail.isBlank()) {
+                showAlert("Input Error", "Please input Membership level!");
+                return;
+            }
         }
 
-        // Validate contact details (e.g., should be a valid phone number format)
-        if (!contact.matches("\\d{10}")) {  // Assuming phone number should be 10 digits long
-            showAlert("Invalid Contact Number", "Invalid contact number! Must be 10 digits.");
-            return;
-        }
-
-        // Create a new Attendee object based on choice
+        // Rest of your sign-up logic
         User newAttendee = null;
-        if (myChoiceBox.getValue().toString().equalsIgnoreCase(choices[0])) {
+        if ("General".equalsIgnoreCase(choice)) {
             newAttendee = createUser("GENERAL_ATTENDEE");
-        } else if (myChoiceBox.getValue().toString().equals(choices[1])) {
-            newAttendee = UserFactory.createUser("VIP_ATTENDEE");
+            newAttendee.setType("General");
+        } else if ("VIP".equalsIgnoreCase(choice)) {
+            newAttendee = createUser("VIP_ATTENDEE");
+            newAttendee.setType("VIP");
         }
-
-        // Set the attendee details
         newAttendee.setName(nameField.getText());
         newAttendee.setEmail(emailField.getText());
         newAttendee.setContactDetails(contactField.getText());
         newAttendee.setUserName(username);
         newAttendee.setPassword(password);
+        // Validate and register the attendee
+        if (!newAttendee.isValidUserName() || !newAttendee.isValidEmail()) {
+            showAlert("Registration Error", "Invalid details provided!");
+            return;
+        }
 
-        // Validate registration (check uniqueness of username/email)
-        if (!newAttendee.isValidUserName()) {
-            showAlert("Username Error", "Username already exists!");
-            return;  // Don't proceed if validation fails
-        }
-        if (!newAttendee.isValidEmail()) {
-            showAlert("Email Error", "Email already exists!");
-            return;  // Don't proceed if validation fails
-        }
         RegisterAdapter userAdapter = new UserRegisterAdapter(newAttendee);
-        userAdapter.register();
-        // Register the attendee
-        // newAttendee.registerAttendee();
-
-        // Load the next page
-        loadPage("home-page.fxml", e);
+        if(userAdapter.register(additionalDetail))// Load the next page
+            loadPage("home-page.fxml", e);
     }
+
 
     // Method to display alerts
     private void showAlert(String title, String message) {
@@ -152,20 +163,50 @@ public class AttendeeRegController implements Initializable {
     }
 
 
+    public void getChoice(javafx.event.ActionEvent e) {
+        choice = myChoiceBox.getValue();
+
+        // Show or hide additional fields based on choice
+        if ("VIP".equalsIgnoreCase(choice)) {
+            vipLevelField.setVisible(true);
+            vipLevelLabel.setVisible(true);
+            membershipLevelField.setVisible(false);
+            membershipLevelLabel.setVisible(false);
+        } else if ("General".equalsIgnoreCase(choice)) {
+            vipLevelField.setVisible(false);
+            vipLevelLabel.setVisible(false);
+            membershipLevelField.setVisible(true);
+            membershipLevelLabel.setVisible(true);
+        } else {
+            // Hide all additional fields if no valid choice is selected
+            vipLevelField.setVisible(false);
+            vipLevelLabel.setVisible(false);
+            membershipLevelField.setVisible(false);
+            membershipLevelLabel.setVisible(false);
+        }
+    }
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         myChoiceBox.getItems().addAll(choices);
         myChoiceBox.setOnAction(this::getChoice);
+
+        // Initially hide additional fields
+        vipLevelField.setVisible(false);
+        vipLevelLabel.setVisible(false);
+        membershipLevelField.setVisible(false);
+        membershipLevelLabel.setVisible(false);
     }
-    public void getChoice(javafx.event.ActionEvent e){
-        choice=myChoiceBox.getValue();
-        System.out.println(choice);
-    }
+
 
     public void backButtonOnAction(javafx.event.ActionEvent e) throws IOException {
         loadPage("home-page.fxml", e);
     }
 
     public void setAttendeeID(int attendeeID) {
+    }
+
+    public void exit(ActionEvent actionEvent) {
+        System.exit(0);
     }
 }

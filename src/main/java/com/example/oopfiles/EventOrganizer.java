@@ -1,4 +1,5 @@
 package com.example.oopfiles;
+import com.example.JDBC.EventAnalysisDBHandler;
 import com.example.JDBC.EventOrganizerDBHandler;
 import javafx.collections.ObservableList;
 
@@ -7,7 +8,7 @@ import java.util.List;
 public class EventOrganizer extends User implements NotificationObserver{
     private List<String> eventsOrganized;
     private int experienceLevel;
-    static EventOrganizerDBHandler dbHandler;
+    static EventOrganizerDBHandler dbHandler = EventOrganizerDBHandler.getInstance();
 
 
     private int eventid;
@@ -19,11 +20,9 @@ public class EventOrganizer extends User implements NotificationObserver{
     // Constructor
     public EventOrganizer() {
         super();
-        dbHandler=new EventOrganizerDBHandler();
     }
 
     public static ObservableList<EventOrganizer> showEvents(ObservableList<EventOrganizer> eventList) {
-        dbHandler = new EventOrganizerDBHandler();
         dbHandler.showEvents(eventList);
         return eventList;
     }

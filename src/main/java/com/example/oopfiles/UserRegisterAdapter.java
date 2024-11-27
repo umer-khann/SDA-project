@@ -12,7 +12,27 @@ public class UserRegisterAdapter implements RegisterAdapter {
 
         // Check user type and call appropriate method
         if (user instanceof Attendee) {
-            return ((Attendee) user).registerAttendee(); // Calls registerAttendee on Attendee subclasses
+            if(user instanceof GeneralAttendee)
+                return ((Attendee) user).registerAttendee("General");
+            else
+                return ((Attendee)user).registerAttendee("VIP");// Calls registerAttendee on Attendee subclasses
+        } else if (user instanceof EventOrganizer) {
+            ((EventOrganizer) user).registerEventOrganizer();
+            return true; // Assume success for EventOrganizer
+        }
+
+        // If the user type is not supported, return false
+        System.err.println("Unknown user type: Registration failed.");
+        return false;
+    }@Override
+    public boolean register(String val) {
+
+        // Check user type and call appropriate method
+        if (user instanceof Attendee) {
+            if(user instanceof GeneralAttendee)
+                return ((Attendee) user).registerAttendee(val);
+            else
+                return ((Attendee)user).registerAttendee(val);// Calls registerAttendee on Attendee subclasses
         } else if (user instanceof EventOrganizer) {
             ((EventOrganizer) user).registerEventOrganizer();
             return true; // Assume success for EventOrganizer

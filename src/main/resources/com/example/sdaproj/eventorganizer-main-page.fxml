@@ -14,6 +14,15 @@
                     <children>
                         <Pane layoutX="102.0" layoutY="20.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #032d4d;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
+                        <Button layoutY="-2.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="30.0" prefWidth="33.0" style="-fx-background-color: trans;" text="Button">
+                           <graphic>
+                              <ImageView fitHeight="22.0" fitWidth="21.0">
+                                 <image>
+                                    <Image url="@images/switch.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                                 <ImageView fx:id="Exit" fitHeight="22.0" fitWidth="22.0" layoutX="678.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@images/exit.png" />
@@ -21,10 +30,7 @@
                                 </ImageView>
                             </children>
                         </Pane>
-                        <HBox layoutX="239.0" layoutY="1.0" prefHeight="43.0" prefWidth="525.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
-                            <children>
-                            </children>
-                        </HBox>
+                        <HBox layoutX="239.0" layoutY="1.0" prefHeight="200.0" prefWidth="635.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
                         <Label fx:id="Menu" layoutX="14.0" layoutY="36.0" prefHeight="22.0" prefWidth="92.0" text="MENU" textFill="#b7b7b7" AnchorPane.bottomAnchor="7.007998687500045" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="618.063980710938" AnchorPane.topAnchor="36.0">
                             <graphic>
                                 <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">

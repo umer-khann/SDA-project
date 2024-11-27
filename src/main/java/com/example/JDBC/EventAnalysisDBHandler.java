@@ -9,8 +9,13 @@ import java.util.Date;
 import java.util.List;
 
 public class EventAnalysisDBHandler {
-
-    // Method to generate event analysis using MyJDBC for the database connection
+    private static EventAnalysisDBHandler instance;
+    public static synchronized EventAnalysisDBHandler getInstance() {
+        if (instance == null) {
+            instance = new EventAnalysisDBHandler();
+        }
+        return instance;
+    }
     public List<EventAnalysis> generateEventAnalysis() {
         List<EventAnalysis> eventAnalysisList = new ArrayList<>();
 

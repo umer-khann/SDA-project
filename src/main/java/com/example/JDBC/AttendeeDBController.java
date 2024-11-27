@@ -1,14 +1,24 @@
 package com.example.JDBC;
 
 import com.example.JDBC.MyJDBC;
+import com.example.oopfiles.Attendee;
+import com.example.oopfiles.GeneralAttendee;
+import com.example.oopfiles.VipAttendee;
 import com.example.oopfiles.*;
+import javafx.scene.control.Alert;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AttendeeDBController {
-
+    private static AttendeeDBController instance;
+    public static synchronized AttendeeDBController getInstance() {
+        if (instance == null) {
+            instance = new AttendeeDBController();
+        }
+        return instance;
+    }
     /**
      * Validate the login credentials for an attendee.
      *
@@ -36,27 +46,42 @@ public class AttendeeDBController {
         }
     }
 
-    public boolean signUpAttendee(Attendee attendee) {
+    public boolean signUpAttendee(Attendee attendee,String add) {
+        if(attendee.getType().equalsIgnoreCase("general") && !isValidMembershipLevel(add)){
+            showErrorAlert("Invalid membership level choose from Basic, Silver, Gold, Platinum");
+            return false;}
         String query = "INSERT INTO Attendees (name, email, contactDetails, username, password, loyaltyPoints, type) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = MyJDBC.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
+            // Insert into the main Attendees table
             preparedStatement.setString(1, attendee.getName());
             preparedStatement.setString(2, attendee.getEmail());
             preparedStatement.setString(3, attendee.getContactDetails());
             preparedStatement.setString(4, attendee.getUserName());
             preparedStatement.setString(5, attendee.getPassword());
-            preparedStatement.setInt(6, 10);
-            System.out.println(attendee.gettype());// default 0 for new attendees
-            preparedStatement.setString(7, attendee.gettype()); // default 0 for new attendees
+            preparedStatement.setInt(6, 10); // Initial loyalty points for a new attendee
+            preparedStatement.setString(7, attendee.gettype()); // Type: General or VIP
 
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Attendee registered successfully!");
-                int ID = getID(attendee.getUserName());
-                attendee.setUserID(ID);
+
+                // Retrieve the newly created attendee's ID
+                int attendeeID = getID(attendee.getUserName());
+                attendee.setUserID(attendeeID);
+
+                // Insert additional data based on attendee type
+                if ("General".equalsIgnoreCase(attendee.gettype())) {
+                    // If the attendee is of type General, insert into generalattendees table
+                    insertGeneralAttendee(attendeeID,add);
+                } else if ("VIP".equalsIgnoreCase(attendee.gettype())) {
+                    // If the attendee is of type VIP, insert into vipattendees table
+                    insertVIPAttendee(attendeeID,add);
+                }
+
                 return true;
             } else {
                 System.out.println("Failed to register the attendee.");
@@ -69,6 +94,67 @@ public class AttendeeDBController {
         }
         return false;
     }
+
+    // Helper method to insert General Attendee
+    private void insertGeneralAttendee(int attendeeID, String membershipLevel) {
+        // Ensure that the membershipLevel is valid
+        if (!isValidMembershipLevel(membershipLevel)) {
+            showErrorAlert("Invalid membership level: " + membershipLevel);
+            return;
+        }
+
+        String query = "INSERT INTO generalattendees (attendeeID, membershipLevel) VALUES (?, ?)";
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, attendeeID);
+            preparedStatement.setString(2, membershipLevel); // Set the validated membership level
+            preparedStatement.executeUpdate();
+
+            System.out.println("General attendee registered successfully with " + membershipLevel + " membership.");
+        } catch (Exception e) {
+            // Show the SQL error in an alert
+            showErrorAlert("Error inserting general attendee: " + e.getMessage());
+        }
+    }
+
+    // Helper method to validate membership level
+    private boolean isValidMembershipLevel(String membershipLevel) {
+        return "Basic".equalsIgnoreCase(membershipLevel) ||
+                "Silver".equalsIgnoreCase(membershipLevel) ||
+                "Gold".equalsIgnoreCase(membershipLevel) ||
+                "Platinum".equalsIgnoreCase(membershipLevel);
+    }
+
+    // Method to show error alert
+    private void showErrorAlert(String errorMessage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(errorMessage);
+        alert.showAndWait();
+    }
+
+    // Helper method to insert VIP Attendee with specified VIP level and access area
+    private void insertVIPAttendee(int attendeeID, String VIPLevel) throws SQLException {
+        String query = "INSERT INTO vipattendees (attendeeID, VIPLevel, accessToExclusiveAreas) VALUES (?, ?, ?)";
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, attendeeID);
+            preparedStatement.setString(2, VIPLevel); // Set the VIP level based on the input
+            preparedStatement.setString(3, "BackStage pass, Access to VIP Lounge, Front-row seating"); // Set access information based on the input
+            preparedStatement.executeUpdate();
+
+            System.out.println("VIP attendee registered successfully with " + VIPLevel + " VIP level and access to ");
+        } catch (Exception e) {
+            throw new RuntimeException("Error inserting VIP attendee: " + e.getMessage(), e);
+        }
+    }
+
+
     public int getID(String username) {
         String query = "select attendeeID from attendees where username = ? ";
         try (Connection connection = MyJDBC.getConnection();
@@ -275,10 +361,8 @@ public class AttendeeDBController {
             return false;
         }
     }
-
-    public User retrieveAttendee(int attendeeID) {
-        User attendee = null;
-
+    public Attendee retrieveAttendee(int attendeeID) {
+        Attendee attendee = null;
 
         // SQL query to fetch the attendee details
         String query = "SELECT a.attendeeID, a.name, a.email, a.contactDetails, a.loyaltyPoints, a.username, a.password, a.type, " +
@@ -288,13 +372,10 @@ public class AttendeeDBController {
                 "LEFT JOIN vipattendees va ON a.attendeeID = va.attendeeID " +
                 "WHERE a.attendeeID = ?";
 
-
         try (Connection conn = MyJDBC.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
-
             stmt.setInt(1, attendeeID);  // Set the attendeeID parameter
-
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -306,7 +387,6 @@ public class AttendeeDBController {
                     String username = rs.getString("username");
                     String password = rs.getString("password");
                     String type = rs.getString("type");
-
 
                     // Instantiate the correct type of attendee based on the type field
                     if ("VIP".equalsIgnoreCase(type)) {
@@ -342,7 +422,6 @@ public class AttendeeDBController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
 
         return attendee;
     }

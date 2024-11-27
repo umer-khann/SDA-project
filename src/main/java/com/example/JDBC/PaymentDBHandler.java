@@ -4,8 +4,13 @@ import java.sql.*;
 
 
 public class PaymentDBHandler {
-
-
+    private static PaymentDBHandler instance;
+    public static synchronized PaymentDBHandler getInstance() {
+        if (instance == null) {
+            instance = new PaymentDBHandler();
+        }
+        return instance;
+    }
         // Method to insert a new payment
         public static int insertPayment(double amount, String status, int transactionId, int userId, Integer eventId) {
             String paymentQuery = "INSERT INTO Payment (Amount, Status, TransactionID, UserID, EventID) VALUES (?, ?, ?, ?, ?)";

@@ -6,14 +6,12 @@ import com.example.JDBC.VenueDBHandler;
 public class OutdoorVenue extends Venue {
     private String weatherPreparedness;
     private int additionalCapacity;
-    private VenueDBHandler db;
 
     // Constructor
     public OutdoorVenue(String venueName, String location, int capacity, String weatherPreparedness, int additionalCapacity) {
         super(venueName, location, capacity);
         this.weatherPreparedness = weatherPreparedness;
         this.additionalCapacity = additionalCapacity;
-        db=new VenueDBHandler();
     }
     public OutdoorVenue() {
         super();

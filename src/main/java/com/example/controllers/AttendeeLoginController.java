@@ -110,4 +110,7 @@ public class AttendeeLoginController {
     }
 
 
+    public void exit(ActionEvent actionEvent) {
+        System.exit(0);
+    }
 }

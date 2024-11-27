@@ -15,7 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventOrganizerDBHandler {
-
+    private static EventOrganizerDBHandler instance;
+    public static synchronized EventOrganizerDBHandler getInstance() {
+        if (instance == null) {
+            instance = new EventOrganizerDBHandler();
+        }
+        return instance;
+    }
 
     public boolean validateLogin(String username, String password) {
         String query = "SELECT * FROM EventOrganizers WHERE username = ? AND password = ?";

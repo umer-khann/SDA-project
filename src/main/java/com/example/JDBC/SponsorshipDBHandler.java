@@ -8,6 +8,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class SponsorshipDBHandler {
+    private static SponsorshipDBHandler instance;
+    public static synchronized SponsorshipDBHandler getInstance() {
+        if (instance == null) {
+            instance = new SponsorshipDBHandler();
+        }
+        return instance;
+    }
 
     public void showEvents(ObservableList<Sponsorship> sponsorshipList, int EventOrgID) {
         String query = "SELECT s.eventID, e.eventName, s.sponsorshipID, s.sponsorName, s.contributionAmount " +

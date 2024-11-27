@@ -12,7 +12,7 @@ public class EventAnalysis {
     private int ticketsSold;
     private String venueName;
     private Date eventDate;
-    private EventAnalysisDBHandler db;
+    private static EventAnalysisDBHandler db = EventAnalysisDBHandler.getInstance();
     public EventAnalysis(int eventID, String eventName, double avgRating, int ticketsSold, String venueName, Date eventDate) {
         this.eventID = eventID;
         this.eventName = eventName;
@@ -20,10 +20,8 @@ public class EventAnalysis {
         this.ticketsSold = ticketsSold;
         this.venueName = venueName;
         this.eventDate = eventDate;
-        db = new EventAnalysisDBHandler();
     }
     public EventAnalysis() {
-        db = new EventAnalysisDBHandler();
     }
     public List<EventAnalysis> generateeventanalysis(List<EventAnalysis> eval){
         eval = db.generateEventAnalysis();
