@@ -56,6 +56,10 @@ public abstract class Event {
         db.updateEventResources(eventid,staff1,seats1,equipment1);
     }
 
+    public static boolean AddEventAttendee(int eventID, int attendeeID) {
+        return db.addEventAttendee(eventID, attendeeID);
+    }
+
 
     public boolean updateDetails(String newName, String newDate) {
         this.eventName = newName;

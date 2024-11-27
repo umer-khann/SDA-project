@@ -176,7 +176,6 @@ public class HandleTicketAndPaymentController {
         ticket.GetPayment().AddNotification(attendeeID,paymentid);
         int ticket_id =ticket.AddTicketInformation(attendeeID,eventid,paymentid);
         ticket.setTicketId(ticket_id);
-        //
         System.out.println("ticket "+ ticket_id);
         ticket.insertTicketPurchaseNotification(attendeeID,ticket_id, eventname);
 

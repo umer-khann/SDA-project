@@ -104,10 +104,6 @@ public abstract class Attendee extends User implements NotificationObserver{
     public int getLoyaltyPoints() { return loyaltyPoints; }
 
 
-    public static boolean AddEventAttendee(int eventID, int attendeeID)
-    {
-        return db.addEventAttendee(eventID, attendeeID);
-    }
 
     public List<EventUpdateNotification> AttendeeEvUP(int attendeeid)
     {
