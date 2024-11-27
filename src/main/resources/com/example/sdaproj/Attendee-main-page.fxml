@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AttendeeMainPageController">
+<AnchorPane prefHeight="470.0" prefWidth="890.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AttendeeMainPageController">
+    <stylesheets>
+        <URL value="@styles2.css" />
+    </stylesheets>
     <children>
         <BorderPane layoutX="114.0" layoutY="54.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
@@ -14,7 +18,7 @@
                     <children>
                         <Pane layoutX="102.0" layoutY="20.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #032d4d;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
-                                <Button layoutY="-2.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="30.0" prefWidth="33.0" style="-fx-background-color: trans;" text="Button">
+                                <Button layoutY="-2.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="30.0" prefWidth="33.0" style="-fx-background-color: trans;">
                            <graphic>
                                         <ImageView fitHeight="22.0" fitWidth="21.0">
                                             <image>
@@ -22,11 +26,15 @@
                                             </image>
                                         </ImageView>
                            </graphic></Button>
-                                <ImageView fx:id="Exit" fitHeight="22.0" fitWidth="22.0" layoutX="678.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@images/exit.png" />
-                                    </image>
-                                </ImageView>
+                                <Button layoutX="848.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="25.0" style="-fx-background-color: trans;">
+                                    <graphic>
+                                        <ImageView fx:id="Exit" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/exit.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
                             </children>
                         </Pane>
                         <HBox layoutX="239.0" layoutY="1.0" prefHeight="43.0" prefWidth="525.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
@@ -61,9 +69,9 @@
                 </AnchorPane>
             </top>
             <left>
-                <AnchorPane fx:id="slider" prefHeight="362.0" prefWidth="176.0" style="-fx-background-color: #0A4969;" BorderPane.alignment="CENTER">
+                <AnchorPane fx:id="slider" prefHeight="362.0" prefWidth="176.0" style="-fx-background-color: #032d4d;" BorderPane.alignment="CENTER">
                     <children>
-                        <VBox layoutX="14.0" layoutY="35.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
+                        <VBox layoutX="14.0" layoutY="35.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #032d4d;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
                             <children>
                                 <JFXButton fx:id="button1" alignment="BASELINE_LEFT" onAction="#handleDashboardClick" prefHeight="38.0" prefWidth="176.0" styleClass="sidebarItem" text="Event Registration" textFill="WHITE">
                                     <font>

@@ -42,14 +42,14 @@
                 </Label>
                 <TableView fx:id="sponsorshipTable" layoutY="32.0" prefHeight="165.0" prefWidth="700.0">
                     <columns>
-                        <TableColumn fx:id="colEventID" prefWidth="106.6666533946991" text="Event ID" />
-                  <TableColumn fx:id="colEventName" prefWidth="106.6666533946991" text="Event Name" />
-                        <TableColumn fx:id="colSponsorID" prefWidth="132.66669464111328" text="Event-Sponsor ID" />
-                        <TableColumn fx:id="colSponsorName" minWidth="0.0" prefWidth="111.99995422363281" text="Sponsor Name" />
-                        <TableColumn fx:id="colContributionAmount" prefWidth="180.00003051757812" text="Contribution Amount" />
+                        <TableColumn fx:id="colEventID" prefWidth="72.66666412353516" text="Event ID" />
+                  <TableColumn fx:id="colEventName" prefWidth="234.66665649414062" text="Event Name" />
+                        <TableColumn fx:id="colSponsorID" prefWidth="116.0" text="Event-Sponsor ID" />
+                        <TableColumn fx:id="colSponsorName" minWidth="0.0" prefWidth="147.0" text="Sponsor Name" />
+                        <TableColumn fx:id="colContributionAmount" prefWidth="129.00003051757812" text="Contribution Amount" />
                     </columns>
                 </TableView>
-            <Button fx:id="displayTableButton" layoutX="12.0" layoutY="202.0" mnemonicParsing="false" onAction="#displayTableButtonOnAction" prefHeight="17.0" prefWidth="114.0" style="-fx-background-color: #263F73;" text="DISPLAY TABLE" textFill="WHITE">
+            <Button fx:id="displayTableButton" layoutX="12.0" layoutY="202.0" mnemonicParsing="false" onAction="#displayTableButtonOnAction" prefHeight="18.0" prefWidth="85.0" style="-fx-background-color: #263F73;" text="DISPLAY " textFill="WHITE">
                <font>
                   <Font name="Verdana Bold" size="9.0" />
                </font>

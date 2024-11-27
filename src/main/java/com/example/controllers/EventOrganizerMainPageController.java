@@ -109,35 +109,6 @@ public class EventOrganizerMainPageController implements Initializable {
             });
             VBOX.setPrefWidth(176);
         });
-
-        // Close menu transition
-        MenuClose.setOnMouseClicked(event -> {
-            TranslateTransition slide = new TranslateTransition();
-            slide.setDuration(Duration.seconds(0.4));
-            slide.setNode(slider);
-            slide.setToX(-176); // Move slider to the left (close position)
-            slide.play();
-
-            slide.setOnFinished((ActionEvent e) -> {
-                Menu.setVisible(true);
-                MenuClose.setVisible(false);
-                slider.setPrefWidth(0); // Sidebar width after close
-                contentArea.setPrefWidth(730); // Content width after close
-
-                // Clear buttons text when sidebar is closed
-                button1.setText("");
-                button2.setText("");
-                button3.setText("");
-                button4.setText("");
-                button5.setText("");
-                button6.setText("");
-                button7.setText("");
-                button8.setText("");
-                button9.setText("");
-                button10.setText("");
-            });
-            VBOX.setPrefWidth(0);
-        });
     }
 
 
@@ -145,34 +116,11 @@ public class EventOrganizerMainPageController implements Initializable {
         // Set the content area width to the full screen width initially
         contentArea.setPrefWidth(mainpane.getWidth()); // Adjust to full screen width
 
-        // Start the transition to open the menu
-        TranslateTransition slide = new TranslateTransition();
-        slide.setDuration(Duration.seconds(0.4));
-        slide.setNode(slider);
-        slide.setToX(-176); // Move slider to the left (close position)
-        slide.play();
-
         // Hide the "Menu Close" label and show the "Menu" label
         MenuClose.setVisible(false);
         Menu.setVisible(true);
 
         // Transition finished actions
-        slide.setOnFinished((ActionEvent e) -> {
-            slider.setPrefWidth(0); // Sidebar width after close
-            contentArea.setPrefWidth(mainpane.getWidth()); // Ensure content width fills screen after close
-
-            // Clear buttons text when sidebar is closed
-            button1.setText("");
-            button2.setText("");
-            button3.setText("");
-            button4.setText("");
-            button5.setText("");
-            button6.setText("");
-            button7.setText("");
-            button8.setText("");
-            button9.setText("");
-            button10.setText("");
-        });
 
         // Set content area visible and reset its width
         contentArea.setVisible(true); // Ensure content area takes full width when sidebar is open

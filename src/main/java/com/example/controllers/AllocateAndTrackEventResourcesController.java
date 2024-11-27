@@ -56,7 +56,7 @@ public class AllocateAndTrackEventResourcesController {
             eventID = Integer.parseInt(eventIDText);
         } catch (NumberFormatException e) {
             // Show an error message if the eventID is not a valid number
-            System.out.println("Please enter a valid event ID.");
+            showAlert(Alert.AlertType.ERROR,"Failure","Please enter a valid event ID.");
             return;  // Exit if the eventID is invalid
         }
 
@@ -64,7 +64,7 @@ public class AllocateAndTrackEventResourcesController {
         boolean eventExists = eventTable.getItems().stream()
                 .anyMatch(event -> event.getEventID() == eventID);
         if (!eventExists) {
-            System.out.println("The event ID does not exist in the table view.");
+            showAlert(Alert.AlertType.ERROR,"Failure","The event ID does not exist in the table view.");
             return;  // Exit if the eventID is not found
         }
 
@@ -83,7 +83,7 @@ public class AllocateAndTrackEventResourcesController {
             try {
                 staff1 = Integer.parseInt(staffText);
             } catch (NumberFormatException e) {
-                System.out.println("Please enter a valid number for staff.");
+                showAlert(Alert.AlertType.ERROR,"Failure","Please enter a valid number for staff.");
                 return;
             }
         }
@@ -91,7 +91,7 @@ public class AllocateAndTrackEventResourcesController {
             try {
                 seats1 = Integer.parseInt(seatsText);
             } catch (NumberFormatException e) {
-                System.out.println("Please enter a valid number for seats.");
+                showAlert(Alert.AlertType.ERROR,"Failure","Please enter a valid number for seats.");
                 return;
             }
         }
@@ -99,7 +99,7 @@ public class AllocateAndTrackEventResourcesController {
             try {
                 equipment1 = Integer.parseInt(equipmentText);
             } catch (NumberFormatException e) {
-                System.out.println("Please enter a valid number for equipment.");
+                showAlert(Alert.AlertType.ERROR,"Failure","Please enter a valid number for equipment.");
                 return;
             }
         }

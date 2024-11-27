@@ -7,36 +7,31 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AttendeeNotifications">
+<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AttendeeNotifications">
     <children>
-        <Button layoutX="201.0" layoutY="35.0" mnemonicParsing="false" onAction="#paymentPushed" text="Payment">
+        <Button layoutX="218.0" layoutY="70.0" mnemonicParsing="false" onAction="#paymentPushed" text="Payment">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </Button>
-        <Button layoutX="73.0" layoutY="35.0" mnemonicParsing="false" onAction="#TickPushed" text="Ticket Purchase">
+        <Button layoutX="547.0" layoutY="70.0" mnemonicParsing="false" onAction="#EvUpPushed" text="Event Update">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </Button>
-        <Button layoutX="447.0" layoutY="35.0" mnemonicParsing="false" onAction="#EvUpPushed" text="Event Update">
+        <Button layoutX="368.0" layoutY="70.0" mnemonicParsing="false" onAction="#EvRedPushed" text="Event Registration">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </Button>
-        <Button layoutX="295.0" layoutY="35.0" mnemonicParsing="false" onAction="#EvRedPushed" text="Event Registration">
+        <Label layoutX="277.0" layoutY="14.0" text="NOTIFICATIONS" textAlignment="CENTER" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="12.0" />
-            </font>
-        </Button>
-        <Label layoutX="250.0" layoutY="14.0" text="NOTIFICATIONS" textAlignment="CENTER" textFill="WHITE">
-            <font>
-                <Font name="System Bold" size="15.0" />
+                <Font name="System Bold" size="19.0" />
             </font>
         </Label>
-        <AnchorPane fx:id="TicketPane" layoutX="-4.0" layoutY="58.0" prefHeight="411.0" prefWidth="600.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+        <AnchorPane fx:id="TicketPane" layoutY="123.0" prefHeight="280.0" prefWidth="700.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
             <children>
-                <TableView fx:id="Table1" layoutY="14.0" prefHeight="341.0" prefWidth="614.0">
+                <TableView fx:id="Table1" layoutY="6.0" prefHeight="246.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                         <TableColumn fx:id="TicketID" minWidth="0.0" prefWidth="62.333335876464844" text="Ticket ID" />
                         <TableColumn fx:id="TickUserID" prefWidth="130.3333282470703" text="User ID" />
@@ -49,9 +44,9 @@
                 </TableView>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="PaymentPane" layoutX="-4.0" layoutY="58.0" prefHeight="411.0" prefWidth="600.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+        <AnchorPane fx:id="PaymentPane" layoutY="108.0" prefHeight="280.0" prefWidth="700.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
             <children>
-                <TableView fx:id="Table2" layoutY="14.0" prefHeight="341.0" prefWidth="614.0">
+                <TableView fx:id="Table2" prefHeight="231.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                         <TableColumn fx:id="PayID" minWidth="0.0" prefWidth="62.333335876464844" text="Payment ID" />
                         <TableColumn fx:id="PayUserID" prefWidth="130.3333282470703" text="User ID" />
@@ -64,9 +59,9 @@
                 </TableView>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="EventRegPane" layoutX="6.0" layoutY="68.0" prefHeight="411.0" prefWidth="600.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+        <AnchorPane fx:id="EventRegPane" layoutX="6.0" layoutY="110.0" prefHeight="280.0" prefWidth="700.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
             <children>
-                <TableView fx:id="Table21" layoutY="14.0" prefHeight="341.0" prefWidth="614.0">
+                <TableView fx:id="Table21" layoutY="14.0" prefHeight="247.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                         <TableColumn fx:id="EVREGEvID" minWidth="0.0" prefWidth="62.333335876464844" text="Event ID" />
                         <TableColumn fx:id="EVREGUserID" prefWidth="130.3333282470703" text="User ID" />
@@ -80,9 +75,9 @@
                 </TableView>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="EventUpdatePane" layoutX="6.0" layoutY="68.0" prefHeight="411.0" prefWidth="600.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+        <AnchorPane fx:id="EventUpdatePane" layoutX="6.0" layoutY="68.0" prefHeight="280.0" prefWidth="700.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
             <children>
-                <TableView fx:id="Table22" layoutY="14.0" prefHeight="341.0" prefWidth="614.0">
+                <TableView fx:id="Table22" layoutY="14.0" prefHeight="281.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                         <TableColumn fx:id="EVUPEventID" minWidth="0.0" prefWidth="62.333335876464844" text="Event ID" />
                         <TableColumn fx:id="EVUPUserID" prefWidth="130.3333282470703" text="User ID" />
@@ -95,5 +90,10 @@
                 </TableView>
             </children>
         </AnchorPane>
+        <Button layoutX="14.0" layoutY="70.0" mnemonicParsing="false" onAction="#TickPushed" text="Ticket Purchase">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Button>
     </children>
 </AnchorPane>

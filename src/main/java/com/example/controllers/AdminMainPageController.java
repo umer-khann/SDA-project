@@ -55,68 +55,31 @@ public class AdminMainPageController implements Initializable {
         });
 
         slider.setTranslateX(-176);
+        slider.setTranslateX(-176); // Initial position
+        // Open menu transition
         Menu.setOnMouseClicked(event -> {
             TranslateTransition slide = new TranslateTransition();
             slide.setDuration(Duration.seconds(0.4));
             slide.setNode(slider);
-
-            slide.setToX(0);
+            slide.setToX(0); // Move slider to the right (open position)
             slide.play();
 
-            slider.setTranslateX(-176);
-
-            slide.setOnFinished((ActionEvent e)-> {
+            slide.setOnFinished((ActionEvent e) -> {
                 Menu.setVisible(false);
                 MenuClose.setVisible(true);
-                slider.setPrefWidth(176);
-                contentArea.setPrefWidth(400);
+                slider.setPrefWidth(176); // Sidebar width after open
+                contentArea.setPrefWidth(400); // Content width after open
+
+                // Reset the buttons
                 button1.setText(a);
                 button2.setText(b);
                 button3.setText(c);
-            });
-        });
-
-        MenuClose.setOnMouseClicked(event -> {
-            TranslateTransition slide = new TranslateTransition();
-            slide.setDuration(Duration.seconds(0.4));
-            slide.setNode(slider);
-
-            slide.setToX(0);
-            slide.play();
-
-            slider.setTranslateX(0);
-
-            slide.setOnFinished((ActionEvent e)-> {
-                Menu.setVisible(true);
-                MenuClose.setVisible(false);
-                slider.setPrefWidth(10);
-                contentArea.setPrefWidth(730);
-                button1.setText("");
-                button2.setText("");
-                button3.setText("");
-
             });
         });
     }
 
     // Method to load a new FXML into the content area
     private void loadPage(String fxml) {
-        TranslateTransition slide = new TranslateTransition();
-        slide.setDuration(Duration.seconds(0.4));
-        slide.setNode(slider);
-
-        slide.setToX(0);
-        slide.play();
-
-        slider.setTranslateX(0);
-        button1.setText("");
-        button2.setText("");
-        button3.setText("");
-        slide.setOnFinished((ActionEvent e)-> {
-            Menu.setVisible(true);
-            MenuClose.setVisible(false);
-            slider.setPrefWidth(10);
-        });
         contentArea.setVisible(true);
         contentArea.setPrefWidth(730);
         try {

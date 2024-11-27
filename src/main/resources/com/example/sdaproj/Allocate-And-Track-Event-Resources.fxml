@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AllocateAndTrackEventResourcesController">
+<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;?import javafx.scene.control.TextField?&gt;&lt;TextField layoutX=&quot;438.0&quot; layoutY=&quot;276.0&quot; prefHeight=&quot;31.0&quot; pre;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AllocateAndTrackEventResourcesController">
     <children>
-        <TableView fx:id="eventTable"  layoutX="2.0" layoutY="53.0" prefHeight="200.0" prefWidth="600.0">
+        <TableView fx:id="eventTable" layoutX="2.0" layoutY="53.0" prefHeight="200.0" prefWidth="700.0">
             <columns>
                 <TableColumn fx:id="colEventID" prefWidth="100" text="Event ID" />
                 <TableColumn fx:id="colEventName" prefWidth="200" text="Event Name" />
@@ -22,22 +22,22 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-        <Label layoutX="234.0" layoutY="14.0" text="EVENT RESOURCES" textAlignment="CENTER" textFill="WHITE">
+        <Label layoutX="283.0" layoutY="23.0" prefHeight="55.0" prefWidth="702.0" style="-fx-background-color: #263F73;" text="                                                                    EVENT RESOURCES" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>
         </Label>
-        <Label layoutX="49.0" layoutY="271.0" text="SELECT EVENT ID" textAlignment="CENTER" textFill="WHITE">
+        <Label layoutX="49.0" layoutY="271.0" text="SELECT EVENT ID" textAlignment="CENTER">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>
         </Label>
-        <Label layoutX="14.0" layoutY="318.0" text="UPDATE STAFF COUNT" textAlignment="CENTER" textFill="WHITE">
+        <Label layoutX="14.0" layoutY="318.0" text="UPDATE STAFF COUNT" textAlignment="CENTER">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>
         </Label>
-        <Label layoutX="317.0" layoutY="271.0" text="UPDATE EQUIPMENT" textAlignment="CENTER" textFill="WHITE">
+        <Label layoutX="317.0" layoutY="271.0" text="UPDATE EQUIPMENT" textAlignment="CENTER">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>
@@ -45,17 +45,20 @@
         <TextField fx:id="equipment" layoutX="473.0" layoutY="261.0" prefHeight="31.0" prefWidth="117.0" />
         <TextField fx:id="staff" layoutX="188.0" layoutY="313.0" prefHeight="31.0" prefWidth="117.0" />
         <TextField fx:id="eventid" layoutX="188.0" layoutY="261.0" prefHeight="31.0" prefWidth="117.0" />
-        <Button fx:id="applychanges" layoutX="109.0" layoutY="359.0" mnemonicParsing="false" onAction="#buttonpress" prefHeight="31.0" prefWidth="422.0" style="-fx-background-color: &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;?import javafx.scene.control.TextField?&gt;&lt;TextField layoutX=&quot;438.0&quot; layoutY=&quot;276.0&quot; prefHeight=&quot;31.0&quot; pre;" text="UPDATE CHANGES">
+        <Button fx:id="applychanges" layoutX="233.0" layoutY="354.0" mnemonicParsing="false" onAction="#buttonpress" prefHeight="32.0" prefWidth="238.0" style="-fx-background-color: #263F73;" text="UPDATE CHANGES" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>
         </Button>
-      <Label layoutX="320.0" layoutY="318.0" text="UPDATE SEATS" textAlignment="CENTER" textFill="WHITE">
+      <Label layoutX="338.0" layoutY="318.0" text="UPDATE SEATS" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
       <TextField fx:id="seats" layoutX="473.0" layoutY="313.0" prefHeight="31.0" prefWidth="117.0" />
-      <Button fx:id="RefreshOnAction" layoutX="17.0" layoutY="9.0" mnemonicParsing="false" onAction="#RFA" text="Refresh" />
+      <Button fx:id="RefreshOnAction" layoutX="21.0" layoutY="15.0" mnemonicParsing="false" onAction="#RFA" style="-fx-background-color: #a2a0a0;" text="Refresh" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
     </children>
 </AnchorPane>

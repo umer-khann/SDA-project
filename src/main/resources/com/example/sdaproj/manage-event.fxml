@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.ManageEventController">
+<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.ManageEventController">
    <children>
-      <TableView fx:id="eventTable" layoutX="2.0" layoutY="53.0" prefHeight="200.0" prefWidth="600.0">
+      <TableView fx:id="eventTable" layoutX="2.0" layoutY="53.0" prefHeight="200.0" prefWidth="700.0">
          <columns>
-            <TableColumn fx:id="colEventID" prefWidth="75.0" text="Event ID" />
-            <TableColumn fx:id="colEventName" prefWidth="75.0" text="Event Name" />
-            <TableColumn fx:id="colEventType" prefWidth="75.0" text="Event Type" />
-            <TableColumn fx:id="colEventDate" prefWidth="75.0" text="Event Date" />
+            <TableColumn fx:id="colEventID" prefWidth="103.33332061767578" text="Event ID" />
+            <TableColumn fx:id="colEventName" prefWidth="291.99999237060547" text="Event Name" />
+            <TableColumn fx:id="colEventType" prefWidth="156.00003051757812" text="Event Type" />
+            <TableColumn fx:id="colEventDate" prefWidth="147.66665649414062" text="Event Date" />
          </columns>
          <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            <TableView fx:constant="UNCONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
       <Label layoutX="246.0" layoutY="14.0" text="MANAGE EVENT" textAlignment="CENTER" textFill="WHITE">
@@ -27,7 +22,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="49.0" layoutY="271.0" text="SELECT EVENT ID" textAlignment="CENTER" textFill="WHITE">
+      <Label layoutX="382.0" layoutY="276.0" text="SELECT EVENT ID" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -37,20 +32,23 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="342.0" layoutY="271.0" text="NEW NAME" textAlignment="CENTER" textFill="WHITE">
+      <Label layoutX="422.0" layoutY="318.0" text="NEW NAME" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="name" layoutX="438.0" layoutY="261.0" prefHeight="31.0" prefWidth="117.0" />
-      <TextField fx:id="eventid" layoutX="188.0" layoutY="261.0" prefHeight="31.0" prefWidth="117.0" />
+      <TextField fx:id="name" layoutX="522.0" layoutY="313.0" prefHeight="31.0" prefWidth="117.0" />
+      <TextField fx:id="eventid" layoutX="521.0" layoutY="266.0" prefHeight="31.0" prefWidth="117.0" />
       <Button layoutX="328.0" layoutY="354.0" mnemonicParsing="false" onAction="#updateEventButtonOnAction" prefHeight="32.0" prefWidth="246.0" style="-fx-background-color: #4CAF50;" text="UPDATE CHANGES" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
       <DatePicker fx:id="date" layoutX="131.0" layoutY="313.0" prefHeight="31.0" prefWidth="204.0" />
-      <Button layoutX="505.0" layoutY="313.0" mnemonicParsing="false" onAction="#setUpdateEventButton" text="refresh" />
+      <Button layoutX="101.0" layoutY="269.0" mnemonicParsing="false" onAction="#setUpdateEventButton" style="-fx-background-color: #a2a0a0;" text="REFRESH" textFill="#fffcfc">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
       <Button layoutX="31.0" layoutY="354.0" mnemonicParsing="false" onAction="#deleteEvent" prefHeight="32.0" prefWidth="246.0" style="-fx-background-color: red;" text="DELETE EVENT" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
