@@ -182,7 +182,7 @@ public class AttendeeEventRegistrationController {
         // Proceed to the next page with Event ID and Attendee ID
         AnchorPane parentPane = (AnchorPane) applychanges.getParent();
 
-        if(!Attendee.AddEventAttendee(enteredId,attendeeID))
+        if(!Event.AddEventAttendee(enteredId,attendeeID))
         {
             showAlert("Error","Attendee already registered for this event");
             return;

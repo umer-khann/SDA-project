@@ -55,9 +55,18 @@ public class Ticket {
     }
 
     // Method to associate Payment with the ticket
-    public void setPayment(Payment payment) {
-        this.payment = payment;
+    public void setPayment(int paymentid,int price,String status, int id ) {
+        this.payment.setPaymentId(paymentid);
+        this.payment.setAmount(price);
+        this.payment.setStatus(status);
+        this.payment.setTransactionId(id);
     }
+
+    public Payment GetPayment()
+    {
+        return this.payment;
+    }
+
 
     public void insertTicketPurchaseNotification(int attendeeID, int ticketId,String eventname)
     {

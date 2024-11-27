@@ -66,7 +66,6 @@
                         <TableColumn fx:id="EVREGEvID" minWidth="0.0" prefWidth="62.333335876464844" text="Event ID" />
                         <TableColumn fx:id="EVREGUserID" prefWidth="130.3333282470703" text="User ID" />
                         <TableColumn fx:id="EVREGmessage" prefWidth="75.0" text="Message" />
-                        <TableColumn fx:id="EVREGtype" prefWidth="75.0" text="Type" />
                         <TableColumn fx:id="EVREGdate" prefWidth="75.0" text="Date" />
                     </columns>
                     <columnResizePolicy>

@@ -924,4 +924,27 @@ public class EventDBController {
             e.printStackTrace();
         }
     }
+
+    public boolean addEventAttendee(int eventID, int attendeeID) {
+        String query = "INSERT INTO EventAttendee (eventID, attendeeID) VALUES (?, ?)";
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Set the eventID and attendeeID parameters
+            preparedStatement.setInt(1, eventID);
+            preparedStatement.setInt(2, attendeeID);
+
+            // Execute the insert
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLIntegrityConstraintViolationException e) {
+            System.out.println("Attendee already registered for this event.");
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
