@@ -591,6 +591,7 @@ public class EventDBController {
 //        }
 //        return false;
 //    }
+
     public boolean saveConferenceEvent(ConferenceEvent event, int eventOrganizerID, int venueID) {
         if(eventexists(event, venueID))
             return false;

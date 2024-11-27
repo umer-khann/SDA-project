@@ -7,6 +7,7 @@ public class UserRegisterAdapter implements RegisterAdapter {
         this.user = user;
     }
 
+
     @Override
     public boolean register() {
 

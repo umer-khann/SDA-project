@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class Feedback {
+
     // Attributes
     private int feedbackID;
     private int rating; // Rating should be between 1 and 5

@@ -3,6 +3,7 @@ package com.example.oopfiles;
 import java.util.List;
 
 public abstract class User {
+
     protected int userID;
     protected String name;
     protected String email;

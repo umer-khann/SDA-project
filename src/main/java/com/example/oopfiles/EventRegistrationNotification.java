@@ -9,6 +9,7 @@ public class EventRegistrationNotification {
     private String createdAt;
     public EventRegistrationNotification() {
     }
+
     public EventRegistrationNotification(int eventRegistrationNotificationID, Integer eventID, int userID,
                                          String message, String status, String createdAt) {
         this.eventRegistrationNotificationID = eventRegistrationNotificationID;

@@ -7,6 +7,7 @@ public class EventUpdateNotification {
     private String message;
     private String status;
     private String createdAt;
+
     public EventUpdateNotification(int eventUpdateNotificationID, Integer eventID, int userID,
                                    String message, String status, String createdAt) {
         this.eventUpdateNotificationID = eventUpdateNotificationID;

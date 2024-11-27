@@ -17,6 +17,7 @@ public class Sponsorship {
     public Sponsorship() {
     }
 
+
     public ObservableList<Sponsorship> intializeTable(ObservableList<Sponsorship> sponsorshipList, int eventOrgID) {
         db.showEvents(sponsorshipList,eventOrgID);
         return sponsorshipList;

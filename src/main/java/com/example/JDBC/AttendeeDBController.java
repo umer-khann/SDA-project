@@ -305,6 +305,7 @@ public class AttendeeDBController {
         }
     }
 
+
     public boolean updateAttendee(int attendeeID, String name, String email, String contact, Integer loyaltyPoints) {
         StringBuilder query = new StringBuilder("UPDATE Attendees SET ");
         boolean hasFieldsToUpdate = false;

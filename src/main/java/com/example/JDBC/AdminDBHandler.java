@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminDBHandler {
+
     private static AdminDBHandler instance;
     public static synchronized AdminDBHandler getInstance() {
         if (instance == null) {

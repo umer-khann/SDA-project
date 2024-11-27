@@ -16,6 +16,7 @@ public class EventFactory {
         }
     }
 
+
     // Overloaded factory method to create an event with common initial values
     public static Event createEvent(String eventType, int eventID, String eventName, float budget, String eventTypeName, String eventDate, boolean status) {
         Event event = createEvent(eventType);

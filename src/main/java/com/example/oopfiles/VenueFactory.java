@@ -2,6 +2,7 @@ package com.example.oopfiles;
 
 public class VenueFactory {
 
+
     // Factory method to create a Venue with parameters
     public static Venue createVenue(String venueType, String venueName, String location, int capacity, String additionalInfo, int extraValue) {
         switch (venueType.toUpperCase()) {

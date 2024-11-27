@@ -15,6 +15,7 @@ public class TicketPurchaseNotification {
         this.status = status;
         this.createdAt = createdAt;
     }
+
     public TicketPurchaseNotification() {
     }
     // Getters and Setters

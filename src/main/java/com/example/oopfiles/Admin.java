@@ -13,6 +13,7 @@ public class Admin extends User implements NotificationObserver{
     private static final String HARD_CODED_PASSWORD = "umer";
     private static AdminDBHandler db = AdminDBHandler.getInstance();
 
+
     public Admin() {
         super(1,"Umer Khan","umer.2003@gmail.com","03005560602");
         this.setUserName(HARD_CODED_USERNAME);

@@ -6,6 +6,7 @@ public class GeneralAttendee extends Attendee implements NotificationObserver{
     private String membershipLevel;
 
 
+
     // Constructor
     public GeneralAttendee() {
         super();

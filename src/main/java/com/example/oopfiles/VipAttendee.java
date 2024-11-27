@@ -2,6 +2,7 @@ package com.example.oopfiles;
 
 import java.util.List;
 
+
 public class VipAttendee extends Attendee implements NotificationObserver{
     private String VIPLevel;
     private String accessToExclusiveAreas;

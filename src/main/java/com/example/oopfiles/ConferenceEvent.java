@@ -11,6 +11,7 @@ public class ConferenceEvent extends Event {
         super();
     }
 
+
     public String getSpeaker() {
         return speaker;
     }

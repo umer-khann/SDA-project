@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 public class EventAnalysisDBHandler {
     private static EventAnalysisDBHandler instance;
     public static synchronized EventAnalysisDBHandler getInstance() {

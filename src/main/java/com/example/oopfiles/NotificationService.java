@@ -7,6 +7,7 @@ public class NotificationService {
     private User eventOrganizer;
     private User attendee;
 
+
     // Add observer based on type
     public void addObserver(User observer, String userType) {
         switch (userType.toUpperCase()) {

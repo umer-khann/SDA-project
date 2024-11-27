@@ -18,6 +18,7 @@ public abstract class Attendee extends User implements NotificationObserver{
         super();
     }
 
+
     public static void addNotif(int ID, int userType, String message, String notifType) {
         db.addNotification(ID,userType,message,notifType);
     }

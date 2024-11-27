@@ -16,6 +16,7 @@ public class SponsorshipDBHandler {
         return instance;
     }
 
+
     public void showEvents(ObservableList<Sponsorship> sponsorshipList, int EventOrgID) {
         String query = "SELECT s.eventID, e.eventName, s.sponsorshipID, s.sponsorName, s.contributionAmount " +
                 "FROM Sponsorship s " +

@@ -174,6 +174,7 @@ public class EventOrganizerDBHandler {
             throw new RuntimeException(e);
         }
     }
+
     public boolean IDExists(int ID) {
         String query = "SELECT * FROM EventOrganizers WHERE eventorganizerid = ?";
 

@@ -4,3 +4,4 @@ public class Tracker {
     public int eventOrganizerID;
     public int attendeeID;
 }
+

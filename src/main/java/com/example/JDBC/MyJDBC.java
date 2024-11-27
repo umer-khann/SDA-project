@@ -11,6 +11,7 @@ public class MyJDBC {
     // Singleton connection (optional for efficiency)
     private static Connection connection;
 
+
     /**
      * Establish and return a database connection.
      *

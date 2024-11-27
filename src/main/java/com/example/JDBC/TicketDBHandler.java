@@ -10,6 +10,7 @@ public class TicketDBHandler {
         }
         return instance;
     }
+
         // Method to insert a new ticket
         public static int insertTicket(double price, int eventId, int attendeeId, int paymentId) {
             String ticketQuery = "INSERT INTO Ticket (Price, eventID, attendeeID, paymentID) VALUES (?, ?, ?, ?)";

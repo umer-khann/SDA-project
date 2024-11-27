@@ -16,6 +16,7 @@ public class PaymentNotification {
         this.status = status;
         this.createdAt = createdAt;
     }
+
     public PaymentNotification() {
     }
     // Getters and Setters

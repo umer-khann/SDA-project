@@ -9,6 +9,7 @@ public class Payment {
     private int transactionId;
     PaymentDBHandler db = PaymentDBHandler.getInstance();
 
+
     // Constructor
     public Payment(int paymentId, double amount, String status, int transactionId) {
         this.paymentId = paymentId;

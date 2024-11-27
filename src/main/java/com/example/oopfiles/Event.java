@@ -33,6 +33,7 @@ public abstract class Event {
 
 
 
+
     public static ObservableList<Event> initializeTableForOrganizer(ObservableList<Event> eventList, int currentOrganizerid) {
         db.showCompleteEvents(eventList,currentOrganizerid);
         return eventList;

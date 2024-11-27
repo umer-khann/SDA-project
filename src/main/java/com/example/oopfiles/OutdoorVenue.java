@@ -7,6 +7,7 @@ public class OutdoorVenue extends Venue {
     private String weatherPreparedness;
     private int additionalCapacity;
 
+
     // Constructor
     public OutdoorVenue(String venueName, String location, int capacity, String weatherPreparedness, int additionalCapacity) {
         super(venueName, location, capacity);

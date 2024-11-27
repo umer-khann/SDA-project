@@ -2,6 +2,7 @@ package com.example.oopfiles;
 
 import java.util.Date;
 
+
 public class WorkshopEvent extends Event {
     private String topic;
     private double duration; // In hours

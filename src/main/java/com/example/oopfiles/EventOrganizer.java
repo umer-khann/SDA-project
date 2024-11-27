@@ -19,6 +19,7 @@ public class EventOrganizer extends User implements NotificationObserver{
     public static boolean IDExists(int ID){
         return dbHandler.IDExists(ID);
     }
+
     private int eventid;
     private String eventname;
     private String name;

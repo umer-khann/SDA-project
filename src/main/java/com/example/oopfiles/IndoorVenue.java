@@ -7,6 +7,7 @@ public class IndoorVenue extends Venue {
     private String roomNumber;
     private int floor;
 
+
     // Constructor
     public IndoorVenue(String venueName, String location, int capacity, String roomNumber, int floor) {
         super(venueName, location, capacity);

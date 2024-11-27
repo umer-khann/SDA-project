@@ -17,6 +17,7 @@ public class Ticket {
         this.payment = new Payment();
     }
 
+
     // Getter and Setter methods
     public int getTicketId() {
         return ticketId;

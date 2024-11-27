@@ -9,6 +9,7 @@ public class Notification {
     private String createdAt;
     private int eventID;
 
+
     public Notification(int notificationID, int userID, String userType, String message, String notificationType, String createdAt, int eventID) {
         this.notificationID = notificationID;
         this.userID = userID;

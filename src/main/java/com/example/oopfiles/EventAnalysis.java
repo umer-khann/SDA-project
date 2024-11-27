@@ -5,6 +5,7 @@ import com.example.JDBC.EventAnalysisDBHandler;
 import java.util.Date;
 import java.util.List;
 
+
 public class EventAnalysis {
     private int eventID;
     private String eventName;

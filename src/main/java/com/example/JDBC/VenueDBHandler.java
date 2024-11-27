@@ -18,6 +18,7 @@ public class VenueDBHandler {
         }
         return instance;
     }
+
     public boolean addVenue(String type, Venue venue,int ID) {
         // SQL query to insert into Venue table
         String venueQuery = "INSERT INTO Venue (venueName, location, capacity, venueType, eventOrganizerID) VALUES (?, ?, ?, ?, ?)";

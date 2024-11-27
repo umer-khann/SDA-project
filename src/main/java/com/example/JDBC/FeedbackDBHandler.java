@@ -13,6 +13,7 @@ public class FeedbackDBHandler {
         }
         return instance;
     }
+
     // Constructor
     public FeedbackDBHandler() {
         // No need to create a connection here, as we use MyJDBC for the connection
