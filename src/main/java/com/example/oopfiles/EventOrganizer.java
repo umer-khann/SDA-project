@@ -3,14 +3,22 @@ import com.example.JDBC.EventAnalysisDBHandler;
 import com.example.JDBC.EventOrganizerDBHandler;
 import javafx.collections.ObservableList;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class EventOrganizer extends User implements NotificationObserver{
     private List<String> eventsOrganized;
     private int experienceLevel;
     static EventOrganizerDBHandler dbHandler = EventOrganizerDBHandler.getInstance();
-
-
+    public static int NoOfLeft(){
+        return dbHandler.NoOfOrganizersLeft();
+    }
+    public static boolean isManaging(int ID){
+        return dbHandler.isManaging(ID);
+    }
+    public static boolean IDExists(int ID){
+        return dbHandler.IDExists(ID);
+    }
     private int eventid;
     private String eventname;
     private String name;
@@ -60,7 +68,10 @@ public class EventOrganizer extends User implements NotificationObserver{
     }
 
     public static boolean RemoveEventOrganizer(int organizerId, Integer newOrganizerId) {
-       return dbHandler.RemoveEventOrganizer(organizerId,newOrganizerId);
+        return dbHandler.RemoveEventOrganizer(organizerId,newOrganizerId);
+    }
+    public static boolean RemoveEventOrganizer(int organizerId) {
+        return dbHandler.RemoveEventOrganizer(organizerId);
     }
 
     @Override

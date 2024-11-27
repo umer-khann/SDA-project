@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class ManageEventController {
@@ -140,7 +141,12 @@ public class ManageEventController {
         if (date.getValue() != null) {
             newDate = java.sql.Date.valueOf(date.getValue()); // Convert JavaFX DatePicker value to java.sql.Date
         }
-
+        LocalDate l = date.getValue();
+        LocalDate today = LocalDate.now();
+        if (l.isBefore(today)) {
+            showAlert("Validation Error", "Event date must be greater than today's date.");
+            return;
+        }
         // Validate inputs (basic checks)
         if (eventIDText.isEmpty()) {
             showAlert("Error", "Event ID must be provided.");

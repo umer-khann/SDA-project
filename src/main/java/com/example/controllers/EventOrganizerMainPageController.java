@@ -162,6 +162,7 @@ public class EventOrganizerMainPageController implements Initializable {
 
             // Set the loaded FXML pane as the content of the content area
             contentArea.setContent(pane);
+
         } catch (IOException e) {
             e.printStackTrace(); // Log the error if loading fails
         }

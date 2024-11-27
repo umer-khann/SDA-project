@@ -42,6 +42,43 @@ public class EventOrganizerDBHandler {
             return "Error retrieving password"; // Handle exception case
         }
     }
+    public boolean isManaging(int orgID) {
+        String query = "SELECT COUNT(*) FROM event WHERE eventOrganizerID = ?";
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, orgID);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int eventCount = resultSet.getInt(1);
+                    return eventCount > 0; // Returns true if the organizer is managing any events
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return false; // Returns false if an error occurs or no events are managed by the organizer
+    }
+    public int NoOfOrganizersLeft() {
+        String query = "SELECT count(*) as Meow FROM EventOrganizers";  // Fixed query
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("Meow"); // Return the count of organizers
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0; // Handle exception case
+        }
+        return 0;  // Default return if no result
+    }
+
     public boolean validateLogin(String username, String password) {
         String query = "SELECT * FROM EventOrganizers WHERE username = ? AND password = ?";
         if(retrievePassword(username).equals(password)){
@@ -61,7 +98,6 @@ public class EventOrganizerDBHandler {
         }
         return false;
     }
-
     public void signUpEventOrganizer(EventOrganizer organizer) {
         String query = "INSERT INTO EventOrganizers (name, email, contactDetails, experience, username, password) " +
                 "VALUES (?, ?, ?, ?, ?, ?)";
@@ -127,6 +163,24 @@ public class EventOrganizerDBHandler {
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, username);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                return resultSet.next(); // Returns true if a matching username is found
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public boolean IDExists(int ID) {
+        String query = "SELECT * FROM EventOrganizers WHERE eventorganizerid = ?";
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, ID);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 return resultSet.next(); // Returns true if a matching username is found
@@ -258,6 +312,34 @@ public class EventOrganizerDBHandler {
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public boolean RemoveEventOrganizer(int organizerId) {
+        String deleteOrganizerQuery = "DELETE FROM EventOrganizers WHERE eventOrganizerID = ?";
+
+        try (Connection connection = MyJDBC.getConnection();
+             PreparedStatement deleteOrganizerStmt = connection.prepareStatement(deleteOrganizerQuery)) {
+
+            connection.setAutoCommit(false);  // Disable auto-commit
+
+            deleteOrganizerStmt.setInt(1, organizerId);
+            int deletedRows = deleteOrganizerStmt.executeUpdate();
+
+            if (deletedRows > 0) {
+                connection.commit();  // Commit if successful
+                System.out.println("Organizer with ID " + organizerId + " has been removed.");
+                return true;
+            } else {
+                connection.rollback();  // Rollback if no rows deleted
+                System.out.println("No organizer found with ID " + organizerId);
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

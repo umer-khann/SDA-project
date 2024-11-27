@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class RemoveEventOrganizerController {
@@ -40,12 +41,40 @@ public class RemoveEventOrganizerController {
     @FXML
     private TableColumn<EventOrganizer, String> colEventName;
 
-    public void buttonpress(ActionEvent actionEvent) {
+    public void buttonpress(ActionEvent actionEvent) throws SQLException {
         // Retrieve the old and new Event Organizer IDs from the text fields
-        String oldOrgIdText = oldorgid.getText();
-        String newOrgIdText = neworgid.getText();
-
+        String oldOrgIdText = oldorgid.getText().trim();
+        String newOrgIdText = neworgid.getText().trim();
+        if(newOrgIdText.isEmpty()){
+            if(EventOrganizer.IDExists(Integer.parseInt(oldOrgIdText)) && !EventOrganizer.isManaging(Integer.parseInt(oldOrgIdText))){
+                if(EventOrganizer.RemoveEventOrganizer(Integer.parseInt(oldOrgIdText))){
+                    showAlert(Alert.AlertType.CONFIRMATION, "Success", "Event organizer removed.");
+                    Refresh(null);
+                    return;
+                }
+                else{
+                    showAlert(Alert.AlertType.ERROR, "Error", "Event organizer ID doesn't exist.");
+                    return;
+                }
+            }
+        }
+        if(oldOrgIdText.isEmpty() || newOrgIdText.isEmpty()){
+            showAlert(Alert.AlertType.ERROR, "Error", "Enter both ID's");
+            return;
+        }
+        if(!EventOrganizer.IDExists(Integer.parseInt(oldOrgIdText)) || !EventOrganizer.IDExists(Integer.parseInt(newOrgIdText))){
+            showAlert(Alert.AlertType.ERROR, "Error", "Event organizer ID doesn't exist.");
+            return;
+        }
         // Check if the old Event Organizer ID is empty or null
+        if (EventOrganizer.NoOfLeft() == 1 || !EventOrganizer.isManaging(Integer.parseInt(oldOrgIdText))) {
+            // Remove the old organizer without needing to check for newOrgIdText
+            EventOrganizer.RemoveEventOrganizer(Integer.parseInt(oldOrgIdText));
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Event organizer has been removed.");
+            Refresh(null);
+            return; // Exit after removal
+        }
+
         if (oldOrgIdText == null || oldOrgIdText.isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Input Error", "Please enter the old organizer ID to remove.");
             return;  // Exit the method to prevent further execution
@@ -78,10 +107,6 @@ public class RemoveEventOrganizerController {
         // Check if the new Event Organizer ID exists in the table
         boolean newOrgExists = eventList.stream().anyMatch(org -> org.getId() == newOrgId);
 
-        // Debugging line to see if the old and new organizers' existence conditions are correct
-        System.out.println("Old Organizer Exists: " + oldOrgExists);
-        System.out.println("New Organizer Exists: " + newOrgExists);
-
         // If both old and new organizers exist and the old one can be removed
         if (oldOrgExists && newOrgExists) {
             // Find the old organizer and the new organizer
@@ -89,19 +114,21 @@ public class RemoveEventOrganizerController {
             EventOrganizer newOrg = eventList.stream().filter(org -> org.getId() == newOrgId).findFirst().orElse(null);
 
             if (oldOrg != null && newOrg != null) {
-
-                EventOrganizer.RemoveEventOrganizer(oldOrgId, newOrgId);  // Remove from the database (if needed)
+                // Remove from the database (if needed)
+                EventOrganizer.RemoveEventOrganizer(oldOrgId, newOrgId);
 
                 // Show success message
                 showAlert(Alert.AlertType.INFORMATION, "Success", "The events have been transferred and the old organizer has been removed.");
+                Refresh(null);
             }
         } else if (!oldOrgExists) {
             showAlert(Alert.AlertType.ERROR, "Error", "Old Event Organizer ID does not exist in the table.");
         } else if (!newOrgExists) {
             showAlert(Alert.AlertType.ERROR, "Error", "New Event Organizer ID does not exist in the table.");
         }
-        Refresh(null);
+
     }
+
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);

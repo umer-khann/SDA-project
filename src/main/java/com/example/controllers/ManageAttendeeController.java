@@ -40,11 +40,6 @@ public class ManageAttendeeController implements Initializable {
     @FXML
     private TextField contactField;
 
-    @FXML
-    private TextField usernameField;
-
-    @FXML
-    private TextField passwordField;
 
     @FXML
     private TableView<Attendee> attendeeTable;
@@ -82,8 +77,6 @@ public class ManageAttendeeController implements Initializable {
         String name = nameField.getText().trim();
         String email = emailField.getText().trim();
         String contact = contactField.getText().trim();
-        String username = usernameField.getText().trim();
-        String password = passwordField.getText().trim();
         String points=loyaltyPointsField.getText().trim();
 
         boolean valid = true;
@@ -117,17 +110,9 @@ public class ManageAttendeeController implements Initializable {
             valid = false;
         }
 
-        // Validate Username field (should only contain alphanumeric characters, underscores, or hyphens if entered)
-        if (!username.isEmpty() && !username.matches("^[a-zA-Z0-9_-]+$")) {
-            showAlert(Alert.AlertType.ERROR, "Validation Error", "Username can only contain alphanumeric characters, underscores, and hyphens.");
-            valid = false;
-        }
+        // Validate Username field (should only contain alphanumeric characters, underscores, or hyphens if entered
 
-        // Validate Password field (should be at least 6 characters if entered)
-        if (!password.isEmpty() && password.length() < 6) {
-            showAlert(Alert.AlertType.ERROR, "Validation Error", "Password must be at least 6 characters long.");
-            valid = false;
-        }
+
 
         // If all fields are valid, process the sign-up logic
         if (valid) {
@@ -267,9 +252,6 @@ public class ManageAttendeeController implements Initializable {
         emailField.clear();
         contactField.clear();
         loyaltyPointsField.clear();
-        usernameField.clear();
-        passwordField.clear();
-
         // Optionally reset any dropdowns or other UI elements if applicable
         // Example: attendeeTypeDropdown.setValue(null);  // Uncomment if you have a dropdown for attendee type
     }

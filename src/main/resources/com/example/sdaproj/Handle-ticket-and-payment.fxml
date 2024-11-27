@@ -83,10 +83,18 @@
    <Line endX="-103.0" endY="339.29290771484375" layoutX="540.0" layoutY="63.0" startX="-103.0" startY="1.0" stroke="WHITE" />
    <Label fx:id="eventNameLabel" layoutX="440.0" layoutY="107.0" prefHeight="21.0" prefWidth="260.0" textAlignment="CENTER" textFill="WHITE" />
    <Label fx:id="eventVenueLabel" layoutX="443.0" layoutY="173.0" prefHeight="21.0" prefWidth="247.0" textAlignment="CENTER" textFill="WHITE" />
-   <Label fx:id="eventDateLabel" layoutX="447.0" layoutY="236.0" prefHeight="21.0" prefWidth="247.0" textAlignment="CENTER" textFill="WHITE" />
+   <Label fx:id="eventDateLabel" layoutX="459.0" layoutY="259.0" prefHeight="21.0" prefWidth="247.0" textAlignment="CENTER" textFill="WHITE" />
    <Label layoutX="534.0" layoutY="279.0" prefHeight="21.0" prefWidth="48.0" textAlignment="CENTER" textFill="WHITE" />
    <Label fx:id="eventDetailsLabel" layoutX="459.0" layoutY="309.0" prefHeight="21.0" prefWidth="247.0" textAlignment="CENTER" textFill="WHITE" />
-   <Label layoutX="529.0" layoutY="80.0" text="Name:" textFill="WHITE" />
-   <Label layoutX="529.0" layoutY="140.0" text="Venue:" textFill="WHITE" />
-   <Label layoutX="540.0" layoutY="203.0" text="Date:" textFill="WHITE" />
+   <Label layoutX="445.0" layoutY="80.0" text="Name:" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font></Label>
+   <Label layoutX="444.0" layoutY="141.0" text="Venue:" textFill="WHITE">
+    <font>
+        <Font name="System Bold" size="12.0" />
+    </font></Label>
+   <Label layoutX="444.0" layoutY="204.0" text="Date:" textFill="WHITE"><font>
+       <Font name="System Bold" size="12.0" />
+   </font></Label>
 </AnchorPane>

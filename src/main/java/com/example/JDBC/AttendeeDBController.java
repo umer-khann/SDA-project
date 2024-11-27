@@ -28,7 +28,6 @@ public class AttendeeDBController {
      */
     public boolean validateLogin(String username, String password) {
         String query = "SELECT * FROM Attendees WHERE username = ? AND password = ?";
-
         if(retrievePassword(username).equals(password)){
             try (Connection connection = MyJDBC.getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement(query)) {

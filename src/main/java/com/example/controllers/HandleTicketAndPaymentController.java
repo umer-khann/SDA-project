@@ -197,6 +197,7 @@ public class HandleTicketAndPaymentController {
         // If everything is valid, confirm payment and show success message
         if (ticket.GetPayment().confirmPayment(transactionId)) {
             showAlert("Success", "Payment successful. Ticket has been booked.");
+            clearfields();
         } else {
             showAlert("Error", "Payment confirmation failed.");
         }
@@ -219,8 +220,17 @@ public class HandleTicketAndPaymentController {
         alert.showAndWait();
     }
 
+    public void clearfields(){
+        txtCreditCardNumber.clear();
+        txtCVVNumber.clear();
+       txtNameOnCard.clear();
+        txtMonth.clear();
+        txtYear.clear();
+
+    }
 
 
     public void setCreditCardType(KeyEvent keyEvent) {
+
     }
 }

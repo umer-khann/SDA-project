@@ -445,9 +445,8 @@ public class EventDBController {
         }
     }
 
-
     public boolean saveConcertEvent(ConcertEvent event, int eventOrganizerID, int venueID) {
-        if(eventexists(event,venueID))
+        if(eventexists(event, venueID))
             return false;
         String query = "INSERT INTO Event (eventName, eventDate, budget, status, eventType, eventOrganizerID, venueID) VALUES (?, ?, ?, ?, ?, ?, ?)";
         System.out.println(eventOrganizerID + " done.");
@@ -471,13 +470,26 @@ public class EventDBController {
                     if (generatedKeys.next()) {
                         int eventID = generatedKeys.getInt(1);
 
-                        // Now insert specific ConcertEvent details
+                        // Insert into ConcertEvent table
                         String concertQuery = "INSERT INTO ConcertEvent (eventID, genre) VALUES (?, ?)";
                         try (PreparedStatement concertStmt = connection.prepareStatement(concertQuery)) {
                             concertStmt.setInt(1, eventID);
                             concertStmt.setString(2, event.getGenre());
                             int concertResult = concertStmt.executeUpdate();
-                            return concertResult > 0;
+
+                            if (concertResult > 0) {
+                                // Insert performers into performer table
+                                String performerQuery = "INSERT INTO performer (performerName, eventID) VALUES (?, ?)";
+                                try (PreparedStatement performerStmt = connection.prepareStatement(performerQuery)) {
+                                    performerStmt.setString(1, event.getPerformerName());
+                                    performerStmt.setInt(2, eventID);
+                                    int performerResult = performerStmt.executeUpdate(); // Store result to check if insertion is successful
+
+                                    if (performerResult > 0) {
+                                        return true; // Return true if insertion into performer is successful
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -488,8 +500,9 @@ public class EventDBController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return false;
+        return false; // Return false if any insertion fails
     }
+
 
     public boolean saveWorkshopEvent(WorkshopEvent event, int eventOrganizerID, int venueID) {
         if(eventexists(event,venueID))
@@ -537,9 +550,51 @@ public class EventDBController {
         return false;
     }
 
+//    public boolean saveConferenceEvent(ConferenceEvent event, int eventOrganizerID, int venueID) {
+//        if(eventexists(event,venueID))
+//            return false;
+//        String query = "INSERT INTO Event (eventName, eventDate, budget, status, eventType, eventOrganizerID, venueID) VALUES (?, ?, ?, ?, ?, ?, ?)";
+//        try (Connection connection = MyJDBC.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+//
+//            // Insert into Event table
+//            preparedStatement.setString(1, event.getEventName());
+//            preparedStatement.setString(2, event.getEventDate());
+//            preparedStatement.setDouble(3, event.getBudget());
+//            preparedStatement.setBoolean(4, event.isActive());
+//            preparedStatement.setString(5, "Conference");
+//            preparedStatement.setInt(6, eventOrganizerID);
+//            preparedStatement.setInt(7, venueID);
+//
+//            int result = preparedStatement.executeUpdate();
+//
+//            if (result > 0) {
+//                // Get the generated eventID for the new event
+//                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+//                    if (generatedKeys.next()) {
+//                        int eventID = generatedKeys.getInt(1);
+//
+//                        // Now insert specific ConferenceEvent details
+//                        String conferenceQuery = "INSERT INTO ConferenceEvent (eventID, agenda) VALUES (?, ?)";
+//                        try (PreparedStatement conferenceStmt = connection.prepareStatement(conferenceQuery)) {
+//                            conferenceStmt.setInt(1, eventID);
+//                            conferenceStmt.setString(2, event.getAgenda());
+//                            int conferenceResult = conferenceStmt.executeUpdate();
+//                            return conferenceResult > 0;
+//                        }
+//                    }
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//        return false;
+//    }
     public boolean saveConferenceEvent(ConferenceEvent event, int eventOrganizerID, int venueID) {
-        if(eventexists(event,venueID))
+        if(eventexists(event, venueID))
             return false;
+
         String query = "INSERT INTO Event (eventName, eventDate, budget, status, eventType, eventOrganizerID, venueID) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = MyJDBC.getConnection();
@@ -568,7 +623,18 @@ public class EventDBController {
                             conferenceStmt.setInt(1, eventID);
                             conferenceStmt.setString(2, event.getAgenda());
                             int conferenceResult = conferenceStmt.executeUpdate();
-                            return conferenceResult > 0;
+
+                            if (conferenceResult > 0) {
+                                // Insert the single speaker into speaker table after conference event insert
+                                String speakerQuery = "INSERT INTO speaker (speakerName, eventID) VALUES (?, ?)";
+                                try (PreparedStatement speakerStmt = connection.prepareStatement(speakerQuery)) {
+                                    speakerStmt.setString(1, event.getSpeaker());  // Assuming a single speaker
+                                    speakerStmt.setInt(2, eventID);
+                                    int speakerResult = speakerStmt.executeUpdate();
+
+                                    return speakerResult > 0; // Return true if the speaker was added
+                                }
+                            }
                         }
                     }
                 }
@@ -579,6 +645,8 @@ public class EventDBController {
         }
         return false;
     }
+
+
 
     public boolean verifyEvent(int eventID) {
         // SQL query to check if the event exists in the database

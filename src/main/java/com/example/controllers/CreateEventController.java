@@ -137,7 +137,11 @@ public class CreateEventController implements Initializable {
         int year = l.getYear();
         int day = l.getDayOfMonth();
         String eventDate = String.format("%04d-%02d-%02d", year, month, day);
-
+        LocalDate today = LocalDate.now();
+        if (l.isBefore(today)) {
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Event date must be in the future");
+            return;
+        }
         // Validate budget input
         double budget = 0;
         try {
