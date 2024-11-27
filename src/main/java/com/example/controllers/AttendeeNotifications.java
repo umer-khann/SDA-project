@@ -58,8 +58,6 @@ public class AttendeeNotifications implements Initializable {
     @FXML
     private TableColumn<EventRegistrationNotification,String> EVREGmessage;
     @FXML
-    private TableColumn<EventRegistrationNotification,String> EVREGtype;
-    @FXML
     private TableColumn<EventRegistrationNotification,String> EVREGdate;
     @FXML
     private AnchorPane EventUpdatePane;
@@ -94,7 +92,6 @@ public class AttendeeNotifications implements Initializable {
         EVREGEvID.setCellValueFactory(new PropertyValueFactory<>("eventID"));
         EVREGUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
         EVREGmessage.setCellValueFactory(new PropertyValueFactory<>("message"));
-        EVREGtype.setCellValueFactory(new PropertyValueFactory<>("status"));
         EVREGdate.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
     }
 
